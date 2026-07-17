@@ -1,4 +1,4 @@
-wxPython>=4.0.0
+wxPython>=4.2.5
 # For Gemini API - the app imports both the new SDK (google.genai) and the
 # legacy one (google.generativeai.types for HarmCategory/HarmBlockThreshold).
 google-genai
