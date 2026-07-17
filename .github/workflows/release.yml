@@ -121,7 +121,7 @@ jobs:
           if (-not (Test-Path omni_describer.zip)) { throw "Package not produced" }
 
       - name: Publish GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ steps.version.outputs.tag }}
           name: Omni Describer ${{ steps.version.outputs.tag }}
