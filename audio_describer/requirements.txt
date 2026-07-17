@@ -5,6 +5,9 @@ google-genai
 google-generativeai
 accessible-output2
 yt-dlp
+# python-vlc bindings for the media player; the libvlc runtime is bundled in
+# bin/vlc/ (frozen builds) or taken from a system VLC install (see README).
+python-vlc
 pyttsx3
 pydub
 winsdk

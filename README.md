@@ -59,20 +59,11 @@ there's no macOS/Linux build path today.
 
 ### Option A: Download a build
 
-Grab the latest release from the [Releases](../../releases) page — a Windows
-build you can run without installing Python. It bundles
-[yt-dlp](https://github.com/yt-dlp/yt-dlp) (which self-updates on use), so
-YouTube downloads work out of the box.
-
-**It does not bundle FFmpeg or VLC.** You must supply those yourself, or media
-processing fails with "command not found":
-
-- Install [FFmpeg](https://ffmpeg.org/download.html) and
-  [VLC](https://www.videolan.org/vlc/) and make sure each is on your system
-  `PATH`, **or**
-- Drop `ffmpeg.exe`, `ffprobe.exe`, and the VLC runtime DLLs into the `bin/`
-  folder next to `omni_describer.exe` in the extracted release. The app checks
-  `bin/` before falling back to `PATH`.
+Grab the latest release from the [Releases](../../releases) page — a
+self-contained Windows build you can run without installing Python. It bundles
+everything it needs: [yt-dlp](https://github.com/yt-dlp/yt-dlp) (which
+self-updates on use), FFmpeg/ffprobe, and the VLC runtime. Nothing to install
+separately.
 
 ### Option B: Run from source
 

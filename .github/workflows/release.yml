@@ -98,15 +98,43 @@ jobs:
           # is what v2.0 shipped with and what the runtime expects.
           pip install "pyinstaller<6"
 
-      # build.spec bundles audio_describer/bin, gitignored and absent in CI.
-      # Fetch the standalone yt-dlp.exe into it so YouTube downloads work out of
-      # the box; the app runs `yt-dlp -U` per session to keep it current, which
-      # only works with the standalone build (not a pip install). FFmpeg/VLC are
-      # NOT bundled — install them or drop them in bin/ (see the README).
-      - name: Fetch yt-dlp into bin dir
+      # build.spec bundles audio_describer/bin, gitignored and absent in CI, so
+      # fetch every runtime dependency into it: yt-dlp (standalone, so `yt-dlp -U`
+      # self-update works), ffmpeg/ffprobe, and the VLC runtime (libvlc + plugins,
+      # which player_window.py loads from bin/vlc). The final Test-Path loop fails
+      # the build if any piece is missing rather than shipping a broken release.
+      - name: Fetch runtime binaries into bin dir
         run: |
-          New-Item -ItemType Directory -Force audio_describer/bin
+          $ErrorActionPreference = 'Stop'
+          New-Item -ItemType Directory -Force audio_describer/bin | Out-Null
+
+          # yt-dlp
           Invoke-WebRequest https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe -OutFile audio_describer/bin/yt-dlp.exe
+
+          # FFmpeg + ffprobe (gyan.dev "release-essentials" is the stable latest URL)
+          Invoke-WebRequest https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip -OutFile ffmpeg.zip
+          Expand-Archive ffmpeg.zip -DestinationPath ffmpeg_tmp -Force
+          Copy-Item (Get-ChildItem ffmpeg_tmp -Recurse -Filter ffmpeg.exe)[0].FullName  audio_describer/bin/ffmpeg.exe
+          Copy-Item (Get-ChildItem ffmpeg_tmp -Recurse -Filter ffprobe.exe)[0].FullName audio_describer/bin/ffprobe.exe
+
+          # VLC runtime -> bin/vlc (libvlc.dll + libvlccore.dll + plugins/)
+          Invoke-WebRequest https://get.videolan.org/vlc/3.0.21/win64/vlc-3.0.21-win64.zip -OutFile vlc.zip
+          Expand-Archive vlc.zip -DestinationPath vlc_tmp -Force
+          $vlcSrc = (Get-ChildItem vlc_tmp -Directory)[0].FullName
+          New-Item -ItemType Directory -Force audio_describer/bin/vlc | Out-Null
+          Copy-Item "$vlcSrc/libvlc.dll","$vlcSrc/libvlccore.dll" audio_describer/bin/vlc/
+          Copy-Item "$vlcSrc/plugins" audio_describer/bin/vlc/ -Recurse -Force
+
+          foreach ($f in @(
+            'audio_describer/bin/yt-dlp.exe',
+            'audio_describer/bin/ffmpeg.exe',
+            'audio_describer/bin/ffprobe.exe',
+            'audio_describer/bin/vlc/libvlc.dll',
+            'audio_describer/bin/vlc/libvlccore.dll',
+            'audio_describer/bin/vlc/plugins'
+          )) {
+            if (-not (Test-Path $f)) { throw "Missing bundled runtime: $f" }
+          }
 
       - name: Build main app
         run: pyinstaller build.spec
@@ -139,7 +167,7 @@ jobs:
           body: |
             Windows build of Omni Describer ${{ steps.version.outputs.tag }}.
 
-            Bundles yt-dlp (self-updates via `yt-dlp -U`). Does NOT bundle
-            FFmpeg or VLC — install them or drop the binaries in
-            `audio_describer/bin/` (see the README). Third-party licenses apply if
-            you redistribute a build that includes them (see THIRD_PARTY_LICENSES).
+            Self-contained: bundles yt-dlp (self-updates via `yt-dlp -U`),
+            FFmpeg/ffprobe, and the VLC runtime. Nothing to install separately.
+            Third-party licenses apply to the bundled binaries (see
+            THIRD_PARTY_LICENSES).

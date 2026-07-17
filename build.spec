@@ -22,7 +22,9 @@ hidden_imports = [
     'pygame._sdl2.font',
     'openai',
     'grpc._cython',
-    'accessible_output2'
+    'accessible_output2',
+    'vlc',  # python-vlc binding; imported lazily inside a try/except so add it
+            # explicitly. The libvlc runtime itself is bundled into bin/vlc by CI.
 ]
 
 # Part 2: Gather all the necessary data files and binaries.
