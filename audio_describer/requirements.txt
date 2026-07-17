@@ -8,4 +8,4 @@ pydub
 winsdk
 simpleaudio
 pygame
-cryptography==41.0.7
+cryptography==49.0.0
