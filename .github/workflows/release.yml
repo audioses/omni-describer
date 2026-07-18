@@ -117,8 +117,11 @@ jobs:
           Copy-Item (Get-ChildItem ffmpeg_tmp -Recurse -Filter ffmpeg.exe)[0].FullName  audio_describer/bin/ffmpeg.exe
           Copy-Item (Get-ChildItem ffmpeg_tmp -Recurse -Filter ffprobe.exe)[0].FullName audio_describer/bin/ffprobe.exe
 
-          # VLC runtime -> bin/vlc (libvlc.dll + libvlccore.dll + plugins/)
-          Invoke-WebRequest https://get.videolan.org/vlc/3.0.21/win64/vlc-3.0.21-win64.zip -OutFile vlc.zip
+          # VLC runtime -> bin/vlc (libvlc.dll + libvlccore.dll + plugins/).
+          # Use the osuosl mirror directly: get.videolan.org 302-redirects to a
+          # rotating mirror that sometimes returns an HTML page instead of the zip.
+          Invoke-WebRequest https://ftp.osuosl.org/pub/videolan/vlc/3.0.21/win64/vlc-3.0.21-win64.zip -OutFile vlc.zip
+          if ((Get-Item vlc.zip).Length -lt 1MB) { throw "vlc.zip download failed (got $((Get-Item vlc.zip).Length) bytes)" }
           Expand-Archive vlc.zip -DestinationPath vlc_tmp -Force
           $vlcSrc = (Get-ChildItem vlc_tmp -Directory)[0].FullName
           New-Item -ItemType Directory -Force audio_describer/bin/vlc | Out-Null
