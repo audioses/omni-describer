@@ -6,6 +6,12 @@ local video file or a YouTube URL, let Google Gemini watch and describe the
 scenes, review and edit the script, then export a video with the description
 track mixed in.
 
+> **⚠️ Only download Omni Describer from this repository's
+> [Releases page](https://github.com/audioses/omni-describer/releases).**
+> Copies of this project elsewhere on GitHub have been found linking to
+> malware. If a "download" leads to a ZIP containing a `.cmd` file and a
+> `.txt` file, do not run it.
+
 ## The story
 
 It all started with a love for movies. Realizing how many details in a great
