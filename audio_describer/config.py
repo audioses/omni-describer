@@ -73,8 +73,9 @@ CONTACT_EMAIL = "info@audioses.com"
 
 # API Settings (Placeholder - Store securely, not directly in code for production)
 GEMINI_API_KEY = None
-# Specify which Gemini model to use, e.g., "gemini-2.5-pro" or "gemini-2.5-flash"
-GEMINI_MODEL_NAME = "gemini-2.5-flash" 
+# Gemini model to use. "gemini-flash-latest" tracks the newest Flash release, so retired models (e.g. 2.5) no longer 404.
+# Pin a specific model (e.g. "gemini-3.8-flash") via the "Gemini Model Override" setting.
+GEMINI_MODEL_NAME = "gemini-flash-latest"
 
 # Video Processing
 SUPPORTED_VIDEO_FORMATS = "*.mp4;*.avi;*.mkv;*.webm;*.mov;*.flv;*.wmv;*.mpeg;*.mpg;*.3gp;*.ogv;*.ts;*.m4v;*.divx"
