@@ -4004,14 +4004,12 @@ msgstr "Не вдалося підготувати голос: %s"
 msgid "no sound produced"
 msgstr "звук не отримано"
 
-#~ msgid "English (Default)"
-#~ msgstr "Англійська (за замовчуванням)"
-
 #: audio_describer/core/gemini_helpers.py:266
 #, python-format
 msgid ""
 "Gemini is overloaded right now (model %s). Nothing is wrong with your video "
-"or your key: try again in a few minutes, or choose another model in Settings."
+"or your key: try again in a few minutes, or choose another model in "
+"Settings."
 msgstr ""
 "Gemini зараз перевантажений (модель %s). З відео й ключем усе гаразд: "
 "спробуйте за кілька хвилин або виберіть іншу модель у Налаштуваннях."
@@ -4019,8 +4017,8 @@ msgstr ""
 #: audio_describer/core/gemini_helpers.py:274
 #, python-format
 msgid ""
-"Gemini is overloaded right now (attempt %(attempt)d of %(max)d). Retrying in "
-"%(delay)d seconds..."
+"Gemini is overloaded right now (attempt %(attempt)d of %(max)d). Retrying in"
+" %(delay)d seconds..."
 msgstr ""
 "Gemini зараз перевантажений (спроба %(attempt)d з %(max)d). Повтор через "
 "%(delay)d с..."
@@ -4029,3 +4027,246 @@ msgstr ""
 #, python-format
 msgid "%(old)s is still overloaded: switching to %(new)s."
 msgstr "%(old)s досі перевантажений: перемикання на %(new)s."
+
+msgid ""
+"This feature uses Gemini, but video descriptions are set to another AI in "
+"Settings, so nothing was sent to Google. Switch to Gemini in Settings to use"
+" it."
+msgstr ""
+"Ця функція використовує Gemini, але для опису відео в налаштуваннях вибрано "
+"інший ШІ, тому до Google нічого не надіслано. Щоб скористатися нею, "
+"перейдіть на Gemini у налаштуваннях."
+
+msgid ""
+"Could not read this image. FFmpeg is required to send it to the vision "
+"service."
+msgstr ""
+"Не вдалося прочитати це зображення. Щоб надіслати його до сервісу "
+"розпізнавання зображень, потрібен FFmpeg."
+
+msgid ""
+"This vision model can only describe images; switch to Gemini in Settings for"
+" PDF documents."
+msgstr ""
+"Ця модель розпізнавання зображень може описувати лише зображення; для "
+"документів PDF перейдіть на Gemini у налаштуваннях."
+
+#, python-format
+msgid "Describing with %s (frames sent to the vision service)."
+msgstr ""
+"Опис за допомогою %s (кадри надіслано до сервісу розпізнавання зображень)."
+
+msgid ""
+"Set the server address and the model of the OpenAI-compatible vision service"
+" in Settings."
+msgstr ""
+"Укажіть у налаштуваннях адресу сервера та модель OpenAI-сумісного сервісу "
+"розпізнавання зображень."
+
+msgid ""
+"Use an https:// address for an online vision service; http:// is only for "
+"this computer."
+msgstr ""
+"Для онлайн-сервісу розпізнавання зображень використовуйте адресу https://; "
+"http:// — лише для цього комп'ютера."
+
+#, python-format
+msgid "The vision service refused the API key (%(code)d)."
+msgstr "Сервіс розпізнавання зображень відхилив API-ключ (%(code)d)."
+
+#, python-format
+msgid "The vision service refused the request (model '%(model)s'): %(detail)s"
+msgstr ""
+"Сервіс розпізнавання зображень відхилив запит (модель '%(model)s'): "
+"%(detail)s"
+
+msgid ""
+"The vision service took too long to answer. Try a smaller model or a shorter"
+" video."
+msgstr ""
+"Сервіс розпізнавання зображень відповідав надто довго. Спробуйте меншу "
+"модель або коротше відео."
+
+#, python-format
+msgid "Could not reach the vision service at %s."
+msgstr ""
+"Не вдалося з'єднатися із сервісом розпізнавання зображень за адресою %s."
+
+#, python-format
+msgid "Unknown voice engine in Settings: %s"
+msgstr "Невідомий голосовий рушій у налаштуваннях: %s"
+
+#, python-format
+msgid ""
+"Settings file was corrupted and has been reset. Your previous settings could"
+" not be recovered. (Error: %s)"
+msgstr ""
+"Файл налаштувань був пошкоджений, тому його скинуто. Попередні налаштування "
+"не вдалося відновити. (Помилка: %s)"
+
+msgid ""
+"Your previous settings could not be migrated from the old encrypted format. "
+"This typically happens after a Windows update or hardware change. Settings "
+"have been reset to defaults. You will need to re-enter your API keys."
+msgstr ""
+"Не вдалося перенести попередні налаштування зі старого зашифрованого "
+"формату. Зазвичай це стається після оновлення Windows або заміни обладнання."
+" Налаштування скинуто до типових. Вам потрібно буде знову ввести свої API-"
+"ключі."
+
+msgid "Automatic (speaker's apparent gender on each line)"
+msgstr "Автоматично (видима стать мовця в кожній репліці)"
+
+msgid "Woman's voice"
+msgstr "Жіночий голос"
+
+msgid "Man's voice"
+msgstr "Чоловічий голос"
+
+msgid "Description voice"
+msgstr "Голос аудіоопису"
+
+msgid "woman"
+msgstr "жінка"
+
+msgid "man"
+msgstr "чоловік"
+
+msgid "unknown"
+msgstr "не визначено"
+
+#, python-format
+msgid "&Voice for this character's translated lines (AI saw: %s):"
+msgstr "&Голос для перекладених реплік цього персонажа (ШІ визначив: %s):"
+
+msgid "&Reset Settings and Data..."
+msgstr "&Скидання налаштувань і даних..."
+
+msgid "Restore default settings or presets, or clear downloaded data"
+msgstr ""
+"Відновити типові налаштування чи шаблони або видалити завантажені дані"
+
+msgid "Reset done. Some settings apply after restarting the app."
+msgstr ""
+"Скидання виконано. Деякі налаштування застосуються після перезапуску "
+"застосунку."
+
+#, python-format
+msgid "%(title)s (Reason: %(reason)s)"
+msgstr "%(title)s (Причина: %(reason)s)"
+
+#, python-format
+msgid "Opening %s"
+msgstr "Відкриття %s"
+
+#, python-format
+msgid "Help file not found: %s"
+msgstr "Файл довідки не знайдено: %s"
+
+#, python-format
+msgid "Could not open %(file)s: %(error)s"
+msgstr "Не вдалося відкрити %(file)s: %(error)s"
+
+msgid "Reset Settings and Data"
+msgstr "Скидання налаштувань і даних"
+
+msgid ""
+"Choose what to reset. A backup copy of your settings and presets is saved "
+"first. Projects and exported files are never touched."
+msgstr ""
+"Виберіть, що скинути. Спочатку зберігається резервна копія ваших налаштувань"
+" і шаблонів. Проєкти та експортовані файли ніколи не змінюються."
+
+msgid "&Settings (back to defaults)"
+msgstr "&Налаштування (повернути типові)"
+
+msgid "Also forget my &API keys"
+msgstr "Також забути мої &API-ключі"
+
+msgid "&Prompt presets (custom presets are removed)"
+msgstr "Шаблони &запитів (власні шаблони видаляються)"
+
+msgid "OpenAI &voice presets"
+msgstr "Шаблони &голосів OpenAI"
+
+msgid "&Downloaded voices and models (downloaded again when needed)"
+msgstr "&Завантажені голоси та моделі (за потреби завантажуються знову)"
+
+msgid "&Temporary files"
+msgstr "&Тимчасові файли"
+
+msgid "&Reset"
+msgstr "&Скинути"
+
+msgid "Nothing is selected."
+msgstr "Нічого не вибрано."
+
+msgid "Reset"
+msgstr "Скидання"
+
+msgid "Reset the selected items now? This cannot be undone from the app."
+msgstr ""
+"Скинути вибрані елементи зараз? Цю дію не можна скасувати в застосунку."
+
+msgid "Confirm Reset"
+msgstr "Підтвердження скидання"
+
+#, python-format
+msgid "The reset did not complete: %s"
+msgstr "Скидання не завершено: %s"
+
+msgid "Microsoft Azure Neural Voices (online, key required)"
+msgstr "Microsoft Azure Neural Voices (онлайн, потрібен ключ)"
+
+msgid "Google Cloud Text-to-Speech (online, key required)"
+msgstr "Google Cloud Text-to-Speech (онлайн, потрібен ключ)"
+
+msgid ""
+"OpenAI-compatible vision service (OpenRouter, OpenAI, Claude, Mistral, LM "
+"Studio...)"
+msgstr ""
+"OpenAI-сумісний сервіс розпізнавання зображень (OpenRouter, OpenAI, Claude, "
+"Mistral, LM Studio...)"
+
+msgid "OpenAI-compatible vision service (frames)"
+msgstr "OpenAI-сумісний сервіс розпізнавання зображень (кадри)"
+
+msgid "Vision service address (OpenAI-compatible):"
+msgstr "Адреса сервісу розпізнавання зображень (OpenAI-сумісного):"
+
+msgid "Vision service model:"
+msgstr "Модель сервісу розпізнавання зображень:"
+
+msgid "Vision service API key (empty for a local server):"
+msgstr ""
+"API-ключ сервісу розпізнавання зображень (порожньо для локального сервера):"
+
+msgid "Microsoft Azure Neural Voices"
+msgstr "Microsoft Azure Neural Voices"
+
+msgid "Speech resource key:"
+msgstr "Ключ ресурсу Speech:"
+
+msgid "Region (for example westeurope):"
+msgstr "Регіон (наприклад, westeurope):"
+
+msgid "Voice (for example fr-FR-DeniseNeural):"
+msgstr "Голос (наприклад, fr-FR-DeniseNeural):"
+
+msgid "Woman's voice for translated dialogue (optional):"
+msgstr "Жіночий голос для перекладених реплік (необов'язково):"
+
+msgid "Man's voice for translated dialogue (optional):"
+msgstr "Чоловічий голос для перекладених реплік (необов'язково):"
+
+msgid "Google Cloud Text-to-Speech"
+msgstr "Google Cloud Text-to-Speech"
+
+msgid "API key:"
+msgstr "API-ключ:"
+
+msgid "Voice (for example fr-FR-Chirp3-HD-Aoede):"
+msgstr "Голос (наприклад, fr-FR-Chirp3-HD-Aoede):"
+
+#~ msgid "English (Default)"
+#~ msgstr "Англійська (за замовчуванням)"

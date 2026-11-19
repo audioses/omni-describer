@@ -3829,3 +3829,241 @@ msgstr ""
 #, python-format
 msgid "%(old)s is still overloaded: switching to %(new)s."
 msgstr "%(old)s vẫn quá tải: chuyển sang %(new)s."
+
+msgid ""
+"This feature uses Gemini, but video descriptions are set to another AI in "
+"Settings, so nothing was sent to Google. Switch to Gemini in Settings to use"
+" it."
+msgstr ""
+"Tính năng này dùng Gemini, nhưng mô tả video đang được đặt cho một AI khác "
+"trong Cài đặt, nên không có gì được gửi đến Google. Hãy chuyển sang Gemini "
+"trong Cài đặt để sử dụng."
+
+msgid ""
+"Could not read this image. FFmpeg is required to send it to the vision "
+"service."
+msgstr ""
+"Không thể đọc hình ảnh này. Cần có FFmpeg để gửi hình ảnh đến dịch vụ phân "
+"tích hình ảnh."
+
+msgid ""
+"This vision model can only describe images; switch to Gemini in Settings for"
+" PDF documents."
+msgstr ""
+"Mô hình phân tích hình ảnh này chỉ mô tả được hình ảnh; hãy chuyển sang "
+"Gemini trong Cài đặt để xử lý tài liệu PDF."
+
+#, python-format
+msgid "Describing with %s (frames sent to the vision service)."
+msgstr ""
+"Đang mô tả bằng %s (các khung hình được gửi đến dịch vụ phân tích hình ảnh)."
+
+msgid ""
+"Set the server address and the model of the OpenAI-compatible vision service"
+" in Settings."
+msgstr ""
+"Hãy đặt địa chỉ máy chủ và mô hình của dịch vụ phân tích hình ảnh tương "
+"thích OpenAI trong Cài đặt."
+
+msgid ""
+"Use an https:// address for an online vision service; http:// is only for "
+"this computer."
+msgstr ""
+"Hãy dùng địa chỉ https:// cho dịch vụ phân tích hình ảnh trực tuyến; http://"
+" chỉ dành cho máy tính này."
+
+#, python-format
+msgid "The vision service refused the API key (%(code)d)."
+msgstr "Dịch vụ phân tích hình ảnh đã từ chối khóa API (%(code)d)."
+
+#, python-format
+msgid "The vision service refused the request (model '%(model)s'): %(detail)s"
+msgstr ""
+"Dịch vụ phân tích hình ảnh đã từ chối yêu cầu (mô hình '%(model)s'): "
+"%(detail)s"
+
+msgid ""
+"The vision service took too long to answer. Try a smaller model or a shorter"
+" video."
+msgstr ""
+"Dịch vụ phân tích hình ảnh phản hồi quá lâu. Hãy thử một mô hình nhỏ hơn "
+"hoặc một video ngắn hơn."
+
+#, python-format
+msgid "Could not reach the vision service at %s."
+msgstr "Không thể kết nối đến dịch vụ phân tích hình ảnh tại %s."
+
+#, python-format
+msgid "Unknown voice engine in Settings: %s"
+msgstr "Cơ chế giọng nói không xác định trong Cài đặt: %s"
+
+#, python-format
+msgid ""
+"Settings file was corrupted and has been reset. Your previous settings could"
+" not be recovered. (Error: %s)"
+msgstr ""
+"Tệp cài đặt bị hỏng và đã được đặt lại. Không thể khôi phục cài đặt trước "
+"đây của bạn. (Lỗi: %s)"
+
+msgid ""
+"Your previous settings could not be migrated from the old encrypted format. "
+"This typically happens after a Windows update or hardware change. Settings "
+"have been reset to defaults. You will need to re-enter your API keys."
+msgstr ""
+"Không thể chuyển cài đặt trước đây của bạn từ định dạng mã hóa cũ. Điều này "
+"thường xảy ra sau khi cập nhật Windows hoặc thay đổi phần cứng. Cài đặt đã "
+"được đặt lại về mặc định. Bạn sẽ cần nhập lại các khóa API."
+
+msgid "Automatic (speaker's apparent gender on each line)"
+msgstr "Tự động (giới tính biểu hiện của người nói ở mỗi câu)"
+
+msgid "Woman's voice"
+msgstr "Giọng nữ"
+
+msgid "Man's voice"
+msgstr "Giọng nam"
+
+msgid "Description voice"
+msgstr "Giọng mô tả"
+
+msgid "woman"
+msgstr "nữ"
+
+msgid "man"
+msgstr "nam"
+
+msgid "unknown"
+msgstr "không rõ"
+
+#, python-format
+msgid "&Voice for this character's translated lines (AI saw: %s):"
+msgstr "&Giọng cho các câu thoại đã dịch của nhân vật này (AI nhận thấy: %s):"
+
+msgid "&Reset Settings and Data..."
+msgstr "&Đặt lại Cài đặt và Dữ liệu..."
+
+msgid "Restore default settings or presets, or clear downloaded data"
+msgstr ""
+"Khôi phục cài đặt hoặc thiết lập sẵn mặc định, hoặc xóa dữ liệu đã tải xuống"
+
+msgid "Reset done. Some settings apply after restarting the app."
+msgstr ""
+"Đã đặt lại. Một số cài đặt sẽ có hiệu lực sau khi khởi động lại ứng dụng."
+
+#, python-format
+msgid "%(title)s (Reason: %(reason)s)"
+msgstr "%(title)s (Lý do: %(reason)s)"
+
+#, python-format
+msgid "Opening %s"
+msgstr "Đang mở %s"
+
+#, python-format
+msgid "Help file not found: %s"
+msgstr "Không tìm thấy tệp trợ giúp: %s"
+
+#, python-format
+msgid "Could not open %(file)s: %(error)s"
+msgstr "Không thể mở %(file)s: %(error)s"
+
+msgid "Reset Settings and Data"
+msgstr "Đặt lại Cài đặt và Dữ liệu"
+
+msgid ""
+"Choose what to reset. A backup copy of your settings and presets is saved "
+"first. Projects and exported files are never touched."
+msgstr ""
+"Chọn nội dung cần đặt lại. Một bản sao lưu cài đặt và thiết lập sẵn của bạn "
+"sẽ được lưu trước. Dự án và các tệp đã xuất không bao giờ bị động đến."
+
+msgid "&Settings (back to defaults)"
+msgstr "&Cài đặt (trở về mặc định)"
+
+msgid "Also forget my &API keys"
+msgstr "Quên luôn các khóa &API của tôi"
+
+msgid "&Prompt presets (custom presets are removed)"
+msgstr "Thiết lập sẵn &lời nhắc (các thiết lập sẵn tùy chỉnh sẽ bị xóa)"
+
+msgid "OpenAI &voice presets"
+msgstr "Thiết lập sẵn &giọng nói OpenAI"
+
+msgid "&Downloaded voices and models (downloaded again when needed)"
+msgstr "Giọng nói và mô hình đã &tải xuống (sẽ tải lại khi cần)"
+
+msgid "&Temporary files"
+msgstr "Tệp tạ&m thời"
+
+msgid "&Reset"
+msgstr "Đặt &lại"
+
+msgid "Nothing is selected."
+msgstr "Chưa chọn mục nào."
+
+msgid "Reset"
+msgstr "Đặt lại"
+
+msgid "Reset the selected items now? This cannot be undone from the app."
+msgstr ""
+"Đặt lại các mục đã chọn ngay bây giờ? Không thể hoàn tác thao tác này từ ứng"
+" dụng."
+
+msgid "Confirm Reset"
+msgstr "Xác nhận Đặt lại"
+
+#, python-format
+msgid "The reset did not complete: %s"
+msgstr "Việc đặt lại chưa hoàn tất: %s"
+
+msgid "Microsoft Azure Neural Voices (online, key required)"
+msgstr "Giọng nói Neural Microsoft Azure (trực tuyến, cần khóa)"
+
+msgid "Google Cloud Text-to-Speech (online, key required)"
+msgstr "Google Cloud Chuyển văn bản thành giọng nói (trực tuyến, cần khóa)"
+
+msgid ""
+"OpenAI-compatible vision service (OpenRouter, OpenAI, Claude, Mistral, LM "
+"Studio...)"
+msgstr ""
+"Dịch vụ phân tích hình ảnh tương thích OpenAI (OpenRouter, OpenAI, Claude, "
+"Mistral, LM Studio...)"
+
+msgid "OpenAI-compatible vision service (frames)"
+msgstr "Dịch vụ phân tích hình ảnh tương thích OpenAI (khung hình)"
+
+msgid "Vision service address (OpenAI-compatible):"
+msgstr "Địa chỉ dịch vụ phân tích hình ảnh (tương thích OpenAI):"
+
+msgid "Vision service model:"
+msgstr "Mô hình dịch vụ phân tích hình ảnh:"
+
+msgid "Vision service API key (empty for a local server):"
+msgstr ""
+"Khóa API dịch vụ phân tích hình ảnh (để trống nếu dùng máy chủ cục bộ):"
+
+msgid "Microsoft Azure Neural Voices"
+msgstr "Giọng nói Neural Microsoft Azure"
+
+msgid "Speech resource key:"
+msgstr "Khóa tài nguyên Speech:"
+
+msgid "Region (for example westeurope):"
+msgstr "Khu vực (ví dụ westeurope):"
+
+msgid "Voice (for example fr-FR-DeniseNeural):"
+msgstr "Giọng nói (ví dụ fr-FR-DeniseNeural):"
+
+msgid "Woman's voice for translated dialogue (optional):"
+msgstr "Giọng nữ cho lời thoại đã dịch (tùy chọn):"
+
+msgid "Man's voice for translated dialogue (optional):"
+msgstr "Giọng nam cho lời thoại đã dịch (tùy chọn):"
+
+msgid "Google Cloud Text-to-Speech"
+msgstr "Google Cloud Chuyển văn bản thành giọng nói"
+
+msgid "API key:"
+msgstr "Khóa API:"
+
+msgid "Voice (for example fr-FR-Chirp3-HD-Aoede):"
+msgstr "Giọng nói (ví dụ fr-FR-Chirp3-HD-Aoede):"

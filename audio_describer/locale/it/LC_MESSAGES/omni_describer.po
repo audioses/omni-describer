@@ -4012,6 +4012,272 @@ msgstr "Impossibile preparare la voce: %s"
 msgid "no sound produced"
 msgstr "nessun suono prodotto"
 
+#: audio_describer/core/gemini_helpers.py:266
+#, python-format
+msgid ""
+"Gemini is overloaded right now (model %s). Nothing is wrong with your video "
+"or your key: try again in a few minutes, or choose another model in "
+"Settings."
+msgstr ""
+"Gemini è sovraccarico in questo momento (modello %s). Il video e la chiave "
+"non hanno problemi: riprova tra qualche minuto o scegli un altro modello "
+"nelle Impostazioni."
+
+#: audio_describer/core/gemini_helpers.py:274
+#, python-format
+msgid ""
+"Gemini is overloaded right now (attempt %(attempt)d of %(max)d). Retrying in"
+" %(delay)d seconds..."
+msgstr ""
+"Gemini è sovraccarico in questo momento (tentativo %(attempt)d di %(max)d). "
+"Nuovo tentativo tra %(delay)d secondi..."
+
+#: audio_describer/core/gemini_helpers.py:259
+#, python-format
+msgid "%(old)s is still overloaded: switching to %(new)s."
+msgstr "%(old)s è ancora sovraccarico: passaggio a %(new)s."
+
+msgid ""
+"This feature uses Gemini, but video descriptions are set to another AI in "
+"Settings, so nothing was sent to Google. Switch to Gemini in Settings to use"
+" it."
+msgstr ""
+"Questa funzione usa Gemini, ma nelle impostazioni le descrizioni video sono "
+"affidate a un'altra IA, quindi non è stato inviato nulla a Google. Passa a "
+"Gemini nelle impostazioni per usarla."
+
+msgid ""
+"Could not read this image. FFmpeg is required to send it to the vision "
+"service."
+msgstr ""
+"Impossibile leggere questa immagine. FFmpeg è necessario per inviarla al "
+"servizio di visione."
+
+msgid ""
+"This vision model can only describe images; switch to Gemini in Settings for"
+" PDF documents."
+msgstr ""
+"Questo modello di visione può descrivere solo immagini; per i documenti PDF "
+"passa a Gemini nelle impostazioni."
+
+#, python-format
+msgid "Describing with %s (frames sent to the vision service)."
+msgstr "Descrizione con %s (fotogrammi inviati al servizio di visione)."
+
+msgid ""
+"Set the server address and the model of the OpenAI-compatible vision service"
+" in Settings."
+msgstr ""
+"Inserisci nelle impostazioni l'indirizzo del server e il modello del "
+"servizio di visione compatibile con OpenAI."
+
+msgid ""
+"Use an https:// address for an online vision service; http:// is only for "
+"this computer."
+msgstr ""
+"Usa un indirizzo https:// per un servizio di visione online; http:// è solo "
+"per questo computer."
+
+#, python-format
+msgid "The vision service refused the API key (%(code)d)."
+msgstr "Il servizio di visione ha rifiutato la chiave API (%(code)d)."
+
+#, python-format
+msgid "The vision service refused the request (model '%(model)s'): %(detail)s"
+msgstr ""
+"Il servizio di visione ha rifiutato la richiesta (modello '%(model)s'): "
+"%(detail)s"
+
+msgid ""
+"The vision service took too long to answer. Try a smaller model or a shorter"
+" video."
+msgstr ""
+"Il servizio di visione ha impiegato troppo tempo a rispondere. Prova un "
+"modello più piccolo o un video più breve."
+
+#, python-format
+msgid "Could not reach the vision service at %s."
+msgstr "Impossibile raggiungere il servizio di visione all'indirizzo %s."
+
+#, python-format
+msgid "Unknown voice engine in Settings: %s"
+msgstr "Motore vocale sconosciuto nelle impostazioni: %s"
+
+#, python-format
+msgid ""
+"Settings file was corrupted and has been reset. Your previous settings could"
+" not be recovered. (Error: %s)"
+msgstr ""
+"Il file delle impostazioni era danneggiato ed è stato reimpostato. Non è "
+"stato possibile recuperare le impostazioni precedenti. (Errore: %s)"
+
+msgid ""
+"Your previous settings could not be migrated from the old encrypted format. "
+"This typically happens after a Windows update or hardware change. Settings "
+"have been reset to defaults. You will need to re-enter your API keys."
+msgstr ""
+"Non è stato possibile migrare le impostazioni precedenti dal vecchio formato"
+" cifrato. Di solito succede dopo un aggiornamento di Windows o una modifica "
+"dell'hardware. Le impostazioni sono state riportate ai valori predefiniti. "
+"Dovrai inserire di nuovo le tue chiavi API."
+
+msgid "Automatic (speaker's apparent gender on each line)"
+msgstr "Automatica (genere apparente di chi parla, battuta per battuta)"
+
+msgid "Woman's voice"
+msgstr "Voce femminile"
+
+msgid "Man's voice"
+msgstr "Voce maschile"
+
+msgid "Description voice"
+msgstr "Voce delle descrizioni"
+
+msgid "woman"
+msgstr "donna"
+
+msgid "man"
+msgstr "uomo"
+
+msgid "unknown"
+msgstr "non determinato"
+
+#, python-format
+msgid "&Voice for this character's translated lines (AI saw: %s):"
+msgstr ""
+"&Voce per le battute tradotte di questo personaggio (secondo l'IA: %s):"
+
+msgid "&Reset Settings and Data..."
+msgstr "Ripristi&na impostazioni e dati..."
+
+msgid "Restore default settings or presets, or clear downloaded data"
+msgstr ""
+"Ripristina le impostazioni o i preset predefiniti, oppure cancella i dati "
+"scaricati"
+
+msgid "Reset done. Some settings apply after restarting the app."
+msgstr ""
+"Ripristino completato. Alcune impostazioni avranno effetto dopo il riavvio "
+"dell'app."
+
+#, python-format
+msgid "%(title)s (Reason: %(reason)s)"
+msgstr "%(title)s (Motivo: %(reason)s)"
+
+#, python-format
+msgid "Opening %s"
+msgstr "Apertura di %s"
+
+#, python-format
+msgid "Help file not found: %s"
+msgstr "File di aiuto non trovato: %s"
+
+#, python-format
+msgid "Could not open %(file)s: %(error)s"
+msgstr "Impossibile aprire %(file)s: %(error)s"
+
+msgid "Reset Settings and Data"
+msgstr "Ripristina impostazioni e dati"
+
+msgid ""
+"Choose what to reset. A backup copy of your settings and presets is saved "
+"first. Projects and exported files are never touched."
+msgstr ""
+"Scegli cosa ripristinare. Prima viene salvata una copia di backup delle "
+"impostazioni e dei preset. I progetti e i file esportati non vengono mai "
+"toccati."
+
+msgid "&Settings (back to defaults)"
+msgstr "&Impostazioni (ritorno ai valori predefiniti)"
+
+msgid "Also forget my &API keys"
+msgstr "Dimentica anche le mie &chiavi API"
+
+msgid "&Prompt presets (custom presets are removed)"
+msgstr "&Preset dei prompt (i preset personalizzati vengono rimossi)"
+
+msgid "OpenAI &voice presets"
+msgstr "Preset &vocali OpenAI"
+
+msgid "&Downloaded voices and models (downloaded again when needed)"
+msgstr "Voci e modelli &scaricati (scaricati di nuovo quando servono)"
+
+msgid "&Temporary files"
+msgstr "File &temporanei"
+
+msgid "&Reset"
+msgstr "&Ripristina"
+
+msgid "Nothing is selected."
+msgstr "Nessun elemento selezionato."
+
+msgid "Reset"
+msgstr "Ripristina"
+
+msgid "Reset the selected items now? This cannot be undone from the app."
+msgstr ""
+"Ripristinare ora gli elementi selezionati? L'operazione non può essere "
+"annullata dall'app."
+
+msgid "Confirm Reset"
+msgstr "Conferma ripristino"
+
+#, python-format
+msgid "The reset did not complete: %s"
+msgstr "Il ripristino non è stato completato: %s"
+
+msgid "Microsoft Azure Neural Voices (online, key required)"
+msgstr "Voci neurali Microsoft Azure (online, chiave necessaria)"
+
+msgid "Google Cloud Text-to-Speech (online, key required)"
+msgstr "Google Cloud Text-to-Speech (online, chiave necessaria)"
+
+msgid ""
+"OpenAI-compatible vision service (OpenRouter, OpenAI, Claude, Mistral, LM "
+"Studio...)"
+msgstr ""
+"Servizio di visione compatibile con OpenAI (OpenRouter, OpenAI, Claude, "
+"Mistral, LM Studio...)"
+
+msgid "OpenAI-compatible vision service (frames)"
+msgstr "Servizio di visione compatibile con OpenAI (fotogrammi)"
+
+msgid "Vision service address (OpenAI-compatible):"
+msgstr "Indirizzo del servizio di visione (compatibile con OpenAI):"
+
+msgid "Vision service model:"
+msgstr "Modello del servizio di visione:"
+
+msgid "Vision service API key (empty for a local server):"
+msgstr "Chiave API del servizio di visione (vuota per un server locale):"
+
+msgid "Microsoft Azure Neural Voices"
+msgstr "Voci neurali Microsoft Azure"
+
+msgid "Speech resource key:"
+msgstr "Chiave della risorsa Speech:"
+
+msgid "Region (for example westeurope):"
+msgstr "Regione (ad esempio westeurope):"
+
+msgid "Voice (for example fr-FR-DeniseNeural):"
+msgstr "Voce (ad esempio fr-FR-DeniseNeural):"
+
+msgid "Woman's voice for translated dialogue (optional):"
+msgstr "Voce femminile per i dialoghi tradotti (facoltativa):"
+
+msgid "Man's voice for translated dialogue (optional):"
+msgstr "Voce maschile per i dialoghi tradotti (facoltativa):"
+
+msgid "Google Cloud Text-to-Speech"
+msgstr "Google Cloud Text-to-Speech"
+
+msgid "API key:"
+msgstr "Chiave API:"
+
+msgid "Voice (for example fr-FR-Chirp3-HD-Aoede):"
+msgstr "Voce (ad esempio fr-FR-Chirp3-HD-Aoede):"
+
 #~ msgid "AI response structure is missing content or parts."
 #~ msgstr "La struttura della risposta dell'IA manca di contenuto o di parti."
 
@@ -4195,27 +4461,3 @@ msgstr "nessun suono prodotto"
 
 #~ msgid "something whent wrong while updating."
 #~ msgstr "Qualcosa è andato storto durante l'aggiornamento."
-
-#: audio_describer/core/gemini_helpers.py:266
-#, python-format
-msgid ""
-"Gemini is overloaded right now (model %s). Nothing is wrong with your video "
-"or your key: try again in a few minutes, or choose another model in Settings."
-msgstr ""
-"Gemini è sovraccarico in questo momento (modello %s). Il video e la chiave "
-"non hanno problemi: riprova tra qualche minuto o scegli un altro modello "
-"nelle Impostazioni."
-
-#: audio_describer/core/gemini_helpers.py:274
-#, python-format
-msgid ""
-"Gemini is overloaded right now (attempt %(attempt)d of %(max)d). Retrying in "
-"%(delay)d seconds..."
-msgstr ""
-"Gemini è sovraccarico in questo momento (tentativo %(attempt)d di %(max)d). "
-"Nuovo tentativo tra %(delay)d secondi..."
-
-#: audio_describer/core/gemini_helpers.py:259
-#, python-format
-msgid "%(old)s is still overloaded: switching to %(new)s."
-msgstr "%(old)s è ancora sovraccarico: passaggio a %(new)s."
