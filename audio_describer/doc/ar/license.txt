@@ -1,0 +1,23 @@
+License and Terms of Use
+
+Thank you for using Omni Describer! By using this software, you agree to the following simple terms:
+
+1. Use Responsibly
+   This tool is designed to help create audio descriptions for videos and other content. Please use it ethically and respect copyrights and the rights of others.
+
+2. AI May Be Inaccurate
+   The descriptions are generated automatically by AI. Sometimes they may be wrong, incomplete, biased, or not make sense. It’s your responsibility to review and decide how to use the generated content.
+
+3. No Warranty
+   This software is provided “as is.” I do not guarantee it will be error-free, flawless, or fully meet your specific needs.
+
+4. No Liability
+   The developer or the contributors cannot be held responsible for any direct or indirect damages, data loss, costs, or other issues that might result from using this software. You use it entirely at your own risk.
+
+5. Sharing
+   You are free to share this application with others, but you may not sell it or claim it as your own work. Please include this license when sharing.
+
+6. About Google Gemini
+   Videos are processed using Google Gemini services. This processing is subject to Google’s own license terms and usage policies. You must read them before using this application.
+
+By clicking “Agree,” you confirm that you have read, understood, and accepted these terms. If you do not agree, please exit the application.

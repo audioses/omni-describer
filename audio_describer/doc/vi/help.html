@@ -97,6 +97,9 @@
                     <li><a href="#prompts">Quản lý Thiết lập sẵn Lời nhắc</a></li>
                     <li><a href="#askmore">Hỏi thêm về Cảnh</a></li>
                     <li><a href="#explorer">Trình khám phá Cảnh</a></li>
+                    <li><a href="#images">Hình ảnh, PDF và màn hình của bạn</a></li>
+                    <li><a href="#cli">Dòng lệnh và xử lý hàng loạt</a></li>
+                    <li><a href="#evaluate">Đánh giá một mô tả âm thanh</a></li>
                     <li><a href="#exporting">Xuất tệp Công việc của bạn</a></li>
                 </ul>
             </li>
@@ -137,6 +140,8 @@
             <strong>Lưu trữ An toàn:</strong> Các khóa API của bạn được mã hóa và lưu trữ an toàn trên máy tính của bạn trong tệp cài đặt của ứng dụng. Chúng không bao giờ được gửi đi bất kỳ đâu ngoại trừ việc kết nối trực tiếp đến các dịch vụ AI tương ứng.
         </div>
 
+        <p data-p7="1">Ở lần khởi động đầu tiên, nếu chưa có khóa Gemini, ứng dụng đề nghị mở trang Google AI Studio và phần Cài đặt. Dán khóa, rồi nhấn <strong>Kiểm tra khóa</strong> bên cạnh ô nhập: ứng dụng cho bạn biết khóa có hoạt động không và có thể dùng bao nhiêu mô hình.</p>
+
         <h2 id="quickstart">Khởi động nhanh: Tạo Mô tả Đầu tiên của bạn</h2>
         <p>Hãy bắt đầu nào! Chỉ cần làm theo các bước đơn giản sau:</p>
         <ol>
@@ -148,6 +153,8 @@
 
         <h2 id="features">Các Tính năng Chính</h2>
 
+        <p data-p6="1">Trước khi mô tả, ứng dụng tìm các khoảnh khắc không có lời nói, kể cả khi có nhạc nền (nhận dạng giọng nói Silero, tải về một lần, khoảng 2 MB, và chạy trên máy tính của bạn), cùng các lần chuyển cảnh, rồi yêu cầu AI đặt mô tả vào đó. Ứng dụng thông báo số token ước tính trước khi gửi video (Escape để hủy) và cập nhật tiến độ ít nhất mỗi 25 giây trong khi làm việc.</p>
+
         <h3 id="player">Trình phát Video có Mô tả</h3>
         <p>Đây là rạp chiếu phim có mô tả cá nhân của bạn. Khi video phát, <strong>trình đọc màn hình đã cài đặt</strong> của bạn (như JAWS hoặc NVDA) sẽ đọc to các mô tả âm thanh được tạo ra vào đúng thời điểm.</p>
         <ul>
@@ -157,6 +164,8 @@
             <li><strong>Mức sử dụng Token của AI:</strong> Khu vực này cho bạn thấy bao nhiêu "token" AI đã được sử dụng, giúp bạn theo dõi việc sử dụng API của mình.</li>
         </ul>
 
+        <p>Cài đặt &gt; Đầu ra Âm thanh, “Mô tả trong trình phát”: trình đọc màn hình của bạn (giọng nói và chữ nổi, mặc định); giọng của ứng dụng đã chọn ở trên, được chuẩn bị trước để video được giảm âm lượng hoặc tạm dừng đúng khoảng thời gian cần thiết; hoặc chỉ chữ nổi, khi đó video tạm dừng sau mỗi mô tả cho đến khi bạn nhấn Enter. “Đồng thời hiển thị mô tả bằng chữ lớn trên video” hiển thị từng mô tả trên hình ảnh, với cỡ chữ và màu do bạn chọn, dành cho người xem thị lực kém.</p>
+
         <h3 id="editing">Chỉnh sửa Mô tả: Sức mạnh Tinh chỉnh</h3>
         <p>AI cung cấp một điểm khởi đầu tuyệt vời, nhưng chất lượng thực sự đến từ sự tinh chỉnh. Nút "Chỉnh sửa Mô tả..." trong trình phát sẽ mở ra một trình soạn thảo mạnh mẽ cho phép bạn kiểm soát hoàn toàn mọi khía cạnh của dự án.</p>
         <ul>
@@ -165,11 +174,15 @@
             <li><strong>Viết lại Văn bản:</strong> Tự do chỉnh sửa văn bản mô tả trong hộp văn bản chính để cải thiện sự rõ ràng, thêm chi tiết hoặc sửa chữa những điểm không chính xác.</li>
             <li><strong>Thêm Mô tả Mới:</strong> Nhấp vào nút "Thêm mới..." để mở một hộp thoại đơn giản nơi bạn có thể tạo một mô tả hoàn toàn mới từ đầu, thiết lập thời gian và văn bản của nó.</li>
             <li><strong>Xóa Mô tả:</strong> Chọn một mô tả và nhấp vào nút "Xóa" để loại bỏ nó vĩnh viễn.</li>
+            <li><strong>Nhân vật:</strong> Nút "Nhân vật..." (Alt+H) mở bảng nhân vật mà AI dùng để giữ tên nhất quán: thêm, sửa hoặc xóa (Enter để sửa, Delete để xóa). Đổi tên một nhân vật sẽ đổi tên đó trong mọi mô tả.</li>
+            <li><strong>Phím tắt:</strong> F8 / Shift+F8: mô tả cần duyệt tiếp theo / trước đó. Ctrl+P: phát hoặc tạm dừng video. Alt+Trái / Alt+Phải: dịch video 1 giây. Ctrl+Z / Ctrl+Y trong danh sách: hoàn tác / làm lại. Ctrl+[ / Ctrl+]: bắt đầu / kết thúc = vị trí trình phát. Ctrl+S: lưu. Nhập thời gian dạng HH:MM:SS.mmm (MM:SS hoặc số giây cũng được); chuyển sang mô tả khác vẫn giữ thay đổi, và khi đóng sẽ hỏi nếu còn thay đổi chưa lưu.</li>
         </ul>
         <div class="note">
             <strong>Lưu Công việc của bạn:</strong> Những thay đổi bạn thực hiện trong trình soạn thảo (thêm, xóa, sửa đổi) được áp dụng ngay lập tức cho phiên làm việc hiện tại của bạn. Khi bạn hoàn tất, chỉ cần nhấp vào nút "Đóng" để quay lại trình phát. Danh sách mô tả đã cập nhật của bạn sẽ được sử dụng để phát lại và cho bất kỳ lần xuất tệp nào sau đó.
         </div>
         
+        <p>Để duyệt chuyên nghiệp, mỗi mô tả có một trạng thái (cần xem lại hoặc đã duyệt) và ghi chú của người duyệt, được lưu cùng dự án. Sau khi tạo, một lượt kiểm tra AI cũng đánh dấu các mô tả không ở thì hiện tại, diễn giải cảm xúc thay vì mô tả những gì nhìn thấy, hoặc thoát khỏi thế giới hư cấu (tên diễn viên, thuật ngữ máy quay); chúng xuất hiện kèm “Cần xem lại” trong trình chỉnh sửa, và phím V trong trình phát sẽ đếm chúng. Thay đổi văn bản sẽ xóa các dấu này.</p>
+
         <h3 id="prompts">Quản lý Thiết lập sẵn Lời nhắc</h3>
         <p>Lời nhắc là những hướng dẫn mạnh mẽ quyết định AI sẽ tập trung vào điều gì. Bằng cách thay đổi lời nhắc, bạn có thể nhận được các mô tả theo những phong cách khác nhau rõ rệt.</p>
         <ul>
@@ -177,6 +190,8 @@
             <li><strong>Quản lý Thiết lập sẵn:</strong> Đi tới <strong>Tệp -> Quản lý Thiết lập sẵn Lời nhắc...</strong>. Tại đây bạn có thể Thêm, Sửa hoặc Xóa các lời nhắc tùy chỉnh của riêng mình. Điều này hoàn hảo để lưu các hướng dẫn bạn thường xuyên sử dụng.</li>
             <li><strong>Dành riêng cho Ngôn ngữ:</strong> Các thiết lập sẵn lời nhắc của bạn được lưu riêng cho mỗi ngôn ngữ bạn chọn trong Cài đặt.</li>
         </ul>
+
+        <p data-p7="1">Các thiết lập sẵn có ở cả mười ngôn ngữ giao diện. <strong>Xuất tệp...</strong> lưu các thiết lập sẵn của bạn vào một tệp để chia sẻ với những người mô tả khác; <strong>Nhập tệp...</strong> thêm các thiết lập sẵn từ một tệp như vậy (thiết lập sẵn trùng tên sẽ bị thay thế).</p>
 
         <h3 id="askmore">Hỏi thêm về Cảnh</h3>
         <p>Bạn đã bao giờ tự hỏi một nhân vật đang cầm gì hay một tấm biển ở hậu cảnh ghi gì chưa? Tính năng này cho phép bạn hỏi bất cứ điều gì bạn nghĩ đến về cảnh đó.</p>
@@ -189,20 +204,37 @@
         </ol>
 
         <h3 id="explorer">Trình khám phá Cảnh</h3>
-        <p>Trình khám phá Cảnh là một cách tương tác để hiểu bố cục không gian của một cảnh. Nó đặt bạn vào một căn phòng ảo mà bạn có thể điều hướng bằng bàn phím.</p>
+        <p>Trình khám phá cảnh cho bạn biết trong hình có gì và ở đâu. Vị trí của mỗi đối tượng được nêu theo mặt đồng hồ: 12 giờ là phía trên của hình, 3 giờ là mép phải, 6 giờ là phía dưới. Đây là một cửa sổ thông thường, được trình đọc màn hình và màn hình chữ nổi đọc.</p>
         <ol>
             <li>Tạm dừng video ở một cảnh bạn muốn khám phá chi tiết.</li>
             <li>Nhấp vào nút <strong>Khám phá Cảnh...</strong>, sau đó nhấp vào "Phân tích Cảnh".</li>
         </ol>
-        <p>Bây giờ bạn đang ở trong Trình khám phá Cảnh. Sử dụng bàn phím để khám phá:</p>
+        <p>Cửa sổ Trình khám phá cảnh có ba phần; chuyển giữa chúng bằng Tab:</p>
         <ul>
-            <li><span class="key">Các phím Mũi tên</span>: Di chuyển vị trí ảo của bạn trên một lưới.</li>
-            <li><span class="key">D</span>: Cung cấp một mô tả chi tiết về bố cục tổng thể của cảnh.</li>
-            <li><span class="key">L</span>: Thông báo danh sách tất cả các đối tượng trong cảnh.</li>
-            <li><span class="key">Shift</span> + <span class="key">L</span>: Chuyển sang "Chế độ Nhảy" để chọn một đối tượng và đi thẳng đến đó.</li>
-            <li><span class="key">Enter</span>: Nhận mô tả chi tiết về đối tượng gần nhất.</li>
-            <li><span class="key">Escape</span>: Đóng Trình khám phá Cảnh.</li>
+            <li><strong>Cảnh</strong>: tóm tắt toàn bộ cảnh.</li>
+            <li><strong>Đối tượng</strong>: các đối tượng cùng vị trí theo giờ. Khi di chuyển trong danh sách, một âm thanh phát bên trái hoặc bên phải tùy vị trí của đối tượng (hãy dùng tai nghe stereo).</li>
+            <li><strong>Chi tiết</strong>: hình dáng của đối tượng được chọn và việc nó đang làm.</li>
+            <li><span class="key">Escape</span>: đóng Trình khám phá cảnh.</li>
         </ul>
+
+        <h3 id="images">Hình ảnh, PDF và màn hình của bạn</h3>
+        <p><strong>Tệp &gt; Mô tả hình ảnh hoặc PDF</strong> (Ctrl+I) mô tả ảnh, ảnh chụp màn hình hoặc tài liệu PDF: chủ thể chính trước, rồi đến con người, màu sắc và chữ hiển thị, đọc nguyên văn. Với PDF: bố cục, hình ảnh, biểu đồ và bảng với các giá trị chính, rồi tóm tắt theo từng phần. Kết quả mở trong một cửa sổ bạn có thể đọc từng dòng hoặc sao chép.</p>
+        <p><strong>Mô tả màn hình của tôi</strong> (Ctrl+Alt+Shift+D) hoạt động từ mọi ứng dụng: trình duyệt, cuộc gọi video, trò chơi. Màn hình chính được chụp, mô tả và trình đọc màn hình sẽ đọc câu trả lời. Ảnh chụp được xóa sau đó.</p>
+        <p><strong>Mô tả màn hình liên tục</strong> (Ctrl+Alt+Shift+L, bật hoặc tắt) kiểm tra màn hình mỗi 3 giây và chỉ mô tả khi có thay đổi rõ rệt, chỉ nói phần mới. Mỗi lần mô tả dùng hạn mức API của bạn: hãy tắt khi không cần nữa.</p>
+        <p><strong>Phụ đề âm thanh:</strong> trong Cài đặt &gt; AI, tùy chọn "Dịch lời thoại bằng ngôn ngữ khác" thêm bản dịch các câu thoại tiếng nước ngoài (anime bản gốc, phim nước ngoài), kèm tên người nói. Giống chữ trên màn hình, chúng được báo bằng một âm ngắn và được đọc bằng giọng thứ hai khi xuất.</p>
+
+        <p>Chế độ riêng tư: trong Cài đặt &gt; Cài đặt AI, mục "Hình ảnh và màn hình được mô tả bởi" có thể dùng mô hình cục bộ qua Ollama (ollama.com) thay cho Gemini. Không có gì rời khỏi máy tính của bạn và không tốn hạn mức, nhưng mô tả kém chính xác hơn, và tài liệu PDF vẫn cần Gemini. Hãy cài Ollama, rồi chạy ollama pull gemma3 (hoặc chọn mô hình thị giác khác trong Cài đặt).</p>
+
+        <p>Khi có nhiều màn hình, màn hình đang hiển thị cửa sổ hoạt động sẽ được mô tả. Ở chế độ trực tiếp, mô tả mới sẽ chờ một khoảng lặng trong nội dung máy tính đang phát (tối đa 8 giây) rồi mới được đọc.</p>
+
+        <h3 id="cli">Dòng lệnh và xử lý hàng loạt</h3>
+        <p>Để mô tả nhiều tệp mà không cần giao diện, hãy dùng dòng lệnh. Thư mục được xử lý từng tệp; hình ảnh và PDF nhận mô tả dạng văn bản. Ứng dụng dùng cùng cài đặt và khóa API.</p>
+        <pre dir="ltr"><code>python -m audio_describer.cli film.mp4 episodes --lang fr --export vtt,srt,txt,project --out out</code></pre>
+
+        <p>Tùy chọn: --density low, medium hoặc high chỉ giữ các mô tả thiết yếu hoặc giữ tất cả trong tệp xuất (dự án vẫn giữ mọi thứ); --export cũng chấp nhận dapt, docx, mkv, mp4, mp3 và m4a; --watch tiếp tục chạy và mô tả mọi tệp mới được sao chép vào các thư mục. Ứng dụng đã cài đặt có cùng dòng lệnh: OmniDescriber.exe --cli kèm theo các tùy chọn tương tự.</p>
+
+        <h3 id="evaluate">Đánh giá một mô tả âm thanh</h3>
+        <p>Nhấn E trong trình phát để mở bảng câu hỏi lấy từ hướng dẫn mô tả âm thanh năm 2020 của cơ quan quản lý nghe nhìn Pháp (CSA). Thẻ thứ nhất dành cho việc nghe không có hình, thẻ thứ hai để kiểm tra khi có hình. Chấm mỗi câu hỏi từ 1 đến 5 và thêm nhận xét; các giá trị đo được (mô tả đè lên lời thoại, số từ mỗi giây, mô tả không chắc chắn, chữ trên màn hình) được hiển thị cạnh những câu hỏi liên quan. Không có điểm tổng: hướng dẫn coi điểm trung bình là vô nghĩa. Câu trả lời được lưu cùng dự án, và Lưu báo cáo sẽ ghi ra một tệp văn bản.</p>
 
         <h3 id="exporting">Xuất tệp Công việc của bạn</h3>
         <p>Khi bạn đã hài lòng với các mô tả của mình, bạn có thể xuất chúng từ Cửa sổ Trình phát ở các định dạng khác nhau:</p>
@@ -211,6 +243,12 @@
             <li><strong>Xuất ra .SRT:</strong> Một tệp phụ đề tiêu chuẩn bạn có thể sử dụng trong các trình phát video như VLC.</li>
             <li><strong>Xuất Âm thanh (MP3):</strong> Đây có lẽ là tính năng thú vị nhất. Nó đọc các mô tả của bạn bằng giọng nói bạn đã chọn trong Cài đặt (SAPI5 hoặc OpenAI), trộn nó với âm thanh video gốc và tự động giảm nhỏ âm thanh nền trong khi có mô tả để tạo ra một tệp MP3 bạn có thể nghe ở bất cứ đâu.</li>
         </ul>
+
+        <p>Các định dạng xuất khác: video có rãnh mô tả âm thanh riêng ở dạng MP4, cho hầu hết trình phát và điện thoại; kịch bản ở định dạng W3C TTML DAPT cho các công cụ mô tả âm thanh chuyên nghiệp; kịch bản sản xuất trong Word (.docx) với mã thời gian, văn bản, mức, trạng thái và ghi chú; và kịch bản đầy đủ, trong đó AI phiên âm lời thoại và xen kẽ với các mô tả, một phương án văn bản thay thế cho người đọc điếc mù (WCAG 1.2.8).</p>
+
+        <p data-p7="1">Tùy chọn khi xuất video và âm thanh: <strong>Chỉ các mô tả ở mật độ hiện tại</strong> xuất đúng những gì bạn nghe trong trình phát (phím D); <strong>Mô tả mở rộng</strong> tạm dừng hình ảnh khi một mô tả dài hơn khoảng lặng của nó, thay vì cắt bớt (video được mã hóa lại và phụ đề gốc không được giữ); <strong>lời ghi công</strong> thêm ở cuối một câu cho biết mô tả âm thanh được tạo bằng AI. Không có tùy chọn mở rộng, thông báo cuối sẽ liệt kê các mô tả bị cắt. Rãnh mô tả âm thanh được đặt tên theo ngôn ngữ mô tả, phụ đề của nguồn được giữ khi có thể, và với âm thanh 5.1, các mô tả được đặt ở kênh giữa. Trong trình phát, <span class="key">Shift</span> + <span class="key">I</span> lưu phần giới thiệu âm thanh thành tệp MP3 để phát hành trước chương trình.</p>
+
+        <p data-p8><strong>Cục bộ và miễn phí:</strong> trong Cài đặt, thẻ AI, mục <strong>Mô tả video</strong> có thể dùng <strong>Ollama (cục bộ, miễn phí, riêng tư)</strong>: video không bao giờ rời khỏi máy tính (cài Ollama rồi một mô hình thị giác, ví dụ <code>ollama pull gemma3</code>); cách này chậm hơn và kém chính xác hơn Gemini. <strong>Lời thoại được dịch</strong> được đọc bằng giọng nữ hoặc nam theo người nói: trong thẻ Âm thanh, giữ giọng Windows tự động hoặc chọn một giọng Piper cục bộ rồi nhấn <strong>Tải xuống và nghe thử</strong> (khoảng 20 MB, một lần). Trong trình chỉnh sửa, <strong>Ctrl+G</strong> đổi giọng người nói của một dòng đã dịch.</p>
 
         <h2 id="advanced-settings">Tìm hiểu sâu về Cài đặt</h2>
         <p>Cửa sổ Cài đặt (<span class="key">Ctrl</span> + <span class="key">,</span>) cho phép bạn kiểm soát chi tiết hành vi của Omni Describer.</p>
@@ -237,6 +275,8 @@
             </li>
         </ul>
         
+        <p data-p7="1">Cũng trong thẻ Đầu ra Âm thanh: <strong>từ điển phát âm</strong>, mỗi dòng một quy tắc, ví dụ <code>Hermione = her-my-oh-nee</code>, được dùng cho giọng của ứng dụng, các bản xuất và nút nghe của trình chỉnh sửa (nguyên từ, không phân biệt chữ hoa hay thường); và <strong>chế độ mô tả âm thanh</strong> khi trình phát khởi động (trong khoảng lặng, mở rộng hoặc theo yêu cầu; phím M vẫn thay đổi được). Trong thẻ AI, cài đặt mật độ chọn mật độ khi mở trình phát.</p>
+
         <h2 id="bestpractices">Mẹo và Thủ thuật để có Kết quả Tốt nhất</h2>
         <p>Tạo ra các mô tả âm thanh tuyệt vời là một nghệ thuật. Mặc dù AI là một trợ lý hiệu quả, bạn sẽ nhận được kết quả tốt nhất khi bạn hướng dẫn nó một cách chính xác.</p>
         
@@ -273,7 +313,7 @@
         Đ: Điều này có nghĩa là video của bạn quá dài hoặc phức tạp về mặt hình ảnh để AI xử lý trong một lần. Đây là một giới hạn về khả năng xử lý, không phải là lỗi nội dung. Giải pháp tốt nhất là đi tới <strong>Cài đặt -> Cài đặt AI</strong> và bật <strong>"Chia đoạn Video"</strong>. Thao tác này sẽ tự động chia video thành các phần nhỏ hơn, dễ quản lý hơn cho AI.</p>
 
         <p><strong>H: AI không thể tạo mô tả vì "Bộ lọc An toàn". Tôi có thể làm gì?</strong><br>
-        Đ: Đây là một vấn đề đã biết, trong đó hệ thống an toàn của AI có thể quá thận trọng. Bạn có một vài lựa chọn để thử, theo thứ tự: 1) Đi tới <strong>Cài đặt -> Cài đặt AI</strong> và bật <strong>"Tắt Bộ lọc An toàn"</strong> (điều này thường hữu ích). 2) Nếu cách đó không thành công, hãy thử giảm "Tốc độ khung hình để AI phân tích" để gửi ít dữ liệu hơn cho AI. 3) Là phương án cuối cùng, bạn có thể sử dụng cài đặt "Ghi đè Mô hình Gemini" và nhập <code>gemini-2.5-pro</code>. Mô hình này mạnh hơn và có thể xử lý nội dung nhạy cảm tốt hơn, nhưng nó chậm hơn và có thể đắt hơn nếu bạn đang ở bậc API trả phí.</p>
+        Đ: Đây là một vấn đề đã biết, trong đó hệ thống an toàn của AI có thể quá thận trọng. Bạn có một vài lựa chọn để thử, theo thứ tự: 1) Đi tới <strong>Cài đặt -> Cài đặt AI</strong> và bật <strong>"Tắt Bộ lọc An toàn"</strong> (điều này thường hữu ích). 2) Nếu cách đó không thành công, hãy thử giảm "Tốc độ khung hình để AI phân tích" để gửi ít dữ liệu hơn cho AI. 3) Là phương án cuối cùng, bạn có thể sử dụng cài đặt "Ghi đè Mô hình Gemini" và nhập <code>gemini-4-argon</code>. Mô hình này mạnh hơn và có thể xử lý nội dung nhạy cảm tốt hơn, nhưng nó chậm hơn và có thể đắt hơn nếu bạn đang ở bậc API trả phí.</p>
         
         <p><strong>H: Một số giọng nói cũ của tôi bị thiếu trong danh sách SAPI5. Chúng đã đi đâu?</strong><br>
         Đ: Các hệ thống Windows hiện đại là 64-bit, nhưng nhiều giọng nói chuyển văn bản thành giọng nói cổ điển, được yêu thích là 32-bit. Trong Cài đặt, dưới tab "Đầu ra Âm thanh", bạn sẽ thấy các lựa chọn cơ chế riêng biệt cho "SAPI5 (64-bit)" và "SAPI5 (32-bit)". Để truy cập các giọng nói cũ hơn của mình, chỉ cần chọn cơ chế 32-bit.</p>
@@ -286,9 +326,46 @@
             <li><span class="key">Ctrl</span> + <span class="key">O</span>: Mở Video từ Máy tính</li>
             <li><span class="key">Ctrl</span> + <span class="key">U</span>: Mở từ URL Trực tiếp</li>
             <li><span class="key">Ctrl</span> + <span class="key">Y</span>: Mở từ YouTube</li>
+            <li><span class="key">Ctrl</span> + <span class="key">P</span>: Mở Dự án (.omniad)</li>
+            <li><span class="key">Ctrl</span> + <span class="key">G</span>: Dùng lại các nhân vật của một tập trước (phim bộ)</li>
+            <li><span class="key">Ctrl</span> + <span class="key">I</span>: Mô tả hình ảnh hoặc PDF</li>
+            <li><span class="key">Ctrl</span> + <span class="key">Alt</span> + <span class="key">Shift</span> + <span class="key">D</span>: Mô tả màn hình của tôi, từ mọi ứng dụng</li>
+            <li><span class="key">Ctrl</span> + <span class="key">Alt</span> + <span class="key">Shift</span> + <span class="key">L</span>: Mô tả màn hình liên tục, bật hoặc tắt</li>
             <li><span class="key">Ctrl</span> + <span class="key">,</span>: Mở Cài đặt</li>
+            <li><span class="key">Escape</span>: Hủy quá trình tạo đang chạy</li>
+            <li><span class="key">Ctrl</span> + <span class="key">Shift</span> + <span class="key">P</span>: Lặp lại thông báo tiến trình gần nhất</li>
             <li><span class="key">F1</span>: Xem Trợ giúp</li>
         </ul>
+
+        <h3>Trong trình phát video</h3>
+        <p>Các phím này hoạt động bất kể điều khiển nào đang có tiêu điểm, ngoại trừ việc các hộp văn bản mô tả và token vẫn giữ các phím đọc riêng của chúng, và các phím mũi tên vẫn điều chỉnh thanh trượt âm lượng khi thanh này có tiêu điểm.</p>
+        <ul>
+            <li><span class="key">Phím cách</span>: Phát / tạm dừng</li>
+            <li><span class="key">Trái</span> / <span class="key">Phải</span>: Lùi / tiến 5 giây</li>
+            <li><span class="key">Ctrl</span> + <span class="key">Trái</span> / <span class="key">Phải</span>: Lùi / tiến 30 giây</li>
+            <li><span class="key">Alt</span> + <span class="key">Trái</span> / <span class="key">Phải</span>: Mô tả trước / tiếp theo (nhảy đến và đọc mô tả đó)</li>
+            <li><span class="key">Lên</span> / <span class="key">Xuống</span>: Âm lượng video</li>
+            <li><span class="key">R</span>: Lặp lại mô tả cuối cùng</li>
+            <li><span class="key">T</span>: Đọc thời gian hiện tại và tổng thời lượng</li>
+            <li><span class="key">A</span>: Bật hoặc tắt mô tả âm thanh</li>
+            <li><span class="key">D</span>: Thay đổi mật độ mô tả: thấp (chỉ thiết yếu), trung bình, cao (mọi chi tiết). Áp dụng ngay lập tức, không cần yêu cầu AI mới.</li>
+            <li><span class="key">M</span>: Chế độ mô tả âm thanh: trong các khoảng lặng (video vẫn tiếp tục phát), mở rộng (video tạm dừng khi một mô tả quá dài so với khoảng lặng của nó, rồi phát tiếp), hoặc theo yêu cầu (không có gì được đọc tự động)</li>
+            <li><span class="key">Enter</span> (chế độ theo yêu cầu): tạm dừng và mô tả ngắn gọn khoảnh khắc hiện tại; <span class="key">Shift</span> + <span class="key">Enter</span>: mọi nội dung đã được mô tả trong 15 giây vừa qua</li>
+            <li><span class="key">Q</span>: Hỏi thêm về khoảnh khắc hiện tại</li>
+            <li><span class="key">S</span>: Khám phá cảnh hiện tại</li>
+            <li><span class="key">I</span>: Phần giới thiệu âm thanh: các nhân vật chính, ngoại hình và các địa điểm, không tiết lộ nội dung, để nghe trước chương trình. AI viết ở lần đầu, sau đó được lưu cùng dự án.</li>
+            <li><span class="key">V</span>: Báo cáo chất lượng: số mô tả, tỷ lệ nằm trong giới hạn số từ, các mô tả đè lên âm thanh hoặc bị kiểm tra AI đánh dấu không chắc chắn, số từ mỗi giây, đoạn dài nhất không có mô tả.</li>
+            <li><span class="key">W</span>: Trên màn hình đang có gì, kể cả chữ hiển thị. Câu trả lời xuất hiện trong cửa sổ Hỏi thêm, nơi bạn có thể hỏi tiếp: AI nhớ cuộc trò chuyện.</li>
+            <li><span class="key">E</span>: Đánh giá mô tả âm thanh này bằng bảng câu hỏi CSA 2020; câu trả lời được lưu cùng dự án và có thể xuất thành báo cáo.</li>
+            <li><span class="key">Shift+Lên / Shift+Xuống</span>: Giảm âm lượng video nhiều hơn hoặc ít hơn khi đang đọc mô tả (từ 0 đến 24 dB).</li>
+            <li><span class="key">?</span>: Giống F1: đọc danh sách phím tắt trình phát.</li>
+            <li><span class="key">Ctrl</span> + <span class="key">S</span>: Lưu dự án (<span class="key">Ctrl</span> + <span class="key">Shift</span> + <span class="key">S</span>: Lưu thành)</li>
+            <li><span class="key">F1</span>: Đọc danh sách phím tắt này</li>
+        </ul>
+        <p>Trong khi một mô tả được đọc, âm lượng video được giảm 9 dB (không bao giờ tắt hẳn, có thể điều chỉnh trong Cài đặt &gt; Đầu ra Âm thanh) rồi được tăng trở lại một cách mượt mà, theo khuyến nghị của các hướng dẫn mô tả âm thanh chuyên nghiệp. Một âm thanh ngắn được phát trước mô tả đọc chữ trên màn hình. Trong khi phát, các mô tả được trình đọc màn hình của bạn đọc với âm lượng riêng của nó; trong tệp xuất, mức âm lượng của chúng được đặt trong Cài đặt &gt; Đầu ra Âm thanh.</p>
+        <p>Trong trình chỉnh sửa mô tả, mỗi mục hiển thị thời gian, mức độ và số từ mỗi giây; các mục quá dài so với khoảng lặng của chúng hoặc rơi vào lời thoại sẽ bắt đầu bằng "Cần xem lại".</p>
+
+        <p data-p7="1">Thêm nữa: <strong>Tệp &gt; Dự án gần đây</strong> mở lại một trong các dự án gần nhất; <strong>Tệp &gt; Nhập mô tả từ SRT hoặc WebVTT</strong> mở một kịch bản mô tả có sẵn cùng video của nó, để nghe, chỉnh sửa hoặc xuất. Trong trình phát, <span class="key">L</span> chọn rãnh âm thanh tiếp theo của video (ví dụ một bản mô tả âm thanh có sẵn) và <span class="key">C</span> chọn rãnh phụ đề tiếp theo hoặc tắt phụ đề; ở chế độ theo yêu cầu, một âm thanh nhẹ báo rằng có mô tả thiết yếu. Trong trình chỉnh sửa mô tả, <span class="key">Ctrl</span> + <span class="key">R</span> đọc văn bản bằng giọng xuất.</p>
 
         <h2 id="contact">Lời cảm ơn, Liên hệ và Người đóng góp</h2>
         <p>Cảm ơn bạn rất nhiều vì đã sử dụng Omni Describer! Ứng dụng này là sự phản ánh mong muốn của tôi trong việc làm cho phương tiện truyền thông hình ảnh trở nên dễ tiếp cận và thú vị hơn cho mọi người. Việc có những người dùng như bạn sử dụng công cụ này và cung cấp phản hồi là động lực lớn nhất để tiếp tục phát triển nó.</p>

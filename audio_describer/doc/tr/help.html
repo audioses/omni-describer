@@ -101,6 +101,9 @@
                     <li><a href="#prompts">Hazır İstemleri Yönetme</a></li>
                     <li><a href="#askmore">Sahne Hakkında Daha Fazla Sor</a></li>
                     <li><a href="#explorer">Sahne Gezgini</a></li>
+                    <li><a href="#images">Resimler, PDF'ler ve ekranınız</a></li>
+                    <li><a href="#cli">Komut satırı ve toplu işlem</a></li>
+                    <li><a href="#evaluate">Sesli Betimlemeyi Değerlendirme</a></li>
                     <li><a href="#exporting">Çalışmanızı Dışa Aktarma</a></li>
                 </ul>
             </li>
@@ -141,6 +144,8 @@
             <strong>Güvenli Depolama:</strong> API anahtarlarınız, yalnızca sizin bilgisayarınızda, uygulamanın ayarlar dosyasında şifrelenerek güvenle saklanır ve ilgili yapay zeka servislerine bağlanmak dışında asla başka bir yere gönderilmez.
         </div>
 
+        <p data-p7="1">İlk açılışta, ayarlanmış bir Gemini anahtarı yoksa uygulama Google AI Studio sayfasını ve Ayarlar'ı açmayı önerir. Anahtarı yapıştırın, ardından alanın yanındaki <strong>Anahtarı test et</strong> düğmesine basın: uygulama anahtarın çalışıp çalışmadığını ve kaç model kullanabildiğini size bildirir.</p>
+
         <h2 id="quickstart">Hızlı Başlangıç: İlk Betimlemenizi Üretin</h2>
         <p>Haydi başlayalım! Şu basit adımları izlemeniz yeterli:</p>
         <ol>
@@ -152,6 +157,8 @@
 
         <h2 id="features">Temel Özellikler</h2>
 
+        <p data-p6="1">Uygulama, betimlemeden önce müzik altında bile konuşmasız anları (Silero konuşma algılama; bir kez indirilir, yaklaşık 2 MB, bilgisayarınızda çalışır) ve plan değişikliklerini bulur, ardından yapay zekadan betimlemeleri oralara yerleştirmesini ister. Videoyu göndermeden önce yaklaşık token sayısını bildirir (Escape iptal eder) ve çalışırken en az 25 saniyede bir bilgi verir.</p>
+
         <h3 id="player">Betimlemeli Video Oynatıcı</h3>
         <p>Burası sizin kişisel, betimlemeli sinema salonunuz. Video normal şekilde oynatılırken, doğru anlarda <strong>bilgisayarınızda kurulu ekran okuyucu</strong> (JAWS, NVDA vb.) sizin için üretilen sesli betimlemeleri okuyacaktır.</p>
         <ul>
@@ -161,6 +168,8 @@
             <li><strong>Yapay Zeka Jeton Kullanımı:</strong> Bu alanda, işlem sırasında ne kadar yapay zeka "jetonu" harcandığını görerek API kullanımınızı takip edebilirsiniz.</li>
         </ul>
 
+        <p>Ayarlar &gt; Ses Çıkışı, "Oynatıcıda betimlemeler": ekran okuyucunuz (konuşma ve braille, varsayılan); yukarıda seçilen uygulama sesi, videonun tam gereken süre boyunca kısılması veya duraklatılması için önceden hazırlanır; ya da yalnızca braille, bu durumda video her betimlemeden sonra siz Enter'a basana kadar duraklar. "Betimlemeleri video üzerinde büyük yazıyla da göster" seçeneği, az gören izleyiciler için her betimlemeyi seçtiğiniz boyut ve renkte görüntünün üzerinde gösterir.</p>
+
         <h3 id="editing">Betimlemeleri Düzenleme: İyileştirme Gücü</h3>
         <p>Yapay zeka harika bir başlangıç noktası sunar, ancak gerçek kalite, yapılan iyileştirmelerle ortaya çıkar. Oynatıcıdaki "Betimlemeleri Düzenle..." düğmesi, projenizin her yönü üzerinde size tam kontrol sağlayan güçlü bir düzenleyici açar.</p>
         <ul>
@@ -169,11 +178,15 @@
             <li><strong>Metni Yeniden Yaz:</strong> Netliği artırmak, ayrıntı eklemek veya yanlışlıkları düzeltmek için ana metin kutusundaki betimleme metnini serbestçe düzenleyin.</li>
             <li><strong>Yeni Betimleme Ekle:</strong> Sıfırdan tamamen yeni bir betimleme oluşturmak için "Yeni Ekle..." düğmesine tıklayın. Zamanını ve metnini siz belirleyin.</li>
             <li><strong>Betimlemeleri Sil:</strong> İstenmeyen bir betimlemeyi seçip "Sil" düğmesine tıklayarak kalıcı olarak kaldırın.</li>
+            <li><strong>Karakterler:</strong> "Karakterler..." düğmesi (Alt+H), yapay zekânın adları tutarlı tutmak için kullandığı sözlüğü açar: ekleyin, düzenleyin veya silin (Enter düzenler, Delete siler). Bir karakterin adını değiştirmek onu tüm betimlemelerde değiştirir.</li>
+            <li><strong>Kısayollar:</strong> F8 / Shift+F8: incelenecek sonraki / önceki betimleme. Ctrl+P: videoyu oynat veya duraklat. Alt+Sol / Alt+Sağ: videoyu 1 saniye kaydır. Listede Ctrl+Z / Ctrl+Y: geri al / yinele. Ctrl+[ / Ctrl+]: başlangıç / bitiş = oynatıcı konumu. Ctrl+S: kaydet. Zamanlar SS:DD:SS.mmm olarak yazılır (DD:SS veya saniye de olur); başka bir betimlemeye geçmek değişiklikleri korur, kapatırken kaydedilmemiş değişiklik varsa sorulur.</li>
         </ul>
         <div class="note">
             <strong>Çalışmanızı Kaydedin:</strong> Düzenleyicide yaptığınız değişiklikler (ekleme, silme, değiştirme) anında mevcut oturumunuza uygulanır. İşiniz bittiğinde, oynatıcıya geri dönmek için "Kapat" düğmesine tıklamanız yeterlidir. Güncellenmiş betimleme listeniz, hem oynatma hem de sonraki dışa aktarma işlemleri için kullanılacaktır.
         </div>
         
+        <p>Profesyonel gözden geçirme için her betimlemenin bir durumu (gözden geçirilecek veya onaylandı) ve projeyle birlikte kaydedilen gözden geçiren notları vardır. Oluşturmadan sonra bir yapay zeka denetimi, şimdiki zamanda olmayan, görüleni betimlemek yerine duyguları yorumlayan veya kurgunun dışına çıkan (oyuncu adları, kamera terimleri) betimlemeleri de işaretler; bunlar düzenleyicide "Gözden geçir" ile görünür ve oynatıcıda V bunları sayar. Metni değiştirmek bu işaretleri kaldırır.</p>
+
         <h3 id="prompts">Hazır İstemleri Yönetme</h3>
         <p>İstemler, yapay zekanın neye odaklanacağını belirleyen güçlü talimatlardır. İstemi değiştirerek birbirinden çok farklı tarzlarda betimlemeler alabilirsiniz.</p>
         <ul>
@@ -181,6 +194,8 @@
             <li><strong>Hazır İstemleri Yönetme:</strong> <strong>Dosya -> Hazır İstemleri Yönet...</strong> menüsüne gidin. Burada kendi özel istemlerinizi Ekleyebilir, Düzenleyebilir veya Silebilirsiniz. Bu, sık kullandığınız talimatları kaydetmek için birebirdir.</li>
             <li><strong>Dile Özel Kayıt:</strong> Hazır istemleriniz, Ayarlar'da seçtiğiniz her dil için ayrı ayrı kaydedilir.</li>
         </ul>
+
+        <p data-p7="1">Hazır ayarlar on arayüz dilinin hepsinde bulunur. <strong>Dışa aktar</strong>, hazır ayarlarınızı diğer betimleme yazarlarıyla paylaşmak için bir dosyaya kaydeder; <strong>İçe aktar</strong> böyle bir dosyadaki hazır ayarları ekler (aynı ada sahip bir hazır ayarın yerine geçer).</p>
 
         <h3 id="askmore">Sahne Hakkında Daha Fazla Sor</h3>
         <p>Bir karakterin elinde ne tuttuğunu veya arka plandaki tabelada ne yazdığını mı merak ettiniz? Bu özellik sayesinde sahneyle ilgili aklınıza takılan her şeyi sorabilirsiniz.</p>
@@ -193,20 +208,37 @@
         </ol>
 
         <h3 id="explorer">Sahne Gezgini</h3>
-        <p>Sahne Gezgini, bir sahnenin mekansal düzenini anlamak için geliştirilmiş etkileşimli bir yöntemdir. Sizi, klavyenizle gezinebileceğiniz sanal bir odaya koyar.</p>
+        <p>Sahne Gezgini resimde ne olduğunu ve nerede olduğunu söyler. Her nesnenin konumu saat kadranına göre verilir: saat 12 resmin üstü, saat 3 sağ kenar, saat 6 alttır. Ekran okuyucunuzun ve braille ekranınızın okuduğu sıradan bir penceredir.</p>
         <ol>
             <li>Detaylıca keşfetmek istediğiniz bir sahnede videoyu duraklatın.</li>
             <li><strong>Sahneyi Keşfet...</strong> düğmesine ve ardından "Sahneyi Analiz Et"e tıklayın.</li>
         </ol>
-        <p>Artık Sahne Gezgini'ndesiniz. Keşfetmek için klavyenizi kullanın:</p>
+        <p>Sahne Gezgini penceresi üç bölümden oluşur; aralarında Tab ile geçin:</p>
         <ul>
-            <li><span class="key">Ok Tuşları</span>: Sanal konumunuzu bir ızgara üzerinde hareket ettirir.</li>
-            <li><span class="key">D</span>: Sahnenin genel düzeni hakkında ayrıntılı bir betimleme sunar.</li>
-            <li><span class="key">L</span>: Sahnedeki tüm nesnelerin bir listesini bildirir.</li>
-            <li><span class="key">Shift</span> + <span class="key">L</span>: Bir nesne seçip doğrudan ona gitmek için "Hızlı Taşıma Modu"na geçin.</li>
-            <li><span class="key">Enter</span>: Size en yakın nesnenin ayrıntılı bir betimlemesini alın.</li>
+            <li><strong>Sahne</strong>: tüm sahnenin özeti.</li>
+            <li><strong>Nesneler</strong>: saat konumlarıyla birlikte nesneler. Listede gezinirken, nesnenin konumuna göre solda veya sağda bir ses çalar (stereo kulaklık kullanın).</li>
+            <li><strong>Ayrıntılar</strong>: seçili nesnenin görünümü ve ne yaptığı.</li>
             <li><span class="key">Escape</span>: Sahne Gezgini'ni kapatır.</li>
         </ul>
+
+        <h3 id="images">Resimler, PDF'ler ve ekranınız</h3>
+        <p><strong>Dosya &gt; Resim veya PDF Betimle</strong> (Ctrl+I) bir fotoğrafı, ekran görüntüsünü veya PDF belgesini betimler: önce ana konu, sonra kişiler, renkler ve görünen metin, aynen okunarak. PDF için: düzen, resimler, grafikler ve tablolar temel değerleriyle, ardından bölüm bölüm özet. Sonuç, satır satır okuyabileceğiniz veya kopyalayabileceğiniz bir pencerede açılır.</p>
+        <p><strong>Ekranımı Betimle</strong> (Ctrl+Alt+Shift+D) her uygulamadan çalışır: tarayıcı, görüntülü arama, oyun. Ana ekran yakalanır, betimlenir ve yanıtı ekran okuyucunuz okur. Görüntü ardından silinir.</p>
+        <p><strong>Sürekli Ekran Betimleme</strong> (Ctrl+Alt+Shift+L, aç veya kapat) ekranı her 3 saniyede bir denetler ve yalnızca belirgin biçimde değiştiğinde, sadece yeni olanı söyleyerek betimler. Her betimleme API kotanızı kullanır: artık gerekmediğinde kapatın.</p>
+        <p><strong>Sesli altyazı:</strong> Ayarlar &gt; Yapay Zekâ bölümündeki "Başka dilde konuşulan diyalogları çevir" seçeneği, yabancı dildeki repliklerin çevirisini konuşan kişinin adıyla ekler (orijinal dilde anime, yabancı filmler). Ekrandaki metin gibi kısa bir sesle duyurulur ve dışa aktarmalarda ikinci sesle okunur.</p>
+
+        <p>Gizli mod: Ayarlar &gt; Yapay Zeka Ayarları bölümündeki "Görselleri ve ekranı betimleyen" seçeneği, Gemini yerine Ollama (ollama.com) üzerinden yerel bir model kullanabilir. Bilgisayarınızdan hiçbir şey çıkmaz ve kota harcanmaz, ancak betimlemeler daha az isabetlidir ve PDF belgeleri için yine Gemini gerekir. Ollama'yı yükleyin, ardından ollama pull gemma3 komutunu çalıştırın (veya Ayarlar'dan başka bir görme modeli seçin).</p>
+
+        <p>Birden çok ekran varsa etkin pencereyi gösteren ekran betimlenir. Sürekli modda yeni betimleme, okunmadan önce bilgisayarın çaldığı seste bir duraklama bekler (en fazla 8 saniye).</p>
+
+        <h3 id="cli">Komut satırı ve toplu işlem</h3>
+        <p>Arayüz olmadan çok sayıda dosyayı betimlemek için komut satırını kullanın. Klasörler dosya dosya işlenir; resimler ve PDF'ler metin betimlemesi alır. Uygulamanın ayarları ve API anahtarı kullanılır.</p>
+        <pre dir="ltr"><code>python -m audio_describer.cli film.mp4 episodes --lang fr --export vtt,srt,txt,project --out out</code></pre>
+
+        <p>Seçenekler: --density low, medium veya high, dışa aktarmalarda yalnızca temel betimlemeleri ya da hepsini tutar (proje her şeyi saklar); --export ayrıca dapt, docx, mkv, mp4, mp3 ve m4a değerlerini kabul eder; --watch çalışmayı sürdürür ve klasörlere kopyalanan her yeni dosyayı betimler. Yüklü uygulamanın komut satırı aynıdır: OmniDescriber.exe --cli ve ardından aynı seçenekler.</p>
+
+        <h3 id="evaluate">Sesli Betimlemeyi Değerlendirme</h3>
+        <p>Fransız görsel-işitsel düzenleme kurumunun (CSA) 2020 sesli betimleme kılavuzundaki anketi açmak için oynatıcıda E tuşuna basın. İlk sekme görüntü olmadan dinlemek, ikincisi görüntüyle denetlemek içindir. Her soruyu 1'den 5'e kadar puanlayın ve yorum ekleyin; ölçülen değerler (diyalog üzerindeki betimlemeler, saniyedeki sözcük sayısı, belirsiz betimlemeler, ekrandaki metin) ilgili soruların yanında gösterilir. Genel puan yoktur: kılavuz bir ortalamayı anlamsız sayar. Yanıtlar projeyle birlikte kaydedilir ve Raporu Kaydet bir metin dosyası yazar.</p>
 
         <h3 id="exporting">Çalışmanızı Dışa Aktarma</h3>
         <p>Betimlemelerinizi mükemmelleştirdikten sonra, oynatıcı penceresinden farklı formatlarda dışa aktarabilirsiniz:</p>
@@ -215,6 +247,12 @@
             <li><strong>SRT'ye Dışa Aktar:</strong> VLC gibi video oynatıcılarla kullanabileceğiniz standart bir altyazı dosyası.</li>
             <li><strong>Ses Dışa Aktar (MP3):</strong> Bu belki de en heyecan verici özelliktir. Betimlemelerinizi Ayarlar'da seçtiğiniz sesle (SAPI5 veya OpenAI) seslendirir, orijinal video sesiyle miksler ve betimlemeler sırasında arka plan sesini otomatik olarak kısarak her yerde dinleyebileceğiniz bir MP3 dosyası oluşturur.</li>
         </ul>
+
+        <p>Diğer dışa aktarmalar: çoğu oynatıcı ve telefon için ayrı sesli betimleme parçası olan MP4 video; profesyonel sesli betimleme araçları için W3C TTML DAPT biçiminde metin; zaman kodları, metin, düzey, durum ve notlar içeren Word (.docx) yapım metni; ve yapay zekanın diyalogları yazıya döküp betimlemelerle harmanladığı tam metin, sağır-kör okurlar için bir metin alternatifi (WCAG 1.2.8).</p>
+
+        <p data-p7="1">Video ve ses dışa aktarma seçenekleri: <strong>Yalnızca geçerli yoğunluktaki betimlemeler</strong>, oynatıcıda duyduğunuzu dışa aktarır (D tuşu); <strong>Genişletilmiş betimleme</strong>, bir betimleme duraklamasından uzun olduğunda onu kesmek yerine görüntüyü duraklatır (video yeniden kodlanır ve özgün altyazılar korunmaz); <strong>sesli künye</strong>, sona sesli betimlemenin yapay zeka tarafından oluşturulduğunu söyleyen bir cümle ekler. Genişletilmiş seçenek olmadan, bitiş mesajı kesilen betimlemeleri listeler. Sesli betimleme parçası betimleme dilinin adını taşır, kaynağın altyazıları mümkün olduğunda korunur ve 5.1 seste betimlemeler orta kanala yerleştirilir. Oynatıcıda <span class="key">Shift</span> + <span class="key">I</span>, sesli tanıtımı programdan önce yayımlamak üzere MP3 olarak kaydeder.</p>
+
+        <p data-p8><strong>Yerel ve ücretsiz:</strong> Ayarlar'da, Yapay Zekâ sekmesinde <strong>Video betimlemeleri</strong> için <strong>Ollama (yerel, ücretsiz, gizli)</strong> seçilebilir: video bilgisayarınızdan hiç çıkmaz (Ollama'yı ve bir görme modelini kurun, örneğin <code>ollama pull gemma3</code>); Gemini'den daha yavaş ve daha az isabetlidir. <strong>Çevrilmiş diyaloglar</strong> konuşmacıya göre kadın ya da erkek sesiyle okunur: Ses sekmesinde otomatik Windows sesini bırakın ya da yerel bir Piper sesi seçip <strong>İndir ve dinle</strong>'ye basın (yaklaşık 20 MB, bir kez). Düzenleyicide <strong>Ctrl+G</strong>, çevrilmiş bir satırın konuşmacı sesini değiştirir.</p>
 
         <h2 id="advanced-settings">Ayarlara Derinlemesine Bir Bakış</h2>
         <p>Ayarlar penceresi (<span class="key">Ctrl</span> + <span class="key">,</span>), Omni Betimleyici'nin davranışını en ince ayrıntısına kadar kontrol etmenizi sağlar.</p>
@@ -241,6 +279,8 @@
             </li>
         </ul>
         
+        <p data-p7="1">Yine Ses Çıkışı sekmesinde: uygulama sesi, dışa aktarmalar ve düzenleyicideki dinle düğmesi tarafından kullanılan, her satırda bir kural içeren <strong>telaffuz sözlüğü</strong> (örneğin <code>Hermione = her-my-oh-nee</code>; tam sözcükler, büyük veya küçük harf); ve oynatıcının başladığı <strong>sesli betimleme modu</strong> (duraklamalarda, genişletilmiş veya isteğe bağlı; M yine de değiştirir). Yapay Zeka sekmesinde yoğunluk ayarı, oynatıcının hangi yoğunlukla açılacağını seçer.</p>
+
         <h2 id="bestpractices">En İyi Sonuçlar İçin İpuçları ve Püf Noktaları</h2>
         <p>Harika sesli betimlemeler üretmek bir sanattır. Yapay zeka bu sanatı icra etmede etkili bir yardımcı olsa da, en iyi sonuçları onu doğru yönlendirdiğinizde alırsınız.</p>
         
@@ -277,7 +317,7 @@
         C: Bu, videonuzun yapay zekanın tek seferde işleyemeyeceği kadar uzun veya görsel olarak karmaşık olduğu anlamına gelir. Bu bir içerik hatası değil, bir kapasite sınırıdır. En iyi çözüm, <strong>Ayarlar -> Yapay Zeka Ayarları</strong>'na gidip <strong>"Video Parçalamayı Etkinleştir"</strong> seçeneğini işaretlemektir. Bu, videoyu yapay zeka için otomatik olarak daha küçük, yönetilebilir parçalara ayıracaktır.</p>
 
         <p><strong>S: Yapay zeka "Güvenlik Filtreleri" nedeniyle neden betimleme üretemedi?</strong><br>
-        C: Bu, yapay zekanın güvenlik sisteminin aşırı dikkatli olabildiği bilinen bir sorundur. Sırayla deneyebileceğiniz birkaç seçeneğiniz var: 1) <strong>Ayarlar -> Yapay Zeka Ayarları</strong>'na gidin ve <strong>"Güvenlik Filtrelerini Kapat"</strong>ı etkinleştirin (bu genellikle yardımcı olur). 2) Bu işe yaramazsa, yapay zekaya daha az veri göndermek için "Analiz için kare hızı"nı düşürmeyi deneyin. 3) Son çare olarak, "Gemini Model Geçersiz Kılma" ayarını kullanabilir ve <code>gemini-2.5-pro</code> yazabilirsiniz. Bu model daha güçlüdür ve hassas içerikleri daha iyi işleyebilir, ancak işlemesi daha uzun sürer ve ücretli bir API katmanındaysanız daha pahalı olabilir.</p>
+        C: Bu, yapay zekanın güvenlik sisteminin aşırı dikkatli olabildiği bilinen bir sorundur. Sırayla deneyebileceğiniz birkaç seçeneğiniz var: 1) <strong>Ayarlar -> Yapay Zeka Ayarları</strong>'na gidin ve <strong>"Güvenlik Filtrelerini Kapat"</strong>ı etkinleştirin (bu genellikle yardımcı olur). 2) Bu işe yaramazsa, yapay zekaya daha az veri göndermek için "Analiz için kare hızı"nı düşürmeyi deneyin. 3) Son çare olarak, "Gemini Model Geçersiz Kılma" ayarını kullanabilir ve <code>gemini-4-argon</code> yazabilirsiniz. Bu model daha güçlüdür ve hassas içerikleri daha iyi işleyebilir, ancak işlemesi daha uzun sürer ve ücretli bir API katmanındaysanız daha pahalı olabilir.</p>
         
         <p><strong>S: Eski seslerimden bazıları SAPI5 listesinde eksik. Nereye gittiler?</strong><br>
         C: Modern Windows sistemleri 64-bit'tir, ancak birçok klasik ve sevilen metinden sese sesleri 32-bit idi. "Ses Çıkışı" sekmesindeki Ayarlar altında, "SAPI5 (64-bit)" ve "SAPI5 (32-bit)" için ayrı motor seçenekleri göreceksiniz. Eski seslerinize erişmek için sadece 32-bit motorunu seçin.</p>
@@ -290,9 +330,46 @@
             <li><span class="key">Ctrl</span> + <span class="key">O</span>: Yerel Video Aç</li>
             <li><span class="key">Ctrl</span> + <span class="key">U</span>: Doğrudan URL'den Aç</li>
             <li><span class="key">Ctrl</span> + <span class="key">Y</span>: YouTube'dan Aç</li>
+            <li><span class="key">Ctrl</span> + <span class="key">P</span>: Proje Aç (.omniad)</li>
+            <li><span class="key">Ctrl</span> + <span class="key">G</span>: Önceki bir bölümün karakterlerini yeniden kullan (dizi)</li>
+            <li><span class="key">Ctrl</span> + <span class="key">I</span>: Resim veya PDF betimle</li>
+            <li><span class="key">Ctrl</span> + <span class="key">Alt</span> + <span class="key">Shift</span> + <span class="key">D</span>: Ekranımı betimle, her uygulamadan</li>
+            <li><span class="key">Ctrl</span> + <span class="key">Alt</span> + <span class="key">Shift</span> + <span class="key">L</span>: Sürekli ekran betimleme, aç veya kapat</li>
             <li><span class="key">Ctrl</span> + <span class="key">,</span>: Ayarları Aç</li>
+            <li><span class="key">Escape</span>: Süren oluşturmayı iptal et</li>
+            <li><span class="key">Ctrl</span> + <span class="key">Shift</span> + <span class="key">P</span>: Son ilerleme mesajını tekrarla</li>
             <li><span class="key">F1</span>: Yardım Görüntüle</li>
         </ul>
+
+        <h3>Video oynatıcıda</h3>
+        <p>Bu tuşlar odak hangi denetimde olursa olsun çalışır; yalnızca betimleme ve token metin kutuları kendi okuma tuşlarını korur, ses düzeyi kaydırıcısı odaktayken de ok tuşları kaydırıcıyı ayarlamaya devam eder.</p>
+        <ul>
+            <li><span class="key">Space</span>: Oynat / duraklat</li>
+            <li><span class="key">Left</span> / <span class="key">Right</span>: 5 saniye geri / ileri</li>
+            <li><span class="key">Ctrl</span> + <span class="key">Left</span> / <span class="key">Right</span>: 30 saniye geri / ileri</li>
+            <li><span class="key">Alt</span> + <span class="key">Left</span> / <span class="key">Right</span>: Önceki / sonraki betimleme (ona atlar ve okur)</li>
+            <li><span class="key">Up</span> / <span class="key">Down</span>: Video ses düzeyi</li>
+            <li><span class="key">R</span>: Son betimlemeyi tekrarla</li>
+            <li><span class="key">T</span>: Geçerli zamanı ve toplam süreyi söyle</li>
+            <li><span class="key">A</span>: Sesli betimlemeyi aç veya kapat</li>
+            <li><span class="key">D</span>: Betimleme yoğunluğunu değiştir: düşük (yalnızca temel), orta, yüksek (tüm ayrıntılar). Hemen uygulanır, yeni bir yapay zeka isteği gerekmez.</li>
+            <li><span class="key">M</span>: Sesli betimleme modu: duraklamalarda (video oynamaya devam eder), genişletilmiş (bir betimleme duraklamasına sığmayacak kadar uzunsa video duraklar, sonra devam eder) veya isteğe bağlı (hiçbir şey otomatik okunmaz)</li>
+            <li><span class="key">Enter</span> (isteğe bağlı mod): videoyu duraklat ve o anı kısaca betimle; <span class="key">Shift</span> + <span class="key">Enter</span>: son 15 saniyede betimlenen her şey</li>
+            <li><span class="key">Q</span>: Geçerli an hakkında Daha Fazla Sor</li>
+            <li><span class="key">S</span>: Geçerli sahneyi keşfet</li>
+            <li><span class="key">I</span>: Sesli giriş: ana karakterler, görünümleri ve mekânlar, sürprizleri bozmadan, programdan önce dinlemek için. İlk seferde yapay zekâ yazar, ardından projeyle kaydedilir.</li>
+            <li><span class="key">V</span>: Kalite raporu: betimleme sayısı, kelime sınırı içindekilerin oranı, ses üzerindeki veya yapay zekâ denetiminin belirsiz saydığı betimlemeler, saniyedeki kelime sayısı, betimlemesiz en uzun bölüm.</li>
+            <li><span class="key">W</span>: Şu an ekranda ne olduğu, görünen metin dahil. Yanıt Daha Fazla Sor penceresinde görünür; orada başka sorular sorabilirsiniz: yapay zekâ konuşmayı hatırlar.</li>
+            <li><span class="key">E</span>: Bu sesli betimlemeyi CSA 2020 anketiyle değerlendir; yanıtlar projeyle birlikte kaydedilir ve rapor olarak dışa aktarılabilir.</li>
+            <li><span class="key">Shift+Yukarı / Shift+Aşağı</span>: Bir betimleme okunurken videoyu daha çok veya daha az kıs (0 ile 24 dB arası).</li>
+            <li><span class="key">?</span>: F1 ile aynı: oynatıcı kısayollarının listesini okur.</li>
+            <li><span class="key">Ctrl</span> + <span class="key">S</span>: Projeyi kaydet (<span class="key">Ctrl</span> + <span class="key">Shift</span> + <span class="key">S</span>: Farklı Kaydet)</li>
+            <li><span class="key">F1</span>: Bu kısayol listesini sesli oku</li>
+        </ul>
+        <p>Bir betimleme okunurken video sesi 9 dB kısılır (asla tamamen kapatılmaz, Ayarlar &gt; Ses Çıkışı bölümünden ayarlanabilir) ve profesyonel sesli betimleme kılavuzlarının önerdiği gibi yumuşakça eski düzeyine getirilir. Ekrandaki metni okuyan bir betimlemeden önce kısa bir ses çalınır. Oynatma sırasında betimlemeler ekran okuyucunuz tarafından kendi ses düzeyinde okunur; dışa aktarmalarda düzeyleri Ayarlar &gt; Ses Çıkışı bölümünden belirlenir.</p>
+        <p>Betimleme düzenleyicisinde her kayıt zamanını, düzeyini ve saniyedeki kelime sayısını gösterir; duraklamasına sığmayacak kadar uzun olan veya diyalogla çakışan kayıtlar "Gözden geçir" ile başlar.</p>
+
+        <p data-p7="1">Daha fazlası: <strong>Dosya &gt; Son Projeler</strong> son projelerden birini yeniden açar; <strong>Dosya &gt; Betimlemeleri SRT veya WebVTT'den İçe Aktar</strong>, mevcut bir betimleme metnini videosuyla birlikte açar; böylece onu dinleyebilir, düzenleyebilir veya dışa aktarabilirsiniz. Oynatıcıda <span class="key">L</span> videonun sonraki ses parçasını (örneğin mevcut bir sesli betimlemeyi), <span class="key">C</span> ise sonraki altyazı parçasını ya da altyazısız seçeneğini seçer; isteğe bağlı modda yumuşak bir ses, temel bir betimlemenin hazır olduğunu bildirir. Betimleme düzenleyicisinde <span class="key">Ctrl</span> + <span class="key">R</span> metni dışa aktarma sesiyle okur.</p>
 
         <h2 id="contact">Teşekkür, İletişim ve Katkıda Bulunanlar</h2>
         <p>Omni Betimleyici'yi kullandığınız için çok teşekkür ederim! Bu uygulama, görsel medyayı herkes için daha erişilebilir ve keyifli kılma arzumun bir yansıması. Sizin gibi kullanıcıların bu aracı kullanması ve geri bildirimde bulunması, projeyi geliştirmeye devam etmem için bana en büyük motivasyonu veriyor.</p>

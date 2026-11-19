@@ -24,8 +24,8 @@ on your PATH or in `audio_describer/bin/`.
 3. Follow the conventions in [AGENTS.md](AGENTS.md) (logging via
    `app_logger`, user-facing strings through `_()`, no hardcoded secrets or
    binary paths).
-4. There's no automated test suite yet. Manually run the app and exercise the
-   flow you touched. If your change adds non-trivial logic (a parser, a
+4. Run `python -m unittest discover -s tests` (stdlib only, also run in CI),
+   then run the app and exercise the flow you touched. If your change adds non-trivial logic (a parser, a
    branch with real consequences), a small `test_*.py` is appreciated but not
    required for small fixes.
 5. Open a PR describing what changed and why, and how you tested it.

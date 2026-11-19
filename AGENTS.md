@@ -13,7 +13,8 @@ generate audio descriptions for video, for blind/low-vision users. See
 
 - Python 3.10+, wxPython for UI, no async framework — threading + `wx.CallAfter`
   for background work (network calls, TTS, downloads).
-- `google-generativeai` for Gemini calls, `yt-dlp` for YouTube, bundled/system
+- `google-genai` SDK for Gemini calls (default model in `config.GEMINI_MODEL_NAME`; the
+  legacy `google-generativeai` is gone, don't re-add it), `yt-dlp` for YouTube, bundled/system
   FFmpeg for media processing, VLC for in-app playback.
 - i18n via gettext (`.po`/`.mo`), wrapped through `_()` from `i18n_setup.py`.
 
@@ -22,9 +23,16 @@ generate audio descriptions for video, for blind/low-vision users. See
 | Path | Purpose |
 |---|---|
 | `run_app.py` | Entry point. Two-stage crash handling — don't remove the try/except wrapping. |
+| `audio_describer/cli.py` | Command line / batch mode (`python -m audio_describer.cli`); calls `core.audio_describer.describe_video` / `describe_file`, the UI-free pipeline also used by the main window. |
+| `audio_describer/core/vad.py` | Silero speech detection (optional `onnxruntime`); model downloaded at run time with a pinned SHA-256, never committed. Falls back to ffmpeg silencedetect. |
+| `audio_describer/core/cloud_tts.py` | Azure Neural TTS and Google Cloud Text-to-Speech over plain REST (urllib, no SDK); keys sent in headers only, never logged. Engines `azure` / `google` in `tts_engine.py`; `*_voice_female` / `*_voice_male` read translated dialogue. Per-character voice casting lives in `timing.apply_voice_casting` (glossary `voice` -> `cast:` flag). |
+| `audio_describer/core/openai_vision.py` | Any OpenAI-compatible vision API (OpenRouter, OpenAI, Claude compat, Mistral, Groq, xAI, Qwen, LM Studio, llama.cpp, vLLM) for `video_backend`/`image_backend` = `openai`; reuses the frame pipeline in `ollama_video.py`. Gemini-only features refuse to run on other backends (`_require_gemini_backend`). |
+| `audio_describer/core/script_export.py` | Stdlib exports: TTML DAPT, production script (.docx written by hand with `zipfile`), full script (WCAG 1.2.8). |
+| `audio_describer/ui/player_voice.py` | App voice in the player: descriptions synthesised ahead, real durations for ducking/pauses. |
+| `audio_describer/utils/audio_meter.py` | Windows Core Audio peak meter via comtypes (live screen description waits for silence). |
 | `audio_describer/core/` | Business logic: Gemini calls (`gemini_helpers.py`), video processing (`video_processor.py`), YouTube download (`youtube_downloader.py`), TTS (`tts_engine.py`). |
 | `audio_describer/ui/` | wxPython windows/dialogs. One file per window/dialog. |
-| `audio_describer/models/` | Settings (`config_model.py`), prompts, voices — persisted to disk as local JSON/obfuscated config, not part of the repo. |
+| `audio_describer/models/` | Settings (`config_model.py`), prompts, voices — persisted to disk as local JSON / DPAPI-encrypted config, not part of the repo. |
 | `audio_describer/utils/` | Logging (`logger.py`), ffmpeg/VLC path discovery (`system_utils.py`), update checking (`update_checker.py`), notification sounds (`sound_player.py`, plays directly from `audio_describer/notifs/`). |
 | `audio_describer/locale/` | Translations. Don't hand-edit `.mo` files — regenerate from `.po` with `msgfmt`. |
 
@@ -47,10 +55,13 @@ generate audio descriptions for video, for blind/low-vision users. See
   `sapi32.py`), and `os.name == 'nt'` branches assume Windows. Don't add
   cross-platform abstractions unless you're actually implementing
   cross-platform support end to end.
-- **No test suite exists yet.** Manually run the app (`python run_app.py`)
-  and exercise the path you changed before calling something done. If you add
-  non-trivial logic, a small `test_*.py` or an `assert`-based self-check is
-  welcome, not required.
+- **Minimal tests only.** `tests/` covers the pure helpers in
+  `core/timing.py` (stdlib-only on purpose, so CI runs it without wx):
+  `python -m unittest discover -s tests`. Still manually run the app
+  (`python run_app.py`) and exercise the path you changed before calling
+  something done.
+- Projects are `.omniad` JSON files (`models/project_model.py`); logs live in
+  `%LOCALAPPDATA%\OmniDescriber\logs`.
 - **Two separate helper executables** are built independently from the main
   app: `sapi32.py` → `sapi32.exe` (32-bit SAPI5 TTS helper) and `updater.py` →
   `updater.exe` (self-update helper, downloaded on demand). Build each with
