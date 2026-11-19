@@ -1,5 +1,6 @@
 # audio_describer/ui/manage_prompts_dialog.py
 from ..i18n_setup import _
+import json
 import wx
 import wx.lib.mixins.listctrl as listmix
 
@@ -49,6 +50,8 @@ class ManagePromptsDialog(wx.Dialog, listmix.ListCtrlAutoWidthMixin):
         self.add_button = wx.Button(self, label=_("&Add..."))
         self.edit_button = wx.Button(self, label=_("&Edit..."))
         self.delete_button = wx.Button(self, label=_("&Delete"))
+        self.export_button = wx.Button(self, label=_("E&xport..."))
+        self.import_button = wx.Button(self, label=_("&Import..."))
         self.close_button = wx.Button(self, wx.ID_CANCEL, label=_("Close"))
         
         self.edit_button.Disable()
@@ -57,6 +60,8 @@ class ManagePromptsDialog(wx.Dialog, listmix.ListCtrlAutoWidthMixin):
         button_sizer.Add(self.add_button, 0, wx.ALL, 5)
         button_sizer.Add(self.edit_button, 0, wx.ALL, 5)
         button_sizer.Add(self.delete_button, 0, wx.ALL, 5)
+        button_sizer.Add(self.export_button, 0, wx.ALL, 5)
+        button_sizer.Add(self.import_button, 0, wx.ALL, 5)
         button_sizer.AddStretchSpacer()
         button_sizer.Add(self.close_button, 0, wx.ALL, 5)
         
@@ -72,6 +77,8 @@ class ManagePromptsDialog(wx.Dialog, listmix.ListCtrlAutoWidthMixin):
         self.add_button.Bind(wx.EVT_BUTTON, self.OnAdd)
         self.edit_button.Bind(wx.EVT_BUTTON, self.OnEdit)
         self.delete_button.Bind(wx.EVT_BUTTON, self.OnDelete)
+        self.export_button.Bind(wx.EVT_BUTTON, self.OnExport)
+        self.import_button.Bind(wx.EVT_BUTTON, self.OnImport)
         # wx.ID_CANCEL is handled automatically by the dialog, no need to bind self.Close()
 
     def PopulateList(self):
@@ -124,6 +131,42 @@ class ManagePromptsDialog(wx.Dialog, listmix.ListCtrlAutoWidthMixin):
             self.SaveChanges()
             self.PopulateList()
         msg.Destroy()
+
+    def OnExport(self, event):
+        """Share presets with other describers (a JSON list of {name, prompt})."""
+        with wx.FileDialog(self, _("Export Presets"), defaultFile="presets.json", wildcard="JSON (*.json)|*.json",
+                           style=wx.FD_SAVE | wx.FD_OVERWRITE_PROMPT) as dlg:
+            if dlg.ShowModal() != wx.ID_OK:
+                return
+            path = dlg.GetPath()
+        try:
+            with open(path, "w", encoding="utf-8") as f:
+                json.dump(self.prompts, f, indent=2, ensure_ascii=False)
+        except OSError as e:
+            wx.MessageBox(_("Could not save the file:\n%s") % e, _("Error"), wx.OK | wx.ICON_ERROR, self)
+
+    def OnImport(self, event):
+        with wx.FileDialog(self, _("Import Presets"), wildcard="JSON (*.json)|*.json",
+                           style=wx.FD_OPEN | wx.FD_FILE_MUST_EXIST) as dlg:
+            if dlg.ShowModal() != wx.ID_OK:
+                return
+            path = dlg.GetPath()
+        try:
+            with open(path, encoding="utf-8-sig") as f:
+                data = json.load(f)
+            imported = prompt_model.validate_presets(data)
+        except (OSError, ValueError) as e:
+            wx.MessageBox(_("This file does not contain valid presets:\n%s") % e, _("Error"), wx.OK | wx.ICON_ERROR, self)
+            return
+        by_name = {p["name"]: i for i, p in enumerate(self.prompts)}
+        for preset in imported:  # same name: the imported version replaces ours
+            if preset["name"] in by_name:
+                self.prompts[by_name[preset["name"]]] = preset
+            else:
+                self.prompts.append(preset)
+        self.SaveChanges()
+        self.PopulateList()
+        wx.MessageBox(_("%d presets imported.") % len(imported), _("Import Presets"), wx.OK | wx.ICON_INFORMATION, self)
 
     def SaveChanges(self):
         prompt_model.set_prompts_for_language(self.current_lang, self.prompts)

@@ -19,6 +19,11 @@ def speak_message(message, interrupt=False):
     if ACCESSIBLE_OUTPUT_AVAILABLE and speaker:
         try:
             speaker.speak(message, interrupt=interrupt)
+            # Also show it on the braille display (NVDA/JAWS); outputs without braille raise.
+            try:
+                speaker.braille(message)
+            except Exception:
+                pass
         except Exception as e:
             # Fallback or logging if speaking fails
             print(f"Accessibility Speak Error: {e}. Message: {message}")
@@ -27,6 +32,17 @@ def speak_message(message, interrupt=False):
     else:
         # Fallback for when screen reader output is not available
         print(f"Accessibility (Fallback): {message}")
+
+
+def braille_message(message):
+    """Braille display only, no speech (audit §6.2, braille-only mode)."""
+    if ACCESSIBLE_OUTPUT_AVAILABLE and speaker:
+        try:
+            speaker.braille(message)
+            return
+        except Exception as e:
+            print(f"Accessibility Braille Error: {e}")
+    print(f"Accessibility (Fallback): {message}")
 
 
 def set_control_accessible_name(control, name):
@@ -39,8 +55,10 @@ def set_control_accessible_name(control, name):
     :param control: The wxPython control.
     :param name: The accessible name string.
     """
-    if hasattr(control, 'SetLabel') and not control.GetLabel(): # Only if no visible label
-         control.SetLabel(name) # This might make it visible, be careful
+    import wx
+    # TextCtrl.SetLabel asserts on recent wxPython ("Use SetValue()"): its label is its content.
+    if hasattr(control, 'SetLabel') and not isinstance(control, wx.TextCtrl) and not control.GetLabel():
+        control.SetLabel(name)
     
     # For many wxPython controls, GetAccessible().SetName(name) is the way
     # However, direct access to SetName on the accessible object might vary
