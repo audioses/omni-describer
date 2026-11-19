@@ -53,5 +53,32 @@ class AdRulesTest(unittest.TestCase):
         self.assertEqual(prompts.load_rules()["core_directives"], ["one", "two"])
 
 
+class ShippedTranslationsTest(unittest.TestCase):
+    """Every rules/<lang>.json mirrors en.json: same keys and types, 12 rules, every {placeholder} kept."""
+
+    def test_translations_keep_structure_and_placeholders(self):
+        import re
+        folder = os.path.join(os.path.dirname(prompts.__file__), "..", "prompts", "rules")
+        with open(os.path.join(folder, "en.json"), encoding="utf-8") as f:
+            en = json.load(f)
+
+        def holes(value):
+            text = json.dumps(value, ensure_ascii=False)
+            return set(re.findall(r"\{[a-z_]+\}", text))
+
+        for name in sorted(os.listdir(folder)):
+            if name == "en.json" or not name.endswith(".json"):
+                continue
+            with self.subTest(name), open(os.path.join(folder, name), encoding="utf-8") as f:
+                tr = json.load(f)
+                self.assertEqual(set(tr), set(en))
+                self.assertEqual(len(tr["core_directives"]), 12)
+                for key, value in en.items():
+                    self.assertIs(type(tr[key]), type(value), key)
+                    self.assertTrue(holes(value) <= holes(tr[key]), (key, holes(value) - holes(tr[key])))
+                    if isinstance(value, dict):
+                        self.assertEqual(set(tr[key]), set(value), key)
+
+
 if __name__ == "__main__":
     unittest.main()
