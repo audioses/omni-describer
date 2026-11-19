@@ -609,7 +609,7 @@ class MainWindow(wx.Frame):
                     "2. Reduce the 'Frame Rate for AI Analysis' in settings to send less data to the AI.\n"
                     "3. Try a different video if the issue persists."
                 ) % reason
-                self.set_processing_status(f"{title} (Reason: {reason})")
+                self.set_processing_status(_("%(title)s (Reason: %(reason)s)") % {"title": title, "reason": reason})
                 wx.MessageBox(message, title, wx.OK | wx.ICON_WARNING, self)
 
             elif isinstance(event.error, TokenLimitError):
@@ -693,13 +693,13 @@ class MainWindow(wx.Frame):
 
             if os.path.exists(file_to_open):
                 webbrowser.open(f"file:///{os.path.realpath(file_to_open)}")
-                self.log_to_ui(f"Opening doc file: {file_to_open}")
+                self.log_to_ui(_("Opening %s") % file_to_open)
             else:
-                self.log_to_ui(f"Doc file not found. Checked: {file_to_open}")
+                self.log_to_ui(_("Help file not found: %s") % file_to_open)
                 app_logger.warning(f"User attempted to open missing document: {file_to_open}")
 
         except Exception as e:
-            self.log_to_ui(f"Error opening doc file '{filename}': {e}")
+            self.log_to_ui(_("Could not open %(file)s: %(error)s") % {"file": filename, "error": e})
             app_logger.error(f"Failed to open document '{filename}': {e}", exc_info=True)
 
     def on_open_webapp(self, event):

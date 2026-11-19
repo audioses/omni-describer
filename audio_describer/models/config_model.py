@@ -275,7 +275,12 @@ def save_settings(settings_dict):
 
 
 app_settings = None
-_settings_load_warning = None
+_settings_load_warning = None  # (English message, detail or None); translated by get_load_warning()
+
+
+def N_(text):
+    """Marks text for translation (extracted into the catalogs) without translating it yet."""
+    return text
 
 
 def load_settings():
@@ -298,7 +303,7 @@ def load_settings():
             return settings
         except Exception as e:
             print(f"Settings file corrupted (error: {e}). Attempting migration or reset.")
-            _settings_load_warning = f"Settings file was corrupted and has been reset. Your previous settings could not be recovered. (Error: {e})"
+            _settings_load_warning = (N_("Settings file was corrupted and has been reset. Your previous settings could not be recovered. (Error: %s)"), str(e))
             try:
                 os.rename(CONFIG_FILE_PATH, CONFIG_FILE_PATH + ".corrupted")
             except Exception:
@@ -314,11 +319,10 @@ def load_settings():
 
     # Check if old files exist but couldn't be migrated
     if os.path.exists(_OLD_CONFIG_FILE_PATH):
-        _settings_load_warning = (
+        _settings_load_warning = (N_(
             "Your previous settings could not be migrated from the old encrypted format. "
             "This typically happens after a Windows update or hardware change. "
-            "Settings have been reset to defaults. You will need to re-enter your API keys."
-        )
+            "Settings have been reset to defaults. You will need to re-enter your API keys."), None)
         _safe_rename_old_file(_OLD_CONFIG_FILE_PATH)
         _safe_rename_old_file(_OLD_SALT_FILE_PATH)
 
@@ -359,8 +363,13 @@ def get_setting(key_name):
 
 
 def get_load_warning():
-    """Returns a warning message if settings loading had issues, or None."""
-    return _settings_load_warning
+    """Warning about settings loading, in the interface language, or None. Settings load before
+    translations exist, so the English text is kept (N_) and translated here, when shown."""
+    if not _settings_load_warning:
+        return None
+    from ..i18n_setup import _
+    text, detail = _settings_load_warning
+    return _(text) % detail if detail is not None else _(text)
 
 
 def remember_recent_project(path, limit=8):

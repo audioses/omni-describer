@@ -249,7 +249,7 @@ def synthesize_description_to_wav(text, output_wav_path, gender=None):
     elif engine_choice in CLOUD_ENGINES:
         return _synthesize_with_cloud(engine_choice, text, output_wav_path)
     else:
-        err_msg = f"Unknown TTS engine selected: '{engine_choice}'"
+        err_msg = _("Unknown voice engine in Settings: %s") % engine_choice
         app_logger.error(err_msg)
         raise TTSError(err_msg)
 
