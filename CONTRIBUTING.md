@@ -41,6 +41,11 @@ update one:
    omni_describer.mo`.
 3. Commit both the `.po` and `.mo`.
 
+Default prompt presets are plain JSON, one file per language: `audio_describer/prompts/<lang>.json`
+(a list of `{"name": ..., "prompt": ...}`). To translate them, copy `en.json` to your language code
+and translate the values; no code change is needed. A language without a file gets the English presets.
+The app follows the Windows display language unless one is chosen in Settings.
+
 ## Building a release executable
 
 The main app is built with PyInstaller via `build.spec` / `build.bat`. Two

@@ -181,7 +181,7 @@ def _test_voice_openai(text, settings):
 
 def _description_language():
     return (config_model.get_setting("description_language")
-            or config_model.get_setting("application_language") or "en").split("_")[0].lower()
+            or config_model.ui_language() or "en").split("_")[0].lower()
 
 
 def _engine_rate_percent():

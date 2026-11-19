@@ -13,7 +13,7 @@ class ManagePromptsDialog(wx.Dialog, listmix.ListCtrlAutoWidthMixin):
         super().__init__(parent, title=_("Manage Prompt Presets"), style=wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER, size=(600, 400))
         listmix.ListCtrlAutoWidthMixin.__init__(self)
 
-        self.current_lang = config_model.get_setting("application_language")
+        self.current_lang = config_model.ui_language()
         self.prompts = prompt_model.get_prompts_for_language(self.current_lang)
 
         self.InitUI()

@@ -22,6 +22,9 @@ def get_app_root():
 def get_locale_dir():
     return os.path.join(get_app_root(), 'locale')
 
+def get_prompts_dir():
+    return os.path.join(get_app_root(), 'prompts')
+
 def get_notifs_dir():
     return os.path.join(get_app_root(), 'notifs')
 

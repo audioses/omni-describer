@@ -73,7 +73,7 @@ class LicenseDialog(wx.Dialog):
         not_found_msg = _("License file could not be found. Please contact support.")
         try:
             doc_dir = config.get_doc_dir()
-            lang_code = config_model.get_setting('application_language') or 'en'
+            lang_code = config_model.ui_language() or 'en'
             
             lang_specific_file = os.path.join(doc_dir, lang_code, filename)
             default_file = os.path.join(doc_dir, 'en', filename)

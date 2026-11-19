@@ -14,7 +14,7 @@ def description_language_name():
     """Language for AI output: its own setting, independent of the UI language
     (e.g. French interface, English descriptions for an English lecture)."""
     code = (config_model.get_setting("description_language")
-            or config_model.get_setting("application_language") or "en")
+            or config_model.ui_language() or "en")
     return timing.LANGUAGE_NAMES.get(code.lower(), "English")
 
 

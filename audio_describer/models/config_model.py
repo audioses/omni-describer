@@ -372,3 +372,20 @@ def remember_recent_project(path, limit=8):
     recent = [p for p in (app_settings.get("recent_projects") or []) if os.path.normcase(os.path.abspath(p)) != key]
     app_settings["recent_projects"] = [os.path.abspath(path)] + recent[:limit - 1]
     save_settings(app_settings)
+
+
+def system_language():
+    """Windows display language as a two-letter code (fr, en...)."""
+    import locale
+    try:
+        import ctypes
+        name = locale.windows_locale.get(ctypes.windll.kernel32.GetUserDefaultUILanguage(), "")
+    except (AttributeError, OSError):  # not Windows
+        name = os.environ.get("LANG", "")
+    return (name.split("_")[0].split(".")[0] or "en").lower()
+
+
+def ui_language():
+    """Interface language: the user's choice, else Windows' language, read again at every start (not
+    saved, so changing the Windows language changes the app's)."""
+    return (get_setting("application_language") or "").strip() or system_language()

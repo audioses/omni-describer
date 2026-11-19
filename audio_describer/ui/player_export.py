@@ -87,7 +87,7 @@ def _handle_text_export(player_instance, options):
         if dlg.ShowModal() == wx.ID_CANCEL: return
         pathname = dlg.GetPath()
     try:
-        lang = config_model.get_setting("description_language") or config_model.get_setting("application_language") or "en"
+        lang = config_model.get_setting("description_language") or config_model.ui_language() or "en"
         if file_format == 'docx':
             script_export.write_docx(pathname, video_basename, script_export.production_rows(descriptions))
         else:
@@ -214,7 +214,7 @@ _AD_LABELS = {
 
 def _description_language():
     return (config_model.get_setting("description_language")
-            or config_model.get_setting("application_language") or "en").lower()
+            or config_model.ui_language() or "en").lower()
 
 
 def ad_labels(lang=None):

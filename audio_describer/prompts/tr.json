@@ -1,0 +1,94 @@
+[
+    {
+        "name": "Fragman",
+        "prompt": "Bu bir film fragmanıdır. Hızlı tempolu, etkili ve ikonik çekimlere odaklan. Kilit aksiyon anlarını, dramatik karakter girişlerini ve vizyon tarihleri veya stüdyo logoları gibi ekrandaki metinleri betimlemeye öncelik ver. Spoiler  vermeden bir heyecan hissi yarat ve konuya dair ipuçları ver. Betimlemeler, hızlı kesitler arasına sığabilmesi için son derece kısa olmalıdır."
+    },
+    {
+        "name": "Aksiyon Film",
+        "prompt": "Bu bir aksiyon videosudur. Aksiyonun temel koreografisine odaklan: önemli yumruklar, tekmeler, kaçışlar ve silah kullanımı. Patlamalar veya araba kovalamacaları gibi büyük ölçekli olayları betimle. Yüksek enerjili tempoya uymak için betimlemeleri kısa ve etkili tut."
+    },
+    {
+        "name": "Romantik Film",
+        "prompt": "Bu bir romantik videodur. Karakterlerin birbirine olan yakınlığını, (el ele tutuşmak gibi) anlamlı dokunuşlarını ve sevgi, özlem veya çatışma gösteren önemli yüz ifadelerini betimlemeye öncelik ver. Mekanın romantik atmosferini betimle (örneğin, 'mum ışığında bir akşam yemeği,' 'ay ışığında bir kumsalda yürüyüş')."
+    },
+    {
+        "name": "Komedi / Sitcom",
+        "prompt": "Bu bir komedi videosudur. Görsel şakalara, fiziksel komediye ve absürt durumlara odaklan. Şakanın anahtarı olan abartılı tepkileri ve komik ifadeleri betimle. Dinleyicinin herkesle birlikte gülebilmesi için şakayı gerçekleştiği anda ve kısa betimle; daha önce betimlemen gerekirse esprinin sonunu asla açık etme."
+    },
+    {
+        "name": "Bilim Kurgu / Fantastik",
+        "prompt": "Bu bir bilim kurgu/fantastik videosudur. Benzersiz dünya unsurlarını betimlemeye odaklan. Fütüristik teknolojiyi, fantastik yaratıkları, sihirli efektleri ve dünya dışı manzaraları betimle. Görsel unsurları gerçek dünyadan farklı kılan şeyleri açıkla (örneğin, 'Parlayan yelkenleri olan bir gemi, mor bir bulutsunun içinde uçuyor.')."
+    },
+    {
+        "name": "Meme / Viral Video",
+        "prompt": "Bu kısa bir meme veya viral videodur. Amaç, temel görsel şakayı veya beklenmedik olayı mümkün olan en kısa şekilde betimlemektir. Videoyu komik veya ilginç kılan ana özneyi ve tek eylemi belirle. Ekran üzerindeki yazılar son derece önemlidir (örneğin, 'Güneş gözlüğü takan bir kedi, bir ritme başını sallıyor. Altyazı: Modunda.')."
+    },
+    {
+        "name": "Belgesel / Bilgilendirici",
+        "prompt": "Bu bir belgesel/eğitici videodur. Ekrandaki metinleri, etiketleri, grafikleri, haritaları ve arşiv görüntülerini betimlemeye öncelik ver. İnsanlar için, konuyla ilgili eylemlerine odaklan (örneğin, \"Biyolog belirli bir bitkiyi işaret ediyor\"). Sade ve bilgilendirici bir ton kullan."
+    },
+    {
+        "name": "Yemek / Tarif",
+        "prompt": "Bu bir yemek pişirme videosudur. Eklenen belirli malzemeleri ve gösterilen pişirme tekniklerini (örneğin, 'soğanı küp küp doğruyor,' 'bifteği mühürlüyor') betimle. Yemeğin kilit aşamalardaki görsel durumunu ve dokusunu betimle (örneğin, 'Sos, parlak bir kıvama gelene kadar koyulaşır.')."
+    },
+    {
+        "name": "Kendin Yap / Eğitici Video",
+        "prompt": "Bu bir eğitici veya kendin yap videosudur. Adım adım ilerleyen sürece odaklan. Kullanılan belirli araçları ve malzemeleri net bir şekilde betimle. Nesne üzerinde gerçekleştirilen eylemi ve eylemden önceki ve sonraki durumunu detaylandır (örneğin, 'Tahtanın üzerindeki işaretli noktaya bir delik açıyor.')."
+    },
+    {
+        "name": "Oyun / Oynanış Videosu Odağı",
+        "prompt": "Bu bir video oyunu kaydıdır. Sağlık çubukları, mermi sayısı veya mini haritalar gibi kritik ekran arayüzü (HUD) ögelerini, değiştiklerinde betimlemeye öncelik ver. Ana karakterin/avatarın oyun dünyasındaki eylemlerini betimle (örneğin, 'Karakter bir ateş büyüsü yapıyor,' 'Avatar bir sonraki platforma zıplıyor.')."
+    },
+    {
+        "name": "Ders / Sunum",
+        "prompt": "Bu bir ders, kurs veya sunumdur. Her slayt başlığını, madde işaretini, formülü ve grafik etiketini ekranda belirdiğinde veya değiştiğinde ekrandaki metin olarak kelimesi kelimesine oku. Diyagramları yapılarına göre betimle (eksenler, eğilim, kutular ve oklar). Konuşmacıyı, içeriği işaret eden jestler dışında betimleme."
+    },
+    {
+        "name": "Anime / Animasyon",
+        "prompt": "Bu bir animasyon eseridir. Karakterleri değişmeyen görsel tasarımlarıyla (saç rengi ve modeli, kıyafet) betimle ve her seferinde aynı tanımı kullan. Ekrandaki tabelaları ve yazıları oku. Stilize efektleri (hız çizgileri, ter damlaları, chibi dönüşümleri) görsel olarak ne ifade ettikleriyle, kısaca betimle."
+    },
+    {
+        "name": "Çocuk",
+        "prompt": "Bu küçük çocuklara yönelik bir içeriktir. Basit, somut kelimeler ve kısa cümleler kullan. Renkleri ve şekilleri adlandır. Komik eylemleri açıkça betimle. Korkutucu ifadelerden kaçın."
+    },
+    {
+        "name": "Korku / Gerilim",
+        "prompt": "Bu bir korku veya gerilim filmidir. Gerilimi artıran sessizlikleri asla doldurma; yalnızca gerekli olanı, kısaca ve mümkünse bir korku anından hemen önce betimle. Gölgeleri, kadrajın kenarındaki hareketleri ve karakterlerin gördüklerini, filmin hâlâ sakladığını açığa çıkarmadan betimle."
+    },
+    {
+        "name": "Müzik Videosu / Konser",
+        "prompt": "Bu bir müzik videosu veya konserdir. Şarkı sözleri çoğu zaman söylenir: yalnızca enstrümantal bölümlerde ve kıtalar arasında, yalnızca en önemli görselleri (sanatçılar, mekân değişiklikleri, koreografi) betimle. Müziğe nefes alacak alan bırak."
+    },
+    {
+        "name": "Spor",
+        "prompt": "Bu bir spor yayınıdır. Spiker genellikle aksiyonu anlatır: yalnızca anlatımda söylenmeyenleri betimle; skor grafiği, tekrarlar, oyuncuların sevinçleri ve seyirciler gibi. Ekrandaki skoru ve süreyi oku."
+    },
+    {
+        "name": "Haber / Röportaj",
+        "prompt": "Bu bir haber veya röportajdır. Alt bantta görünen isimleri ve unvanları, yazıları ve grafikleri kelimesi kelimesine oku. Mekânları ve arşiv görüntülerini kısaca betimle. Konuşanların sesinin üzerine asla betimleme yapma."
+    },
+    {
+        "name": "Diyalogsuz / Sessiz",
+        "prompt": "Bu videoda çok az diyalog var veya hiç yok. Sürekli betimle, ancak müziğe ve kasıtlı sessizliğe nefes alacak alan bırak. Hikâyeyi eylem eylem takip et, önce genelden sonra ayrıntıya."
+    },
+    {
+        "name": "Dans / Koreografi",
+        "prompt": "Bu bir dans gösterisi veya koreografidir. Her hareketi vücut bölümü ve yönüyle betimle (kollar başın üzerinden süzülür, sola doğru bir dönüş), dizilişleri, kaldırışları, girişleri ve kostümleri ilk göründüklerinde betimle. Betimlemeleri enstrümantal bölümlere yerleştir; söylenen sözlerin üzerine asla konuşma."
+    },
+    {
+        "name": "Fitness / Yoga",
+        "prompt": "Bu, izleyicinin eşlik ettiği bir egzersiz veya yoga videosudur. Her yeni hareket için başlangıç pozisyonunu, ardından vücut bölümünü, tarafı (eğitmenin sağı veya solu), yönü ve gösterilen tekrar sayısını ver. Ekrandaki hareket adlarını ve sayaçları oku. Görünüşü ve mekânı yalnızca başta bir kez betimle."
+    },
+    {
+        "name": "Doğa / Yaban Hayatı",
+        "prompt": "Bu bir doğa veya yaban hayatı filmidir. Bir türün adını yalnızca anlatım veya ekrandaki yazı onu belirtiyorsa ya da tür açıkça tanınıyorsa ver; aksi hâlde boyutunu, şeklini, rengini ve hareketini betimle. Davranışları (avlanma, beslenme, kur yapma) ve manzara ile havadaki değişimleri betimle. Anlatım çoğu zaman eylemi açıklar: yalnızca onun söylemediklerini ekle."
+    },
+    {
+        "name": "Vlog / Kameraya Konuşma",
+        "prompt": "Bu, bir kişinin çoğunlukla kameraya konuştuğu bir vlogdur. Konuşanı ve mekânı başta bir kez betimle, sonra yalnızca değişiklikleri: ara görüntüler, kameraya gösterilen nesneler, ekrandaki yazılar, emoji ve çıkartma katmanları ve söyleneni anlam olarak değiştiren görünür tepkiler."
+    },
+    {
+        "name": "Ürün İnceleme / Kutu Açılışı",
+        "prompt": "Bu bir ürün incelemesi veya kutu açılışıdır. Ekranda ya da ambalajda görünen marka, model, fiyat ve teknik özellikleri oku. Ürünün şeklini, tanıdık nesnelerle karşılaştırarak boyutunu, malzemesini, düğmelerini ve girişlerini, kutudan çıkan her parçayı betimle. Gösterimleri görünür sonuçlarıyla betimle."
+    }
+]

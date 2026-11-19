@@ -1,0 +1,94 @@
+[
+    {
+        "name": "Movie Trailer",
+        "prompt": "This is a movie trailer. Focus on fast-paced, impactful, and iconic shots. Prioritize describing key action moments, dramatic character introductions, and any on-screen text like release dates or studio logos. Create a sense of excitement and hint at the plot without revealing spoilers. Descriptions must be extremely brief to fit between quick cuts."
+    },
+    {
+        "name": "Action Movie",
+        "prompt": "This is an action movie. Focus on the core choreography of the action: significant punches, kicks, dodges, and use of weapons. Describe large-scale events like explosions or car chases. Keep descriptions concise and impactful to match the high-energy pacing."
+    },
+    {
+        "name": "Romantic Movie",
+        "prompt": "This is a romantic movie. Prioritize describing the characters' proximity to each other, meaningful touches (like holding hands), and significant facial expressions that show affection, longing, or conflict. Describe the romantic atmosphere of the setting (e.g., 'candlelit dinner,' 'walk on a moonlit beach')."
+    },
+    {
+        "name": "Comedy / Sitcom",
+        "prompt": "This is comedic content. Focus on the visual gags, physical comedy, and absurd situations. Describe exaggerated reactions and comical expressions that are key to the joke. Describe the gag as it happens so the listener laughs with everyone, and be brief; if it must come early, never give the punchline away."
+    },
+    {
+        "name": "Sci-Fi / Fantasy",
+        "prompt": "This is science fiction or fantasy. Focus on describing the unique world elements. Describe futuristic technology, fantastical creatures, magical effects, and otherworldly landscapes. Explain what makes the visual elements different from the real world (e.g., 'A ship with glowing sails flies through a purple nebula.')."
+    },
+    {
+        "name": "Meme / Viral Video",
+        "prompt": "This is a short meme or viral video. The goal is to describe the core visual joke or unexpected event as concisely as possible. Identify the key subject and the one action that makes the video funny or interesting. On-screen captions are highly important (e.g., 'A cat wearing sunglasses nods its head to a beat. Caption: Vibing.')."
+    },
+    {
+        "name": "Documentary / Educational",
+        "prompt": "This is a documentary/educational video. Prioritize describing on-screen text, labels, graphics, maps, and archival footage. For people, focus on their actions as they relate to the subject matter (e.g., 'The biologist points to a specific plant.'). Maintain a neutral, informative tone."
+    },
+    {
+        "name": "Cooking / Recipe",
+        "prompt": "This is a cooking video. Describe the specific ingredients as they are added and the cooking techniques shown (e.g., 'dicing the onion,' 'searing the steak'). Describe the visual state and texture of the food at key stages (e.g., 'The sauce thickens to a glossy consistency.')."
+    },
+    {
+        "name": "DIY / Tutorial",
+        "prompt": "This is a tutorial or DIY video. Focus on the step-by-step process. Clearly describe the specific tools and materials used. Detail the action being performed on the object, and describe the state of the object before and after the action (e.g., 'The carpenter drills a hole through the marked spot on the plank.')."
+    },
+    {
+        "name": "Gaming / Let's Play",
+        "prompt": "This is a video game recording. Prioritize describing critical on-screen UI elements (the HUD), such as health bars, ammo count, or mini-maps if they change. Describe the main character/avatar's actions within the game world (e.g., 'The character casts a fire spell,' 'The avatar jumps to the next platform.')."
+    },
+    {
+        "name": "Lecture / Slides",
+        "prompt": "This is a lecture, course or presentation. Read every slide title, bullet, formula and chart label verbatim as on-screen text when it appears or changes. Describe diagrams by their structure (axes, trend, boxes and arrows). Do not describe the speaker beyond gestures that point at content."
+    },
+    {
+        "name": "Anime / Animation",
+        "prompt": "This is an animated work. Describe characters by their stable visual design (hair colour and style, outfit) and keep the same descriptor each time. Read on-screen signs and captions. Describe stylised effects (speed lines, sweat drops, chibi transformations) by what they convey visually, briefly."
+    },
+    {
+        "name": "Kids",
+        "prompt": "This is content for young children. Use simple, concrete words and short sentences. Name colours and shapes. Describe funny actions clearly. Avoid frightening wording."
+    },
+    {
+        "name": "Horror / Thriller",
+        "prompt": "This is a horror or thriller film. Never fill the silences that build tension; describe only what is essential, briefly, just before a scare when possible. Describe shadows, movements at the edge of the frame and what characters see, without revealing what the film still hides."
+    },
+    {
+        "name": "Music Video / Concert",
+        "prompt": "This is a music video or concert. Lyrics are sung most of the time: describe only during instrumental passages and between verses, and only the most important visuals (performers, setting changes, choreography). Leave the music room to breathe."
+    },
+    {
+        "name": "Sport",
+        "prompt": "This is a sports broadcast. Commentary usually covers the action: describe only what the commentary does not say, such as the score graphic, replays, players' celebrations and the crowd. Read on-screen scores and clock."
+    },
+    {
+        "name": "News / Interview",
+        "prompt": "This is a news report or interview. Read lower-third names and titles, captions and graphics verbatim. Describe locations and archival footage briefly. Never cover the speakers."
+    },
+    {
+        "name": "No Dialogue / Silent",
+        "prompt": "This video has little or no dialogue. Describe continuously but leave breathing room for the music and intentional silence. Follow the story action by action, general before particular."
+    },
+    {
+        "name": "Dance / Choreography",
+        "prompt": "This is a dance performance or choreography. Describe each move by body part and direction (arms sweep overhead, a spin to the left), formations, lifts and entrances, and costumes on first appearance. Place descriptions on instrumental phrases; never cover sung lyrics."
+    },
+    {
+        "name": "Fitness / Yoga",
+        "prompt": "This is a workout or yoga video the viewer follows along with. For each new movement give the starting position, then body part, side (the instructor's left or right), direction and the number of repetitions shown. Read exercise names and timers on screen. Describe appearance and setting once, at the start."
+    },
+    {
+        "name": "Nature / Wildlife",
+        "prompt": "This is a nature or wildlife film. Name a species only when the narration or on-screen text identifies it or it is unmistakable; otherwise give size, shape, colour and movement. Describe behaviour (hunting, feeding, courtship) and changes in landscape and weather. The narration often explains the action: add only what it leaves out."
+    },
+    {
+        "name": "Vlog / Talking Head",
+        "prompt": "This is a vlog or a person speaking to the camera most of the time. Describe the speaker and setting once, at the start, then only changes: cutaways, objects shown to the camera, on-screen text, emoji and sticker overlays, and visible reactions that change the meaning of what is said."
+    },
+    {
+        "name": "Product Review / Unboxing",
+        "prompt": "This is a product review or unboxing. Read brand, model, price and specifications shown on screen or on the packaging. Describe the product's shape, size compared with familiar objects, materials, buttons and ports, and each item as it comes out of the box. Describe demonstrations by their visible result."
+    }
+]

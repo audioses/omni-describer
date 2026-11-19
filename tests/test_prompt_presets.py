@@ -27,6 +27,26 @@ class DefaultPresetsTest(unittest.TestCase):
         self.assertEqual(prompt_model._repair_hint_text(presets), 2)
         self.assertEqual(presets, [{"name": "adi2", "prompt": "Describe calmly."}])
 
+    def test_defaults_come_from_one_json_file_per_language(self):
+        import os
+        from audio_describer import config
+        files = {os.path.splitext(f)[0] for f in os.listdir(config.get_prompts_dir()) if f.endswith(".json")}
+        self.assertEqual(files, set(prompt_model.DEFAULT_PROMPTS))
+        self.assertIn("en", files)
+
+    def test_language_without_file_falls_back_to_english(self):
+        self.assertEqual(prompt_model._get_default_prompts_for_lang("xx"), prompt_model.DEFAULT_PROMPTS["en"])
+
+    def test_empty_language_setting_follows_windows_and_is_not_saved(self):
+        from unittest import mock
+        from audio_describer.models import config_model
+        with mock.patch.object(config_model, "app_settings", {"application_language": ""}),                 mock.patch.object(config_model, "system_language", return_value="fr"),                 mock.patch.object(config_model, "save_settings") as save:
+            self.assertEqual(config_model.ui_language(), "fr")
+            self.assertEqual(config_model.app_settings["application_language"], "")
+            save.assert_not_called()
+        with mock.patch.object(config_model, "app_settings", {"application_language": "es"}):
+            self.assertEqual(config_model.ui_language(), "es")
+
 
 if __name__ == "__main__":
     unittest.main()

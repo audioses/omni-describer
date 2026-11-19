@@ -1,7 +1,6 @@
 # audio_describer/i18n_setup.py
 import gettext
 import os
-import locale
 import wx
 import sys
 
@@ -20,19 +19,7 @@ def initialize_translations():
     from .models import config_model
 
     try:
-        lang_code = config_model.get_setting("application_language")
-        
-        # MODIFICATION: Check for empty string to trigger auto-detection
-        if not lang_code or not lang_code.strip():
-            current_locale, _encoding = locale.getdefaultlocale()
-            detected_lang = current_locale.split('_')[0] if current_locale else "en"
-            app_logger.info(f"i18n: No language set. Detected system locale: '{detected_lang}'")
-            
-            # Save the detected language for future runs
-            lang_code = detected_lang
-            config_model.app_settings['application_language'] = lang_code
-            config_model.save_settings(config_model.app_settings)
-            
+        lang_code = config_model.ui_language()  # empty setting = follow Windows, never frozen
         app_logger.info(f"i18n: Using language code: {lang_code}")
     except Exception as e:
         app_logger.warning(f"i18n: Error getting lang setting (default 'en'): {e}")
