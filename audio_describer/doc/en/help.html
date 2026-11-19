@@ -73,6 +73,9 @@
         li { margin-bottom: 0.8em; }
         a { color: #2980b9; text-decoration: none; }
         a:hover { text-decoration: underline; }
+        table { border-collapse: collapse; width: 100%; margin: 1em 0; }
+        th, td { border: 1px solid #dee2e6; padding: 6px 10px; text-align: left; vertical-align: top; }
+        th { background-color: #eaf2f8; }
     </style>
 </head>
 <body>
@@ -93,11 +96,22 @@
             <li><a href="#whatis">What's in a Name?</a></li>
             <li><a href="#requirements">System Requirements</a></li>
             <li><a href="#setup">Getting Started: Setting Up Your API Keys</a></li>
-            <li><a href="#quickstart">Quick Start: Generating Your First Description</a></li>
+            <li><a href="#quickstart">Quick Start: Generating Your First Description</a>
+                <ul>
+                    <li><a href="#cancel">Cancelling a Description</a></li>
+                </ul>
+            </li>
+            <li><a href="#main-window">The Main Window and Its Menus</a>
+                <ul>
+                    <li><a href="#file-menu">The File Menu</a></li>
+                    <li><a href="#help-menu">The Help Menu</a></li>
+                </ul>
+            </li>
             <li><a href="#features">Main Features</a>
                 <ul>
                     <li><a href="#player">The Described Video Player</a></li>
                     <li><a href="#editing">Editing Descriptions: The Power to Refine</a></li>
+                    <li><a href="#characters">Characters and Their Voices</a></li>
                     <li><a href="#prompts">Managing Prompt Presets</a></li>
                     <li><a href="#askmore">Ask More About the Scene</a></li>
                     <li><a href="#explorer">Scene Explorer</a></li>
@@ -107,7 +121,19 @@
                     <li><a href="#exporting">Exporting Your Work</a></li>
                 </ul>
             </li>
-            <li><a href="#advanced-settings">A Deep Dive into Settings</a></li>
+            <li><a href="#ai-backends">Choosing the AI: Gemini, Ollama or an OpenAI-Compatible Service</a></li>
+            <li><a href="#voices">Voices</a></li>
+            <li><a href="#language">Interface Language and Description Language</a></li>
+            <li><a href="#advanced-settings">A Deep Dive into Settings</a>
+                <ul>
+                    <li><a href="#settings-general">General Tab</a></li>
+                    <li><a href="#settings-ai">AI Settings Tab</a></li>
+                    <li><a href="#settings-audio">Audio Output Tab</a></li>
+                </ul>
+            </li>
+            <li><a href="#ai-rules">Customising the AI Rules</a></li>
+            <li><a href="#reset">Reset Settings and Data</a></li>
+            <li><a href="#data-folder">Where Your Data Is Stored</a></li>
             <li><a href="#bestpractices">Tips and Tricks for the Best Results</a></li>
             <li><a href="#faq">Frequently Asked Questions (FAQ)</a></li>
             <li><a href="#shortcuts">Keyboard Shortcuts</a></li>
@@ -117,215 +143,399 @@
         <h2 id="whatis">What's in a Name?</h2>
         <p>The "Omni" in the name comes from Latin, meaning "all" or "everything." I chose this name because I didn't want the tool to serve just one purpose. Yes, Omni Describer primarily aims to make media accessible for blind and visually impaired individuals by creating audio descriptions. However, its purpose is not limited to that.</p>
         <p>This is also an <strong>exploration tool</strong>. A film critic, a student, an artist, or anyone curious about visual details can use features like "Scene Explorer" or "Ask More" to delve into the layers of a video like never before. Omni Describer is a window to see the world through the "eyes" of AI and understand it differently. In short, it is "a describer for everything, for everyone."</p>
-        
+
         <h2 id="requirements">System Requirements</h2>
         <p>To get the best performance from Omni Describer, I recommend meeting the following minimum system requirements:</p>
         <ul>
             <li><strong>Operating System:</strong> Windows 10 or newer (64-bit).</li>
             <li><strong>Memory (RAM):</strong> At least 4 GB of RAM.</li>
             <li><strong>Storage:</strong> At least 500 MB of free disk space for the application and temporary files.</li>
-            <li><strong>Internet Connection:</strong> An active internet connection is required to connect to AI services (Google Gemini, OpenAI) and download videos.</li>
+            <li><strong>Internet Connection:</strong> Needed for the online AI services (Google Gemini, an online OpenAI-compatible service), the online voices (OpenAI, Azure, Google) and video downloads. With a local AI (Ollama, or a local OpenAI-compatible server) and Windows or Piper voices, videos can be described without sending anything over the internet.</li>
             <li><strong>Screen Reader:</strong> For full accessibility, a screen reader like JAWS, NVDA, or Windows Narrator is recommended.</li>
         </ul>
 
         <h2 id="setup">Getting Started: Setting Up Your API Keys</h2>
-        <p>Omni Describer uses cloud-based AI services to analyze and voice descriptions. Therefore, you need to enter your own API keys before you can start.</p>
+        <p>By default, Omni Describer uses Google Gemini to analyse videos, so you need your own Gemini API key before you start. Other AI services and voices have their own keys, described in <a href="#ai-backends">Choosing the AI</a> and <a href="#voices">Voices</a>.</p>
         <ol>
-            <li><strong>Open Settings:</strong> Go to the <strong>File</strong> menu and select <strong>Settings...</strong> (or press <span class="key">Ctrl</span> + <span class="key">,</span>).</li>
-            <li><strong>AI Settings Tab:</strong>
+            <li><strong>Open Settings:</strong> open the <strong>File</strong> menu (<span class="key">Alt</span> + <span class="key">F</span>) and choose <strong>Settings...</strong>, or press <span class="key">Ctrl</span> + <span class="key">,</span>.</li>
+            <li><strong>AI Settings tab:</strong> press <span class="key">Ctrl</span> + <span class="key">Tab</span> to move from the General tab to the AI Settings tab, then <span class="key">Tab</span> into it.
                 <ul>
-                    <li><strong>Gemini API Key:</strong> This is mandatory for video analysis. Paste your key into the "Gemini API Key:" field. You can get a free API key from <a href="https://aistudio.google.com/app/apikey" target="_blank">Google AI Studio</a>.</li>
-                    <li><strong>OpenAI API Key (for TTS):</strong> This is required for high-quality text-to-speech. Paste your key into this field. You can still use the built-in Windows voices without this key, but OpenAI is recommended for the best results. You can get a key from the <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI Platform</a>.</li>
+                    <li><strong>Gemini API Key:</strong> needed for video analysis with Gemini. Paste your key into this field. You can get a free key from <a href="https://aistudio.google.com/app/apikey" target="_blank">Google AI Studio</a>. Then press <span class="key">Tab</span> to the <strong>Test key</strong> button (<span class="key">Alt</span> + <span class="key">T</span>): the app says whether the key works and how many models it can use.</li>
+                    <li><strong>OpenAI API Key (for TTS):</strong> only needed if you choose the OpenAI voices. You can still use the built-in Windows voices without it. You can get a key from the <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI Platform</a>.</li>
                 </ul>
             </li>
-            <li><strong>Save:</strong> Click <strong>Apply</strong> or <strong>OK</strong> to save your settings. You're now ready to go!</li>
+            <li><strong>Save:</strong> press <strong>Apply</strong> or <strong>OK</strong> to save your settings. You're now ready to go!</li>
         </ol>
         <div class="note">
             <strong>Secure Storage:</strong> Your API keys are encrypted and stored securely on your computer in the application's settings file. They are never sent anywhere else except to connect directly to the respective AI services.
         </div>
 
-        <p data-p7="1">At the first start, if no Gemini key is set, the app offers to open the Google AI Studio page and the Settings. Paste the key, then press <strong>Test key</strong> next to the field: the app tells you whether the key works and how many models it can use.</p>
+        <p data-p7="1">At the first start, if no Gemini key is set (and no local AI is chosen), the app offers to open the Google AI Studio page and the Settings. Answer Yes, paste the key, then press <strong>Test key</strong>. At the very first start you are also asked to accept the license (Agree or Disagree).</p>
 
         <h2 id="quickstart">Quick Start: Generating Your First Description</h2>
         <p>Let's get started! Just follow these simple steps:</p>
         <ol>
-            <li><strong>Choose a Video:</strong> Click a button like "Local Video File" on the main window or select your video source from the File menu.</li>
-            <li><strong>Select a Prompt (Optional):</strong> The dropdown menu lists pre-made instructions that guide the AI. For your first try, leaving it at "(No Preset Selected)" is a great starting point.</li>
-            <li><strong>Start Processing:</strong> The application will now begin analyzing your video. You can follow the progress in the "Status Log" at the bottom of the window. This may take a few minutes, depending on the length of the video.</li>
+            <li><strong>Select a Prompt (Optional):</strong> in the main window, <span class="key">Tab</span> to the list "Optional: Select a prompt preset to enhance generation" and choose a preset with the arrow keys. The read-only box after it shows the full text that will be sent to the AI. For your first try, leaving it at "(No Preset Selected)" is a great starting point.</li>
+            <li><strong>Choose a Video:</strong> press <span class="key">Ctrl</span> + <span class="key">O</span> for a video on your computer, <span class="key">Ctrl</span> + <span class="key">U</span> for a direct link to a video file, or <span class="key">Ctrl</span> + <span class="key">Y</span> for a YouTube link. The same actions are the first three buttons of the main window (<span class="key">Alt</span> + <span class="key">L</span>, <span class="key">Alt</span> + <span class="key">U</span>, <span class="key">Alt</span> + <span class="key">Y</span>).</li>
+            <li><strong>Wait for the description:</strong> the application downloads the video if needed, prepares it and sends it to the AI. You can follow the progress in the "Status Log" (the screen reader also speaks the main steps). This may take a few minutes, depending on the length of the video. <span class="key">Ctrl</span> + <span class="key">Shift</span> + <span class="key">P</span> repeats the last progress message.</li>
         </ol>
-        <p>When the process is complete, the <strong>Described Video Player</strong> will open automatically, and you can start enjoying your newly described video!</p>
+        <p>When the process is complete, the <strong>Described Video Player</strong> will open automatically, and you can start enjoying your newly described video! Remember to save the project with <span class="key">Ctrl</span> + <span class="key">S</span> in the player: otherwise the descriptions are lost when you close it (the player asks you before closing).</p>
+
+        <h3 id="cancel">Cancelling a Description</h3>
+        <p>While a description is being generated, press <span class="key">Escape</span> in the main window, or the <strong>Cancel Generation</strong> button (<span class="key">Alt</span> + <span class="key">C</span>; the focus moves to it when a generation starts). The cancellation works at every stage: while the video is being prepared, while it is being uploaded (even a long upload), while the app waits to retry after an error, and while the AI is working. The app says "Cancelling..." then "Generation cancelled." Closing the app also stops a running generation. While a generation runs, the File menu and the source buttons are unavailable.</p>
+
+        <h2 id="main-window">The Main Window and Its Menus</h2>
+        <p>The main window contains, in <span class="key">Tab</span> order:</p>
+        <ol>
+            <li><strong>Local Video File</strong>, <strong>Direct Video URL</strong> and <strong>YouTube Video URL</strong> buttons, to choose the video to describe.</li>
+            <li><strong>Open Web Platform</strong>: opens the web version of Omni Describer in your browser (no API key needed there).</li>
+            <li>The <strong>prompt preset</strong> list and the read-only text of the selected preset (see <a href="#prompts">Managing Prompt Presets</a>).</li>
+            <li>The <strong>Status Log</strong>, a read-only text of everything the app did; read it with the arrow keys.</li>
+            <li><strong>Settings...</strong>, <strong>Cancel Generation</strong> (only available while a description is being generated) and <strong>Exit</strong> buttons.</li>
+        </ol>
+        <p>The status bar at the bottom shows the current step and, during processing, the percentage.</p>
+
+        <h3 id="file-menu">The File Menu</h3>
+        <p>Open it with <span class="key">Alt</span> + <span class="key">F</span>.</p>
+        <ul>
+            <li><strong>Open Local Video...</strong> (<span class="key">Ctrl</span> + <span class="key">O</span>): choose a video file on your computer and describe it.</li>
+            <li><strong>Open Video from URL...</strong> (<span class="key">Ctrl</span> + <span class="key">U</span>): type the direct address of a video file (ending in .mp4, .webm...). It is downloaded, then described.</li>
+            <li><strong>Open from YouTube...</strong> (<span class="key">Ctrl</span> + <span class="key">Y</span>): paste a YouTube address. The quality downloaded is set in Settings, General tab.</li>
+            <li><strong>Open Project...</strong> (<span class="key">Ctrl</span> + <span class="key">P</span>): reopen a saved project (.omniad file) in the player, without asking the AI again. If the video has moved, the app asks you to locate it.</li>
+            <li><strong>Recent Projects</strong>: a submenu of the last projects you opened or saved; press the number in front of a project to open it.</li>
+            <li><strong>Import Descriptions from SRT or WebVTT...</strong>: open an existing description script (.srt or .vtt). The app says how many descriptions it found and then asks for the video they belong to. You can then listen to them, edit them or export them.</li>
+            <li><strong>Describe an Image or PDF...</strong> (<span class="key">Ctrl</span> + <span class="key">I</span>), <strong>Describe My Screen</strong> (<span class="key">Ctrl</span> + <span class="key">Alt</span> + <span class="key">Shift</span> + <span class="key">D</span>) and <strong>Live Screen Description</strong> (<span class="key">Ctrl</span> + <span class="key">Alt</span> + <span class="key">Shift</span> + <span class="key">L</span>): see <a href="#images">Images, PDFs and Your Screen</a>.</li>
+            <li><strong>Reuse Characters from a Project...</strong> (<span class="key">Ctrl</span> + <span class="key">G</span>): for a series, choose the project of an earlier episode; the next descriptions start from its characters, so names and descriptions stay the same.</li>
+            <li><strong>Manage Prompt Presets...</strong>: see <a href="#prompts">Managing Prompt Presets</a>.</li>
+            <li><strong>Open Web Platform...</strong> (<span class="key">Ctrl</span> + <span class="key">W</span>): opens the web version in your browser.</li>
+            <li><strong>Settings...</strong> (<span class="key">Ctrl</span> + <span class="key">,</span>): see <a href="#advanced-settings">A Deep Dive into Settings</a>.</li>
+            <li><strong>Reset Settings and Data...</strong>: see <a href="#reset">Reset Settings and Data</a>.</li>
+            <li><strong>Exit</strong> (<span class="key">Alt</span> + <span class="key">F4</span>).</li>
+        </ul>
+
+        <h3 id="help-menu">The Help Menu</h3>
+        <ul>
+            <li><strong>View Help</strong> (<span class="key">F1</span>): opens this guide in your web browser, in the interface language when a translation exists.</li>
+            <li><strong>Changelog</strong>: what changed in each version.</li>
+            <li><strong>Contributors</strong>: the people who helped build and translate the app.</li>
+            <li><strong>View License</strong>: the license agreement.</li>
+            <li><strong>About...</strong>: version, contact address and a Visit Website button.</li>
+        </ul>
 
         <h2 id="features">Main Features</h2>
 
         <p data-p6="1">Before describing, the app finds the moments without speech, even under music (Silero speech detection, downloaded once, about 2 MB, and run on your computer), and the shot changes, then asks the AI to place descriptions there. It announces the approximate number of tokens before sending the video (Escape cancels), and gives news at least every 25 seconds while it works.</p>
 
         <h3 id="player">The Described Video Player</h3>
-        <p>This is your personal, described movie theater. As the video plays, your <strong>installed screen reader</strong> (like JAWS or NVDA) will read the generated audio descriptions aloud at the correct moments.</p>
+        <p>This is your personal, described movie theater. As the video plays, the descriptions are read at the right moments: by default by your <strong>installed screen reader</strong> (like JAWS or NVDA), or by the app voice or on your braille display (see "Descriptions in the player" in <a href="#settings-audio">Audio Output Tab</a>). The focus starts on the Play button. In <span class="key">Tab</span> order the player contains:</p>
         <ul>
-            <li><strong>Playback Controls:</strong> Use the Play/Pause, Rewind/Forward buttons, or the seek slider to navigate the video.</li>
-            <li><strong>Current Description Area:</strong> You can follow the text of the currently active description here.</li>
-            <li><strong>Edit and Refine:</strong> Click the "Edit Descriptions..." button to open a powerful editor for full control over your project.</li>
-            <li><strong>AI Token Usage:</strong> This area shows you how many AI "tokens" were used, helping you keep track of your API usage.</li>
+            <li><strong>Play / Pause</strong> button (it says Replay at the end of the video) and the <strong>video progress slider</strong>: arrow keys on the slider move in the video.</li>
+            <li><strong>Rewind 5s</strong> (<span class="key">Alt</span> + <span class="key">R</span>) and <strong>Forward 5s</strong> (<span class="key">Alt</span> + <span class="key">F</span>) buttons, and the <strong>Vol</strong> slider (the video volume, remembered for next time).</li>
+            <li><strong>Current Audio Description:</strong> the text of the description being read; you can review it with your screen reader's reading keys.</li>
+            <li><strong>AI Token Usage:</strong> how many AI "tokens" were used, helping you keep track of your API usage.</li>
+            <li><strong>Explore Scene...</strong>, <strong>Ask More...</strong>, <strong>Edit Descriptions...</strong>, <strong>Settings...</strong> and <strong>Export...</strong> buttons, each described below.</li>
         </ul>
+        <p>Most actions also have a single-key shortcut that works wherever the focus is: see <a href="#shortcuts">Keyboard Shortcuts</a> (or press <span class="key">F1</span> or <span class="key">?</span> in the player to hear them). When you close the player, it asks whether to save the project if something changed; a downloaded video is deleted on closing unless you saved a project (the video is then copied next to the project).</p>
 
         <p>Settings > Audio Output, "Descriptions in the player": your screen reader (speech and braille, the default); the app voice chosen above, prepared in advance so the video is lowered or paused for exactly the right time; or braille only, where the video pauses after each description until you press Enter. "Also show descriptions in large text on the video" displays each description on the picture, with a size and colour of your choice, for low-vision viewers.</p>
 
         <h3 id="editing">Editing Descriptions: The Power to Refine</h3>
-        <p>The AI provides a fantastic starting point, but true quality comes from refinement. The "Edit Descriptions..." button in the player opens a powerful editor that gives you full control over every aspect of your project.</p>
+        <p>The AI provides a fantastic starting point, but true quality comes from refinement. The "Edit Descriptions..." button in the player opens a powerful editor that gives you full control over every aspect of your project. The video must be loaded first.</p>
         <ul>
-            <li><strong>Select and Modify:</strong> The list at the top has one row per description: start, end, text, words per second, review status and level. Selecting a row loads it below and moves the video there.</li>
-            <li><strong>Adjust Timestamps:</strong> Edit the <code>Start</code> and <code>End</code> fields (HH:MM:SS.mmm), or set them from the player position. When you change the start time, the end time automatically shifts to preserve the description's duration. All times are validated to ensure they are within the bounds of your video.</li>
-            <li><strong>Rewrite Text:</strong> Freely edit the description text in the main text box to improve clarity, add detail, or correct inaccuracies.</li>
-            <li><strong>Add New Descriptions:</strong> Click the "Add New..." button to open a simple dialog where you can create a brand new description from scratch, setting its time and text.</li>
-            <li><strong>Delete Descriptions:</strong> Select a description and click the "Delete" button to permanently remove it.</li>
-            <li><strong>Characters:</strong> The "Characters..." button (Alt+H) opens the character glossary the AI uses to keep names consistent. Add, edit or delete a character (Enter edits, Delete removes). Giving a character a new name also renames it in every description.</li>
-            <li><strong>Shortcuts:</strong> F8 / Shift+F8: next / previous description to review. Ctrl+P: play or pause the video. Alt+Left / Alt+Right: move the video 1 second. Ctrl+Z / Ctrl+Y in the list: undo / redo. Ctrl+[ / Ctrl+]: set the start / end to the player position. Ctrl+S: save. Times are typed as HH:MM:SS.mmm (MM:SS or seconds also work); moving to another description keeps your changes, and closing asks if some are not saved.</li>
+            <li><strong>Select and Modify:</strong> The list at the top (<span class="key">Alt</span> + <span class="key">L</span>) has one row per description: start, end, text, words per second, review status and level. Selecting a row loads it below and moves the video there. <span class="key">Enter</span> on a row moves to its text.</li>
+            <li><strong>Adjust Timestamps:</strong> Edit the <code>Start</code> and <code>End</code> fields (HH:MM:SS.mmm), or set them from the player position with the buttons "Start = player position" (<span class="key">Alt</span> + <span class="key">T</span> or <span class="key">Ctrl</span> + <span class="key">[</span>) and "End = player position" (<span class="key">Alt</span> + <span class="key">N</span> or <span class="key">Ctrl</span> + <span class="key">]</span>). When you change the start time, the end time automatically shifts to preserve the description's duration. All times are validated to ensure they are within the bounds of your video.</li>
+            <li><strong>Rewrite Text:</strong> Freely edit the description text to improve clarity, add detail, or correct inaccuracies.</li>
+            <li><strong>Review status and Reviewer notes:</strong> mark a description "To review" or "Validated" and add a note; both are saved with the project and appear in the Word production script.</li>
+            <li><strong>Add New...</strong> (<span class="key">Alt</span> + <span class="key">A</span>): opens a small dialog where you set the start, end and text of a new description; the start is the current player position.</li>
+            <li><strong>Delete</strong> (<span class="key">Alt</span> + <span class="key">D</span>, or <span class="key">Delete</span> in the list): removes the selected description after confirmation.</li>
+            <li><strong>Characters...</strong> (<span class="key">Alt</span> + <span class="key">H</span>): opens the character glossary, see <a href="#characters">Characters and Their Voices</a>.</li>
+            <li><strong>Hear with the export voice</strong> (<span class="key">Alt</span> + <span class="key">R</span> or <span class="key">Ctrl</span> + <span class="key">R</span>): plays the text with the voice used in audio exports, pronunciation dictionary included.</li>
+            <li><strong>Save Changes</strong> (<span class="key">Alt</span> + <span class="key">S</span> or <span class="key">Ctrl</span> + <span class="key">S</span>) and <strong>Close</strong> (or <span class="key">Escape</span>).</li>
+            <li><strong>Shortcuts:</strong> F8 / Shift+F8: next / previous description to review. Ctrl+P: play or pause the video. Alt+Left / Alt+Right: move the video 1 second. Ctrl+Z / Ctrl+Y in the list: undo / redo. Ctrl+G on a translated dialogue line: change the speaker's voice (unknown, woman, man). Times are typed as HH:MM:SS.mmm (MM:SS or seconds also work); moving to another description keeps your changes, and closing asks if some are not saved.</li>
         </ul>
         <div class="note">
-            <strong>Save Your Work:</strong> Changes you make in the editor (adding, deleting, modifying) are instantly applied to your current session. When you are done, simply click the "Close" button to return to the player. Your updated list of descriptions will be used for playback and for any subsequent exports.
+            <strong>Save Your Work:</strong> When you close the editor, your updated list of descriptions goes back to the player and is used for playback and exports. To keep it after closing the player, save the project in the player with <span class="key">Ctrl</span> + <span class="key">S</span>.
         </div>
-        
-        <p>For professional review, each description has a status (to review or validated) and reviewer notes, saved with the project. After generation, an AI check also marks descriptions that are not in the present tense, that interpret feelings instead of describing what is seen, or that leave the fiction (actors' names, camera jargon); they appear with "Review" in the editor, and V in the player counts them. Changing the text clears these marks.</p>
+
+        <p>For professional review, each description has a status (to review or validated) and reviewer notes, saved with the project. After generation, an AI check also marks descriptions that are not in the present tense, that interpret feelings instead of describing what is seen, or that leave the fiction (actors' names, camera jargon); they appear with "Review" in the editor, and V in the player counts them. Changing the text clears these marks. Entries that are too long for their pause or that fall over dialogue also start with "Review".</p>
+
+        <h3 id="characters">Characters and Their Voices</h3>
+        <p>The AI keeps a glossary of characters so that each person is described the same way throughout the video and named only once their name has been spoken or shown. Open it from the editor with <strong>Characters...</strong> (<span class="key">Alt</span> + <span class="key">H</span>).</p>
+        <ul>
+            <li>The list shows each character's ID, name ("Not named" until revealed), description and voice. <span class="key">Enter</span> edits the selected character, <span class="key">Delete</span> removes it (after confirmation).</li>
+            <li><strong>Add...</strong> (<span class="key">Alt</span> + <span class="key">A</span>), <strong>Edit...</strong> (<span class="key">Alt</span> + <span class="key">E</span>), <strong>Delete</strong> (<span class="key">Alt</span> + <span class="key">D</span>), then <strong>OK</strong> to keep your changes or <strong>Cancel</strong>.</li>
+            <li>In the character form: <strong>ID</strong> (a unique identifier, required), <strong>Name</strong> (leave it empty if not revealed yet), <strong>Description</strong> (how to recognise them, required).</li>
+            <li><strong>Voice for this character's translated lines:</strong> when foreign-language dialogue is translated (see <a href="#images">audio subtitles</a>), choose which voice reads this character's lines in audio exports and with the app voice:
+                <ul>
+                    <li><strong>Automatic</strong> (default): the speaker's apparent gender on each line.</li>
+                    <li><strong>Woman's voice</strong> or <strong>Man's voice</strong>: always that voice for this character.</li>
+                    <li><strong>Description voice</strong>: the same voice as the descriptions.</li>
+                </ul>
+                The label ends with "AI saw: woman", "man" or "unknown": the gender the AI perceived, which your choice overrides without erasing it.</li>
+            <li>Giving a character a new name also renames it in every description; the app says how many descriptions were updated.</li>
+        </ul>
+        <p>To reuse the characters of an earlier episode, use File &gt; Reuse Characters from a Project (<span class="key">Ctrl</span> + <span class="key">G</span>) before describing the next one.</p>
 
         <h3 id="prompts">Managing Prompt Presets</h3>
-        <p>Prompts are powerful instructions that determine what the AI focuses on. By changing the prompt, you can get descriptions in vastly different styles.</p>
+        <p>Prompts are extra instructions that tell the AI what to focus on. By changing the prompt, you can get descriptions in vastly different styles.</p>
         <ul>
-            <li><strong>Selecting a Preset:</strong> Before processing a video, choose a preset from the dropdown menu on the main window.</li>
-            <li><strong>Managing Presets:</strong> Go to <strong>File -> Manage Prompt Presets...</strong>. Here you can Add, Edit, or Delete your own custom prompts. This is perfect for saving instructions you use frequently.</li>
-            <li><strong>Language-Specific:</strong> Your prompt presets are saved separately for each language you select in the Settings.</li>
+            <li><strong>Selecting a Preset:</strong> Before processing a video, choose a preset in the prompt list of the main window.</li>
+            <li><strong>Managing Presets:</strong> Go to <strong>File &gt; Manage Prompt Presets...</strong>. The list shows each preset's name and text. Buttons: <strong>Add...</strong> (<span class="key">Alt</span> + <span class="key">A</span>), <strong>Edit...</strong> (<span class="key">Alt</span> + <span class="key">E</span>, or <span class="key">Enter</span> on a preset), <strong>Delete</strong> (<span class="key">Alt</span> + <span class="key">D</span>), <strong>Export...</strong> (<span class="key">Alt</span> + <span class="key">X</span>), <strong>Import...</strong> (<span class="key">Alt</span> + <span class="key">I</span>) and <strong>Close</strong>. A preset has a name and a prompt text, both required.</li>
+            <li><strong>One list per interface language:</strong> the dialog manages the presets of the current interface language (it says which one at the top). Switching the interface to another language shows that language's list.</li>
         </ul>
 
-        <p data-p7="1">The presets exist in the ten interface languages. <strong>Export...</strong> saves your presets to a file to share them with other describers; <strong>Import...</strong> adds the presets of such a file (a preset with the same name is replaced).</p>
+        <p data-p7="1">The presets exist in the ten interface languages. The default presets ship with the app as JSON files in its <code>prompts</code> folder, one file per language (<code>en.json</code>, <code>fr.json</code>...); your own list is saved in your data folder (<code>prompts.json</code>). <strong>Export...</strong> saves your presets to a JSON file to share them with other describers; <strong>Import...</strong> adds the presets of such a file (a preset with the same name is replaced). File &gt; Reset Settings and Data can bring back the default presets.</p>
 
         <h3 id="askmore">Ask More About the Scene</h3>
-        <p>Ever wonder what a character is holding or what a sign in the background says? This feature lets you ask anything that comes to mind about the scene.</p>
+        <p>Ever wonder what a character is holding or what a sign in the background says? This feature lets you ask anything that comes to mind about the scene. It uses Gemini.</p>
         <ol>
             <li>Pause the video at the moment you're curious about.</li>
-            <li>Click the <strong>Ask More...</strong> button.</li>
+            <li>Press <span class="key">Q</span>, or the <strong>Ask More...</strong> button.</li>
             <li>Type your question in the "Your New Question:" field (e.g., "What color is the woman's hat?" or "What does the writing on the wall say?").</li>
-            <li>Select how many seconds of video the AI should analyze around the current time.</li>
-            <li>Click "Submit Question." The AI's answer will appear in the "Conversation History" area.</li>
+            <li>Choose in "Video Context Duration (seconds)" how many seconds of video around the current time the AI should analyse (1 to 60, default 5).</li>
+            <li>Press <strong>Submit Question</strong> (<span class="key">Alt</span> + <span class="key">S</span>). The AI's answer appears in the "Conversation History" area, and you can ask follow-up questions: the AI remembers the conversation.</li>
+            <li><strong>Add to Descriptions</strong> (<span class="key">Alt</span> + <span class="key">A</span>) adds the last answer as a new description at the current time. <strong>Close</strong> returns to the player.</li>
         </ol>
+        <p>The <span class="key">W</span> key in the player asks directly "What is on screen right now?" and shows the answer in this window.</p>
 
         <h3 id="explorer">Scene Explorer</h3>
-        <p>Scene Explorer tells you what is in the picture and where. Each object comes with a clock position: 12 o'clock is the top of the picture, 3 o'clock the right edge, 6 o'clock the bottom. It is an ordinary window, read by your screen reader and braille display.</p>
+        <p>Scene Explorer tells you what is in the picture and where. Each object comes with a clock position: 12 o'clock is the top of the picture, 3 o'clock the right edge, 6 o'clock the bottom. It is an ordinary window, read by your screen reader and braille display. It uses Gemini.</p>
         <ol>
             <li>Pause the video on a scene you want to explore in detail.</li>
-            <li>Click the <strong>Explore Scene...</strong> button, then click "Analyze Scene".</li>
+            <li>Press <span class="key">S</span>, or the <strong>Explore Scene...</strong> button.</li>
+            <li>In the options, choose the "Analysis Duration (seconds)" (1 to 10, default 3) and optionally type what to focus on, then press <strong>Analyze Scene</strong> (<span class="key">Enter</span>).</li>
         </ol>
         <p>The Scene Explorer window has three parts; move between them with Tab:</p>
         <ul>
-            <li><strong>Scene</strong>: a summary of the whole scene.</li>
-            <li><strong>Objects</strong>: the objects with their clock position. Moving through the list plays a sound placed to the left or right according to where the object is (use stereo headphones).</li>
-            <li><strong>Details</strong>: what the selected object looks like and what it is doing.</li>
+            <li><strong>Scene</strong> (<span class="key">Alt</span> + <span class="key">S</span>): a summary of the whole scene.</li>
+            <li><strong>Objects</strong> (<span class="key">Alt</span> + <span class="key">O</span>): the objects with their clock position. Moving through the list plays a sound placed to the left or right according to where the object is (use stereo headphones).</li>
+            <li><strong>Details</strong> (<span class="key">Alt</span> + <span class="key">D</span>): what the selected object looks like and what it is doing.</li>
             <li><span class="key">Escape</span>: close the Scene Explorer.</li>
         </ul>
 
         <h3 id="images">Images, PDFs and Your Screen</h3>
-        <p><strong>File &gt; Describe an Image or PDF</strong> (Ctrl+I) describes a photo, a screenshot or a PDF document: main subject first, people, colours and any visible text, read exactly. For a PDF: layout, pictures, charts and tables with their key values, then a summary by section. The result opens in a window you can read line by line or copy.</p>
-        <p><strong>Describe My Screen</strong> (Ctrl+Alt+Shift+D) works from any application: a browser, a video call, a game. The main screen is captured, described and the answer is read by your screen reader. The capture is deleted afterwards.</p>
+        <p><strong>File &gt; Describe an Image or PDF</strong> (Ctrl+I) describes a photo, a screenshot or a PDF document: main subject first, people, colours and any visible text, read exactly. For a PDF: layout, pictures, charts and tables with their key values, then a summary by section. The result opens in a window you can read line by line, or copy with the <strong>Copy</strong> button (<span class="key">Alt</span> + <span class="key">C</span>). Supported images: PNG, JPG, WEBP, GIF, BMP and HEIC.</p>
+        <p><strong>Describe My Screen</strong> (Ctrl+Alt+Shift+D) works from any application: a browser, a video call, a game. The screen is captured, described and the answer is read by your screen reader. The capture is deleted afterwards.</p>
         <p><strong>Live Screen Description</strong> (Ctrl+Alt+Shift+L, on or off) checks the screen every 3 seconds and describes it only when it has changed noticeably, saying just what is new. Each description uses your API quota: turn it off when you no longer need it.</p>
-        <p><strong>Audio subtitles:</strong> in Settings &gt; AI, "Translate dialogue spoken in another language" adds the translation of foreign-language lines (anime in the original version, foreign films), introduced by the speaker. Like on-screen text, they are announced by a short sound and read in the second voice in exports.</p>
+        <p><strong>Audio subtitles:</strong> in Settings &gt; AI, "Translate dialogue spoken in another language" adds the translation of foreign-language lines (anime in the original version, foreign films), introduced by the speaker. Like on-screen text, they are announced by a short sound and read in the second voice in exports; with "Read translated dialogue with a voice matching the speaker" they are read with a woman's or a man's voice (see <a href="#voices">Voices</a>).</p>
 
-        <p>Private mode: in Settings > AI, "Images and screen described by" can use a local model through Ollama (ollama.com) instead of Gemini. Nothing leaves your computer and no quota is used, but the descriptions are less accurate, and PDF documents still need Gemini. Install Ollama, then run ollama pull gemma3 (or choose another vision model in Settings).</p>
+        <p>Private mode: in Settings > AI, "Images and screen described by" can use a local model through Ollama (ollama.com) or an OpenAI-compatible vision service instead of Gemini (see <a href="#ai-backends">Choosing the AI</a>). With Ollama nothing leaves your computer and no quota is used, but the descriptions are less accurate. PDF documents always need Gemini. Install Ollama, then run ollama pull gemma3 (or choose another vision model in Settings).</p>
 
         <p>With several screens, the screen showing the active window is described. In live mode, the new description waits for a pause in what the computer is playing (up to 8 seconds) before it is spoken.</p>
 
         <h3 id="cli">Command Line and Batch Mode</h3>
-        <p>To describe many files without the interface, use the command line. Folders are processed file by file; images and PDFs get a text description. The same settings and API key as the app are used.</p>
+        <p>To describe many files without the interface, use the command line. Folders are processed file by file; images and PDFs get a text description (<code>name_description.txt</code>). The same settings and API key as the app are used.</p>
         <pre dir="ltr"><code>python -m audio_describer.cli film.mp4 episodes --lang fr --export vtt,srt,txt,project --out out</code></pre>
-
-        <p>Options: --density low, medium or high keeps only the essential descriptions or all of them in the exports (the project keeps everything); --export also accepts dapt, docx, mkv, mp4, mp3 and m4a; --watch keeps running and describes every new file copied into the folders. The installed app has the same command line: OmniDescriber.exe --cli followed by the same options.</p>
+        <p>The installed app has the same command line: <code>OmniDescriber.exe --cli</code> followed by the same options. All options:</p>
+        <ul>
+            <li><code>inputs</code>: one or more videos, images, PDFs or folders.</li>
+            <li><code>--lang</code>: description language code (fr, en, es...), for this run only; default: the app setting.</li>
+            <li><code>--export</code>: comma-separated list among vtt, srt, txt, dapt, docx, project, mkv, mp4, mp3 and m4a. Default: <code>vtt,project</code>.</li>
+            <li><code>--density low|medium|high</code>: keeps only the essential descriptions (low) or all of them (high, default) in the exports; the project keeps everything.</li>
+            <li><code>--extended</code>: in audio and video exports, pause the picture when a description is longer than its pause.</li>
+            <li><code>--no-credit</code>: no spoken AI credit at the end of audio and video exports.</li>
+            <li><code>--watch</code>: keep running and describe every new file copied into the folders (once its copy is finished). <span class="key">Ctrl</span> + <span class="key">C</span> stops.</li>
+            <li><code>--out</code>: output folder (default: the current folder).</li>
+            <li><code>--prompt</code>: extra instructions for the AI, like a prompt preset.</li>
+        </ul>
 
         <h3 id="evaluate">Evaluating an Audio Description</h3>
-        <p>Press E in the player to open the questionnaire from the 2020 audio description guide of the French audiovisual regulator (CSA). The first tab is for listening without the picture, the second for checking with the picture. Rate each question from 1 to 5 and add comments; measured values (descriptions over dialogue, words per second, uncertain descriptions, on-screen text) are shown next to the questions they inform. There is no overall score: the guide considers an average meaningless. The answers are saved with the project, and Save Report writes a text file.</p>
+        <p>Press E in the player to open the questionnaire from the 2020 audio description guide of the French audiovisual regulator (CSA). The video pauses. The first tab is for listening without the picture, the second for checking with the picture (<span class="key">Ctrl</span> + <span class="key">Tab</span> switches tabs). Rate each question from 1 to 5 (or leave it "not rated") and add comments; measured values (descriptions over dialogue, words per second, uncertain descriptions, on-screen text) are shown next to the questions they inform. There is no overall score: the guide considers an average meaningless. OK keeps the answers with the project (save it with Ctrl+S), and Save Report (<span class="key">Alt</span> + <span class="key">R</span>) writes a text file.</p>
 
         <h3 id="exporting">Exporting Your Work</h3>
-        <p>Once you're happy with your descriptions, you can export them from the Player Window in different formats:</p>
+        <p>Once you're happy with your descriptions, press the <strong>Export...</strong> button in the player. Choose a format with the arrow keys, set the options below the list, press <strong>Continue</strong> (<span class="key">Enter</span>) and choose where to save. The formats:</p>
         <ul>
-            <li><strong>Export to .TXT:</strong> A simple text file with timestamps.</li>
-            <li><strong>Export to .SRT:</strong> A standard subtitle file you can use in video players like VLC.</li>
-            <li><strong>Export Audio (MP3):</strong> This is perhaps the most exciting feature. It voices your descriptions with the voice you selected in Settings (SAPI5 or OpenAI), mixes it with the original video audio, and automatically lowers the background sound during descriptions to create an MP3 file you can listen to anywhere.</li>
+            <li><strong>Video with a separate audio description track (MKV)</strong>: the original tracks are kept, the description is an extra audio track.</li>
+            <li><strong>Video with a separate audio description track (MP4)</strong>: the same, for most players and phones.</li>
+            <li><strong>MP3 Audio</strong>: voices your descriptions with the voice selected in Settings, mixes it with the original sound and lowers the background during descriptions, to create an MP3 you can listen to anywhere.</li>
+            <li><strong>Audio description track only (M4A)</strong>: only the voiced descriptions, placed at their times.</li>
+            <li><strong>WebVTT descriptions (.vtt)</strong>: for web players and platforms.</li>
+            <li><strong>SRT Subtitle File</strong>: the descriptions as subtitles with their times, for players like VLC.</li>
+            <li><strong>Plain Text File (.txt)</strong>: one description per line, without times.</li>
+            <li><strong>W3C TTML DAPT script (.ttml)</strong>: for professional audio description tools.</li>
+            <li><strong>Production script (Word .docx)</strong>: timecodes, text, level, status and notes, for review.</li>
+            <li><strong>Full script (.txt)</strong>: the AI transcribes the dialogue and interleaves it with the descriptions, a text alternative for deafblind readers (WCAG 1.2.8). It uses Gemini and can take a few minutes.</li>
         </ul>
+        <p>Audio and video exports need FFmpeg (included with the app) and voice each description; a progress window lets you follow and cancel the export.</p>
 
-        <p>Other exports: video with a separate audio description track in MP4, for most players and phones; the script in W3C TTML DAPT for professional audio description tools; a production script in Word (.docx) with timecodes, text, level, status and notes; and the full script, where the AI transcribes the dialogue and interleaves it with the descriptions, a text alternative for deafblind readers (WCAG 1.2.8).</p>
+        <p data-p7="1">Options of the export window: <strong>Only the descriptions of the current density</strong> (<span class="key">Alt</span> + <span class="key">D</span>, on by default) exports what you hear in the player (key D); <strong>Extended description</strong> (<span class="key">Alt</span> + <span class="key">X</span>, MKV, MP4 and MP3 only; on by default when the player is in extended mode) pauses the picture when a description is longer than its pause, instead of cutting it (the video is re-encoded and the original subtitles are not kept); <strong>spoken credit</strong> (<span class="key">Alt</span> + <span class="key">R</span>, audio and video formats) adds at the end a sentence saying that the audio description was generated by AI. Without the extended option, the end message lists the descriptions that were cut. The audio description track is named in the description language, the subtitles of the source are kept when possible, and with 5.1 sound the descriptions are placed on the centre channel. In the player, <span class="key">Shift</span> + <span class="key">I</span> saves the audio introduction as an MP3 to publish before the programme.</p>
 
-        <p data-p7="1">Options of the video and audio exports: <strong>Only the descriptions of the current density</strong> exports what you hear in the player (key D); <strong>Extended description</strong> pauses the picture when a description is longer than its pause, instead of cutting it (the video is re-encoded and the original subtitles are not kept); <strong>spoken credit</strong> adds at the end a sentence saying that the audio description was generated by AI. Without the extended option, the end message lists the descriptions that were cut. The audio description track is named in the description language, the subtitles of the source are kept when possible, and with 5.1 sound the descriptions are placed on the centre channel. In the player, <span class="key">Shift</span> + <span class="key">I</span> saves the audio introduction as an MP3 to publish before the programme.</p>
-
-        <p data-p8><strong>Local and free:</strong> in Settings, AI tab, <strong>Video descriptions</strong> can use <strong>Ollama (local, free, private)</strong>: the video never leaves your computer (install Ollama, then a vision model such as <code>ollama pull gemma3</code>); it is slower and less accurate than Gemini. <strong>Translated dialogue</strong> is read with a woman's or a man's voice matching the speaker: in the Audio tab, keep the automatic Windows voice or choose a local Piper voice and press <strong>Download and listen</strong> (about 20 MB, once). In the editor, <strong>Ctrl+G</strong> changes the speaker's voice of a translated line.</p>
-
-        <h2 id="advanced-settings">A Deep Dive into Settings</h2>
-        <p>The Settings window (<span class="key">Ctrl</span> + <span class="key">,</span>) gives you fine-grained control over Omni Describer's behavior.</p>
-
-        <h3>General Tab</h3>
+        <h2 id="ai-backends">Choosing the AI: Gemini, Ollama or an OpenAI-Compatible Service</h2>
+        <p>In Settings, AI Settings tab, two lists choose which AI looks at your media:</p>
         <ul>
-            <li><strong>Allow descriptions to interrupt current speech:</strong> When checked, a new description will start speaking immediately, even if the previous one hasn't finished. Uncheck this to let each description finish completely before the next one starts. Useful for very fast-paced scenes.</li>
+            <li><strong>Video descriptions:</strong> the AI that describes videos.</li>
+            <li><strong>Images and screen described by:</strong> the AI used by Describe an Image or PDF, Describe My Screen and Live Screen Description.</li>
         </ul>
-
-        <h3>AI Settings Tab</h3>
+        <p>Each list offers three choices:</p>
         <ul>
-            <li><strong>Frame Rate for AI Analysis:</strong> Determines how many video frames per second are sent to the AI. A lower value (e.g., 5 FPS) can significantly reduce API costs and help avoid processing limits, but may cause the AI to miss very fast actions.</li>
-            <li><strong>Enable Video Chunking:</strong> For long videos (over 10-15 minutes), the AI can sometimes run out of processing capacity. This feature automatically splits the video into smaller parts, analyzes them sequentially, and stitches the results together. It is highly recommended for long-form content.</li>
-            <li><strong>Disable Safety Filters (Use with caution):</strong> This option may allow the AI to process content that it might normally flag as sensitive. However, this is not an absolute override. The output is still subject to the AI provider's core safety policies. Please remember that you are responsible for how you use this feature.</li>
-        </ul>
-
-        <h3>Audio Output Tab</h3>
-        <ul>
-            <li><strong>Text-to-Speech Engine:</strong>
+            <li><strong>Gemini (online)</strong>, the default and the most accurate. It receives the whole video with its sound. Needs the Gemini API key.</li>
+            <li><strong>Ollama (local, free, private)</strong>: a vision model running on your own computer through Ollama (<a href="https://ollama.com" target="_blank">ollama.com</a>). The video never leaves your computer and no quota is used, but it is slower and less accurate. Install Ollama, then a vision model, for example <code>ollama pull gemma3</code>, and type the model name in <strong>Ollama vision model</strong> (default gemma3; llava or qwen2.5vl also work).</li>
+            <li><strong>OpenAI-compatible vision service</strong>: any service that speaks the OpenAI chat API with images, online or on your computer: OpenRouter, OpenAI, Mistral, Groq, Claude through OpenRouter, or a local server such as LM Studio, llama.cpp or vLLM. Fill in three fields:
                 <ul>
-                    <li><strong>SAPI5 (Windows Built-in):</strong> Uses voices that come with Windows or that you have installed. It does not require an additional API key. The app can access both modern 64-bit voices and legacy 32-bit voices. If you have older, favorite voices from past systems, choosing the "SAPI5 (32-bit Voices)" option will allow you to use them.</li>
-                    <li><strong>OpenAI TTS (High Quality):</strong> Produces more natural and fluent-sounding voices. Using this option requires a paid OpenAI account and API key. You can create and manage custom voice presets for OpenAI.</li>
+                    <li><strong>Vision service address (OpenAI-compatible):</strong> the address of the API, for example <code>https://openrouter.ai/api/v1</code> (the default), <code>https://api.openai.com/v1</code>, or <code>http://localhost:1234/v1</code> for LM Studio. An online service must use <code>https://</code>; <code>http://</code> is only accepted for this computer (localhost, 127.0.0.1).</li>
+                    <li><strong>Vision service model:</strong> the model name as the service writes it, for example <code>openai/gpt-5-mini</code> on OpenRouter. It must be a model that accepts images.</li>
+                    <li><strong>Vision service API key:</strong> the key of that service; leave it empty for a local server.</li>
                 </ul>
             </li>
         </ul>
-        
-        <p data-p7="1">Also in the Audio Output tab: the <strong>pronunciation dictionary</strong>, one rule per line, such as <code>Hermione = her-my-oh-nee</code>, used by the app voice, the exports and the editor's listen button (whole words, upper or lower case); and the <strong>audio description mode</strong> the player starts in (in the pauses, extended or on demand; M still changes it). In the AI tab, the density setting chooses the density the player opens with.</p>
+        <p>With Ollama or an OpenAI-compatible service, the video is not uploaded: still frames are taken from each part of the video, with their times, and sent to the model.</p>
+        <div class="note">
+            <strong>Features that need Gemini:</strong> PDF documents, Ask More (and the W key), Scene Explorer, the audio introduction (I key) and the full script export (dialogue transcription) always use Gemini. When "Video descriptions" is set to another AI, these features refuse to run and tell you so, so that nothing is sent to Google behind your back. Switch "Video descriptions" back to Gemini to use them.
+        </div>
+
+        <h2 id="voices">Voices</h2>
+        <p>The voice chosen in Settings, <strong>Audio Output</strong> tab, reads the descriptions in audio and video exports, in the editor's "Hear" button, and in the player when "Descriptions in the player" is set to the app voice. (With the default screen reader mode, your screen reader's own voice reads them during playback.) Choose the <strong>Text-to-Speech Engine</strong> with the arrow keys; the fields of that engine appear below it. Press <strong>Test</strong> in the "Test Voice" group to hear the text typed above it.</p>
+        <ul>
+            <li><strong>OpenAI TTS (High Quality)</strong>: natural voices; needs a paid OpenAI account and the OpenAI API key (AI Settings tab). Choose a <strong>Voice Preset</strong>; <strong>Manage Voice Presets...</strong> lets you add, edit and delete presets, each with a name, a base OpenAI voice (alloy, echo, fable, onyx, nova, shimmer, coral, ash, ballad, sage), a speed and instructions for the tone ("Speak in a calm, warm tone").</li>
+            <li><strong>SAPI5 (64-bit Voices)</strong> and <strong>SAPI5 (32-bit Voices)</strong>: voices installed in Windows, no key needed. The 32-bit choice gives access to older voices from past systems.</li>
+            <li><strong>Windows OneCore (Modern Voices)</strong>: the modern voices of Windows (the ones Narrator uses), offline, no key needed.</li>
+            <li>For SAPI5 and OneCore, choose the <strong>Voice</strong> and the <strong>Speed</strong> (50 to 200 %).</li>
+            <li><strong>Microsoft Azure Neural Voices (online, key required)</strong>: fields <strong>Speech resource key</strong> (from an Azure Speech resource), <strong>Region</strong> (for example <code>westeurope</code>), <strong>Voice</strong> (for example <code>fr-FR-DeniseNeural</code>), and optionally a <strong>Woman's voice</strong> and a <strong>Man's voice for translated dialogue</strong>.</li>
+            <li><strong>Google Cloud Text-to-Speech (online, key required)</strong>: fields <strong>API key</strong>, <strong>Voice</strong> (for example <code>fr-FR-Chirp3-HD-Aoede</code>), and optionally a <strong>Woman's voice</strong> and a <strong>Man's voice for translated dialogue</strong>.</li>
+        </ul>
+        <h3 id="dialogue-voices">Translated dialogue read with a voice matching the speaker</h3>
+        <p>When dialogue in another language is translated (audio subtitles) and <strong>Read translated dialogue with a voice matching the speaker (woman or man)</strong> is checked (the default), each translated line is read with a woman's or a man's voice. The app picks, in this order:</p>
+        <ol>
+            <li>with Azure or Google, the woman's or man's voice typed in that engine's fields;</li>
+            <li>otherwise the <strong>Woman's voice</strong> or <strong>Man's voice</strong> chosen below the checkbox: either "Installed Windows voice (automatic)", which takes a Windows voice of that gender in the description language, or a <strong>local Piper voice</strong>. Piper voices are free, high-quality voices that run offline on your computer. Choose one in the list (its size is shown), then press <strong>Download and listen</strong>: it is downloaded once (about 20 MB, checksum verified) and a sample is played. The list shows the Piper voices of the description language;</li>
+            <li>if none of these is available, the usual description voice.</li>
+        </ol>
+        <p>Which voice a speaker gets can be fixed per character (see <a href="#characters">Characters and Their Voices</a>) or per line in the editor with <span class="key">Ctrl</span> + <span class="key">G</span>.</p>
+
+        <h2 id="language">Interface Language and Description Language</h2>
+        <ul>
+            <li><strong>Interface language</strong> (Settings, General tab, "Application Language"): with "Auto-Detect on Startup" (the default), the app follows the Windows display language each time it starts, so changing the Windows language changes the app's language at the next start. Choose a language in the list to keep it fixed. A change applies after restarting the app. Available: Arabic, English, French, Italian, Portuguese, Russian, Spanish, Turkish, Ukrainian and Vietnamese.</li>
+            <li><strong>Description language</strong> (Settings, AI Settings tab, "Description Language"): the language the AI writes in. "Same as interface" (the default) follows the interface language; you can choose any other listed language, for example a French interface with English descriptions for an English lecture. The command line option <code>--lang</code> overrides it for one run.</li>
+        </ul>
+        <p>The prompt presets follow the interface language; the AI rules follow the description language (see <a href="#ai-rules">Customising the AI Rules</a>).</p>
+
+        <h2 id="advanced-settings">A Deep Dive into Settings</h2>
+        <p>The Settings window (<span class="key">Ctrl</span> + <span class="key">,</span>, or the Settings button of the main window or the player) has three tabs; press <span class="key">Ctrl</span> + <span class="key">Tab</span> to move between them and <span class="key">Tab</span> to move between the fields of a tab. At the bottom: <strong>Apply</strong> saves without closing (available once something changed), <strong>OK</strong> saves and closes, <strong>Cancel</strong> closes without saving.</p>
+
+        <h3 id="settings-general">General Tab</h3>
+        <ul>
+            <li><strong>YouTube Video Download Quality:</strong> Best Available, or 1080p down to 144p (default 360p). A lower quality downloads faster and is usually enough for the AI.</li>
+            <li><strong>Application Language (Requires Restart):</strong> see <a href="#language">Interface Language and Description Language</a>.</li>
+            <li><strong>Logging Level:</strong> Info (default), Debug (more detail, useful when reporting a problem) or Disabled. The log file is in <code>%LOCALAPPDATA%\OmniDescriber\logs</code>.</li>
+            <li><strong>Allow descriptions to interrupt current speech:</strong> When checked, a new description will start speaking immediately, even if the previous one hasn't finished. Unchecked (the default), each description finishes completely before the next one starts.</li>
+        </ul>
+
+        <h3 id="settings-ai">AI Settings Tab</h3>
+        <ul>
+            <li><strong>Gemini API Key</strong> and the <strong>Test key</strong> button: see <a href="#setup">Getting Started</a>.</li>
+            <li><strong>OpenAI API Key (for TTS):</strong> for the OpenAI voices only.</li>
+            <li><strong>Frame Rate for AI Analysis:</strong> Determines how many video frames per second are sent to the AI: original, 10, 5, 2 or 1 FPS. A lower value can significantly reduce API costs and help avoid processing limits, but may cause the AI to miss very fast actions.</li>
+            <li><strong>Description density when the player opens:</strong> essential descriptions only, standard (default), or all descriptions with details. The D key in the player changes it at any time without a new AI request.</li>
+            <li><strong>Description Language:</strong> see <a href="#language">Interface Language and Description Language</a>.</li>
+            <li><strong>Description Style:</strong> Objective (default), or Subjective, evocative.</li>
+            <li><strong>Focus On:</strong> General (default), Characters, Actions and instructions, Settings and atmosphere, or On-screen text.</li>
+            <li><strong>Maximum Words per Description:</strong> an upper limit on the length of each description (default 40); 0 means only the length of the pause limits it.</li>
+            <li><strong>Explicitation:</strong> Describe only what is visible; Describe and name (default), for example the place or a well-known object; or Describe, name and briefly explain.</li>
+            <li><strong>Images and screen described by</strong>, <strong>Video descriptions</strong>, <strong>Ollama vision model</strong>, <strong>Vision service address</strong>, <strong>Vision service model</strong> and <strong>Vision service API key</strong>: see <a href="#ai-backends">Choosing the AI</a>.</li>
+            <li><strong>Translate dialogue spoken in another language (audio subtitles):</strong> off by default; see <a href="#images">audio subtitles</a>.</li>
+            <li><strong>Check the descriptions with a second AI pass:</strong> on by default; a text-only check marks uncertain descriptions "Review" in the editor.</li>
+            <li><strong>Mention colours:</strong> on by default; uncheck it if colours mean nothing to you.</li>
+            <li><strong>Gemini Model:</strong> a read-only list of models (the default is shown in the label). <strong>Refresh model list</strong> (<span class="key">Alt</span> + <span class="key">R</span>) asks Google which models your key can use and fills the list.</li>
+            <li><strong>Thinking Level (Gemini 3 and later):</strong> Low (faster, cheaper), Medium (default) or High (slower, for complex films).</li>
+            <li><strong>Temperature:</strong> how free the AI is in its wording (default 0.3). Lower values give more literal, consistent descriptions. A value that is not a number is replaced by the default.</li>
+            <li><strong>Send Video Only (No Audio) to AI:</strong> not recommended: without the sound, the AI can no longer avoid speaking over dialogue.</li>
+            <li><strong>Disable Safety Filters (Use with caution):</strong> on by default. This lets the AI process content that it might otherwise flag as sensitive, but the output is still subject to the AI provider's core safety policies. You are responsible for how you use this feature.</li>
+            <li><strong>Enable Video Chunking for Long Videos:</strong> splits the video into parts, analyses them one after the other and joins the results. Recommended for long videos. <strong>Chunk Duration (seconds)</strong> (30 to 2400, default 600) is available only when chunking is checked.</li>
+            <li><strong>Detect pauses in the soundtrack before describing (recommended):</strong> on by default; finds the moments without speech so descriptions are placed there.</li>
+        </ul>
+
+        <h3 id="settings-audio">Audio Output Tab</h3>
+        <ul>
+            <li><strong>Text-to-Speech Engine</strong> and its fields (OpenAI voice preset, SAPI5/OneCore voice and speed, Azure or Google key, region and voices), and the <strong>Test Voice</strong> group: see <a href="#voices">Voices</a>.</li>
+            <li><strong>Pronunciation dictionary:</strong> one rule per line, such as <code>Hermione = her-my-oh-nee</code>, used by the app voice, the exports and the editor's listen button (whole words, upper or lower case).</li>
+            <li><strong>Audio description mode in the player:</strong> in the pauses (the video keeps playing, default), extended (the video pauses when a description does not fit), or on demand (Enter describes the current moment). M changes it in the player.</li>
+            <li><strong>Original audio lowered during descriptions (-dB):</strong> how much the video sound is lowered while a description is spoken, in the player and the exports (default 9 dB; 6 to 12 recommended; 0 = not lowered). Shift+Up and Shift+Down change it from the player.</li>
+            <li><strong>Audio description voice level in exports (dB):</strong> makes the description voice louder or quieter than the programme in exports (-20 to +20, 0 = unchanged).</li>
+            <li><strong>In exports, read on-screen text in a second, lower voice:</strong> on by default, so you can tell a read sign or title from a description.</li>
+            <li><strong>Read translated dialogue with a voice matching the speaker</strong>, <strong>Woman's voice</strong>, <strong>Man's voice</strong> and the <strong>Download and listen</strong> buttons: see <a href="#dialogue-voices">Translated dialogue</a>.</li>
+            <li><strong>Descriptions in the player:</strong> Screen reader (speech and braille, default); App voice above, prepared in advance (exact timing); or Braille only, the video waits for Enter.</li>
+            <li><strong>Also show descriptions in large text on the video</strong>, <strong>Text size on the video</strong> (16 to 120, default 40) and <strong>Text colour on the video</strong> (yellow, white or cyan): for low-vision viewers.</li>
+        </ul>
+
+        <h2 id="ai-rules">Customising the AI Rules</h2>
+        <p>Everything the app sends to the AI besides your prompt preset is written in a text file you can read and change: the 12 professional audio description rules (place descriptions in pauses, word budget, present tense, objectivity, characters, on-screen text, scene changes, do not describe what is heard, no censorship, no spoilers, adapt to the content, levels), the list of output fields the AI must return, and the lines added by the Style, Focus On, Explicitation, colours and audio subtitles settings.</p>
+        <ul>
+            <li>The built-in text is in <code>prompts\rules\en.json</code> inside the app folder (in the installed app, inside the <code>_internal</code> folder next to <code>OmniDescriber.exe</code>). Do not edit that file: it is replaced by updates.</li>
+            <li>To change the rules, create a file named <code>ad_rules.json</code> in your data folder, <code>%APPDATA%\Describer</code> (type this in the Windows Run dialog, <span class="key">Windows</span> + <span class="key">R</span>, to open it). Copy into it only the keys you want to change from <code>en.json</code>; a partial file is fine, the other keys keep their built-in value. Keep the placeholders in braces, such as <code>{language}</code> or <code>{max_words}</code>: the app fills them in. A key of the wrong type, or a file that is not valid JSON, is ignored (and noted in the log), so a typo cannot stop descriptions.</li>
+            <li>When the description language is not English, a translation <code>prompts\rules\&lt;language&gt;.json</code> (for example <code>fr.json</code>) is used if it exists; your <code>ad_rules.json</code> is applied on top of it.</li>
+            <li>The file is read again for each description: your edits apply to the next description without restarting the app.</li>
+            <li>File &gt; Reset Settings and Data, "Prompt presets", removes your <code>ad_rules.json</code> (a backup copy is kept), so the built-in rules apply again.</li>
+        </ul>
+
+        <h2 id="reset">Reset Settings and Data</h2>
+        <p><strong>File &gt; Reset Settings and Data...</strong> restores a clean state. Check what you want to reset, then press <strong>Reset</strong> (<span class="key">Alt</span> + <span class="key">R</span>) and confirm:</p>
+        <ul>
+            <li><strong>Settings (back to defaults)</strong> (<span class="key">Alt</span> + <span class="key">S</span>): all settings return to their default values. Your API keys (Gemini, OpenAI, vision service, Azure, Google) are kept...</li>
+            <li>...unless you also check <strong>Also forget my API keys</strong> (<span class="key">Alt</span> + <span class="key">A</span>), available only when Settings is checked.</li>
+            <li><strong>Prompt presets (custom presets are removed)</strong> (<span class="key">Alt</span> + <span class="key">P</span>): the default presets of every language come back, and your <code>ad_rules.json</code> is removed.</li>
+            <li><strong>OpenAI voice presets</strong> (<span class="key">Alt</span> + <span class="key">V</span>): back to the default presets.</li>
+            <li><strong>Downloaded voices and models</strong> (<span class="key">Alt</span> + <span class="key">D</span>): deletes the Piper voices and the speech-detection model; they are downloaded again when needed.</li>
+            <li><strong>Temporary files</strong> (<span class="key">Alt</span> + <span class="key">T</span>): deletes the app's own temporary folder (downloaded and processed videos), nothing else.</li>
+        </ul>
+        <p>Before resetting settings or presets, a backup copy of the files is saved in the <code>backups</code> subfolder of your data folder, in a folder named with the date and time, so a mistaken reset can be undone by copying the files back. Projects (.omniad) and exported files are never touched. Some settings, such as the interface language, apply after restarting the app.</p>
+
+        <h2 id="data-folder">Where Your Data Is Stored</h2>
+        <ul>
+            <li><strong>Data folder:</strong> <code>%APPDATA%\Describer</code>, that is <code>C:\Users\&lt;your name&gt;\AppData\Roaming\Describer</code>. It contains your encrypted settings and keys (<code>settings.dat2</code>), your prompt presets (<code>prompts.json</code>), your own AI rules (<code>ad_rules.json</code>, if you created it), and the <code>backups</code> folder.</li>
+            <li><strong>Downloaded voices and models, and the log:</strong> <code>%LOCALAPPDATA%\OmniDescriber</code> (Piper voices, the speech-detection model, and the <code>logs</code> folder).</li>
+            <li><strong>Temporary files:</strong> <code>%TEMP%\OmniDescriber</code>.</li>
+            <li><strong>Projects and exports:</strong> wherever you save them.</li>
+        </ul>
 
         <h2 id="bestpractices">Tips and Tricks for the Best Results</h2>
         <p>Creating great audio descriptions is an art. While AI is an effective assistant, you'll get the best results when you guide it correctly.</p>
-        
+
         <h3>The Power of Prompts: Your Director's Notes</h3>
         <div class="note">
-            The application has a set of <strong>core rules</strong> it teaches the AI (like not talking over dialogue). Think of the <strong>Prompt Preset</strong> area on the main screen as the place where you provide your <strong>director's notes</strong> for that specific video. A good note helps the AI focus on a particular style or detail.
+            The application has a set of <strong>core rules</strong> it teaches the AI (like not talking over dialogue; see <a href="#ai-rules">Customising the AI Rules</a>). Think of the <strong>Prompt Preset</strong> area on the main screen as the place where you provide your <strong>director's notes</strong> for that specific video. A good note helps the AI focus on a particular style or detail.
         </div>
-        
+
         <div class="best-practice">
             <strong>Tip: The "Focus on Names" Prompt</strong><br>
             In a video with many characters, you can create a custom prompt to prioritize name tracking:
             <code>Your highest priority for this video is to identify and use the correct character names as soon as they are spoken.</code>
         </div>
-        
+
         <div class="best-practice">
             <strong>Tip: The "Describe the Atmosphere" Prompt</strong><br>
             For visually rich films, guide the AI to focus on the environment:
             <code>Focus on describing the setting, atmosphere, and environmental details. Mention the lighting, colors, and the overall mood of the scene.</code>
         </div>
-        
-        <h4>What to Avoid in Prompts</h4>
+
+        <h3>What to Avoid in Prompts</h3>
         <p>Avoid instructions that contradict the AI's core principles (describing only visuals, not speaking over dialogue). Giving it a flawed instruction can cause poor results.</p>
         <ul>
             <li><strong>Bad Prompt:</strong> <code>"Tell me everything that happens."</code> This is too vague and can cause the AI to describe unimportant details.</li>
             <li><strong>Bad Prompt:</strong> <code>"Tell me what the characters are saying."</code> This will cause it to violate the "visuals only" rule.</li>
         </ul>
-        <p>In short: Use prompts to guide the AI's focus, not to change the fundamental rules of good audio description.</p>
+        <p>In short: Use prompts to guide the AI's focus, not to change the fundamental rules of good audio description. To change the rules themselves, use <code>ad_rules.json</code>.</p>
 
         <h2 id="faq">Frequently Asked Questions (FAQ)</h2>
         <p><strong>Q: My API keys are not working. What should I do?</strong><br>
-        A: First, double-check that you have copied the entire key correctly. For OpenAI, ensure you have set up a payment method in your account, as their TTS service is not free. For Gemini, ensure the API is enabled in your Google Cloud project.</p>
+        A: First, double-check that you have copied the entire key correctly, and use the <strong>Test key</strong> button next to the Gemini key. For OpenAI, ensure you have set up a payment method in your account, as their TTS service is not free. For Gemini, ensure the API is enabled in your Google Cloud project.</p>
 
         <p><strong>Q: The process failed with a "MAX_TOKENS" error. What does this mean?</strong><br>
-        A: This means your video is too long or visually complex for the AI to process in a single pass. This is a capacity limit, not a content error. The best solution is to go to <strong>Settings -> AI Settings</strong> and enable <strong>"Video Chunking"</strong>. This will automatically split the video into smaller, more manageable parts for the AI.</p>
+        A: This means your video is too long or visually complex for the AI to process in a single pass. This is a capacity limit, not a content error. The best solution is to go to <strong>Settings &gt; AI Settings</strong> and enable <strong>"Enable Video Chunking for Long Videos"</strong>. This will automatically split the video into smaller, more manageable parts for the AI.</p>
 
         <p><strong>Q: The AI failed to generate descriptions because of "Safety Filters". What can I do?</strong><br>
-        A: This is a known issue where the AI's safety system can be overly cautious. You have a few options to try, in order: 1) Go to <strong>Settings -> AI Settings</strong> and enable <strong>"Disable Safety Filters"</strong> (this often helps). 2) If that fails, try reducing the "Frame Rate for AI Analysis" to send less data to the AI. 3) As a last resort, you can use the "Gemini Model Override" setting and enter <code>gemini-4-argon</code>. This model is more powerful and may handle sensitive content better, but it is slower and may be more expensive if you are on a paid API tier.</p>
-        
+        A: This is a known issue where the AI's safety system can be overly cautious. You have a few options to try, in order: 1) Go to <strong>Settings &gt; AI Settings</strong> and make sure <strong>"Disable Safety Filters"</strong> is checked. 2) If that fails, try reducing the "Frame Rate for AI Analysis" to send less data to the AI. 3) As a last resort, choose a more powerful model in the <strong>Gemini Model</strong> list, such as <code>gemini-4-argon</code>. It may handle sensitive content better, but it is slower and may be more expensive if you are on a paid API tier.</p>
+
         <p><strong>Q: Some of my old voices are missing from the SAPI5 list. Where did they go?</strong><br>
-        A: Modern Windows systems are 64-bit, but many classic, beloved text-to-speech voices were 32-bit. In Settings under the "Audio Output" tab, you will see separate engine choices for "SAPI5 (64-bit)" and "SAPI5 (32-bit)". To access your older voices, simply select the 32-bit engine.</p>
+        A: Modern Windows systems are 64-bit, but many classic, beloved text-to-speech voices were 32-bit. In Settings under the "Audio Output" tab, you will see separate engine choices for "SAPI5 (64-bit Voices)" and "SAPI5 (32-bit Voices)". To access your older voices, simply select the 32-bit engine.</p>
 
         <p><strong>Q: Why does generating descriptions take so long?</strong><br>
-        A: The time depends on your video's length, your internet speed (for the upload to the AI), the selected frame rate, and the current load on the AI services. Using "Video Chunking" is highly recommended for long videos.</p>
+        A: The time depends on your video's length, your internet speed (for the upload to the AI), the selected frame rate, and the current load on the AI services. Using "Video Chunking" is highly recommended for long videos. You can stop at any time with Escape.</p>
+
+        <p><strong>Q: Ask More or Scene Explorer says "This feature uses Gemini".</strong><br>
+        A: "Video descriptions" is set to Ollama or an OpenAI-compatible service. These features only work with Gemini; switch back to Gemini in Settings &gt; AI Settings to use them.</p>
 
         <h2 id="shortcuts">Keyboard Shortcuts</h2>
+        <h3 id="shortcuts-main">In the main window</h3>
         <ul>
             <li><span class="key">Ctrl</span> + <span class="key">O</span>: Open Local Video</li>
             <li><span class="key">Ctrl</span> + <span class="key">U</span>: Open from Direct URL</li>
@@ -334,46 +544,70 @@
             <li><span class="key">Ctrl</span> + <span class="key">G</span>: Reuse the characters of an earlier episode (series)</li>
             <li><span class="key">Ctrl</span> + <span class="key">I</span>: Describe an image or PDF</li>
             <li><span class="key">Ctrl</span> + <span class="key">Alt</span> + <span class="key">Shift</span> + <span class="key">D</span>: Describe my screen, from any application</li>
-            <li><span class="key">Ctrl</span> + <span class="key">Alt</span> + <span class="key">Shift</span> + <span class="key">L</span>: Live screen description on or off</li>
+            <li><span class="key">Ctrl</span> + <span class="key">Alt</span> + <span class="key">Shift</span> + <span class="key">L</span>: Live screen description on or off, from any application</li>
+            <li><span class="key">Ctrl</span> + <span class="key">W</span>: Open the web platform</li>
             <li><span class="key">Ctrl</span> + <span class="key">,</span>: Open Settings</li>
             <li><span class="key">Escape</span>: Cancel the running generation</li>
             <li><span class="key">Ctrl</span> + <span class="key">Shift</span> + <span class="key">P</span>: Repeat the last progress message</li>
             <li><span class="key">F1</span>: View Help</li>
+            <li><span class="key">Alt</span> + <span class="key">F4</span>: Exit</li>
         </ul>
 
-        <h3>In the video player</h3>
-        <p>These keys work whatever control has the focus, except that the description and token text boxes keep their own reading keys, and the arrow keys keep adjusting the volume slider when it has the focus.</p>
+        <h3 id="shortcuts-player">In the video player</h3>
+        <p>These keys work whatever control has the focus, except that the description and token text boxes keep their own reading keys, and the arrow keys keep adjusting the volume slider when it has the focus. F1, Ctrl+S and Alt+Left / Alt+Right work everywhere.</p>
         <ul>
             <li><span class="key">Space</span>: Play / pause</li>
             <li><span class="key">Left</span> / <span class="key">Right</span>: Back / forward 5 seconds</li>
             <li><span class="key">Ctrl</span> + <span class="key">Left</span> / <span class="key">Right</span>: Back / forward 30 seconds</li>
             <li><span class="key">Alt</span> + <span class="key">Left</span> / <span class="key">Right</span>: Previous / next description (jumps to it and reads it)</li>
-            <li><span class="key">Up</span> / <span class="key">Down</span>: Video volume</li>
+            <li><span class="key">Up</span> / <span class="key">Down</span>: Video volume (by 5)</li>
             <li><span class="key">R</span>: Repeat the last description</li>
             <li><span class="key">T</span>: Announce the current time and total duration</li>
             <li><span class="key">A</span>: Turn audio description on or off</li>
             <li><span class="key">D</span>: Change description density: low (essential only), medium, high (all details). Applies instantly, no new AI request.</li>
             <li><span class="key">M</span>: Audio description mode: in the pauses (the video keeps playing), extended (the video pauses when a description is too long for its pause, then resumes), or on demand (nothing is read automatically)</li>
             <li><span class="key">Enter</span> (on-demand mode): pause and describe the current moment briefly; <span class="key">Shift</span> + <span class="key">Enter</span>: everything described in the last 15 seconds</li>
+            <li><span class="key">Enter</span> (braille only mode): resume the video after a description</li>
             <li><span class="key">Q</span>: Ask More about the current moment</li>
             <li><span class="key">S</span>: Explore the current scene</li>
             <li><span class="key">I</span>: Audio introduction: main characters, their look and the places, without spoilers, to hear before the programme. Written by the AI the first time, then saved with the project.</li>
+            <li><span class="key">Shift</span> + <span class="key">I</span>: Save the audio introduction as an MP3</li>
             <li><span class="key">V</span>: Quality report: number of descriptions, share within their word budget, descriptions over sound or marked uncertain by the AI check, words per second, longest stretch without description.</li>
             <li><span class="key">W</span>: What is on screen now, including visible text. The answer appears in the Ask More window, where you can keep asking follow-up questions: the AI remembers the conversation.</li>
             <li><span class="key">E</span>: Evaluate this audio description with the CSA 2020 questionnaire; the answers are saved with the project and can be exported as a report.</li>
-            <li><span class="key">Shift+Up / Shift+Down</span>: Lower the video more or less while a description is spoken (0 to 24 dB).</li>
+            <li><span class="key">L</span>: Next audio track of the video (for example an existing audio description)</li>
+            <li><span class="key">C</span>: Next subtitle track, or none</li>
+            <li><span class="key">Shift+Up / Shift+Down</span>: Lower the video more or less while a description is spoken (0 to 24 dB, by 3 dB).</li>
             <li><span class="key">?</span>: Same as F1: speak the list of player shortcuts.</li>
             <li><span class="key">Ctrl</span> + <span class="key">S</span>: Save the project (<span class="key">Ctrl</span> + <span class="key">Shift</span> + <span class="key">S</span>: Save As)</li>
             <li><span class="key">F1</span>: Speak this list of shortcuts</li>
         </ul>
-        <p>While a description is spoken, the video volume is lowered by 9 dB (never muted, adjustable in Settings &gt; Audio Output) and raised back smoothly, as recommended by professional audio description guides. A short sound plays before a description that reads on-screen text. During playback the descriptions are read by your screen reader, at its own volume; in exports their level is set in Settings &gt; Audio Output.</p>
-        <p>In the description editor, each entry shows its time, level and words per second; entries that are too long for their pause or that fall over dialogue start with "Review".</p>
+        <p>While a description is spoken, the video volume is lowered by 9 dB (never muted, adjustable in Settings &gt; Audio Output) and raised back smoothly, as recommended by professional audio description guides. A short sound plays before a description that reads on-screen text. In on-demand mode, a soft sound says that an essential description is available. With the screen reader mode, descriptions are read at your screen reader's own volume; in exports their level is set in Settings &gt; Audio Output.</p>
 
-        <p data-p7="1">More: <strong>File &gt; Recent Projects</strong> reopens one of the last projects; <strong>File &gt; Import Descriptions from SRT or WebVTT</strong> opens an existing description script with its video, to listen to it, edit it or export it. In the player, <span class="key">L</span> chooses the next audio track of the video (for example an existing audio description) and <span class="key">C</span> the next subtitle track or none; in on-demand mode a soft sound says that an essential description is available. In the description editor, <span class="key">Ctrl</span> + <span class="key">R</span> plays the text with the export voice.</p>
+        <h3 id="shortcuts-editor">In the description editor</h3>
+        <ul>
+            <li><span class="key">F8</span> / <span class="key">Shift</span> + <span class="key">F8</span>: Next / previous description to review</li>
+            <li><span class="key">Ctrl</span> + <span class="key">P</span>: Play or pause the video</li>
+            <li><span class="key">Alt</span> + <span class="key">Left</span> / <span class="key">Right</span>: Move the video 1 second</li>
+            <li><span class="key">Ctrl</span> + <span class="key">[</span> / <span class="key">Ctrl</span> + <span class="key">]</span>: Set the start / end to the player position</li>
+            <li><span class="key">Ctrl</span> + <span class="key">R</span>: Hear the text with the export voice</li>
+            <li><span class="key">Ctrl</span> + <span class="key">G</span>: Change the speaker's voice of a translated line (unknown, woman, man)</li>
+            <li><span class="key">Ctrl</span> + <span class="key">S</span>: Save changes</li>
+            <li><span class="key">Ctrl</span> + <span class="key">Z</span> / <span class="key">Ctrl</span> + <span class="key">Y</span> (outside text fields): Undo / redo</li>
+            <li><span class="key">Delete</span> in the list: Delete the description</li>
+            <li><span class="key">Escape</span>: Close (asks to save unsaved changes)</li>
+        </ul>
+
+        <h3 id="shortcuts-dialogs">In the other dialogs</h3>
+        <ul>
+            <li>Characters and Manage Prompt Presets: <span class="key">Enter</span> on an item edits it; in Characters, <span class="key">Delete</span> removes the selected character.</li>
+            <li>Settings and Evaluation: <span class="key">Ctrl</span> + <span class="key">Tab</span> / <span class="key">Ctrl</span> + <span class="key">Shift</span> + <span class="key">Tab</span> switch tabs.</li>
+            <li>Every dialog: <span class="key">Escape</span> closes or cancels; underlined letters are reached with <span class="key">Alt</span> plus the letter, as given in this guide.</li>
+        </ul>
 
         <h2 id="contact">Acknowledgments, Contact, and Contributors</h2>
         <p>Thank you so much for using Omni Describer! This application is a reflection of my desire to make visual media more accessible and enjoyable for everyone. Having users like you use this tool and provide feedback is the greatest motivation to continue developing it.</p>
-        
+
         <h3>Feedback and Support</h3>
         <p>Do you have a question, a bug report, or an idea for a new feature? I would love to hear from you! The best way to reach me is by email. Your feedback is invaluable for making Omni Describer even better.</p>
         <ul>
