@@ -46,6 +46,10 @@ Default prompt presets are plain JSON, one file per language: `audio_describer/p
 and translate the values; no code change is needed. A language without a file gets the English presets.
 The app follows the Windows display language unless one is chosen in Settings.
 
+The audio description rules and every other text sent to the AI are in `audio_describer/prompts/rules/en.json`.
+`rules/<lang>.json` (the description language) and the user's own `ad_rules.json` in the app's data folder
+override it key by key, so a partial file is fine. Keep the `{placeholders}`; the app fills them in.
+
 ## Building a release executable
 
 The main app is built with PyInstaller via `build.spec` / `build.bat`. Two

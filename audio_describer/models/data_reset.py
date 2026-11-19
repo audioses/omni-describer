@@ -58,9 +58,14 @@ def reset_settings(keep_api_keys=True):
 
 
 def reset_prompts():
-    """Prompt presets back to the defaults of every language (custom presets removed)."""
+    """Prompt presets back to the defaults of every language (custom presets removed), and the user's
+    own AD rules file (ad_rules.json) removed so the built-in rules apply again."""
     from . import prompt_model
-    _backup([prompt_model._get_prompts_file_path()])
+    from ..core.prompts import USER_RULES_FILE
+    user_rules = os.path.join(config_model.APP_DATA_DIR, USER_RULES_FILE)
+    _backup([prompt_model._get_prompts_file_path(), user_rules])
+    if os.path.isfile(user_rules):
+        os.remove(user_rules)
     prompt_model._prompts_cache.clear()
     prompt_model._prompts_cache.update(copy.deepcopy(prompt_model.DEFAULT_PROMPTS))
     if not prompt_model.save_prompts():

@@ -987,6 +987,6 @@ def _parse_unified_response(json_string, status_update_callback):
 
 # Prompt building lives in prompts.py; re-exported for existing callers (ollama_video, UI).
 from .prompts import (  # noqa: E402,F401
-    CORE_DIRECTIVES, EMPHASIS_INSTRUCTIONS, EXPLICITATION_INSTRUCTIONS, MAX_CUTS_IN_PROMPT, MAX_WINDOWS_IN_PROMPT, MIN_WINDOW_SEC,
+    MAX_CUTS_IN_PROMPT, MAX_WINDOWS_IN_PROMPT, MIN_WINDOW_SEC, core_directives, load_rules, system_prompt,
     _build_unified_prompts, _format_cuts, _format_windows, _personalisation_lines, description_language_name,
 )

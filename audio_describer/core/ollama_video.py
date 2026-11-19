@@ -18,7 +18,7 @@ from ..models import config_model
 from ..utils.logger import app_logger
 from ..utils.system_utils import run_command
 from . import audio_describer as ad
-from . import timing, video_processor
+from . import prompts, timing, video_processor
 from .gemini_helpers import GeminiAPIError
 
 SEGMENT_SEC = 25
@@ -43,13 +43,7 @@ SCHEMA = {
     "required": ["audio_descriptions"],
 }
 
-SYSTEM_PROMPT = """
-You are an expert professional Audio Describer. You receive still frames sampled from one part of a video, in order, with their times. Return a single JSON object.
-
-**OUTPUT FIELDS:**
-- "audio_descriptions": "start_sec" (seconds from the start of the full video, inside the part you are given), "description_text", "level" (1, 2 or 3) and "on_screen_text" (true when it reads on-screen text). Describe only what the frames show; you cannot hear the soundtrack.
-- "character_glossary": only characters not already known: "id" (stable descriptive identifier, e.g. "man_in_red_shirt"), "description" (physical description), "name" (only if shown on screen, else null).
-""" + ad.CORE_DIRECTIVES
+# System prompt text: prompts/rules/en.json ("system_frames"), built at call time so edits apply at once.
 
 
 def _read(request, timeout):
@@ -101,7 +95,7 @@ def _extract_frames(video_path, start, end):
 
 
 def _ask_ollama(model, prompt, images):
-    body = json.dumps({"model": model, "system": SYSTEM_PROMPT, "prompt": prompt, "images": images,
+    body = json.dumps({"model": model, "system": prompts.system_prompt("frames"), "prompt": prompt, "images": images,
                        "format": SCHEMA, "stream": False, "options": {"temperature": 0.2}}).encode("utf-8")
     request = urllib.request.Request(ad.OLLAMA_URL, data=body, headers={"Content-Type": "application/json"})
     try:
@@ -198,7 +192,7 @@ def describe_video_locally(video_path, user_prompt, status, cancel_event, initia
                    + "\n".join(f"- Image {i}: {t:.1f} s ({timing.format_vtt_time(t)})" for i, (t, _b) in enumerate(frames, 1))
                    + f"\nGive every \"start_sec\" between {start:.1f} and {end:.1f}. Reply with the JSON object only.")
         images = [b for _t, b in frames]
-        raw = (openai_vision.chat(SYSTEM_PROMPT, prompt, images, json_output=True) if remote
+        raw = (openai_vision.chat(prompts.system_prompt("frames"), prompt, images, json_output=True) if remote
                else _ask_ollama(model, prompt, images))
         new, new_glossary = _parse(raw, start, end, quiet_windows)
         ad._merge_glossary(glossary, new_glossary)
