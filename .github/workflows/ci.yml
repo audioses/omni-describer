@@ -23,3 +23,9 @@ jobs:
 
       - name: Import config (no heavy deps)
         run: python -c "import audio_describer.config; print(audio_describer.config.APP_VERSION)"
+
+      - name: Unit tests (pure functions, no wx needed)
+        run: python -m unittest discover -s tests -v
+
+      - name: Project file self-check
+        run: python -m audio_describer.models.project_model

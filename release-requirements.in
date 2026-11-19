@@ -1,0 +1,3 @@
+-r audio_describer/requirements.txt
+# PyInstaller 6: the exe, updater.exe and sapi32.exe at the top, everything else in _internal/.
+pyinstaller>=6,<7

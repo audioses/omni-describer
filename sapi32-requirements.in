@@ -1,0 +1,5 @@
+# 32-bit SAPI5 helper (sapi32.py), built with x86 Python in release.yml.
+pyttsx3
+pyinstaller<6
+# PyInstaller 5 imports pkg_resources, removed from setuptools 81.
+setuptools<81

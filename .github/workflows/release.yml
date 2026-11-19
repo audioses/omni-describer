@@ -92,11 +92,11 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r audio_describer/requirements.txt
-          # Pin to PyInstaller 5.x: v6 nests bundled data in _internal/, but the app
-          # resolves doc/notifs/locale/bin next to the exe. v5's flat onedir layout
-          # is what v2.0 shipped with and what the runtime expects.
-          pip install "pyinstaller<6"
+          # Exact versions + hashes (audit 5.2). requirements.lock is compiled from
+          # release-requirements.in (app deps + PyInstaller 6.x: exe, updater.exe and
+          # sapi32.exe at the top, libraries and data in _internal/). Regenerate, on Windows x64 Python 3.11:
+          #   uvx --python cpython-3.11-windows-x86_64 --from pip-tools pip-compile --generate-hashes --allow-unsafe --strip-extras --no-emit-index-url -o requirements.lock release-requirements.in
+          pip install --require-hashes -r requirements.lock
 
       # build.spec bundles audio_describer/bin, gitignored and absent in CI, so
       # fetch every runtime dependency into it: yt-dlp (standalone, so `yt-dlp -U`
@@ -107,12 +107,19 @@ jobs:
         run: |
           $ErrorActionPreference = 'Stop'
           New-Item -ItemType Directory -Force audio_describer/bin | Out-Null
+          # Pinned versions + SHA-256 (audit 5.2), each cross-checked against the
+          # publisher's own sum. To bump: change URL and hash together.
+          function Get-Verified($url, $out, $sha256) {
+            Invoke-WebRequest $url -OutFile $out
+            $actual = (Get-FileHash $out -Algorithm SHA256).Hash
+            if ($actual -ne $sha256) { throw "SHA-256 mismatch for $url`n expected $sha256`n got      $actual" }
+          }
 
-          # yt-dlp
-          Invoke-WebRequest https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe -OutFile audio_describer/bin/yt-dlp.exe
+          # yt-dlp (bundled copy self-updates at run time with `yt-dlp -U`)
+          Get-Verified https://github.com/yt-dlp/yt-dlp/releases/download/2026.10.26/yt-dlp.exe audio_describer/bin/yt-dlp.exe F5389D3698ECDE4EF06F4E6B1CE0294FE9AC1396228C8990B8D3416D6D177A7D
 
-          # FFmpeg + ffprobe (gyan.dev "release-essentials" is the stable latest URL)
-          Invoke-WebRequest https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip -OutFile ffmpeg.zip
+          # FFmpeg + ffprobe (gyan.dev essentials build, versioned GitHub mirror)
+          Get-Verified https://github.com/GyanD/codexffmpeg/releases/download/9.0.2/ffmpeg-9.0.2-essentials_build.zip ffmpeg.zip 60F467265B1E312373DBCD92200C2618A74850F98D3D078E94296BB3FA2047BA
           Expand-Archive ffmpeg.zip -DestinationPath ffmpeg_tmp -Force
           Copy-Item (Get-ChildItem ffmpeg_tmp -Recurse -Filter ffmpeg.exe)[0].FullName  audio_describer/bin/ffmpeg.exe
           Copy-Item (Get-ChildItem ffmpeg_tmp -Recurse -Filter ffprobe.exe)[0].FullName audio_describer/bin/ffprobe.exe
@@ -120,8 +127,7 @@ jobs:
           # VLC runtime -> bin/vlc (libvlc.dll + libvlccore.dll + plugins/).
           # Use the osuosl mirror directly: get.videolan.org 302-redirects to a
           # rotating mirror that sometimes returns an HTML page instead of the zip.
-          Invoke-WebRequest https://ftp.osuosl.org/pub/videolan/vlc/3.0.21/win64/vlc-3.0.21-win64.zip -OutFile vlc.zip
-          if ((Get-Item vlc.zip).Length -lt 1MB) { throw "vlc.zip download failed (got $((Get-Item vlc.zip).Length) bytes)" }
+          Get-Verified https://ftp.osuosl.org/pub/videolan/vlc/3.0.21/win64/vlc-3.0.21-win64.zip vlc.zip A0B7EC02B50ADF6417EED014FB8DF50AF39690505A4225B85B3DC2ED17D14843
           Expand-Archive vlc.zip -DestinationPath vlc_tmp -Force
           $vlcSrc = (Get-ChildItem vlc_tmp -Directory)[0].FullName
           New-Item -ItemType Directory -Force audio_describer/bin/vlc | Out-Null
@@ -142,9 +148,22 @@ jobs:
       - name: Build main app
         run: pyinstaller build.spec
 
+      # sapi32.exe exists to reach 32-bit SAPI5 voices (Eloquence etc.), so it
+      # MUST be built by a 32-bit interpreter; the default setup-python is x64 (B1).
+      - uses: actions/setup-python@v6
+        id: py32
+        with:
+          python-version: '3.11'
+          architecture: 'x86'
+          update-environment: false
+
       - name: Build helper executables
         run: |
-          pyinstaller --onefile sapi32.py
+          # Hashed lock compiled with x86 Python from sapi32-requirements.in:
+          #   uvx --python cpython-3.11-windows-x86 --from pip-tools pip-compile --generate-hashes --allow-unsafe --strip-extras --no-emit-index-url -o sapi32-requirements.lock sapi32-requirements.in
+          & "${{ steps.py32.outputs.python-path }}" -m pip install --require-hashes -r sapi32-requirements.lock
+          & "${{ steps.py32.outputs.python-path }}" -m PyInstaller --onefile sapi32.py
+          & "${{ steps.py32.outputs.python-path }}" -c "import struct,sys; sys.exit(0 if struct.calcsize('P')==4 else 1)"
           pyinstaller --onefile updater.py
           Copy-Item dist/sapi32.exe  dist/omni_describer_dist/ -Force
           Copy-Item dist/updater.exe dist/omni_describer_dist/ -Force
@@ -156,15 +175,26 @@ jobs:
           Compress-Archive -Path dist/omni_describer_dist/* -DestinationPath omni_describer.zip
           if (-not (Test-Path omni_describer.zip)) { throw "Package not produced" }
 
+      # Writes <asset>.sig, checked by the app before installing (audit 5.2).
+      # Fails the release if config.UPDATE_SIGNING_PUBLIC_KEY is set but the
+      # secret is missing or doesn't match; no-op while the key is empty.
+      - name: Sign update assets
+        env:
+          UPDATE_SIGNING_KEY: ${{ secrets.UPDATE_SIGNING_KEY }}
+        run: python -m audio_describer.utils.update_signature sign omni_describer.zip dist/updater.exe
+
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ steps.version.outputs.tag }}
           name: Omni Describer ${{ steps.version.outputs.tag }}
+          # *.sig only exist once signing is configured; the globs may match nothing.
           files: |
             omni_describer.zip
             dist/updater.exe
-          fail_on_unmatched_files: true
+            omni_describer.zip.sig
+            dist/updater.exe.sig
+          fail_on_unmatched_files: false
           generate_release_notes: true
           make_latest: true
           body: |

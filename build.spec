@@ -14,18 +14,17 @@ genai_datas, genai_binaries, genai_hiddenimports = collect_all('google.genai')
 # the distribution is 'google-genai'. Add it explicitly so importlib.metadata
 # lookups resolve in the frozen build.
 genai_datas += copy_metadata('google-genai')
+# Local Piper voices: sherpa-onnx ships native DLLs (and onnxruntime) inside its package.
+sherpa_datas, sherpa_binaries, sherpa_hiddenimports = collect_all('sherpa_onnx')
 
 # Part 1: Gather all the necessary Python modules.
 hidden_imports = [
     *genai_hiddenimports,
-    *collect_submodules('google.generativeai'),
-    *collect_submodules('google.api_core'),
+    *sherpa_hiddenimports,
     *collect_submodules('google.auth'),
     *collect_submodules('cryptography'),
     'pyttsx3.drivers.sapi5',
-    'pygame._sdl2.font',
     'openai',
-    'grpc._cython',
     'accessible_output2',
     'vlc',  # python-vlc binding; imported lazily inside a try/except so add it
             # explicitly. The libvlc runtime itself is bundled into bin/vlc by CI.
@@ -34,6 +33,7 @@ hidden_imports = [
 # Part 2: Gather all the necessary data files and binaries.
 added_files = [
     *genai_datas,
+    *sherpa_datas,
     ('audio_describer/bin', 'bin'),
     ('audio_describer/notifs', 'notifs'),
     ('audio_describer/doc', 'doc'),
@@ -44,24 +44,34 @@ added_files = [
 a = Analysis(
     ['run_app.py'],
     pathex=[],
-    binaries=genai_binaries,
+    binaries=genai_binaries + sherpa_binaries,
     datas=added_files,
     hiddenimports=hidden_imports,
     hookspath=[],
     runtime_hooks=[],
     excludes=[
         'torch', 'torchaudio', 'torchvision',
-        'numpy', 'pandas', 'scipy', 'sklearn',
+        'pandas', 'scipy', 'sklearn',  # numpy kept: onnxruntime (Silero VAD) needs it
         'IPython', 'Cython', 'astroid', 'pylint',
         'av', 'matplotlib', 'jupyter',
     ],
-    win_no_prefer_redirects=False,
-    win_private_assemblies=False,
-    cipher=None,  # Remove encryption here; handled by CLI
     noarchive=False,
 )
 
-pyz = PYZ(a.pure, a.zipped_data, cipher=None)
+# One recent, consistent Microsoft C++ runtime. Some packages ship a 2020 msvcp140.dll
+# (14.27); with it onnxruntime (Silero pause detection) crashed the app with an access
+# violation in MSVCP140.dll. Take the whole set from System32 instead (14.4x or newer).
+import os
+VC_RUNTIME = ('msvcp140.dll', 'msvcp140_1.dll', 'msvcp140_2.dll', 'vcruntime140.dll', 'vcruntime140_1.dll',
+              'concrt140.dll')
+system32 = os.path.join(os.environ.get('SystemRoot', r'C:\Windows'), 'System32')
+a.binaries = [b for b in a.binaries if b[0].lower() not in VC_RUNTIME]
+for name in VC_RUNTIME:
+    path = os.path.join(system32, name)
+    if os.path.exists(path):
+        a.binaries.append((name, path, 'BINARY'))
+
+pyz = PYZ(a.pure)
 
 # Part 4: Configure the final executable.
 exe = EXE(
@@ -73,7 +83,7 @@ exe = EXE(
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
-    upx=True,
+    upx=False,  # UPX packing triggers antivirus false positives
     console=False,
     disable_windowed_traceback=False,
     argv_emulation=False,
@@ -86,10 +96,9 @@ exe = EXE(
 coll = COLLECT(
     exe,
     a.binaries,
-    a.zipfiles,
     a.datas,
     strip=False,
-    upx=True,
+    upx=False,  # UPX packing triggers antivirus false positives
     upx_exclude=[],
-    name='omni_describer_dist',
+    name='omni_describer_dist',  # PyInstaller 6: libraries and data go to _internal/
 )
