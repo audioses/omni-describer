@@ -25,25 +25,6 @@ def _initialize_mixer():
         app_logger.error(f"Pygame mixer could not be initialized: {e}")
         MIXER_INITIALIZED = False
 
-# NEW FUNCTION: Allows safe re-initialization after pygame.quit()
-def reinitialize_mixer():
-    """
-    Re-initializes the pygame mixer if it has been shut down.
-    This is necessary after another part of the app calls pygame.quit().
-    """
-    global MIXER_INITIALIZED
-    if not LIBRARIES_AVAILABLE:
-        return
-
-    # pygame.mixer.get_init() returns None if it's not initialized
-    if not pygame.mixer.get_init():
-        app_logger.info("SoundPlayer: Mixer was not initialized. Attempting to re-initialize...")
-        MIXER_INITIALIZED = False # Force _initialize_mixer to run
-        _initialize_mixer()
-    else:
-        app_logger.info("SoundPlayer: Mixer is already initialized.")
-
-
 def _play_in_thread(sound_path):
     """Internal function to play a sound file in a separate thread."""
     try:
@@ -53,6 +34,44 @@ def _play_in_thread(sound_path):
             pygame.time.delay(100)
     except Exception as e:
         app_logger.error(f"Failed to play sound: {e}", exc_info=True)
+
+def play_panned(sound_identifier: str, pan: float):
+    """Play a notification sound placed in the stereo field (-1 left .. 1 right)."""
+    if not MIXER_INITIALIZED:
+        return
+    sound_path = os.path.join(config.get_notifs_dir(), sound_identifier)
+    try:
+        channel = pygame.mixer.Sound(sound_path).play()
+        if channel:
+            pan = max(-1.0, min(1.0, float(pan)))
+            channel.set_volume(min(1.0, 1.0 - pan), min(1.0, 1.0 + pan))
+    except Exception as e:
+        app_logger.error(f"Failed to play panned sound: {e}")
+
+
+_voice_channel = None
+
+
+def play_voice(path, volume=1.0):
+    """Player app voice: one clip at a time, a new one cuts the previous. Returns False if not played."""
+    global _voice_channel
+    if not MIXER_INITIALIZED:
+        return False
+    try:
+        stop_voice()
+        _voice_channel = pygame.mixer.Sound(path).play()
+        if _voice_channel:
+            _voice_channel.set_volume(max(0.0, min(1.0, volume)))
+        return _voice_channel is not None
+    except Exception as e:
+        app_logger.error(f"Failed to play voice clip: {e}")
+        return False
+
+
+def stop_voice():
+    if _voice_channel:
+        _voice_channel.stop()
+
 
 def play(sound_identifier: str, is_full_path=False):
     """

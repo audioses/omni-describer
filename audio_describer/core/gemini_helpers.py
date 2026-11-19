@@ -1,6 +1,5 @@
 # audio_describer/core/gemini_helpers.py
 import sys
-import importlib.util
 import json
 import os
 import re
@@ -10,7 +9,9 @@ import time
 from typing import Any, Union
 
 from ..i18n_setup import _
+from .. import app_state
 from .. import config
+from .. import config as config_module  # generate_content_with_retry has a "config" parameter
 from ..utils.logger import app_logger
 from ..models import config_model
 
@@ -18,29 +19,14 @@ from ..models import config_model
 MAX_RETRIES = 3
 INITIAL_RETRY_DELAY_SEC = 5
 MAX_RETRY_DELAY_SEC = 60
+OVERLOAD_MAX_RETRIES = 4        # 503 "high demand": 15+30+60 s on the chosen model...
+OVERLOAD_INITIAL_DELAY_SEC = 15
+FALLBACK_MAX_RETRIES = 2        # ...then each fallback model gets 2 tries (15 s apart)
 
-# --- Enhanced Debugging for PyInstaller and google-generativeai ---
-app_logger.debug(f"Python sys.path for SDK import: {sys.path}")
-google_spec = importlib.util.find_spec("google")
-if google_spec:
-    app_logger.debug(f"Found 'google' namespace package. Search locations: {google_spec.submodule_search_locations}")
-else:
-    app_logger.warning("Could not find spec for the 'google' namespace package.")
-
-genai_spec = importlib.util.find_spec("google.generativeai")
-if genai_spec:
-    app_logger.debug(f"Found 'google.generativeai' spec before import attempt. Origin: {genai_spec.origin}")
-else:
-    app_logger.warning("Could not find spec for 'google.generativeai' before import attempt. This is a likely indicator of a packaging issue.")
-# --- End Enhanced Debugging ---
-
-
-# --- Lazy-loading Gemini SDK ---
+# --- Lazy-loading Gemini SDK (google-genai only; the legacy google-generativeai SDK is no longer used) ---
 genai = None
 types = None
-HarmCategory = None
-HarmBlockThreshold = None
-google_api_exceptions = None
+genai_errors = None
 GEMINI_SDK_AVAILABLE = False
 _sdk_import_lock = threading.Lock()
 
@@ -49,8 +35,8 @@ def _lazy_import_gemini_sdk():
     Imports the Gemini SDK modules when first needed.
     This defers potential startup crashes from native libraries until they are actually used.
     """
-    global genai, types, HarmCategory, HarmBlockThreshold, google_api_exceptions, GEMINI_SDK_AVAILABLE
-    
+    global genai, types, genai_errors, GEMINI_SDK_AVAILABLE
+
     if GEMINI_SDK_AVAILABLE:
         return
 
@@ -62,18 +48,15 @@ def _lazy_import_gemini_sdk():
         try:
             from google import genai as genai_module
             from google.genai import types as types_module
-            from google.generativeai.types import HarmCategory as HarmCategory_module, HarmBlockThreshold as HarmBlockThreshold_module
-            import google.api_core.exceptions as google_api_exceptions_module
+            from google.genai import errors as errors_module
 
             genai = genai_module
             types = types_module
-            HarmCategory = HarmCategory_module
-            HarmBlockThreshold = HarmBlockThreshold_module
-            google_api_exceptions = google_api_exceptions_module
-            
+            genai_errors = errors_module
+
             GEMINI_SDK_AVAILABLE = True
             app_logger.info(f"Successfully lazy-imported Gemini SDK. Location: {genai.__file__}")
-        
+
         except ImportError as e:
             GEMINI_SDK_AVAILABLE = False
             app_logger.error("Failed to lazy-import Gemini SDK: %s", e, exc_info=True)
@@ -130,29 +113,79 @@ def get_gemini_client():
         app_logger.error("Failed to initialize Gemini Client: %s", e, exc_info=True)
         raise GeminiAPIError(_("Failed to initialize Gemini Client: %s") % e)
 
+_SAFETY_CATEGORIES = (
+    "HARM_CATEGORY_HARASSMENT",
+    "HARM_CATEGORY_HATE_SPEECH",
+    "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+    "HARM_CATEGORY_DANGEROUS_CONTENT",
+)
+
 def build_safety_settings():
-    """Constructs the safety_settings list for the Gemini API call."""
+    """Constructs the safety_settings list for the Gemini API call.
+
+    AD guides (ACB, Netflix, Ofcom) require uncensored, factual description, so
+    filters are off by default."""
     _lazy_import_gemini_sdk()
-    disable_safety = config_model.get_setting("gemini_disable_safety_block_none")
-
-    if disable_safety:
-        app_logger.warning("Disabling all Gemini safety filters as per user setting.")
-        return [
-            {'category': HarmCategory.HARM_CATEGORY_HARASSMENT.name, 'threshold': HarmBlockThreshold.BLOCK_NONE.name},
-            {'category': HarmCategory.HARM_CATEGORY_HATE_SPEECH.name, 'threshold': HarmBlockThreshold.BLOCK_NONE.name},
-            {'category': HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT.name, 'threshold': HarmBlockThreshold.BLOCK_NONE.name},
-            {'category': HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT.name, 'threshold': HarmBlockThreshold.BLOCK_NONE.name},
-        ]
-    else:
+    if not config_model.get_setting("gemini_disable_safety_block_none"):
         return None
+    app_logger.warning("Disabling all Gemini safety filters as per user setting.")
+    return [types.SafetySetting(category=c, threshold="BLOCK_NONE") for c in _SAFETY_CATEGORIES]
 
-def build_generation_config(system_instruction_text=None, is_json_response=False, enable_thinking=False):
+
+def get_model_name():
+    """User override from settings, else the default model."""
+    override = config_model.get_setting("gemini_model_override")
+    return override.strip() if override and override.strip() else config.GEMINI_MODEL_NAME
+
+
+def build_thinking_config(model_name, enable_thinking):
+    """Model-aware thinking config (B8).
+
+    - Gemini 3.x / 4.x: thinking_level ('low'|'medium'|'high'); thinking cannot be
+      fully disabled (3.8 Flash rejects 'minimal'), so 'low' when not wanted.
+    - Gemini 2.5: thinking_budget (-1 = automatic, 0 = off where allowed).
+    - Others: no config.
+    Thoughts are never returned (include_thoughts=False): they cost output tokens.
+    """
+    _lazy_import_gemini_sdk()
+    name = (model_name or "").lower().removeprefix("models/")
+    m = re.match(r"gemini-(\d+)(?:\.(\d+))?", name)
+    if not m:
+        return None
+    major = int(m.group(1))
+    if major >= 3:
+        level = config_model.get_setting("gemini_thinking_level") or "medium"
+        return types.ThinkingConfig(include_thoughts=False, thinking_level=level if enable_thinking else "low")
+    if major == 2 and m.group(2) == "5":
+        return types.ThinkingConfig(include_thoughts=False, thinking_budget=-1 if enable_thinking else 0)
+    return None
+
+
+def list_generation_models(client=None):
+    """Model codes usable with generate_content, from client.models.list() (newest first-ish)."""
+    client = client or get_gemini_client()
+    names = []
+    for model in client.models.list():
+        actions = getattr(model, "supported_actions", None) or []
+        name = (getattr(model, "name", "") or "").removeprefix("models/")
+        if "generateContent" in actions and name.startswith("gemini") and not re.search(r"(tts|image|embedding|live|audio)", name):
+            names.append(name)
+    return sorted(set(names), reverse=True)
+
+
+def build_generation_config(system_instruction_text=None, is_json_response=False, enable_thinking=False, response_schema=None, model_name=None):
     """Builds the generation config for the API call."""
     _lazy_import_gemini_sdk()
     
     config_params = {}
+    model_name = model_name or get_model_name()
+    m = re.match(r"gemini-(\d+)", (model_name or "").lower().removeprefix("models/"))
+    # Gemini 3+: Google says keep the default temperature (below 1.0 can loop) and 3.6+ ignores it.
+    send_temperature = not (m and int(m.group(1)) >= 3)
 
-    if (temp_str := config_model.get_setting("gemini_temperature")) is not None:
+    if not send_temperature:
+        pass
+    elif (temp_str := config_model.get_setting("gemini_temperature")) is not None:
         try:
             config_params["temperature"] = float(temp_str)
         except ValueError:
@@ -161,20 +194,15 @@ def build_generation_config(system_instruction_text=None, is_json_response=False
     else:
         config_params["temperature"] = 0.2
 
-    if enable_thinking:
-        model_name_to_use = config_model.get_setting("gemini_model_override") or config.GEMINI_MODEL_NAME
-        if "1.5" in model_name_to_use or "2.5" in model_name_to_use:
-            app_logger.info(f"Model '{model_name_to_use}' supports thinking. Enabling thinking_config.")
-            thinking_config = types.ThinkingConfig(
-                include_thoughts=True,
-                thinking_budget=-1
-            )
-            config_params["thinking_config"] = thinking_config
-        else:
-            app_logger.info(f"Model '{model_name_to_use}' may not support thinking. Disabling thinking_config.")
+    thinking_config = build_thinking_config(model_name, enable_thinking)
+    if thinking_config is not None:
+        config_params["thinking_config"] = thinking_config
 
     if is_json_response:
         config_params["response_mime_type"] = "application/json"
+        if response_schema:
+            # Structured output: the API guarantees schema-valid JSON (no markdown fences to strip).
+            config_params["response_json_schema"] = response_schema
     
     safety_settings = build_safety_settings()
     if safety_settings:
@@ -207,55 +235,87 @@ def log_token_usage(context, response):
         app_logger.warning(f"Token usage metadata not found in response for {context}.")
     return usage_dict
 
-def generate_content_with_retry(client, model, contents, config, status_callback=None):
-    """Calls client.models.generate_content with exponential backoff on rate-limit errors.
+def _transient_kind(e):
+    """'rate_limit' (429, quota), 'overloaded' (500/503/504, high demand) or None (not retryable)."""
+    code = getattr(e, "code", None) if (genai_errors is not None and isinstance(e, genai_errors.APIError)) else None
+    text = str(e).lower()
+    if code == 429 or any(k in text for k in ("429", "resource exhausted", "resource_exhausted", "rate limit", "quota")):
+        return "rate_limit"
+    if code in (500, 503, 504) or any(k in text for k in ("503", "unavailable", "overloaded", "high demand", "504",
+                                                          "deadline exceeded")):
+        return "overloaded"
+    return None
 
-    Retries on HTTP 429 (ResourceExhausted / rate limit) and 503 (service unavailable).
+
+def generate_content_with_retry(client, model, contents, config, status_callback=None):
+    """Calls client.models.generate_content with exponential backoff on transient errors.
+
+    Retries on HTTP 429 (rate limit) and 500/503/504 (overloaded). When the chosen model
+    stays overloaded, switches to the fallback models (config.FALLBACK_GEMINI_MODELS):
+    same Gemini 3+ thinking config, and uploaded files are shared by all models.
     All other errors are raised immediately.
     """
     _lazy_import_gemini_sdk()
+    fallbacks = [m for m in dict.fromkeys(config_module.FALLBACK_GEMINI_MODELS) if m != model]
+    try:
+        return _generate_on_model(client, model, contents, config, status_callback, OVERLOAD_MAX_RETRIES)
+    except GeminiAPIError as overloaded:
+        if not getattr(overloaded, "overloaded", False) or not fallbacks:
+            raise
+        for fallback in fallbacks:
+            msg = _("%(old)s is still overloaded: switching to %(new)s.") % {"old": model, "new": fallback}
+            app_logger.warning(msg)
+            if status_callback:
+                status_callback(msg)
+            try:
+                return _generate_on_model(client, fallback, contents, config, status_callback, FALLBACK_MAX_RETRIES)
+            except GeminiAPIError as e:
+                if not getattr(e, "overloaded", False):
+                    raise
+            except Exception as e:  # e.g. a model that refuses this config: try the next one
+                app_logger.warning(f"Fallback model {fallback} failed: {e}")
+        raise overloaded
 
+
+def _generate_on_model(client, model, contents, config, status_callback, overload_attempts):
     last_exception = None
-    for attempt in range(1, MAX_RETRIES + 1):
+    attempt = 0
+    while True:
+        attempt += 1
         try:
-            response = client.models.generate_content(
-                model=model, contents=contents, config=config
+            response = app_state.run_cancellable(
+                client.models.generate_content, model=model, contents=contents, config=config
             )
             return response
+        except app_state.GenerationCancelled:
+            raise
         except Exception as e:
-            error_str = str(e).lower()
-            is_retryable = False
-
-            # Check for google.api_core rate-limit / quota / unavailable errors
-            if google_api_exceptions is not None:
-                if isinstance(e, (google_api_exceptions.ResourceExhausted,
-                                  google_api_exceptions.ServiceUnavailable,
-                                  google_api_exceptions.TooManyRequests)):
-                    is_retryable = True
-
-            # Fallback: check error message for common rate-limit indicators
-            if not is_retryable:
-                for keyword in ("429", "resource exhausted", "rate limit", "quota",
-                                "503", "service unavailable", "overloaded"):
-                    if keyword in error_str:
-                        is_retryable = True
-                        break
-
-            if not is_retryable or attempt == MAX_RETRIES:
+            kind = _transient_kind(e)
+            # Overload spikes (503 "high demand") often last a minute or more: wait longer for them.
+            max_attempts = overload_attempts if kind == "overloaded" else MAX_RETRIES
+            if kind is None:
+                raise
+            if attempt >= max_attempts:
+                if kind == "overloaded":
+                    error = GeminiAPIError(_("Gemini is overloaded right now (model %s). Nothing is wrong with your video "
+                                             "or your key: try again in a few minutes, or choose another model in "
+                                             "Settings.") % model)
+                    error.overloaded = True
+                    raise error from e
                 raise
 
             last_exception = e
-            delay = min(INITIAL_RETRY_DELAY_SEC * (2 ** (attempt - 1)), MAX_RETRY_DELAY_SEC)
-            retry_msg = _("Rate limit hit (attempt %(attempt)d/%(max)d). Retrying in %(delay)d seconds...") % {
-                "attempt": attempt, "max": MAX_RETRIES, "delay": delay
-            }
+            if kind == "overloaded":
+                delay = min(OVERLOAD_INITIAL_DELAY_SEC * (2 ** (attempt - 1)), MAX_RETRY_DELAY_SEC)
+                retry_msg = _("Gemini is overloaded right now (attempt %(attempt)d of %(max)d). Retrying in %(delay)d seconds...")
+            else:
+                delay = min(INITIAL_RETRY_DELAY_SEC * (2 ** (attempt - 1)), MAX_RETRY_DELAY_SEC)
+                retry_msg = _("Rate limit hit (attempt %(attempt)d/%(max)d). Retrying in %(delay)d seconds...")
+            retry_msg = retry_msg % {"attempt": attempt, "max": max_attempts, "delay": delay}
             app_logger.warning(f"Rate limit / transient error on attempt {attempt}: {e}. Retrying in {delay}s...")
             if status_callback:
                 status_callback(retry_msg)
-            time.sleep(delay)
-
-    # Should not reach here, but just in case
-    raise last_exception or GeminiAPIError(_("Failed after %d retries.") % MAX_RETRIES)
+            app_state.sleep_or_cancel(delay)
 
 
 def process_gemini_response(response, status_callback):
@@ -311,8 +371,8 @@ def process_gemini_response(response, status_callback):
 
     final_text_result = "".join(final_text_parts).strip()
     
-    if hasattr(candidate, 'finish_reason') and candidate.finish_reason.name == 'SAFETY':
-        reason = candidate.finish_reason.name
+    if getattr(getattr(candidate, 'finish_reason', None), 'name', None) == 'SAFETY':
+        reason = 'SAFETY'
         block_msg = _("AI content generation was stopped due to: %s") % reason
         if status_callback: status_callback(block_msg)
         app_logger.warning(block_msg)
@@ -405,3 +465,13 @@ def save_raw_ai_output(video_filename: str, output_type: str, content: Union[str
         app_logger.info(f"Raw AI output saved to: {file_path}")
     except Exception as e:
         app_logger.error(f"Failed to save raw AI output to file: {e}", exc_info=True)
+
+def test_api_key(api_key):
+    """First-run / Settings 'Test key': returns the usable models for this key, raises on a bad key."""
+    _lazy_import_gemini_sdk()
+    return list_generation_models(genai.Client(api_key=api_key.strip()))
+
+
+def api_key_configured():
+    key = config_model.get_setting("user_gemini_api_key") or config.GEMINI_API_KEY
+    return bool(key) and key != "YOUR_GEMINI_API_KEY_HERE"
