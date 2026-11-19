@@ -121,7 +121,7 @@
                     <li><a href="#exporting">Çalışmanızı Dışa Aktarma</a></li>
                 </ul>
             </li>
-            <li><a href="#ai-backends">Yapay Zekayı Seçme: Gemini, Ollama veya OpenAI Uyumlu Bir Hizmet</a></li>
+            <li><a href="#ai-backends">Yapay Zeka: Gemini Modelleri ve Ayarları</a></li>
             <li><a href="#voices">Sesler</a></li>
             <li><a href="#language">Arayüz Dili ve Betimleme Dili</a></li>
             <li><a href="#advanced-settings">Ayarlara Derinlemesine Bir Bakış</a>
@@ -150,12 +150,12 @@
             <li><strong>İşletim Sistemi:</strong> Windows 10 veya üzeri (64-bit).</li>
             <li><strong>Bellek (RAM):</strong> En az 4 GB RAM.</li>
             <li><strong>Depolama:</strong> Uygulama ve geçici dosyalar için en az 500 MB boş disk alanı.</li>
-            <li><strong>İnternet Bağlantısı:</strong> Çevrimiçi yapay zeka hizmetleri (Google Gemini, çevrimiçi bir OpenAI uyumlu hizmet), çevrimiçi sesler (OpenAI, Azure, Google) ve video indirme için gereklidir. Yerel bir yapay zeka (Ollama veya yerel bir OpenAI uyumlu sunucu) ve Windows ya da Piper sesleriyle, videolar internet üzerinden hiçbir şey gönderilmeden betimlenebilir.</li>
+            <li><strong>İnternet Bağlantısı:</strong> Zorunludur: yapay zeka, yani Google Gemini, çevrimiçi çalışır. Çevrimiçi sesler (OpenAI, Azure, Google) ve video indirme için de gereklidir.</li>
             <li><strong>Ekran Okuyucu:</strong> Tam erişilebilirlik için JAWS, NVDA veya Windows Ekran Okuyucusu gibi bir ekran okuyucu yazılımı önerilir.</li>
         </ul>
 
         <h2 id="setup">Haydi Başlayalım: API Anahtarları Kurulumu</h2>
-        <p>Omni Betimleyici, videoları analiz etmek için varsayılan olarak Google Gemini'yi kullanır; bu nedenle başlamadan önce kendi Gemini API anahtarınıza ihtiyacınız vardır. Diğer yapay zeka hizmetlerinin ve seslerin kendi anahtarları vardır; bunlar <a href="#ai-backends">Yapay Zekayı Seçme</a> ve <a href="#voices">Sesler</a> bölümlerinde anlatılmıştır.</p>
+        <p>Omni Betimleyici videoları, resimleri ve belgeleri analiz etmek için Google Gemini'yi kullanır; bu nedenle başlamadan önce kendi Gemini API anahtarınıza ihtiyacınız vardır. Çevrimiçi seslerin kendi anahtarları vardır; bunlar <a href="#voices">Sesler</a> bölümünde anlatılmıştır. Gemini modelinin seçimi <a href="#ai-backends">Yapay Zeka: Gemini Modelleri ve Ayarları</a> bölümünde açıklanmıştır.</p>
         <ol>
             <li><strong>Ayarlar'ı Açın:</strong> <strong>Dosya</strong> menüsünü açın (<span class="key">Alt</span> + <span class="key">F</span>) ve <strong>Ayarlar...</strong> öğesini seçin ya da <span class="key">Ctrl</span> + <span class="key">,</span> tuşlarına basın.</li>
             <li><strong>Yapay Zeka Ayarları sekmesi:</strong> Genel sekmesinden Yapay Zeka Ayarları sekmesine geçmek için <span class="key">Ctrl</span> + <span class="key">Tab</span> tuşlarına, ardından sekmenin içine girmek için <span class="key">Tab</span> tuşuna basın.
@@ -170,7 +170,7 @@
             <strong>Güvenli Depolama:</strong> API anahtarlarınız şifrelenir ve bilgisayarınızda, uygulamanın ayarlar dosyasında güvenle saklanır. İlgili yapay zeka hizmetlerine doğrudan bağlanmak dışında asla başka bir yere gönderilmez.
         </div>
 
-        <p data-p7="1">İlk açılışta, ayarlanmış bir Gemini anahtarı yoksa (ve yerel bir yapay zeka seçilmemişse) uygulama Google AI Studio sayfasını ve Ayarlar'ı açmayı önerir. Evet yanıtını verin, anahtarı yapıştırın, ardından <strong>Anahtarı test et</strong> düğmesine basın. Uygulamanın en ilk açılışında ayrıca lisansı kabul etmeniz istenir (Kabul Et veya Kabul Etme).</p>
+        <p data-p7="1">İlk açılışta, ayarlanmış bir Gemini anahtarı yoksa uygulama Google AI Studio sayfasını ve Ayarlar'ı açmayı önerir. Evet yanıtını verin, anahtarı yapıştırın, ardından <strong>Anahtarı test et</strong> düğmesine basın. Uygulamanın en ilk açılışında ayrıca lisansı kabul etmeniz istenir (Kabul Et veya Kabul Etme).</p>
 
         <h2 id="quickstart">Hızlı Başlangıç: İlk Betimlemenizi Üretin</h2>
         <p>Haydi başlayalım! Şu basit adımları izlemeniz yeterli:</p>
@@ -319,8 +319,6 @@
         <p><strong>Sürekli Ekran Betimleme</strong> (Ctrl+Alt+Shift+L, aç veya kapat) ekranı her 3 saniyede bir denetler ve yalnızca belirgin biçimde değiştiğinde, sadece yeni olanı söyleyerek betimler. Her betimleme API kotanızı kullanır: artık gerekmediğinde kapatın.</p>
         <p><strong>Sesli altyazı:</strong> Ayarlar &gt; Yapay Zeka bölümündeki "Başka dilde konuşulan diyalogları çevir" seçeneği, yabancı dildeki repliklerin çevirisini konuşan kişiyi belirterek ekler (orijinal dilde anime, yabancı filmler). Ekrandaki metin gibi kısa bir sesle duyurulur ve dışa aktarmalarda ikinci sesle okunur; "Çevrilmiş diyalogları konuşmacıya uygun bir sesle oku" seçeneğiyle kadın ya da erkek sesiyle okunur (bkz. <a href="#voices">Sesler</a>).</p>
 
-        <p>Gizli mod: Ayarlar &gt; Yapay Zeka bölümündeki "Görselleri ve ekranı betimleyen" seçeneği, Gemini yerine Ollama (ollama.com) üzerinden yerel bir model veya OpenAI uyumlu bir görüntü tanıma hizmeti kullanabilir (bkz. <a href="#ai-backends">Yapay Zekayı Seçme</a>). Ollama ile bilgisayarınızdan hiçbir şey çıkmaz ve kota harcanmaz, ancak betimlemeler daha az isabetlidir. PDF belgeleri için her zaman Gemini gerekir. Ollama'yı yükleyin, ardından ollama pull gemma3 komutunu çalıştırın (veya Ayarlar'dan başka bir görme modeli seçin).</p>
-
         <p>Birden çok ekran varsa etkin pencereyi gösteren ekran betimlenir. Sürekli modda yeni betimleme, okunmadan önce bilgisayarın çaldığı seste bir duraklama bekler (en fazla 8 saniye).</p>
 
         <h3 id="cli">Komut Satırı ve Toplu İşlem</h3>
@@ -360,28 +358,22 @@
 
         <p data-p7="1">Dışa aktarma penceresinin seçenekleri: <strong>Yalnızca geçerli yoğunluktaki betimlemeler</strong> (<span class="key">Alt</span> + <span class="key">D</span>, varsayılan olarak açık), oynatıcıda duyduğunuzu dışa aktarır (D tuşu); <strong>Genişletilmiş betimleme</strong> (<span class="key">Alt</span> + <span class="key">X</span>, yalnızca MKV, MP4 ve MP3; oynatıcı genişletilmiş moddayken varsayılan olarak açık), bir betimleme duraklamasından uzun olduğunda onu kesmek yerine görüntüyü duraklatır (video yeniden kodlanır ve özgün altyazılar korunmaz); <strong>sesli not</strong> (<span class="key">Alt</span> + <span class="key">R</span>, ses ve video biçimleri), sona sesli betimlemenin yapay zeka tarafından oluşturulduğunu söyleyen bir cümle ekler. Genişletilmiş seçenek olmadan, bitiş mesajı kesilen betimlemeleri listeler. Sesli betimleme parçası betimleme dilinin adını taşır, kaynağın altyazıları mümkün olduğunda korunur ve 5.1 seste betimlemeler orta kanala yerleştirilir. Oynatıcıda <span class="key">Shift</span> + <span class="key">I</span>, sesli tanıtımı programdan önce yayımlamak üzere MP3 olarak kaydeder.</p>
 
-        <h2 id="ai-backends">Yapay Zekayı Seçme: Gemini, Ollama veya OpenAI Uyumlu Bir Hizmet</h2>
-        <p>Ayarlar'ın Yapay Zeka Ayarları sekmesinde, iki liste medyanıza hangi yapay zekanın bakacağını seçer:</p>
+        <h2 id="ai-backends">Yapay Zeka: Gemini Modelleri ve Ayarları</h2>
+        <p>Omni Betimleyici her şey için Google Gemini'yi kullanır: video betimlemeleri, resimler, PDF belgeleri ve ekranınız, Daha Fazla Sor, Sahne Gezgini, sesli tanıtım ve tam metindeki diyalog dökümü. Gemini videonun tamamını ses kaydıyla birlikte alır: diyalogları duyar ve betimlemeleri konuşmaların üzerine değil, gerçek duraklamalara yerleştirir. Tek bir Gemini API anahtarı yeterlidir; anahtarı <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a> adresinden ücretsiz alabilirsiniz (bkz. <a href="#setup">Haydi Başlayalım</a>).</p>
+        <p><strong>Model seçimi:</strong> Ayarlar'da, Yapay Zeka Ayarları sekmesinde, <strong>Gemini Modeli</strong>. <strong>Model listesini yenile</strong>, anahtarınızın kullanabileceği güncel model listesini Google'dan ister. Varsayılan model <code>gemini-3.8-flash</code>, çoğu video için kalite, hız ve maliyet arasında iyi bir denge sunar.</p>
         <ul>
-            <li><strong>Video betimlemeleri:</strong> videoları betimleyen yapay zeka.</li>
-            <li><strong>Görselleri ve ekranı betimleyen:</strong> Resim veya PDF Betimle, Ekranımı Betimle ve Sürekli Ekran Betimleme tarafından kullanılan yapay zeka.</li>
+            <li><strong>Ücretsiz katman</strong> (faturalandırma gerekmez, Google'ın günlük sınırları dahilinde): <code>gemini-4-hydrogen</code>, en yeni genel model, Düşünme Düzeyi Yüksek olduğunda daha yavaştır; <code>gemini-3.8-flash</code> (varsayılan) ve <code>gemini-3.6-flash</code>; <code>gemini-3.5-flash-lite</code> ve <code>gemini-3.1-flash-lite</code>, en ucuz ve en hızlı olanlar, ancak kaliteleri daha düşüktür.</li>
+            <li><strong>Yalnızca ücretli</strong> (Google hesabınızda faturalandırma etkin olmalı): <code>gemini-4-neon</code>, <code>gemini-4-carbon</code> ve <code>gemini-4-argon</code>.</li>
+            <li><code>gemini-2.5</code> ve <code>gemini-2.0</code> modelleri kullanımdan kaldırılmış veya kapatılmıştır: bunlardan biri hâlâ seçiliyse daha yeni bir model seçin.</li>
         </ul>
-        <p>Her liste üç seçenek sunar:</p>
+        <p>Hızlı taslaklar, çok uzun videolar veya günlük kotanız azaldığında bir Flash-Lite modeli seçin. Betimlemelerin kalitesinin bekleme süresinden daha önemli olduğu bir film için <code>gemini-4-hydrogen</code> seçin.</p>
+        <p>Diğer yapay zeka ayarları <a href="#settings-ai">Yapay Zeka Ayarları Sekmesi</a> bölümünde anlatılmıştır; kısaca:</p>
         <ul>
-            <li><strong>Gemini (çevrimiçi)</strong>: varsayılan ve en isabetli seçenek. Videonun tamamını sesiyle birlikte alır. Gemini API anahtarı gerektirir.</li>
-            <li><strong>Ollama (yerel, ücretsiz, gizli)</strong>: Ollama (<a href="https://ollama.com" target="_blank">ollama.com</a>) aracılığıyla kendi bilgisayarınızda çalışan bir görme modeli. Video bilgisayarınızdan hiç çıkmaz ve kota harcanmaz, ancak daha yavaş ve daha az isabetlidir. Ollama'yı, ardından bir görme modelini kurun, örneğin <code>ollama pull gemma3</code>, ve model adını <strong>Ollama görme modeli</strong> alanına yazın (varsayılan gemma3; llava veya qwen2.5vl de çalışır).</li>
-            <li><strong>OpenAI uyumlu görüntü tanıma hizmeti</strong>: çevrimiçi veya bilgisayarınızda, resimlerle OpenAI sohbet API'sini konuşan herhangi bir hizmet: OpenRouter, OpenAI, Mistral, Groq, OpenRouter üzerinden Claude ya da LM Studio, llama.cpp veya vLLM gibi yerel bir sunucu. Üç alanı doldurun:
-                <ul>
-                    <li><strong>Görüntü tanıma hizmeti adresi (OpenAI uyumlu):</strong> API'nin adresi, örneğin <code>https://openrouter.ai/api/v1</code> (varsayılan), <code>https://api.openai.com/v1</code> veya LM Studio için <code>http://localhost:1234/v1</code>. Çevrimiçi bir hizmet <code>https://</code> kullanmalıdır; <code>http://</code> yalnızca bu bilgisayar için (localhost, 127.0.0.1) kabul edilir.</li>
-                    <li><strong>Görüntü tanıma hizmeti modeli:</strong> hizmetin yazdığı şekliyle model adı, örneğin OpenRouter'da <code>openai/gpt-5-mini</code>. Resim kabul eden bir model olmalıdır.</li>
-                    <li><strong>Görüntü tanıma hizmeti API anahtarı:</strong> o hizmetin anahtarı; yerel bir sunucu için boş bırakın.</li>
-                </ul>
-            </li>
+            <li><strong>Düşünme Düzeyi (Gemini 3 ve sonrası):</strong> modelin yanıt vermeden önce ne kadar düşündüğü. Düşük daha hızlı ve ucuzdur; Yüksek karmaşık filmlerde yardımcı olur ama daha yavaştır.</li>
+            <li><strong>Yapay zekâya gönderilen görüntü ayrıntısı:</strong> Gemini'nin videonun her karesini ne kadar ayrıntılı aldığı. Çoğu video için Düşük veya Orta yeterlidir; uzun videoların sınırlara sığmasını ve daha ucuza gelmesini sağlar. Yüksek, ekrandaki küçük yazıları, jenerikleri veya tabelaları okumaya yardımcı olur, ancak kare başına yaklaşık 3-4 kat daha pahalıdır. Otomatik (varsayılan) seçimi Gemini'ye bırakır.</li>
+            <li><strong>Güvenlik Filtrelerini Kapat:</strong> varsayılan olarak açıktır; böylece şiddet veya hassas sahneler içeren filmler de betimlenir.</li>
+            <li><strong>Uzun Videolar için Parçalama Özelliğini Etkinleştir:</strong> uzun bir videoyu parçalar halinde, birbiri ardına analiz eder; uzun bir video başarısız olduğunda veya erken durduğunda kullanın.</li>
         </ul>
-        <p>Ollama veya OpenAI uyumlu bir hizmetle video yüklenmez: videonun her bölümünden zamanlarıyla birlikte durağan kareler alınır ve modele gönderilir.</p>
-        <div class="note">
-            <strong>Gemini gerektiren özellikler:</strong> PDF belgeleri, Daha Fazla Sor (ve W tuşu), Sahne Gezgini, sesli tanıtım (I tuşu) ve tam metin dışa aktarma (diyalog dökümü) her zaman Gemini'yi kullanır. "Video betimlemeleri" başka bir yapay zekaya ayarlandığında, bu özellikler çalışmayı reddeder ve bunu size söyler; böylece haberiniz olmadan Google'a hiçbir şey gönderilmez. Bunları kullanmak için "Video betimlemeleri"ni yeniden Gemini'ye ayarlayın.
-        </div>
 
         <h2 id="voices">Sesler</h2>
         <p>Ayarlar'ın <strong>Ses Çıkışı</strong> sekmesinde seçilen ses, betimlemeleri ses ve video dışa aktarmalarında, düzenleyicinin "Dinle" düğmesinde ve "Oynatıcıda betimlemeler" uygulama sesine ayarlandığında oynatıcıda okur. (Varsayılan ekran okuyucu modunda, oynatma sırasında betimlemeleri ekran okuyucunuzun kendi sesi okur.) <strong>Metinden sese motoru</strong> seçeneğini ok tuşlarıyla seçin; o motorun alanları altında görünür. Yukarıya yazılan metni duymak için "Konuşmacıyı Test Et" grubundaki <strong>Test</strong> düğmesine basın.</p>
@@ -431,13 +423,12 @@
             <li><strong>Odak:</strong> Genel (varsayılan), Karakterler, Eylemler ve talimatlar, Mekân ve atmosfer veya Ekrandaki metin.</li>
             <li><strong>Betimleme Başına En Fazla Kelime:</strong> her betimlemenin uzunluğu için bir üst sınır (varsayılan 40); 0, yalnızca duraklamanın uzunluğunun sınırladığı anlamına gelir.</li>
             <li><strong>Açıklama düzeyi:</strong> Yalnızca görüneni betimle; Betimle ve adlandır (varsayılan), örneğin mekânı veya iyi bilinen bir nesneyi; ya da Betimle, adlandır ve kısaca açıkla.</li>
-            <li><strong>Görselleri ve ekranı betimleyen</strong>, <strong>Video betimlemeleri</strong>, <strong>Ollama görme modeli</strong>, <strong>Görüntü tanıma hizmeti adresi</strong>, <strong>Görüntü tanıma hizmeti modeli</strong> ve <strong>Görüntü tanıma hizmeti API anahtarı</strong>: bkz. <a href="#ai-backends">Yapay Zekayı Seçme</a>.</li>
             <li><strong>Başka dilde konuşulan diyalogları çevir (sesli altyazı):</strong> varsayılan olarak kapalı; bkz. <a href="#images">sesli altyazı</a>.</li>
             <li><strong>Betimlemeleri ikinci bir yapay zekâ geçişiyle denetle:</strong> varsayılan olarak açık; yalnızca metin üzerinden yapılan bir denetim, belirsiz betimlemeleri düzenleyicide "Gözden geçir" olarak işaretler.</li>
             <li><strong>Renklerden söz et:</strong> varsayılan olarak açık; renkler sizin için bir anlam ifade etmiyorsa işareti kaldırın.</li>
             <li><strong>Gemini Modeli:</strong> salt okunur bir model listesi (varsayılan etikette gösterilir). <strong>Model listesini yenile</strong> (<span class="key">Alt</span> + <span class="key">R</span>) anahtarınızın hangi modelleri kullanabileceğini Google'a sorar ve listeyi doldurur.</li>
             <li><strong>Düşünme Düzeyi (Gemini 3 ve sonrası):</strong> Düşük (daha hızlı, daha ucuz), Orta (varsayılan) veya Yüksek (daha yavaş, karmaşık filmler için).</li>
-            <li><strong>Sıcaklık:</strong> yapay zekanın ifade seçiminde ne kadar serbest olduğu (varsayılan 0.3). Daha düşük değerler daha birebir, tutarlı betimlemeler verir. Sayı olmayan bir değer varsayılanla değiştirilir.</li>
+            <li><strong>Yapay zekâya gönderilen görüntü ayrıntısı:</strong> Otomatik (varsayılan), Düşük (daha ucuz, uzun videolar için), Orta veya Yüksek (ekrandaki küçük yazıları okur, daha pahalı). Yapay zekanın videonun her karesini ne kadar ayrıntılı aldığını belirler (Gemini'nin "media resolution" ayarı). Çoğu video için Düşük veya Orta yeterlidir; Yüksek, kare başına yaklaşık 3-4 kat daha fazla token harcar. Bkz. <a href="#ai-backends">Yapay Zeka</a>.</li>
             <li><strong>Yapay zekaya yalnızca video gönder (ses olmadan):</strong> önerilmez: ses olmadan yapay zeka artık diyalogların üzerine konuşmaktan kaçınamaz.</li>
             <li><strong>Güvenlik Filtrelerini Kapat (Dikkatli kullanın):</strong> varsayılan olarak açık. Bu, yapay zekanın normalde hassas olarak işaretleyebileceği içerikleri işlemesine olanak tanır, ancak çıktı yine de yapay zeka sağlayıcısının temel güvenlik politikalarına tabidir. Bu özelliği nasıl kullandığınızdan siz sorumlusunuz.</li>
             <li><strong>Uzun Videolar için Parçalama Özelliğini Etkinleştir:</strong> videoyu parçalara ayırır, bunları sırayla analiz eder ve sonuçları birleştirir. Uzun videolar için önerilir. <strong>Parça Süresi (saniye)</strong> (30 ile 2400 arası, varsayılan 600) yalnızca parçalama işaretliyken kullanılabilir.</li>
@@ -470,7 +461,7 @@
         <h2 id="reset">Ayarları ve Verileri Sıfırlama</h2>
         <p><strong>Dosya &gt; Ayarları ve Verileri Sıfırla...</strong> temiz bir duruma geri döndürür. Sıfırlamak istediklerinizi işaretleyin, ardından <strong>Sıfırla</strong> (<span class="key">Alt</span> + <span class="key">R</span>) düğmesine basın ve onaylayın:</p>
         <ul>
-            <li><strong>Ayarlar (varsayılanlara dön)</strong> (<span class="key">Alt</span> + <span class="key">S</span>): tüm ayarlar varsayılan değerlerine döner. API anahtarlarınız (Gemini, OpenAI, görüntü tanıma hizmeti, Azure, Google) korunur...</li>
+            <li><strong>Ayarlar (varsayılanlara dön)</strong> (<span class="key">Alt</span> + <span class="key">S</span>): tüm ayarlar varsayılan değerlerine döner. API anahtarlarınız (Gemini, OpenAI, Azure, Google) korunur...</li>
             <li>...ancak <strong>API anahtarlarımı da unut</strong> (<span class="key">Alt</span> + <span class="key">A</span>) seçeneğini de işaretlerseniz korunmaz; bu seçenek yalnızca Ayarlar işaretliyken kullanılabilir.</li>
             <li><strong>Hazır istemler (özel hazır istemler kaldırılır)</strong> (<span class="key">Alt</span> + <span class="key">P</span>): her dilin varsayılan hazır istemleri geri gelir ve <code>ad_rules.json</code> dosyanız kaldırılır.</li>
             <li><strong>OpenAI hazır ses ayarları</strong> (<span class="key">Alt</span> + <span class="key">V</span>): varsayılan hazır ayarlara döner.</li>
@@ -523,16 +514,13 @@
         C: Bu, videonuzun yapay zekanın tek seferde işleyemeyeceği kadar uzun veya görsel olarak karmaşık olduğu anlamına gelir. Bu bir içerik hatası değil, bir kapasite sınırıdır. En iyi çözüm, <strong>Ayarlar &gt; Yapay Zeka Ayarları</strong>'na gidip <strong>"Uzun Videolar için Parçalama Özelliğini Etkinleştir"</strong> seçeneğini işaretlemektir. Bu, videoyu yapay zeka için otomatik olarak daha küçük, yönetilebilir parçalara ayıracaktır.</p>
 
         <p><strong>S: Yapay zeka "Güvenlik Filtreleri" nedeniyle betimleme üretemedi. Ne yapabilirim?</strong><br>
-        C: Bu, yapay zekanın güvenlik sisteminin aşırı dikkatli olabildiği bilinen bir sorundur. Sırayla deneyebileceğiniz birkaç seçeneğiniz var: 1) <strong>Ayarlar &gt; Yapay Zeka Ayarları</strong>'na gidin ve <strong>"Güvenlik Filtrelerini Kapat"</strong> seçeneğinin işaretli olduğundan emin olun. 2) Bu işe yaramazsa, yapay zekaya daha az veri göndermek için "Analiz için kare hızı"nı düşürmeyi deneyin. 3) Son çare olarak, <strong>Gemini Modeli</strong> listesinden <code>gemini-4-argon</code> gibi daha güçlü bir model seçin. Hassas içerikleri daha iyi işleyebilir, ancak daha yavaştır ve ücretli bir API katmanındaysanız daha pahalı olabilir.</p>
+        C: Bu, yapay zekanın güvenlik sisteminin aşırı dikkatli olabildiği bilinen bir sorundur. Sırayla deneyebileceğiniz birkaç seçeneğiniz var: 1) <strong>Ayarlar &gt; Yapay Zeka Ayarları</strong>'na gidin ve <strong>"Güvenlik Filtrelerini Kapat"</strong> seçeneğinin işaretli olduğundan emin olun. 2) Bu işe yaramazsa, yapay zekaya daha az veri göndermek için "Analiz için kare hızı"nı düşürmeyi deneyin. 3) Son çare olarak, <strong>Gemini Modeli</strong> listesinden <code>gemini-4-hydrogen</code> (ücretsiz katman) veya <code>gemini-4-argon</code> (yalnızca ücretli, faturalandırma etkin) gibi daha güçlü bir model seçin. Bunlar hassas içerikleri daha iyi işleyebilir, ancak daha yavaştır.</p>
 
         <p><strong>S: Eski seslerimden bazıları SAPI5 listesinde eksik. Nereye gittiler?</strong><br>
         C: Modern Windows sistemleri 64-bit'tir, ancak birçok klasik ve sevilen metinden sese sesleri 32-bit idi. Ayarlar'da "Ses Çıkışı" sekmesinde, "SAPI5 (64-bit Sesler)" ve "SAPI5 (32-bit Sesler)" için ayrı motor seçenekleri göreceksiniz. Eski seslerinize erişmek için sadece 32-bit motorunu seçin.</p>
 
         <p><strong>S: Betimlemelerin üretilmesi neden uzun sürüyor?</strong><br>
         C: Süre; videonuzun uzunluğuna, internet hızınıza (videonun yapay zekaya yüklenmesi için), seçilen kare hızına ve yapay zeka hizmetlerinin o anki yoğunluğuna bağlıdır. Uzun videolar için "Video Parçalama" özelliğini kullanmanız şiddetle tavsiye edilir. İstediğiniz zaman Escape ile durdurabilirsiniz.</p>
-
-        <p><strong>S: Daha Fazla Sor veya Sahne Gezgini "Bu özellik Gemini'yi kullanır" diyor.</strong><br>
-        C: "Video betimlemeleri" Ollama'ya veya OpenAI uyumlu bir hizmete ayarlanmış. Bu özellikler yalnızca Gemini ile çalışır; bunları kullanmak için Ayarlar &gt; Yapay Zeka Ayarları'nda yeniden Gemini'ye geçin.</p>
 
         <h2 id="shortcuts">Klavye Kısayolları</h2>
         <h3 id="shortcuts-main">Ana pencerede</h3>

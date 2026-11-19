@@ -121,7 +121,7 @@
                     <li><a href="#exporting">Exportar tu trabajo</a></li>
                 </ul>
             </li>
-            <li><a href="#ai-backends">Elegir la IA: Gemini, Ollama o un servicio compatible con OpenAI</a></li>
+            <li><a href="#ai-backends">La IA: modelos y ajustes de Gemini</a></li>
             <li><a href="#voices">Voces</a></li>
             <li><a href="#language">Idioma de la interfaz e idioma de las descripciones</a></li>
             <li><a href="#advanced-settings">Los ajustes en detalle</a>
@@ -150,12 +150,12 @@
             <li><strong>Sistema operativo:</strong> Windows 10 o posterior (64 bits).</li>
             <li><strong>Memoria (RAM):</strong> al menos 4 GB de RAM.</li>
             <li><strong>Almacenamiento:</strong> al menos 500 MB de espacio libre en disco para la aplicación y los archivos temporales.</li>
-            <li><strong>Conexión a Internet:</strong> necesaria para los servicios de IA en línea (Google Gemini, un servicio en línea compatible con OpenAI), las voces en línea (OpenAI, Azure, Google) y la descarga de vídeos. Con una IA local (Ollama o un servidor local compatible con OpenAI) y voces de Windows o Piper, los vídeos se pueden describir sin enviar nada por Internet.</li>
+            <li><strong>Conexión a Internet:</strong> imprescindible: la IA, Google Gemini, funciona en línea. También es necesaria para las voces en línea (OpenAI, Azure, Google) y la descarga de vídeos.</li>
             <li><strong>Lector de pantalla:</strong> para una accesibilidad completa, se recomienda un lector de pantalla como JAWS, NVDA o el Narrador de Windows.</li>
         </ul>
 
         <h2 id="setup">Primeros pasos: configurar tus claves de API</h2>
-        <p>De forma predeterminada, Omni Describer usa Google Gemini para analizar los vídeos, así que necesitas tu propia clave de API de Gemini antes de empezar. Los demás servicios de IA y voces tienen sus propias claves, que se describen en <a href="#ai-backends">Elegir la IA</a> y <a href="#voices">Voces</a>.</p>
+        <p>Omni Describer usa Google Gemini para analizar los vídeos, las imágenes y los documentos, así que necesitas tu propia clave de API de Gemini antes de empezar. Las voces en línea tienen sus propias claves, que se describen en <a href="#voices">Voces</a>; la elección del modelo de Gemini se explica en <a href="#ai-backends">La IA: modelos y ajustes de Gemini</a>.</p>
         <ol>
             <li><strong>Abre los ajustes:</strong> abre el menú <strong>Archivo</strong> (<span class="key">Alt</span> + <span class="key">A</span>) y elige <strong>Ajustes...</strong>, o pulsa <span class="key">Ctrl</span> + <span class="key">,</span>.</li>
             <li><strong>Pestaña Ajustes de la IA:</strong> pulsa <span class="key">Ctrl</span> + <span class="key">Tab</span> para pasar de la pestaña General a la pestaña Ajustes de la IA y, después, <span class="key">Tab</span> para entrar en ella.
@@ -170,7 +170,7 @@
             <strong>Almacenamiento seguro:</strong> tus claves de API se cifran y se guardan de forma segura en tu equipo, en el archivo de ajustes de la aplicación. Nunca se envían a ningún otro lugar, salvo para conectarse directamente a los servicios de IA correspondientes.
         </div>
 
-        <p data-p7="1">En el primer inicio, si no hay ninguna clave de Gemini configurada (y no se ha elegido una IA local), la aplicación ofrece abrir la página de Google AI Studio y los ajustes. Responde Sí, pega la clave y pulsa <strong>Probar clave</strong>. En el primerísimo inicio también se te pide que aceptes la licencia (De acuerdo o En desacuerdo).</p>
+        <p data-p7="1">En el primer inicio, si no hay ninguna clave de Gemini configurada, la aplicación ofrece abrir la página de Google AI Studio y los ajustes. Responde Sí, pega la clave y pulsa <strong>Probar clave</strong>. En el primerísimo inicio también se te pide que aceptes la licencia (De acuerdo o En desacuerdo).</p>
 
         <h2 id="quickstart">Inicio rápido: generar tu primera descripción</h2>
         <p>¡Empecemos! Solo tienes que seguir estos sencillos pasos:</p>
@@ -319,8 +319,6 @@
         <p><strong>Descripción continua de la pantalla</strong> (Ctrl+Alt+Shift+L, activar o desactivar) revisa la pantalla cada 3 segundos y solo la describe cuando ha cambiado de forma notable, diciendo únicamente lo nuevo. Cada descripción consume tu cuota de API: desactívala cuando ya no la necesites.</p>
         <p><strong>Subtítulos sonoros:</strong> en Ajustes &gt; Ajustes de la IA, «Traducir los diálogos en otro idioma» añade la traducción de las frases en otro idioma (anime en versión original, películas extranjeras), precedida del nombre de quien habla. Igual que el texto en pantalla, se anuncian con un sonido breve y se leen con la segunda voz en las exportaciones; con «Leer el diálogo traducido con una voz que corresponda al hablante» se leen con una voz de mujer o de hombre (consulta <a href="#voices">Voces</a>).</p>
 
-        <p>Modo privado: en Ajustes > Ajustes de la IA, «Imágenes y pantalla descritas por» puede usar un modelo local a través de Ollama (ollama.com) o un servicio de visión compatible con OpenAI en lugar de Gemini (consulta <a href="#ai-backends">Elegir la IA</a>). Con Ollama nada sale de tu equipo y no se consume cuota, pero las descripciones son menos precisas. Los documentos PDF siempre necesitan Gemini. Instala Ollama y luego ejecuta ollama pull gemma3 (o elige otro modelo de visión en los ajustes).</p>
-
         <p>Con varias pantallas, se describe la que muestra la ventana activa. En el modo continuo, la nueva descripción espera a una pausa en lo que el equipo está reproduciendo (hasta 8 segundos) antes de leerse.</p>
 
         <h3 id="cli">Línea de comandos y modo por lotes</h3>
@@ -360,28 +358,22 @@
 
         <p data-p7="1">Opciones de la ventana de exportación: <strong>Solo las descripciones de la densidad actual</strong> (<span class="key">Alt</span> + <span class="key">D</span>, activada de forma predeterminada) exporta lo que oyes en el reproductor (tecla D); <strong>Audiodescripción extendida</strong> (<span class="key">Alt</span> + <span class="key">X</span>, solo MKV, MP4 y MP3; activada de forma predeterminada cuando el reproductor está en modo extendido) pausa la imagen cuando una descripción es más larga que su pausa, en lugar de cortarla (el vídeo se vuelve a codificar y no se conservan los subtítulos originales); la <strong>mención hablada</strong> (<span class="key">Alt</span> + <span class="key">M</span>, formatos de audio y vídeo) añade al final una frase que indica que la audiodescripción se ha generado con IA. Sin la opción extendida, el mensaje final enumera las descripciones que se cortaron. La pista de audiodescripción lleva el nombre en el idioma de las descripciones, los subtítulos del original se conservan cuando es posible y, con sonido 5.1, las descripciones se colocan en el canal central. En el reproductor, <span class="key">Shift</span> + <span class="key">I</span> guarda la introducción sonora como MP3 para publicarla antes del programa.</p>
 
-        <h2 id="ai-backends">Elegir la IA: Gemini, Ollama o un servicio compatible con OpenAI</h2>
-        <p>En Ajustes, pestaña Ajustes de la IA, dos listas eligen qué IA analiza tus contenidos:</p>
+        <h2 id="ai-backends">La IA: modelos y ajustes de Gemini</h2>
+        <p>Omni Describer usa Google Gemini para todo: las descripciones de vídeo, las imágenes, los documentos PDF y tu pantalla, Preguntar más, el Explorador de escena, la introducción sonora y la transcripción de los diálogos del guion completo. Gemini recibe el vídeo entero con su banda sonora: oye los diálogos y coloca las descripciones en las pausas reales en lugar de hablar encima de las personas. Solo necesitas una clave de API de Gemini; puedes obtenerla gratis en <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a> (consulta <a href="#setup">Primeros pasos</a>).</p>
+        <p><strong>Elegir un modelo:</strong> en Ajustes, pestaña Ajustes de la IA, <strong>Modelo de Gemini</strong>. <strong>Actualizar lista de modelos</strong> pide a Google la lista actual de modelos que puede usar tu clave. El predeterminado, <code>gemini-3.8-flash</code>, ofrece un buen equilibrio entre calidad, velocidad y coste para la mayoría de los vídeos.</p>
         <ul>
-            <li><strong>Descripciones de vídeo:</strong> la IA que describe los vídeos.</li>
-            <li><strong>Imágenes y pantalla descritas por:</strong> la IA que usan Describir una imagen o un PDF, Describir mi pantalla y Descripción continua de la pantalla.</li>
+            <li><strong>Nivel gratuito</strong> (sin facturación, dentro de los límites diarios de Google): <code>gemini-4-hydrogen</code>, el modelo general más reciente, más lento cuando el nivel de razonamiento es Alto; <code>gemini-3.8-flash</code> (predeterminado) y <code>gemini-3.6-flash</code>; <code>gemini-3.5-flash-lite</code> y <code>gemini-3.1-flash-lite</code>, los más baratos y rápidos, con menor calidad.</li>
+            <li><strong>Solo de pago</strong> (con la facturación activada en tu cuenta de Google): <code>gemini-4-neon</code>, <code>gemini-4-carbon</code> y <code>gemini-4-argon</code>.</li>
+            <li>Los modelos <code>gemini-2.5</code> y <code>gemini-2.0</code> están obsoletos o desactivados: si aún tienes uno seleccionado, elige un modelo más reciente.</li>
         </ul>
-        <p>Cada lista ofrece tres opciones:</p>
+        <p>Elige un modelo Flash-Lite para borradores rápidos, vídeos muy largos o cuando se te acaba la cuota diaria. Elige <code>gemini-4-hydrogen</code> para una película en la que la calidad de las descripciones importe más que el tiempo de espera.</p>
+        <p>Los demás ajustes de la IA se describen en <a href="#settings-ai">Pestaña Ajustes de la IA</a>; en resumen:</p>
         <ul>
-            <li><strong>Gemini (en línea)</strong>, la opción predeterminada y la más precisa. Recibe el vídeo completo con su sonido. Necesita la clave de API de Gemini.</li>
-            <li><strong>Ollama (local, gratuito, privado)</strong>: un modelo de visión que se ejecuta en tu propio equipo a través de Ollama (<a href="https://ollama.com" target="_blank">ollama.com</a>). El vídeo nunca sale de tu equipo y no se consume cuota, pero es más lento y menos preciso. Instala Ollama y luego un modelo de visión, por ejemplo <code>ollama pull gemma3</code>, y escribe el nombre del modelo en <strong>Modelo de visión de Ollama</strong> (gemma3 de forma predeterminada; llava o qwen2.5vl también funcionan).</li>
-            <li><strong>Servicio de visión compatible con OpenAI</strong>: cualquier servicio que hable la API de chat de OpenAI con imágenes, en línea o en tu equipo: OpenRouter, OpenAI, Mistral, Groq, Claude a través de OpenRouter, o un servidor local como LM Studio, llama.cpp o vLLM. Rellena tres campos:
-                <ul>
-                    <li><strong>Dirección del servicio de visión (compatible con OpenAI):</strong> la dirección de la API, por ejemplo <code>https://openrouter.ai/api/v1</code> (la predeterminada), <code>https://api.openai.com/v1</code> o <code>http://localhost:1234/v1</code> para LM Studio. Un servicio en línea debe usar <code>https://</code>; <code>http://</code> solo se acepta para este equipo (localhost, 127.0.0.1).</li>
-                    <li><strong>Modelo del servicio de visión:</strong> el nombre del modelo tal como lo escribe el servicio, por ejemplo <code>openai/gpt-5-mini</code> en OpenRouter. Debe ser un modelo que acepte imágenes.</li>
-                    <li><strong>Clave de API del servicio de visión:</strong> la clave de ese servicio; déjala vacía para un servidor local.</li>
-                </ul>
-            </li>
+            <li><strong>Nivel de razonamiento (Gemini 3 y posteriores):</strong> cuánto razona el modelo antes de responder. Bajo es más rápido y barato; Alto ayuda con películas complejas, pero es más lento.</li>
+            <li><strong>Detalle de las imágenes enviadas a la IA:</strong> cuánto detalle de cada fotograma del vídeo recibe Gemini. Bajo o Medio bastan para la mayoría de los vídeos y permiten que los vídeos largos quepan y cuesten menos; Alto ayuda a leer textos pequeños en pantalla, créditos o carteles, pero cuesta unas 3 o 4 veces más por fotograma. Automático (predeterminado) deja que Gemini decida.</li>
+            <li><strong>Deshabilitar filtros de seguridad:</strong> activado de forma predeterminada, para que las películas con escenas violentas o delicadas se describan igualmente.</li>
+            <li><strong>Habilitar división en fragmentos para vídeos largos:</strong> analiza un vídeo largo por partes, una tras otra; úsalo cuando un vídeo largo falla o se detiene antes de tiempo.</li>
         </ul>
-        <p>Con Ollama o un servicio compatible con OpenAI, el vídeo no se sube: se toman fotogramas fijos de cada parte del vídeo, con sus tiempos, y se envían al modelo.</p>
-        <div class="note">
-            <strong>Funciones que necesitan Gemini:</strong> los documentos PDF, Preguntar más (y la tecla W), el Explorador de escena, la introducción sonora (tecla I) y la exportación del guion completo (transcripción de los diálogos) siempre usan Gemini. Cuando «Descripciones de vídeo» está asignado a otra IA, estas funciones se niegan a ejecutarse y te lo indican, para que no se envíe nada a Google sin que lo sepas. Vuelve a poner «Descripciones de vídeo» en Gemini para usarlas.
-        </div>
 
         <h2 id="voices">Voces</h2>
         <p>La voz elegida en Ajustes, pestaña <strong>Salida de audio</strong>, lee las descripciones en las exportaciones de audio y vídeo, en el botón «Escuchar» del editor y en el reproductor cuando «Descripciones en el reproductor» está en la voz de la aplicación. (Con el modo predeterminado de lector de pantalla, es la propia voz de tu lector de pantalla la que las lee durante la reproducción.) Elige el <strong>Motor de texto a voz</strong> con las flechas; los campos de ese motor aparecen debajo. Pulsa <strong>Probar</strong> en el grupo «Probar voz» para oír el texto escrito encima.</p>
@@ -431,13 +423,12 @@
             <li><strong>Centrarse en:</strong> General (predeterminado), Personajes, Acciones e instrucciones, Escenarios y ambiente, o Texto en pantalla.</li>
             <li><strong>Máximo de palabras por descripción:</strong> un límite superior a la longitud de cada descripción (40 de forma predeterminada); 0 significa que solo la duración de la pausa la limita.</li>
             <li><strong>Explicitación:</strong> Describir solo lo visible; Describir y nombrar (predeterminado), por ejemplo el lugar o un objeto conocido; o Describir, nombrar y explicar brevemente.</li>
-            <li><strong>Imágenes y pantalla descritas por</strong>, <strong>Descripciones de vídeo</strong>, <strong>Modelo de visión de Ollama</strong>, <strong>Dirección del servicio de visión</strong>, <strong>Modelo del servicio de visión</strong> y <strong>Clave de API del servicio de visión</strong>: consulta <a href="#ai-backends">Elegir la IA</a>.</li>
             <li><strong>Traducir los diálogos en otro idioma (subtítulos sonoros):</strong> desactivada de forma predeterminada; consulta <a href="#images">subtítulos sonoros</a>.</li>
             <li><strong>Revisar las descripciones con una segunda pasada de la IA:</strong> activada de forma predeterminada; una revisión solo de texto marca las descripciones dudosas con «Revisar» en el editor.</li>
             <li><strong>Mencionar colores:</strong> activada de forma predeterminada; desmárcala si los colores no te dicen nada.</li>
             <li><strong>Modelo de Gemini:</strong> una lista de modelos de solo lectura (el predeterminado se indica en la etiqueta). <strong>Actualizar lista de modelos</strong> (<span class="key">Alt</span> + <span class="key">A</span>) pregunta a Google qué modelos puede usar tu clave y rellena la lista.</li>
             <li><strong>Nivel de razonamiento (Gemini 3 y posteriores):</strong> Bajo (más rápido, más barato), Medio (predeterminado) o Alto (más lento, para películas complejas).</li>
-            <li><strong>Temperatura:</strong> la libertad de la IA al redactar (0,3 de forma predeterminada). Los valores más bajos dan descripciones más literales y coherentes. Un valor que no sea un número se sustituye por el predeterminado.</li>
+            <li><strong>Detalle de las imágenes enviadas a la IA:</strong> Automático (predeterminado), Bajo (más barato, para vídeos largos), Medio o Alto (lee textos pequeños en pantalla, cuesta más). Fija cuánto detalle de cada fotograma del vídeo recibe la IA (la «media resolution» de Gemini). Bajo o Medio bastan para la mayoría de los vídeos; Alto cuesta unas 3 o 4 veces más tokens por fotograma. Consulta <a href="#ai-backends">La IA</a>.</li>
             <li><strong>Enviar solo vídeo (sin audio) a la IA:</strong> no recomendado: sin el sonido, la IA ya no puede evitar hablar encima de los diálogos.</li>
             <li><strong>Deshabilitar filtros de seguridad (usar con precaución):</strong> activada de forma predeterminada. Permite a la IA procesar contenido que de otro modo podría marcar como sensible, pero el resultado sigue sujeto a las políticas de seguridad básicas del proveedor de IA. Eres responsable del uso que hagas de esta función.</li>
             <li><strong>Habilitar división en fragmentos para vídeos largos:</strong> divide el vídeo en partes, las analiza una tras otra y une los resultados. Recomendado para vídeos largos. <strong>Duración del fragmento (segundos)</strong> (de 30 a 2400; 600 de forma predeterminada) solo está disponible cuando la división está marcada.</li>
@@ -470,7 +461,7 @@
         <h2 id="reset">Restablecer ajustes y datos</h2>
         <p><strong>Archivo &gt; Restablecer ajustes y datos...</strong> restaura un estado limpio. Marca lo que quieras restablecer, pulsa <strong>Restablecer</strong> (<span class="key">Alt</span> + <span class="key">R</span>) y confirma:</p>
         <ul>
-            <li><strong>Ajustes (volver a los valores predeterminados)</strong> (<span class="key">Alt</span> + <span class="key">J</span>): todos los ajustes vuelven a sus valores predeterminados. Tus claves de API (Gemini, OpenAI, servicio de visión, Azure, Google) se conservan...</li>
+            <li><strong>Ajustes (volver a los valores predeterminados)</strong> (<span class="key">Alt</span> + <span class="key">J</span>): todos los ajustes vuelven a sus valores predeterminados. Tus claves de API (Gemini, OpenAI, Azure, Google) se conservan...</li>
             <li>...salvo que marques también <strong>Olvidar también mis claves de API</strong> (<span class="key">Alt</span> + <span class="key">O</span>), disponible solo cuando Ajustes está marcado.</li>
             <li><strong>Preajustes de prompt (se eliminan los preajustes personalizados)</strong> (<span class="key">Alt</span> + <span class="key">P</span>): vuelven los preajustes predeterminados de todos los idiomas y se elimina tu <code>ad_rules.json</code>.</li>
             <li><strong>Preajustes de voz de OpenAI</strong> (<span class="key">Alt</span> + <span class="key">V</span>): vuelven los preajustes predeterminados.</li>
@@ -523,16 +514,13 @@
         R: Significa que tu vídeo es demasiado largo o visualmente complejo para que la IA lo procese de una sola vez. Es un límite de capacidad, no un error de contenido. La mejor solución es ir a <strong>Ajustes &gt; Ajustes de la IA</strong> y activar <strong>«Habilitar división en fragmentos para vídeos largos»</strong>. Así el vídeo se dividirá automáticamente en partes más pequeñas y manejables para la IA.</p>
 
         <p><strong>P: La IA no pudo generar descripciones por los «filtros de seguridad». ¿Qué puedo hacer?</strong><br>
-        R: Es un problema conocido: el sistema de seguridad de la IA puede ser demasiado prudente. Tienes varias opciones, en este orden: 1) Ve a <strong>Ajustes &gt; Ajustes de la IA</strong> y asegúrate de que <strong>«Deshabilitar filtros de seguridad»</strong> está marcado. 2) Si no basta, reduce la «Tasa de fotogramas para análisis de la IA» para enviar menos datos a la IA. 3) Como último recurso, elige un modelo más potente en la lista <strong>Modelo de Gemini</strong>, como <code>gemini-4-argon</code>. Puede gestionar mejor el contenido sensible, pero es más lento y puede salir más caro si usas un nivel de pago de la API.</p>
+        R: Es un problema conocido: el sistema de seguridad de la IA puede ser demasiado prudente. Tienes varias opciones, en este orden: 1) Ve a <strong>Ajustes &gt; Ajustes de la IA</strong> y asegúrate de que <strong>«Deshabilitar filtros de seguridad»</strong> está marcado. 2) Si no basta, reduce la «Tasa de fotogramas para análisis de la IA» para enviar menos datos a la IA. 3) Como último recurso, elige un modelo más potente en la lista <strong>Modelo de Gemini</strong>, como <code>gemini-4-hydrogen</code> (nivel gratuito) o <code>gemini-4-argon</code> (solo de pago, con facturación activada). Pueden gestionar mejor el contenido sensible, pero son más lentos.</p>
 
         <p><strong>P: Faltan algunas de mis voces antiguas en la lista de SAPI5. ¿Dónde están?</strong><br>
         R: Los sistemas Windows modernos son de 64 bits, pero muchas voces de síntesis clásicas y muy queridas eran de 32 bits. En los ajustes, en la pestaña «Salida de audio», verás opciones de motor distintas para «SAPI5 (voces de 64 bits)» y «SAPI5 (voces de 32 bits)». Para acceder a tus voces antiguas, selecciona simplemente el motor de 32 bits.</p>
 
         <p><strong>P: ¿Por qué tarda tanto en generar las descripciones?</strong><br>
         R: El tiempo depende de la duración del vídeo, de la velocidad de tu conexión (para la subida a la IA), de la tasa de fotogramas seleccionada y de la carga actual de los servicios de IA. Se recomienda mucho usar la «división en fragmentos» para vídeos largos. Puedes detenerlo en cualquier momento con Escape.</p>
-
-        <p><strong>P: Preguntar más o el Explorador de escena dicen «Esta función usa Gemini».</strong><br>
-        R: «Descripciones de vídeo» está asignado a Ollama o a un servicio compatible con OpenAI. Estas funciones solo funcionan con Gemini; vuelve a poner Gemini en Ajustes &gt; Ajustes de la IA para usarlas.</p>
 
         <h2 id="shortcuts">Atajos de teclado</h2>
         <h3 id="shortcuts-main">En la ventana principal</h3>

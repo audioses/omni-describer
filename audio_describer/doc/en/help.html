@@ -121,7 +121,7 @@
                     <li><a href="#exporting">Exporting Your Work</a></li>
                 </ul>
             </li>
-            <li><a href="#ai-backends">Choosing the AI: Gemini, Ollama or an OpenAI-Compatible Service</a></li>
+            <li><a href="#ai-backends">The AI: Gemini Models and Settings</a></li>
             <li><a href="#voices">Voices</a></li>
             <li><a href="#language">Interface Language and Description Language</a></li>
             <li><a href="#advanced-settings">A Deep Dive into Settings</a>
@@ -150,12 +150,12 @@
             <li><strong>Operating System:</strong> Windows 10 or newer (64-bit).</li>
             <li><strong>Memory (RAM):</strong> At least 4 GB of RAM.</li>
             <li><strong>Storage:</strong> At least 500 MB of free disk space for the application and temporary files.</li>
-            <li><strong>Internet Connection:</strong> Needed for the online AI services (Google Gemini, an online OpenAI-compatible service), the online voices (OpenAI, Azure, Google) and video downloads. With a local AI (Ollama, or a local OpenAI-compatible server) and Windows or Piper voices, videos can be described without sending anything over the internet.</li>
+            <li><strong>Internet Connection:</strong> Required: the AI, Google Gemini, works online. Also needed for the online voices (OpenAI, Azure, Google) and video downloads.</li>
             <li><strong>Screen Reader:</strong> For full accessibility, a screen reader like JAWS, NVDA, or Windows Narrator is recommended.</li>
         </ul>
 
         <h2 id="setup">Getting Started: Setting Up Your API Keys</h2>
-        <p>By default, Omni Describer uses Google Gemini to analyse videos, so you need your own Gemini API key before you start. Other AI services and voices have their own keys, described in <a href="#ai-backends">Choosing the AI</a> and <a href="#voices">Voices</a>.</p>
+        <p>Omni Describer uses Google Gemini to analyse videos, images and documents, so you need your own Gemini API key before you start. The online voices have their own keys, described in <a href="#voices">Voices</a>; choosing a Gemini model is explained in <a href="#ai-backends">The AI: Gemini Models and Settings</a>.</p>
         <ol>
             <li><strong>Open Settings:</strong> open the <strong>File</strong> menu (<span class="key">Alt</span> + <span class="key">F</span>) and choose <strong>Settings...</strong>, or press <span class="key">Ctrl</span> + <span class="key">,</span>.</li>
             <li><strong>AI Settings tab:</strong> press <span class="key">Ctrl</span> + <span class="key">Tab</span> to move from the General tab to the AI Settings tab, then <span class="key">Tab</span> into it.
@@ -170,7 +170,7 @@
             <strong>Secure Storage:</strong> Your API keys are encrypted and stored securely on your computer in the application's settings file. They are never sent anywhere else except to connect directly to the respective AI services.
         </div>
 
-        <p data-p7="1">At the first start, if no Gemini key is set (and no local AI is chosen), the app offers to open the Google AI Studio page and the Settings. Answer Yes, paste the key, then press <strong>Test key</strong>. At the very first start you are also asked to accept the license (Agree or Disagree).</p>
+        <p data-p7="1">At the first start, if no Gemini key is set, the app offers to open the Google AI Studio page and the Settings. Answer Yes, paste the key, then press <strong>Test key</strong>. At the very first start you are also asked to accept the license (Agree or Disagree).</p>
 
         <h2 id="quickstart">Quick Start: Generating Your First Description</h2>
         <p>Let's get started! Just follow these simple steps:</p>
@@ -319,8 +319,6 @@
         <p><strong>Live Screen Description</strong> (Ctrl+Alt+Shift+L, on or off) checks the screen every 3 seconds and describes it only when it has changed noticeably, saying just what is new. Each description uses your API quota: turn it off when you no longer need it.</p>
         <p><strong>Audio subtitles:</strong> in Settings &gt; AI, "Translate dialogue spoken in another language" adds the translation of foreign-language lines (anime in the original version, foreign films), introduced by the speaker. Like on-screen text, they are announced by a short sound and read in the second voice in exports; with "Read translated dialogue with a voice matching the speaker" they are read with a woman's or a man's voice (see <a href="#voices">Voices</a>).</p>
 
-        <p>Private mode: in Settings > AI, "Images and screen described by" can use a local model through Ollama (ollama.com) or an OpenAI-compatible vision service instead of Gemini (see <a href="#ai-backends">Choosing the AI</a>). With Ollama nothing leaves your computer and no quota is used, but the descriptions are less accurate. PDF documents always need Gemini. Install Ollama, then run ollama pull gemma3 (or choose another vision model in Settings).</p>
-
         <p>With several screens, the screen showing the active window is described. In live mode, the new description waits for a pause in what the computer is playing (up to 8 seconds) before it is spoken.</p>
 
         <h3 id="cli">Command Line and Batch Mode</h3>
@@ -360,28 +358,22 @@
 
         <p data-p7="1">Options of the export window: <strong>Only the descriptions of the current density</strong> (<span class="key">Alt</span> + <span class="key">D</span>, on by default) exports what you hear in the player (key D); <strong>Extended description</strong> (<span class="key">Alt</span> + <span class="key">X</span>, MKV, MP4 and MP3 only; on by default when the player is in extended mode) pauses the picture when a description is longer than its pause, instead of cutting it (the video is re-encoded and the original subtitles are not kept); <strong>spoken credit</strong> (<span class="key">Alt</span> + <span class="key">R</span>, audio and video formats) adds at the end a sentence saying that the audio description was generated by AI. Without the extended option, the end message lists the descriptions that were cut. The audio description track is named in the description language, the subtitles of the source are kept when possible, and with 5.1 sound the descriptions are placed on the centre channel. In the player, <span class="key">Shift</span> + <span class="key">I</span> saves the audio introduction as an MP3 to publish before the programme.</p>
 
-        <h2 id="ai-backends">Choosing the AI: Gemini, Ollama or an OpenAI-Compatible Service</h2>
-        <p>In Settings, AI Settings tab, two lists choose which AI looks at your media:</p>
+        <h2 id="ai-backends">The AI: Gemini Models and Settings</h2>
+        <p>Omni Describer uses Google Gemini for everything: video descriptions, images, PDF documents and your screen, Ask More, Scene Explorer, the audio introduction and the dialogue transcription of the full script. Gemini receives the whole video with its soundtrack: it hears the dialogue and places the descriptions in the real pauses instead of speaking over people. One Gemini API key is all you need; you can get it free at <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a> (see <a href="#setup">Getting Started</a>).</p>
+        <p><strong>Choosing a model:</strong> in Settings, AI Settings tab, <strong>Gemini Model</strong>. <strong>Refresh model list</strong> asks Google for the current list of models your key can use. The default, <code>gemini-3.8-flash</code>, is a good balance of quality, speed and cost for most videos.</p>
         <ul>
-            <li><strong>Video descriptions:</strong> the AI that describes videos.</li>
-            <li><strong>Images and screen described by:</strong> the AI used by Describe an Image or PDF, Describe My Screen and Live Screen Description.</li>
+            <li><strong>Free tier</strong> (no billing needed, within Google's daily limits): <code>gemini-4-hydrogen</code>, the newest general model, slower when the Thinking Level is High; <code>gemini-3.8-flash</code> (default) and <code>gemini-3.6-flash</code>; <code>gemini-3.5-flash-lite</code> and <code>gemini-3.1-flash-lite</code>, the cheapest and fastest, with lower quality.</li>
+            <li><strong>Paid only</strong> (billing enabled on your Google account): <code>gemini-4-neon</code>, <code>gemini-4-carbon</code> and <code>gemini-4-argon</code>.</li>
+            <li>The <code>gemini-2.5</code> and <code>gemini-2.0</code> models are deprecated or shut down: if one is still selected, choose a newer model.</li>
         </ul>
-        <p>Each list offers three choices:</p>
+        <p>Pick a Flash-Lite model for quick drafts, very long videos or when your daily quota runs short. Pick <code>gemini-4-hydrogen</code> for a film where the quality of the descriptions matters more than the waiting time.</p>
+        <p>The other AI settings are described in <a href="#settings-ai">AI Settings Tab</a>; in short:</p>
         <ul>
-            <li><strong>Gemini (online)</strong>, the default and the most accurate. It receives the whole video with its sound. Needs the Gemini API key.</li>
-            <li><strong>Ollama (local, free, private)</strong>: a vision model running on your own computer through Ollama (<a href="https://ollama.com" target="_blank">ollama.com</a>). The video never leaves your computer and no quota is used, but it is slower and less accurate. Install Ollama, then a vision model, for example <code>ollama pull gemma3</code>, and type the model name in <strong>Ollama vision model</strong> (default gemma3; llava or qwen2.5vl also work).</li>
-            <li><strong>OpenAI-compatible vision service</strong>: any service that speaks the OpenAI chat API with images, online or on your computer: OpenRouter, OpenAI, Mistral, Groq, Claude through OpenRouter, or a local server such as LM Studio, llama.cpp or vLLM. Fill in three fields:
-                <ul>
-                    <li><strong>Vision service address (OpenAI-compatible):</strong> the address of the API, for example <code>https://openrouter.ai/api/v1</code> (the default), <code>https://api.openai.com/v1</code>, or <code>http://localhost:1234/v1</code> for LM Studio. An online service must use <code>https://</code>; <code>http://</code> is only accepted for this computer (localhost, 127.0.0.1).</li>
-                    <li><strong>Vision service model:</strong> the model name as the service writes it, for example <code>openai/gpt-5-mini</code> on OpenRouter. It must be a model that accepts images.</li>
-                    <li><strong>Vision service API key:</strong> the key of that service; leave it empty for a local server.</li>
-                </ul>
-            </li>
+            <li><strong>Thinking Level (Gemini 3 and later):</strong> how much the model reasons before answering. Low is faster and cheaper; High helps with complex films but is slower.</li>
+            <li><strong>Picture detail sent to the AI:</strong> how much detail of each video frame Gemini receives. Low or Medium is enough for most videos and lets long videos fit and cost less; High helps read small on-screen text, credits or signs, but costs about 3 to 4 times more per frame. Automatic (default) leaves the choice to Gemini.</li>
+            <li><strong>Disable Safety Filters:</strong> on by default, so that films with violent or sensitive scenes are still described.</li>
+            <li><strong>Enable Video Chunking for Long Videos:</strong> analyses a long video in parts, one after the other; use it when a long video fails or stops early.</li>
         </ul>
-        <p>With Ollama or an OpenAI-compatible service, the video is not uploaded: still frames are taken from each part of the video, with their times, and sent to the model.</p>
-        <div class="note">
-            <strong>Features that need Gemini:</strong> PDF documents, Ask More (and the W key), Scene Explorer, the audio introduction (I key) and the full script export (dialogue transcription) always use Gemini. When "Video descriptions" is set to another AI, these features refuse to run and tell you so, so that nothing is sent to Google behind your back. Switch "Video descriptions" back to Gemini to use them.
-        </div>
 
         <h2 id="voices">Voices</h2>
         <p>The voice chosen in Settings, <strong>Audio Output</strong> tab, reads the descriptions in audio and video exports, in the editor's "Hear" button, and in the player when "Descriptions in the player" is set to the app voice. (With the default screen reader mode, your screen reader's own voice reads them during playback.) Choose the <strong>Text-to-Speech Engine</strong> with the arrow keys; the fields of that engine appear below it. Press <strong>Test</strong> in the "Test Voice" group to hear the text typed above it.</p>
@@ -431,13 +423,12 @@
             <li><strong>Focus On:</strong> General (default), Characters, Actions and instructions, Settings and atmosphere, or On-screen text.</li>
             <li><strong>Maximum Words per Description:</strong> an upper limit on the length of each description (default 40); 0 means only the length of the pause limits it.</li>
             <li><strong>Explicitation:</strong> Describe only what is visible; Describe and name (default), for example the place or a well-known object; or Describe, name and briefly explain.</li>
-            <li><strong>Images and screen described by</strong>, <strong>Video descriptions</strong>, <strong>Ollama vision model</strong>, <strong>Vision service address</strong>, <strong>Vision service model</strong> and <strong>Vision service API key</strong>: see <a href="#ai-backends">Choosing the AI</a>.</li>
             <li><strong>Translate dialogue spoken in another language (audio subtitles):</strong> off by default; see <a href="#images">audio subtitles</a>.</li>
             <li><strong>Check the descriptions with a second AI pass:</strong> on by default; a text-only check marks uncertain descriptions "Review" in the editor.</li>
             <li><strong>Mention colours:</strong> on by default; uncheck it if colours mean nothing to you.</li>
             <li><strong>Gemini Model:</strong> a read-only list of models (the default is shown in the label). <strong>Refresh model list</strong> (<span class="key">Alt</span> + <span class="key">R</span>) asks Google which models your key can use and fills the list.</li>
             <li><strong>Thinking Level (Gemini 3 and later):</strong> Low (faster, cheaper), Medium (default) or High (slower, for complex films).</li>
-            <li><strong>Temperature:</strong> how free the AI is in its wording (default 0.3). Lower values give more literal, consistent descriptions. A value that is not a number is replaced by the default.</li>
+            <li><strong>Picture detail sent to the AI:</strong> Automatic (default), Low (cheaper, for long videos), Medium, or High (reads small on-screen text, costs more). It sets how much detail of each video frame the AI receives (Gemini's media resolution). Low or Medium is enough for most videos; High costs about 3 to 4 times more tokens per frame. See <a href="#ai-backends">The AI</a>.</li>
             <li><strong>Send Video Only (No Audio) to AI:</strong> not recommended: without the sound, the AI can no longer avoid speaking over dialogue.</li>
             <li><strong>Disable Safety Filters (Use with caution):</strong> on by default. This lets the AI process content that it might otherwise flag as sensitive, but the output is still subject to the AI provider's core safety policies. You are responsible for how you use this feature.</li>
             <li><strong>Enable Video Chunking for Long Videos:</strong> splits the video into parts, analyses them one after the other and joins the results. Recommended for long videos. <strong>Chunk Duration (seconds)</strong> (30 to 2400, default 600) is available only when chunking is checked.</li>
@@ -470,7 +461,7 @@
         <h2 id="reset">Reset Settings and Data</h2>
         <p><strong>File &gt; Reset Settings and Data...</strong> restores a clean state. Check what you want to reset, then press <strong>Reset</strong> (<span class="key">Alt</span> + <span class="key">R</span>) and confirm:</p>
         <ul>
-            <li><strong>Settings (back to defaults)</strong> (<span class="key">Alt</span> + <span class="key">S</span>): all settings return to their default values. Your API keys (Gemini, OpenAI, vision service, Azure, Google) are kept...</li>
+            <li><strong>Settings (back to defaults)</strong> (<span class="key">Alt</span> + <span class="key">S</span>): all settings return to their default values. Your API keys (Gemini, OpenAI, Azure, Google) are kept...</li>
             <li>...unless you also check <strong>Also forget my API keys</strong> (<span class="key">Alt</span> + <span class="key">A</span>), available only when Settings is checked.</li>
             <li><strong>Prompt presets (custom presets are removed)</strong> (<span class="key">Alt</span> + <span class="key">P</span>): the default presets of every language come back, and your <code>ad_rules.json</code> is removed.</li>
             <li><strong>OpenAI voice presets</strong> (<span class="key">Alt</span> + <span class="key">V</span>): back to the default presets.</li>
@@ -523,16 +514,13 @@
         A: This means your video is too long or visually complex for the AI to process in a single pass. This is a capacity limit, not a content error. The best solution is to go to <strong>Settings &gt; AI Settings</strong> and enable <strong>"Enable Video Chunking for Long Videos"</strong>. This will automatically split the video into smaller, more manageable parts for the AI.</p>
 
         <p><strong>Q: The AI failed to generate descriptions because of "Safety Filters". What can I do?</strong><br>
-        A: This is a known issue where the AI's safety system can be overly cautious. You have a few options to try, in order: 1) Go to <strong>Settings &gt; AI Settings</strong> and make sure <strong>"Disable Safety Filters"</strong> is checked. 2) If that fails, try reducing the "Frame Rate for AI Analysis" to send less data to the AI. 3) As a last resort, choose a more powerful model in the <strong>Gemini Model</strong> list, such as <code>gemini-4-argon</code>. It may handle sensitive content better, but it is slower and may be more expensive if you are on a paid API tier.</p>
+        A: This is a known issue where the AI's safety system can be overly cautious. You have a few options to try, in order: 1) Go to <strong>Settings &gt; AI Settings</strong> and make sure <strong>"Disable Safety Filters"</strong> is checked. 2) If that fails, try reducing the "Frame Rate for AI Analysis" to send less data to the AI. 3) As a last resort, choose a more powerful model in the <strong>Gemini Model</strong> list, such as <code>gemini-4-hydrogen</code> (free tier) or <code>gemini-4-argon</code> (paid only, billing enabled). They may handle sensitive content better, but they are slower.</p>
 
         <p><strong>Q: Some of my old voices are missing from the SAPI5 list. Where did they go?</strong><br>
         A: Modern Windows systems are 64-bit, but many classic, beloved text-to-speech voices were 32-bit. In Settings under the "Audio Output" tab, you will see separate engine choices for "SAPI5 (64-bit Voices)" and "SAPI5 (32-bit Voices)". To access your older voices, simply select the 32-bit engine.</p>
 
         <p><strong>Q: Why does generating descriptions take so long?</strong><br>
         A: The time depends on your video's length, your internet speed (for the upload to the AI), the selected frame rate, and the current load on the AI services. Using "Video Chunking" is highly recommended for long videos. You can stop at any time with Escape.</p>
-
-        <p><strong>Q: Ask More or Scene Explorer says "This feature uses Gemini".</strong><br>
-        A: "Video descriptions" is set to Ollama or an OpenAI-compatible service. These features only work with Gemini; switch back to Gemini in Settings &gt; AI Settings to use them.</p>
 
         <h2 id="shortcuts">Keyboard Shortcuts</h2>
         <h3 id="shortcuts-main">In the main window</h3>
