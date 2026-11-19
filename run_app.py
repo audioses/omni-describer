@@ -29,6 +29,16 @@ def main():
         # --- Stage 2: Run the main application with full logging ---
         # Any error from here on will be caught and logged by the configured app_logger.
         
+        if len(sys.argv) > 1 and sys.argv[1] == "--cli":
+            # Command line in the compiled app (audit §10): OmniDescriber.exe --cli film.mp4 --export vtt
+            if getattr(sys, 'frozen', False) and os.name == 'nt':
+                import ctypes
+                if ctypes.windll.kernel32.AttachConsole(-1):  # windowed exe: write to the calling console
+                    sys.stdout = open("CONOUT$", "w", encoding="utf-8", errors="replace")
+                    sys.stderr = sys.stdout
+            from audio_describer.cli import main as cli_main
+            sys.exit(cli_main(sys.argv[2:]))
+
         # We pre-import the logger here to make it available in the final catch block.
         from audio_describer.utils.logger import app_logger, get_log_file_path
 

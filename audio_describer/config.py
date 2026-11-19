@@ -9,9 +9,9 @@ def get_app_root():
     Gets the application's root directory, handling both source and frozen modes.
     """
     if getattr(sys, 'frozen', False):
-        # In a frozen app, the data folders (notifs, locale, etc.) are
-        # placed next to the main executable. This is the most reliable way.
-        return os.path.dirname(sys.executable)
+        # PyInstaller 6 puts the data folders (notifs, locale, doc, bin) in _internal/,
+        # which is sys._MEIPASS; older flat builds had them next to the executable.
+        return getattr(sys, '_MEIPASS', os.path.dirname(sys.executable))
     else:
         # In source mode, data files are in the 'audio_describer' directory,
         # same as this config.py file.
@@ -21,6 +21,9 @@ def get_app_root():
 # These functions call get_app_root() to ensure the path is always correct at runtime.
 def get_locale_dir():
     return os.path.join(get_app_root(), 'locale')
+
+def get_prompts_dir():
+    return os.path.join(get_app_root(), 'prompts')
 
 def get_notifs_dir():
     return os.path.join(get_app_root(), 'notifs')
@@ -67,15 +70,27 @@ GITHUB_REPO = "audioses/omni-describer"
 VERSION_URL = f"https://api.github.com/repos/{GITHUB_REPO}/releases/latest"
 DOWNLOAD_URL = f"https://github.com/{GITHUB_REPO}/releases/latest/download/omni_describer.zip"
 UPDATER_URL = f"https://github.com/{GITHUB_REPO}/releases/latest/download/updater.exe"
+# Ed25519 public key (base64) that signs every update asset (<asset>.sig). Empty =
+# only GitHub's SHA-256 digest is checked. Set it only together with the release
+# secret UPDATE_SIGNING_KEY: see audio_describer/utils/update_signature.py.
+UPDATE_SIGNING_PUBLIC_KEY = ""
 WEBSITE_URL = "https://audioses.com/"
 WEBAPP_URL = "https://studio.binclusive.io"
 CONTACT_EMAIL = "info@audioses.com"
 
 # API Settings (Placeholder - Store securely, not directly in code for production)
 GEMINI_API_KEY = None
-# Gemini model to use. "gemini-flash-latest" tracks the newest Flash release, so retired models (e.g. 2.5) no longer 404.
-# Pin a specific model (e.g. "gemini-3.8-flash") via the "Gemini Model Override" setting.
-GEMINI_MODEL_NAME = "gemini-flash-latest"
+# Default Gemini model. gemini-3.8-flash: stable, free tier, video input,
+# structured output, thinking_level, cheapest of the strong models. gemini-2.5-* are
+# deprecated (rerouted from 2026-12-01). Users can pick another model in Settings.
+# Checked 2026-11-19 against aistudio.google.com/docs/models.md.
+GEMINI_MODEL_NAME = "gemini-3.8-flash"
+# Shown in Settings before the live list from the API is loaded.
+# Free tier: 4-hydrogen, 3.8/3.6 Flash, 3.5/3.1 Flash-Lite. Paid only: 4-neon, 4-carbon, 4-argon.
+KNOWN_GEMINI_MODELS = ["gemini-3.8-flash", "gemini-4-hydrogen", "gemini-3.6-flash", "gemini-3.5-flash-lite",
+                       "gemini-3.1-flash-lite", "gemini-4-neon", "gemini-4-carbon", "gemini-4-argon"]
+# Tried in order when the chosen model stays overloaded (503 "high demand").
+FALLBACK_GEMINI_MODELS = ["gemini-3.8-flash", "gemini-3.5-flash-lite"]
 
 # Video Processing
 SUPPORTED_VIDEO_FORMATS = "*.mp4;*.avi;*.mkv;*.webm;*.mov;*.flv;*.wmv;*.mpeg;*.mpg;*.3gp;*.ogv;*.ts;*.m4v;*.divx"

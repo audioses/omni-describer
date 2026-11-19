@@ -85,6 +85,12 @@ class AskMoreDialog(wx.Dialog):
         self.Bind(wx.EVT_BUTTON, self.OnSubmit, id=wx.ID_OK)
         self.Bind(wx.EVT_BUTTON, self.OnAddToMain, self.add_to_main_button)
         self.question_text_ctrl.SetFocus()
+        self.exchanges = []
+
+    def AskNow(self, question):
+        """Submit a question programmatically (W key: what is on screen)."""
+        self.question_text_ctrl.SetValue(question)
+        self.OnSubmit(None)
 
     def OnSubmit(self, event):
         user_question = self.question_text_ctrl.GetValue().strip()
@@ -92,6 +98,7 @@ class AskMoreDialog(wx.Dialog):
             wx.MessageBox(_("Please enter a question."), _("Question Required"), wx.OK | wx.ICON_WARNING, self); return
 
         self.OnProcessingStart()
+        self._pending_question = user_question
         self.AppendToHistory(_("You asked: %s") % user_question)
 
         submit_event = AskMoreSubmitEvent()
@@ -123,6 +130,9 @@ class AskMoreDialog(wx.Dialog):
     def SetAnswer(self, answer_text, is_error=False):
         self.last_response_is_error = is_error
         self.last_ai_answer = answer_text
+        if not is_error and getattr(self, "_pending_question", None):
+            self.exchanges.append((self._pending_question, answer_text))  # memory for follow-up questions
+        self._pending_question = None
         
         prefix = _("AI Answer: ")
         if is_error:

@@ -84,8 +84,7 @@ msgstr ""
 
 #: audio_describer/core/audio_describer.py:84
 msgid "Failed to parse character glossary from AI's JSON response."
-msgstr ""
-"Yapay zekanın JSON yanıtından karakter sözlüğü ayrıştırılamadı."
+msgstr "Yapay zekanın JSON yanıtından karakter sözlüğü ayrıştırılamadı."
 
 #: audio_describer/core/audio_describer.py:86
 #, python-format
@@ -200,8 +199,12 @@ msgstr "Gemini İstemcisi başlatılamadı: %s"
 
 #: audio_describer/core/gemini_helpers.py
 #, python-format
-msgid "Rate limit hit (attempt %(attempt)d/%(max)d). Retrying in %(delay)d seconds..."
-msgstr "Hız sınırına ulaşıldı (deneme %(attempt)d/%(max)d). %(delay)d saniye sonra tekrar denenecek..."
+msgid ""
+"Rate limit hit (attempt %(attempt)d/%(max)d). Retrying in %(delay)d "
+"seconds..."
+msgstr ""
+"Hız sınırına ulaşıldı (deneme %(attempt)d/%(max)d). %(delay)d saniye sonra "
+"tekrar denenecek..."
 
 #: audio_describer/core/gemini_helpers.py
 #, python-format
@@ -220,7 +223,8 @@ msgstr "Yapay zeka yanıt vermedi veya geçersiz bir yanıt yapısı döndürdü
 #: audio_describer/core/gemini_helpers.py:228
 msgid ""
 "AI process stopped because it reached its processing limit (MAX_TOKENS)."
-msgstr "İşleme sınırı (MAX_TOKENS) aşıldığı için yapay zeka işlemi durduruldu."
+msgstr ""
+"İşleme sınırı (MAX_TOKENS) aşıldığı için yapay zeka işlemi durduruldu."
 
 #: audio_describer/core/gemini_helpers.py:234
 #, python-format
@@ -321,8 +325,8 @@ msgid ""
 "yt-dlp command not found. Please ensure yt-dlp is installed and in your "
 "system PATH, or bundled correctly."
 msgstr ""
-"yt-dlp komutu bulunamadı. Lütfen yt-dlp'nin kurulu ve sistem yolunda tanımlı "
-"olduğundan veya doğru şekilde paketlendiğinden emin olun."
+"yt-dlp komutu bulunamadı. Lütfen yt-dlp'nin kurulu ve sistem yolunda tanımlı"
+" olduğundan veya doğru şekilde paketlendiğinden emin olun."
 
 #: audio_describer/core/youtube_downloader.py:199
 msgid "Timeout fetching video information."
@@ -350,7 +354,8 @@ msgid "Best Available"
 msgstr "Mevcut En İyi"
 
 #: audio_describer/core/youtube_downloader.py:275
-msgid "Could not retrieve video info; cannot reliably predict output filename."
+msgid ""
+"Could not retrieve video info; cannot reliably predict output filename."
 msgstr ""
 "Video bilgileri alınamadı; çıktı dosya adı güvenilir bir şekilde tahmin "
 "edilemiyor."
@@ -369,8 +374,8 @@ msgid ""
 "yt-dlp command not found. Please ensure yt-dlp is installed and in your "
 "system PATH, or bundled correctly at %s."
 msgstr ""
-"yt-dlp komutu bulunamadı. Lütfen yt-dlp'nin kurulu ve sistem yolunda tanımlı "
-"olduğundan veya %s konumunda doğru şekilde paketlendiğinden emin olun."
+"yt-dlp komutu bulunamadı. Lütfen yt-dlp'nin kurulu ve sistem yolunda tanımlı"
+" olduğundan veya %s konumunda doğru şekilde paketlendiğinden emin olun."
 
 #: audio_describer/core/youtube_downloader.py:334
 #, python-format
@@ -384,8 +389,8 @@ msgstr "%s indirilirken beklenmedik hata: %s"
 
 #: audio_describer/core/youtube_downloader.py:346
 msgid ""
-"Standalone test: config_model.app_settings seems empty, loading defaults for "
-"test."
+"Standalone test: config_model.app_settings seems empty, loading defaults for"
+" test."
 msgstr ""
 "Bağımsız test: config_model.app_settings boş görünüyor, test için "
 "varsayılanlar yükleniyor."
@@ -459,8 +464,7 @@ msgid ""
 "Downloader self-test finished. Check console and app_log.txt for details."
 msgstr ""
 "\n"
-"İndirici otomatik testi tamamlandı. Ayrıntılar için konsolu ve app_log.txt "
-"dosyasını kontrol edin."
+"İndirici otomatik testi tamamlandı. Ayrıntılar için konsolu ve app_log.txt dosyasını kontrol edin."
 
 #: audio_describer/core/youtube_downloader.py:414
 #, python-format
@@ -769,7 +773,7 @@ msgstr "Dışa Aktarma Formatı Seçin"
 
 #: audio_describer/ui/export_options_dialog.py:39
 msgid "&Continue"
-msgstr "Devam Et"
+msgstr "&Devam Et"
 
 #: audio_describer/ui/file_dialogs.py:38
 msgid "Open Local Video File"
@@ -789,7 +793,8 @@ msgstr "Dosya seçimi iptal edildi."
 msgid "File selected: %s"
 msgstr "%s doyası seçildi"
 
-#: audio_describer/ui/file_dialogs.py:72 audio_describer/ui/file_dialogs.py:125
+#: audio_describer/ui/file_dialogs.py:72
+#: audio_describer/ui/file_dialogs.py:125
 msgid "URL input cancelled."
 msgstr "Adres girişi iptal edildi."
 
@@ -940,7 +945,7 @@ msgstr "Yardım dosyasını açar"
 
 #: audio_describer/ui/main_window.py:70
 msgid "&Changelog"
-msgstr "Değişiklik listesi"
+msgstr "&Değişiklik listesi"
 
 #: audio_describer/ui/main_window.py:70
 msgid "View the application's changelog"
@@ -956,7 +961,7 @@ msgstr "Katkıda bululanların listesini görüntüle"
 
 #: audio_describer/ui/main_window.py:72
 msgid "View &License"
-msgstr "Lisans anlaşmasını aç"
+msgstr "&Lisans anlaşmasını aç"
 
 #: audio_describer/ui/main_window.py:72
 msgid "View the application's license agreement"
@@ -1132,32 +1137,24 @@ msgstr "İçerik Üretimi Engellendi"
 #: audio_describer/ui/main_window.py:363
 #, python-format
 msgid ""
-"The AI was unable to generate descriptions because its content safety "
-"filters were triggered.\n"
+"The AI was unable to generate descriptions because its content safety filters were triggered.\n"
 "\n"
 "Reason: %s\n"
 "\n"
-"This can sometimes happen with content that is violent, sensitive, or "
-"complex. Here are some things you can try:\n"
+"This can sometimes happen with content that is violent, sensitive, or complex. Here are some things you can try:\n"
 "\n"
-"1. Go to Settings -> AI Settings and enable 'Disable Safety Filters'. (Use "
-"with caution)\n"
-"2. Reduce the 'Frame Rate for AI Analysis' in settings to send less data to "
-"the AI.\n"
+"1. Go to Settings -> AI Settings and enable 'Disable Safety Filters'. (Use with caution)\n"
+"2. Reduce the 'Frame Rate for AI Analysis' in settings to send less data to the AI.\n"
 "3. Try a different video if the issue persists."
 msgstr ""
-"Yapay zeka, içerik güvenlik filtreleri tetiklendiği için betimleme "
-"oluşturamadı.\n"
+"Yapay zeka, içerik güvenlik filtreleri tetiklendiği için betimleme oluşturamadı.\n"
 "\n"
 "Neden: %s\n"
 "\n"
-"Bu bazen şiddet içeren, hassas veya karmaşık içeriklerde olabilir. "
-"Deneyebileceğiniz bazı şeyler şunlardır:\n"
+"Bu bazen şiddet içeren, hassas veya karmaşık içeriklerde olabilir. Deneyebileceğiniz bazı şeyler şunlardır:\n"
 "\n"
-"1. Ayarlar -> Yapay Zeka Ayarları'na gidin ve 'Güvenlik Filtrelerini Devre "
-"Dışı Bırak' seçeneğini etkinleştirin. (Dikkatli kullanın)\n"
-"2. Yapay Zeka için daha az veri göndermek üzere ayarlarınızdaki 'Yapay Zeka "
-"Analizi İçin Kare Hızı'nı azaltın.\n"
+"1. Ayarlar -> Yapay Zeka Ayarları'na gidin ve 'Güvenlik Filtrelerini Devre Dışı Bırak' seçeneğini etkinleştirin. (Dikkatli kullanın)\n"
+"2. Yapay Zeka için daha az veri göndermek üzere ayarlarınızdaki 'Yapay Zeka Analizi İçin Kare Hızı'nı azaltın.\n"
 "3. Sorun devam ederse farklı bir model veya video deneyin."
 
 #: audio_describer/ui/main_window.py:374
@@ -1166,32 +1163,21 @@ msgstr "İşlem kapasitesine ulaşıldı"
 
 #: audio_describer/ui/main_window.py:376
 msgid ""
-"The AI stopped because the video is too long or complex to process in a "
-"single pass.\n"
+"The AI stopped because the video is too long or complex to process in a single pass.\n"
 "\n"
-"This is a capacity limit, not a content safety issue. Here are the best ways "
-"to solve this:\n"
+"This is a capacity limit, not a content safety issue. Here are the best ways to solve this:\n"
 "\n"
-"1. (Recommended) Go to Settings -> AI Settings and enable 'Video Chunking'. "
-"This will automatically split the video into manageable parts for the AI.\n"
-"2. Reduce the 'Frame Rate for AI Analysis' in settings to make the video "
-"simpler for the AI.\n"
-"3. If you are an advanced user, you can try specifying a more powerful model "
-"in the 'Gemini Model Override' setting."
+"1. (Recommended) Go to Settings -> AI Settings and enable 'Video Chunking'. This will automatically split the video into manageable parts for the AI.\n"
+"2. Reduce the 'Frame Rate for AI Analysis' in settings to make the video simpler for the AI.\n"
+"3. If you are an advanced user, you can try specifying a more powerful model in the 'Gemini Model Override' setting."
 msgstr ""
-"Yapay zeka, video tek geçişte işlenemeyecek kadar uzun veya karmaşık olduğu "
-"için durduruldu.\n"
+"Yapay zeka, video tek geçişte işlenemeyecek kadar uzun veya karmaşık olduğu için durduruldu.\n"
 "\n"
-"Bu bir kapasite sınırı, içerik güvenliği sorunu değildir. Bunu çözmenin en "
-"iyi yolları şunlardır:\n"
+"Bu bir kapasite sınırı, içerik güvenliği sorunu değildir. Bunu çözmenin en iyi yolları şunlardır:\n"
 "\n"
-"1. (Önerilen) Ayarlar -> Yapay Zeka Ayarları'na gidin ve 'Video Parçalama' "
-"seçeneğini etkinleştirin. Bu, videoyu yapay zeka için yönetilebilir "
-"parçalara otomatik olarak ayıracaktır.\n"
-"2. Videoyu yapay zeka için daha basit hale getirmek üzere ayarlarınızdaki "
-"'Yapay Zeka Analizi İçin Kare Hızı'nı azaltın.\n"
-"3. Gelişmiş bir kullanıcıysanız, 'Gemini Modeli Geçersiz Kılma' ayarında "
-"daha güçlü bir model belirlemeyi deneyebilirsiniz."
+"1. (Önerilen) Ayarlar -> Yapay Zeka Ayarları'na gidin ve 'Video Parçalama' seçeneğini etkinleştirin. Bu, videoyu yapay zeka için yönetilebilir parçalara otomatik olarak ayıracaktır.\n"
+"2. Videoyu yapay zeka için daha basit hale getirmek üzere ayarlarınızdaki 'Yapay Zeka Analizi İçin Kare Hızı'nı azaltın.\n"
+"3. Gelişmiş bir kullanıcıysanız, 'Gemini Modeli Geçersiz Kılma' ayarında daha güçlü bir model belirlemeyi deneyebilirsiniz."
 
 #: audio_describer/ui/main_window.py:386
 #, python-format
@@ -1243,8 +1229,7 @@ msgstr "Çıkmayı Onayla"
 
 #: audio_describer/ui/main_window.py:512
 msgid ""
-"An application to automatically generate audio descriptions for videos using "
-"Gemini AI.\n"
+"An application to automatically generate audio descriptions for videos using Gemini AI.\n"
 "\n"
 "Developed with accessibility in mind."
 msgstr ""
@@ -1407,7 +1392,7 @@ msgstr "Betimlemeleri Düzenle..."
 
 #: audio_describer/ui/player_window.py:204
 msgid "Settings..."
-msgstr "&Ayarlar..."
+msgstr "Ayarlar..."
 
 #: audio_describer/ui/player_window.py:208
 msgid "Export..."
@@ -1538,8 +1523,8 @@ msgstr "Sahne Gezgini'nde bir hata oluştu."
 #: audio_describer/ui/scene_explorer_dialog.py:56
 msgid ""
 "Scene Explorer opened. Use arrow keys to move. Press D for scene "
-"description, L to list all objects, and Shift + L to enter jump mode. Escape "
-"to close."
+"description, L to list all objects, and Shift + L to enter jump mode. Escape"
+" to close."
 msgstr ""
 "Sahne Gezgini açıldı. Hareket etmek için ok tuşlarını kullanın. Sahne "
 "betimlemesi için D'ye, tüm nesneleri listelemek için L'ye ve hızlı git "
@@ -1662,7 +1647,7 @@ msgstr "Ukraynaca"
 
 #: audio_describer/ui/settings_dialog.py:47
 msgid "Vietnamese"
-msgstr ""
+msgstr "Vietnamca"
 
 #: audio_describer/ui/settings_dialog.py:50
 msgid "Info (Default)"
@@ -1928,6 +1913,1929 @@ msgstr ""
 msgid "Relaunching application..."
 msgstr "Uygulama yeniden başlatılıyor..."
 
+# --- v2.0 New Strings ---
+#: audio_describer/__app__real.py
+msgid "Settings Notice"
+msgstr "Ayarlar Bildirimi"
+
+#: audio_describer/__app__real.py
+msgid "Omni Describer Web Platform"
+msgstr "Omni Betimleyici Web Platformu"
+
+#: audio_describer/__app__real.py
+#, python-format
+msgid ""
+"Omni Describer is now available as a web platform!\n"
+"\n"
+"The desktop app will continue to work, but new features and improvements are now focused on the web version at:\n"
+"\n"
+"%(webapp_url)s\n"
+"\n"
+"The web platform requires no installation, no API keys, and works on all devices including Mac and mobile.\n"
+"\n"
+"Would you like to open the web platform now?\n"
+"\n"
+"(This message will only be shown once.)"
+msgstr ""
+"Omni Betimleyici artık bir web platformu olarak kullanılabilir!\n"
+"\n"
+"Masaüstü uygulama çalışmaya devam edecek, ancak yeni özellikler ve iyileştirmeler artık şu adresteki web sürümüne odaklanmaktadır:\n"
+"\n"
+"%(webapp_url)s\n"
+"\n"
+"Web platformu kurulum gerektirmez, API anahtarına ihtiyaç duymaz ve Mac ve mobil dahil tüm cihazlarda çalışır.\n"
+"\n"
+"Web platformunu şimdi açmak ister misiniz?\n"
+"\n"
+"(Bu mesaj yalnızca bir kez gösterilecektir.)"
+
+#: audio_describer/ui/main_window.py
+msgid "Open &Web Platform...\tCtrl+W"
+msgstr "Web &Platformunu Aç...\tCtrl+W"
+
+#: audio_describer/ui/main_window.py
+msgid "Open the Omni Describer web platform in your browser"
+msgstr "Omni Betimleyici web platformunu tarayıcınızda açın"
+
+#: audio_describer/ui/main_window.py
+msgid "Or try the web platform (no API key needed):"
+msgstr "Veya web platformunu deneyin (API anahtarı gerekmez):"
+
+#: audio_describer/ui/main_window.py
+msgid "Open &Web Platform"
+msgstr "Web &Platformunu Aç"
+
+#: audio_describer/ui/main_window.py audio_describer/core/audio_describer.py
+msgid "Processing video..."
+msgstr "Video işleniyor..."
+
+#: audio_describer/ui/settings_dialog.py
+msgid "1 FPS (Minimal cost, for static content)"
+msgstr "1 FPS (Minimum maliyet, statik içerik için)"
+
+#: audio_describer/core/audio_describer.py
+msgid "Video is shorter than chunk size, processing as single request."
+msgstr "Video parça boyutundan kısa, tek istek olarak işleniyor."
+
+#: audio_describer/core/audio_describer.py
+#, python-format
+msgid "Processing chunk %d of %d (%.0fs - %.0fs)..."
+msgstr "Parça %d / %d işleniyor (%.0fs - %.0fs)..."
+
+#: audio_describer/core/audio_describer.py
+#, python-format
+msgid "Chunk %d: parsed %d descriptions."
+msgstr "Parça %d: %d betimleme ayrıştırıldı."
+
+#: audio_describer/core/audio_describer.py
+#, python-format
+msgid "Chunked generation failed: %s"
+msgstr "Parçalı oluşturma başarısız oldu: %s"
+
+#: audio_describer/core/video_processor.py
+msgid "Pre-processing video for AI analysis (stripping audio)..."
+msgstr "Yapay zeka analizi için video ön işleniyor (ses kaldırılıyor)..."
+
+#: audio_describer/core/audio_describer.py:30
+msgid "Generation cancelled by user."
+msgstr "Oluşturma kullanıcı tarafından iptal edildi."
+
+#: audio_describer/core/audio_describer.py:231
+msgid "Detecting pauses in the soundtrack..."
+msgstr "Ses kaydındaki duraklamalar algılanıyor..."
+
+#: audio_describer/core/audio_describer.py:323
+msgid "%(count)d descriptions ready, %(flagged)d to review."
+msgstr "%(count)d betimleme hazır, %(flagged)d tanesi gözden geçirilmeli."
+
+#: audio_describer/core/audio_describer.py:348
+msgid ""
+"Detected content: %(genre)s, for %(audience)s, spoken language %(lang)s. "
+"Choose a preset or a focus to change it."
+msgstr ""
+"Algılanan içerik: %(genre)s, hedef kitle %(audience)s, konuşma dili "
+"%(lang)s. Değiştirmek için bir hazır ayar veya odak seçin."
+
+#: audio_describer/core/audio_describer.py:254
+msgid "Requesting descriptions from AI..."
+msgstr "Yapay zekadan betimlemeler isteniyor..."
+
+#: audio_describer/core/audio_describer.py:334
+msgid "Generation failed: %s"
+msgstr "Oluşturma başarısız oldu: %s"
+
+#: audio_describer/core/audio_describer.py:440
+msgid "Invalid timestamp format: %s"
+msgstr "Geçersiz zaman damgası biçimi: %s"
+
+#: audio_describer/core/audio_describer.py:234
+msgid "Found %d pauses in the soundtrack."
+msgstr "Ses kaydında %d duraklama bulundu."
+
+#: audio_describer/core/audio_describer.py:256
+msgid "Chunk %(n)d of %(total)d, %(pct)d%% done."
+msgstr "Parça %(n)d / %(total)d, %%%(pct)d tamamlandı."
+
+#: audio_describer/ui/edit_description_dialog.py:157
+msgid "too long"
+msgstr "çok uzun"
+
+#: audio_describer/ui/edit_description_dialog.py:157
+msgid "over sound"
+msgstr "sesin üzerinde"
+
+#: audio_describer/ui/edit_description_dialog.py:161
+msgid "Review: %s. "
+msgstr "Gözden geçir: %s. "
+
+#: audio_describer/ui/edit_description_dialog.py:164
+msgid "%(time)s, level %(level)d, %(wps).1f words per second: %(text)s"
+msgstr "%(time)s, düzey %(level)d, saniyede %(wps).1f kelime: %(text)s"
+
+#: audio_describer/ui/export_options_dialog.py:16
+msgid ""
+"Video with a separate audio description track (MKV, original tracks kept)"
+msgstr "Ayrı sesli betimleme parçası olan video (MKV, özgün parçalar korunur)"
+
+#: audio_describer/ui/export_options_dialog.py:18
+msgid "Audio description track only (M4A)"
+msgstr "Yalnızca sesli betimleme parçası (M4A)"
+
+#: audio_describer/ui/export_options_dialog.py:19
+msgid "WebVTT descriptions (.vtt, for web players and platforms)"
+msgstr "WebVTT betimlemeleri (.vtt, web oynatıcıları ve platformlar için)"
+
+#: audio_describer/ui/file_dialogs.py:87
+msgid ""
+"The YouTube URL you entered does not appear to be valid.\n"
+"\n"
+"Please use a valid format, such as:\n"
+"youtube.com/watch?v=VIDEO_ID\n"
+"youtu.be/VIDEO_ID\n"
+"youtube.com/shorts/VIDEO_ID"
+msgstr ""
+"Girdiğiniz YouTube adresi geçerli görünmüyor.\n"
+"\n"
+"Lütfen geçerli bir biçim kullanın, örneğin:\n"
+"youtube.com/watch?v=VIDEO_ID\n"
+"youtu.be/VIDEO_ID\n"
+"youtube.com/shorts/VIDEO_ID"
+
+#: audio_describer/ui/main_window.py:63
+msgid "Open &Project...\tCtrl+P"
+msgstr "&Proje Aç...\tCtrl+P"
+
+#: audio_describer/ui/main_window.py:63
+msgid "Reopen a saved audio description project"
+msgstr "Kaydedilmiş bir sesli betimleme projesini yeniden aç"
+
+#: audio_describer/ui/main_window.py:64
+msgid "Reuse &Characters from a Project...\tCtrl+G"
+msgstr "Bir Projeden &Karakterleri Kullan...\tCtrl+G"
+
+#: audio_describer/ui/main_window.py:64
+msgid "Keep the same character names and descriptions as an earlier episode"
+msgstr "Önceki bir bölümle aynı karakter adlarını ve tanımlarını koru"
+
+#: audio_describer/ui/main_window.py:138
+msgid "Cancel the running generation (Escape)"
+msgstr "Süren oluşturmayı iptal et (Escape)"
+
+#: audio_describer/ui/main_window.py:276
+msgid "Omni Describer projects (*%s)|*%s"
+msgstr "Omni Describer projeleri (*%s)|*%s"
+
+#: audio_describer/ui/main_window.py:137
+msgid "&Cancel Generation"
+msgstr "Oluşturmayı &İptal Et"
+
+#: audio_describer/ui/main_window.py:273
+msgid "Cancelling... the current step will finish first."
+msgstr "İptal ediliyor... önce geçerli adım tamamlanacak."
+
+#: audio_describer/ui/main_window.py:277
+msgid "Open Project"
+msgstr "Proje Aç"
+
+#: audio_describer/ui/main_window.py:288
+msgid "Video Not Found"
+msgstr "Video Bulunamadı"
+
+#: audio_describer/ui/main_window.py:292
+msgid "Project opened: %d descriptions."
+msgstr "Proje açıldı: %d betimleme."
+
+#: audio_describer/ui/main_window.py:303
+msgid "Reuse Characters from a Project"
+msgstr "Bir Projeden Karakterleri Kullan"
+
+#: audio_describer/ui/main_window.py:313
+msgid "%d characters will be reused for the next descriptions."
+msgstr "Sonraki betimlemeler için %d karakter yeniden kullanılacak."
+
+#: audio_describer/ui/main_window.py:288
+msgid ""
+"The project's video was not found:\n"
+"%s\n"
+"\n"
+"Please locate it."
+msgstr ""
+"Projenin videosu bulunamadı:\n"
+"%s\n"
+"\n"
+"Lütfen konumunu belirtin."
+
+#: audio_describer/ui/main_window.py:419
+msgid "Generation cancelled."
+msgstr "Oluşturma iptal edildi."
+
+#: audio_describer/ui/main_window.py:285
+msgid ""
+"Could not open project:\n"
+"%s"
+msgstr ""
+"Proje açılamadı:\n"
+"%s"
+
+#: audio_describer/ui/player_export.py:117
+msgid "Exporting File"
+msgstr "Dosya Dışa Aktarılıyor"
+
+#: audio_describer/ui/player_export.py:117
+msgid "Starting..."
+msgstr "Başlatılıyor..."
+
+#: audio_describer/ui/player_export.py:59
+msgid "No descriptions to export."
+msgstr "Dışa aktarılacak betimleme yok."
+
+#: audio_describer/ui/player_export.py:59
+msgid "Export Note"
+msgstr "Dışa Aktarma Notu"
+
+#: audio_describer/ui/player_export.py:78
+msgid "SRT Subtitles (*.srt)|*.srt"
+msgstr "SRT Altyazıları (*.srt)|*.srt"
+
+#: audio_describer/ui/player_export.py:79
+msgid "WebVTT descriptions (*.vtt)|*.vtt"
+msgstr "WebVTT betimlemeleri (*.vtt)|*.vtt"
+
+#: audio_describer/ui/player_export.py:80
+msgid "Text files (*.txt)|*.txt"
+msgstr "Metin dosyaları (*.txt)|*.txt"
+
+#: audio_describer/ui/player_export.py:82
+msgid "All files|*.*"
+msgstr "Tüm dosyalar|*.*"
+
+#: audio_describer/ui/player_export.py:84
+msgid "Save Exported Text File"
+msgstr "Dışa Aktarılan Metin Dosyasını Kaydet"
+
+#: audio_describer/ui/player_export.py:105
+msgid "Matroska video (*.mkv)|*.mkv"
+msgstr "Matroska videosu (*.mkv)|*.mkv"
+
+#: audio_describer/ui/player_export.py:106
+msgid "MP3 Audio (*.mp3)|*.mp3"
+msgstr "MP3 Ses (*.mp3)|*.mp3"
+
+#: audio_describer/ui/player_export.py:107
+msgid "M4A Audio (*.m4a)|*.m4a"
+msgstr "M4A Ses (*.m4a)|*.m4a"
+
+#: audio_describer/ui/player_export.py:111
+msgid "Save Exported File"
+msgstr "Dışa Aktarılan Dosyayı Kaydet"
+
+#: audio_describer/ui/player_export.py:227
+msgid "Mixing audio tracks..."
+msgstr "Ses parçaları karıştırılıyor..."
+
+#: audio_describer/ui/player_export.py:267
+msgid "Export Complete."
+msgstr "Dışa aktarma tamamlandı."
+
+#: audio_describer/ui/player_export.py:133
+msgid "FFmpeg could not convert a synthesized clip: %s"
+msgstr "FFmpeg sentezlenen bir klibi dönüştüremedi: %s"
+
+#: audio_describer/ui/player_export.py:221
+msgid "FFmpeg is required for audio and video export."
+msgstr "Ses ve video dışa aktarımı için FFmpeg gerekli."
+
+#: audio_describer/ui/player_export.py:99
+msgid "Error saving file: %s"
+msgstr "Dosya kaydedilirken hata: %s"
+
+#: audio_describer/ui/player_export.py:170
+msgid "Synthesizing description %d of %d..."
+msgstr "Betimleme %d / %d sentezleniyor..."
+
+#: audio_describer/ui/player_export.py:265
+msgid ""
+"FFmpeg failed to create the export:\n"
+"%s"
+msgstr ""
+"FFmpeg dışa aktarımı oluşturamadı:\n"
+"%s"
+
+#: audio_describer/ui/player_export.py:176
+msgid "Failed to synthesize description #%d."
+msgstr "%d numaralı betimleme sentezlenemedi."
+
+#: audio_describer/ui/player_window.py:126
+msgid ""
+"Player shortcuts: Space, play or pause. Left and Right arrows, back or "
+"forward 5 seconds; with Control, 30 seconds. Alt plus Left or Right, "
+"previous or next description. Up and Down arrows, video volume. R, repeat "
+"the last description. T, announce the time. A, turn audio description on or "
+"off. D, change description density. M, change the audio description mode: in"
+" the pauses, pause the video when needed, or on demand. In on-demand mode, "
+"Enter describes the current moment and Shift+Enter gives more detail. Q, ask"
+" more. S, explore scene. Control plus S, save project. F1, this help."
+msgstr ""
+"Oynatıcı kısayolları: Boşluk, oynat veya duraklat. Sol ve Sağ ok, 5 saniye "
+"geri veya ileri; Control ile 30 saniye. Alt artı Sol veya Sağ, önceki veya "
+"sonraki betimleme. Yukarı ve Aşağı ok, video ses düzeyi. R, son betimlemeyi "
+"tekrarla. T, zamanı söyle. A, sesli betimlemeyi aç veya kapat. D, betimleme "
+"yoğunluğunu değiştir. M, sesli betimleme modunu değiştir: duraklamalarda, "
+"gerektiğinde videoyu duraklatarak veya isteğe bağlı. İsteğe bağlı modda "
+"Enter o anı betimler, Shift+Enter daha fazla ayrıntı verir. Q, daha "
+"fazlasını sor. S, sahneyi keşfet. Control artı S, projeyi kaydet. F1, bu "
+"yardım."
+
+#: audio_describer/ui/player_window.py:541
+msgid "Density low: essential descriptions only."
+msgstr "Yoğunluk düşük: yalnızca temel betimlemeler."
+
+#: audio_describer/ui/player_window.py:542
+msgid "Density medium: essential and important descriptions."
+msgstr "Yoğunluk orta: temel ve önemli betimlemeler."
+
+#: audio_describer/ui/player_window.py:543
+msgid "Density high: all descriptions, including details."
+msgstr "Yoğunluk yüksek: ayrıntılar dahil tüm betimlemeler."
+
+#: audio_describer/ui/player_window.py:551
+msgid "Mode: descriptions in the pauses, the video keeps playing."
+msgstr "Mod: betimlemeler duraklamalarda, video oynamaya devam eder."
+
+#: audio_describer/ui/player_window.py:552
+msgid "Mode: extended, the video pauses when a description does not fit."
+msgstr "Mod: genişletilmiş, bir betimleme sığmadığında video duraklar."
+
+#: audio_describer/ui/player_window.py:553
+msgid ""
+"Mode: on demand. Press Enter to describe the current moment, Shift+Enter for"
+" more detail."
+msgstr ""
+"Mod: isteğe bağlı. O anı betimlemek için Enter'a, daha fazla ayrıntı için "
+"Shift+Enter'a basın."
+
+#: audio_describer/ui/player_window.py:562
+msgid "No description for this moment. Press Q to ask the AI."
+msgstr "Bu an için betimleme yok. Yapay zekaya sormak için Q'ya basın."
+
+#: audio_describer/ui/player_window.py:645
+msgid "Project saved."
+msgstr "Proje kaydedildi."
+
+#: audio_describer/ui/player_window.py:569
+msgid "No descriptions."
+msgstr "Betimleme yok."
+
+#: audio_describer/ui/player_window.py:593
+msgid "%(pos)s of %(total)s"
+msgstr "%(pos)s / %(total)s"
+
+#: audio_describer/ui/player_window.py:605
+msgid "Audio description on."
+msgstr "Sesli betimleme açık."
+
+#: audio_describer/ui/player_window.py:605
+msgid "Audio description off."
+msgstr "Sesli betimleme kapalı."
+
+#: audio_describer/ui/player_window.py:544
+msgid "%d descriptions."
+msgstr "%d betimleme."
+
+#: audio_describer/ui/player_window.py:580
+msgid "No next description."
+msgstr "Sonraki betimleme yok."
+
+#: audio_describer/ui/player_window.py:580
+msgid "No previous description."
+msgstr "Önceki betimleme yok."
+
+#: audio_describer/ui/player_window.py:617
+msgid "Save Project"
+msgstr "Projeyi Kaydet"
+
+#: audio_describer/ui/player_window.py:630
+msgid "Copying video next to the project..."
+msgstr "Video projenin yanına kopyalanıyor..."
+
+#: audio_describer/ui/player_window.py:654
+msgid ""
+"Save this project before closing? Otherwise the generated descriptions will "
+"be lost."
+msgstr ""
+"Kapatmadan önce bu proje kaydedilsin mi? Aksi halde oluşturulan betimlemeler"
+" kaybolacak."
+
+#: audio_describer/ui/player_window.py:655
+msgid "Unsaved Descriptions"
+msgstr "Kaydedilmemiş Betimlemeler"
+
+#: audio_describer/ui/player_window.py:638
+msgid ""
+"Could not save the project:\n"
+"%s"
+msgstr ""
+"Proje kaydedilemedi:\n"
+"%s"
+
+#: audio_describer/ui/player_window.py:508
+msgid "Volume %d"
+msgstr "Ses düzeyi %d"
+
+#: audio_describer/ui/player_window.py:510
+msgid "No description yet."
+msgstr "Henüz betimleme yok."
+
+#: audio_describer/ui/settings_dialog.py:156
+msgid "Gemini Model"
+msgstr "Gemini Modeli"
+
+#: audio_describer/ui/settings_dialog.py:457
+msgid "Loading model list..."
+msgstr "Model listesi yükleniyor..."
+
+#: audio_describer/ui/settings_dialog.py:55
+msgid "Low (faster, cheaper)"
+msgstr "Düşük (daha hızlı, daha ucuz)"
+
+#: audio_describer/ui/settings_dialog.py:55
+msgid "Medium (Default)"
+msgstr "Orta (Varsayılan)"
+
+#: audio_describer/ui/settings_dialog.py:56
+msgid "High (slower, for complex films)"
+msgstr "Yüksek (daha yavaş, karmaşık filmler için)"
+
+#: audio_describer/ui/settings_dialog.py:58
+msgid "Objective (Default)"
+msgstr "Nesnel (Varsayılan)"
+
+#: audio_describer/ui/settings_dialog.py:58
+msgid "Subjective, evocative"
+msgstr "Öznel, çağrışımlı"
+
+#: audio_describer/ui/settings_dialog.py:59
+msgid "General (Default)"
+msgstr "Genel (Varsayılan)"
+
+#: audio_describer/ui/settings_dialog.py:60
+msgid "Actions and instructions"
+msgstr "Eylemler ve talimatlar"
+
+#: audio_describer/ui/settings_dialog.py:60
+msgid "Settings and atmosphere"
+msgstr "Mekân ve atmosfer"
+
+#: audio_describer/ui/settings_dialog.py:61
+msgid "On-screen text"
+msgstr "Ekrandaki metin"
+
+#: audio_describer/ui/settings_dialog.py:150
+msgid "Mention colours"
+msgstr "Renklerden söz et"
+
+#: audio_describer/ui/settings_dialog.py:158
+msgid "&Refresh model list"
+msgstr "Model listesini &yenile"
+
+#: audio_describer/ui/settings_dialog.py:167
+msgid ""
+"Send Video Only (No Audio) to AI - not recommended: the AI can no longer "
+"avoid dialogue"
+msgstr ""
+"Yapay zekaya yalnızca video gönder (ses olmadan) - önerilmez: yapay zeka "
+"artık diyaloglardan kaçınamaz"
+
+#: audio_describer/ui/settings_dialog.py:175
+msgid "Detect pauses in the soundtrack before describing (recommended)"
+msgstr "Betimlemeden önce ses kaydındaki duraklamaları algıla (önerilir)"
+
+#: audio_describer/ui/settings_dialog.py:53
+msgid "Same as interface"
+msgstr "Arayüzle aynı"
+
+#: audio_describer/ui/settings_dialog.py:138
+msgid "Description Language:"
+msgstr "Betimleme Dili:"
+
+#: audio_describer/ui/settings_dialog.py:141
+msgid "Description Style:"
+msgstr "Betimleme Üslubu:"
+
+#: audio_describer/ui/settings_dialog.py:144
+msgid "Focus On:"
+msgstr "Odak:"
+
+#: audio_describer/ui/settings_dialog.py:147
+msgid "Maximum Words per Description (0 = fit the pause):"
+msgstr "Betimleme Başına En Fazla Kelime (0 = duraklamaya sığdır):"
+
+#: audio_describer/ui/settings_dialog.py:161
+msgid "Thinking Level (Gemini 3 and later):"
+msgstr "Düşünme Düzeyi (Gemini 3 ve sonrası):"
+
+#: audio_describer/ui/settings_dialog.py:224
+msgid ""
+"Original audio lowered during descriptions (-dB, player and export; 6 to 12 "
+"recommended):"
+msgstr ""
+"Betimlemeler sırasında özgün sesin kısılması (-dB, oynatıcı ve dışa aktarma;"
+" 6 ile 12 arası önerilir):"
+
+#: audio_describer/ui/settings_dialog.py:227
+msgid "Audio description voice level in exports (dB, 0 = unchanged):"
+msgstr "Dışa aktarmalarda sesli betimleme ses düzeyi (dB, 0 = değişmez):"
+
+#: audio_describer/ui/settings_dialog.py:476
+msgid "%d models available."
+msgstr "%d model kullanılabilir."
+
+#: audio_describer/ui/settings_dialog.py:153
+msgid "Gemini Model (empty = default %s):"
+msgstr "Gemini Modeli (boş = varsayılan %s):"
+
+#: audio_describer/ui/settings_dialog.py:471
+msgid "Could not load the model list: %s"
+msgstr "Model listesi yüklenemedi: %s"
+
+#: audio_describer/ui/settings_dialog.py:471
+msgid "no models returned"
+msgstr "hiç model döndürülmedi"
+
+#: audio_describer/utils/update_checker.py:101
+msgid ""
+"The downloaded update is damaged or was modified (checksum mismatch). It was"
+" deleted."
+msgstr ""
+"İndirilen güncelleme hasarlı veya değiştirilmiş (sağlama toplamı uyuşmuyor)."
+" Silindi."
+
+#: audio_describer/utils/update_checker.py:116
+msgid ""
+"The updater component seems to be missing. The application will now attempt "
+"to download the necessary updater to proceed."
+msgstr ""
+"Güncelleyici bileşeni eksik görünüyor. Uygulama devam etmek için gerekli "
+"güncelleyiciyi indirmeyi deneyecek."
+
+#: audio_describer/utils/update_checker.py:117
+msgid "Updater Missing"
+msgstr "Güncelleyici Eksik"
+
+#: audio_describer/utils/update_checker.py:138
+msgid ""
+"Could not download the required updater component. The update cannot proceed.\n"
+"\n"
+"Please try again later or contact support.\n"
+"\n"
+"Error: {}"
+msgstr ""
+"Gerekli güncelleyici bileşeni indirilemedi. Güncelleme devam edemiyor.\n"
+"\n"
+"Lütfen daha sonra tekrar deneyin veya destekle iletişime geçin.\n"
+"\n"
+"Hata: {}"
+
+#: audio_describer/core/audio_describer.py:372
+msgid "Checking the descriptions for inconsistencies..."
+msgstr "Betimlemeler tutarsızlıklara karşı denetleniyor..."
+
+#: audio_describer/core/audio_describer.py:393
+msgid "Quality check: %d descriptions marked uncertain."
+msgstr "Kalite denetimi: %d betimleme belirsiz olarak işaretlendi."
+
+#: audio_describer/ui/edit_description_dialog.py:171
+msgid "Rename Character"
+msgstr "Karakteri Yeniden Adlandır"
+
+#: audio_describer/ui/edit_description_dialog.py:184
+msgid "uncertain, check with Ask More"
+msgstr "belirsiz, Daha Fazla Sor ile doğrulayın"
+
+#: audio_describer/ui/edit_description_dialog.py:155
+msgid "Select a character first."
+msgstr "Önce bir karakter seçin."
+
+#: audio_describer/ui/edit_description_dialog.py:159
+msgid "New name for this character:"
+msgstr "Bu karakterin yeni adı:"
+
+#: audio_describer/ui/edit_description_dialog.py:171
+msgid "Character renamed. %d descriptions updated."
+msgstr "Karakter yeniden adlandırıldı. %d betimleme güncellendi."
+
+#: audio_describer/ui/edit_description_dialog.py:81
+msgid "&Rename Character..."
+msgstr "Karakteri &Yeniden Adlandır..."
+
+#: audio_describer/ui/player_window.py:128
+msgid ""
+"Player shortcuts: Space, play or pause. Left and Right arrows, back or "
+"forward 5 seconds; with Control, 30 seconds. Alt plus Left or Right, "
+"previous or next description. Up and Down arrows, video volume. R, repeat "
+"the last description. T, announce the time. A, turn audio description on or "
+"off. D, change description density. M, change the audio description mode: in"
+" the pauses, pause the video when needed, or on demand. In on-demand mode, "
+"Enter describes the current moment and Shift+Enter gives more detail. I, "
+"audio introduction: the main characters and places, without spoilers. V, "
+"quality report. Q, ask more. S, explore scene. Control plus S, save project."
+" F1, this help."
+msgstr ""
+"Oynatıcı kısayolları: Boşluk, oynat veya duraklat. Sol ve Sağ ok, 5 saniye "
+"geri veya ileri; Control ile 30 saniye. Alt artı Sol veya Sağ, önceki veya "
+"sonraki betimleme. Yukarı ve Aşağı ok, video ses düzeyi. R, son betimlemeyi "
+"tekrarla. T, zamanı söyle. A, sesli betimlemeyi aç veya kapat. D, betimleme "
+"yoğunluğunu değiştir. M, sesli betimleme modunu değiştir: duraklamalarda, "
+"gerektiğinde videoyu duraklatarak veya isteğe bağlı. İsteğe bağlı modda "
+"Enter o anı betimler, Shift+Enter daha fazla ayrıntı verir. I, sesli giriş: "
+"ana karakterler ve mekânlar, sürprizleri bozmadan. V, kalite raporu. Q, daha"
+" fazlasını sor. S, sahneyi keşfet. Control artı S, projeyi kaydet. F1, bu "
+"yardım."
+
+#: audio_describer/ui/player_window.py:577
+msgid "Writing the audio introduction. It will be read when ready."
+msgstr "Sesli giriş yazılıyor. Hazır olduğunda okunacak."
+
+#: audio_describer/ui/player_window.py:605
+msgid ""
+"%(count)d descriptions. %(within).0f%% within their word budget. %(overlap)d"
+" over sound or dialogue, %(uncertain)d uncertain. Average %(wps).1f words "
+"per second. Longest stretch without description: %(gap)s."
+msgstr ""
+"%(count)d betimleme. %%%(within).0f kelime sınırı içinde. %(overlap)d tanesi"
+" ses veya diyalog üzerinde, %(uncertain)d tanesi belirsiz. Saniyede ortalama"
+" %(wps).1f kelime. Betimlemesiz en uzun bölüm: %(gap)s."
+
+#: audio_describer/ui/player_window.py:571
+msgid "The audio introduction is being written..."
+msgstr "Sesli giriş yazılıyor..."
+
+#: audio_describer/ui/player_window.py:593
+msgid "Could not write the audio introduction: %s"
+msgstr "Sesli giriş yazılamadı: %s"
+
+#: audio_describer/ui/player_window.py:593
+msgid "empty answer"
+msgstr "boş yanıt"
+
+#: audio_describer/ui/settings_dialog.py:63
+msgid "Describe only what is visible"
+msgstr "Yalnızca görüneni betimle"
+
+#: audio_describer/ui/settings_dialog.py:64
+msgid "Describe and name (Default)"
+msgstr "Betimle ve adlandır (Varsayılan)"
+
+#: audio_describer/ui/settings_dialog.py:65
+msgid "Describe, name and briefly explain"
+msgstr "Betimle, adlandır ve kısaca açıkla"
+
+#: audio_describer/ui/settings_dialog.py:157
+msgid "Check the descriptions with a second AI pass (marks uncertain ones)"
+msgstr ""
+"Betimlemeleri ikinci bir yapay zekâ geçişiyle denetle (belirsiz olanları "
+"işaretler)"
+
+#: audio_describer/ui/settings_dialog.py:154
+msgid "Explicitation:"
+msgstr "Açıklama düzeyi:"
+
+#: audio_describer/ui/scene_explorer_dialog.py:33
+msgid "in the centre"
+msgstr "ortada"
+
+#: audio_describer/ui/scene_explorer_dialog.py:36
+msgid "at %d o'clock"
+msgstr "saat %d yönünde"
+
+#: audio_describer/ui/scene_explorer_dialog.py:35
+msgid "at %d o'clock, near the edge"
+msgstr "saat %d yönünde, kenara yakın"
+
+#: audio_describer/ui/scene_explorer_dialog.py:49
+msgid "&Scene:"
+msgstr "&Sahne:"
+
+#: audio_describer/ui/scene_explorer_dialog.py:53
+msgid "&Objects (12 o'clock is the top of the picture):"
+msgstr "&Nesneler (saat 12 resmin üstüdür):"
+
+#: audio_describer/ui/scene_explorer_dialog.py:57
+msgid "&Details:"
+msgstr "&Ayrıntılar:"
+
+#: audio_describer/ui/player_window.py:128
+msgid ""
+"Player shortcuts: Space, play or pause. Left and Right arrows, back or "
+"forward 5 seconds; with Control, 30 seconds. Alt plus Left or Right, "
+"previous or next description. Up and Down arrows, video volume. R, repeat "
+"the last description. T, announce the time. A, turn audio description on or "
+"off. D, change description density. M, change the audio description mode: in"
+" the pauses, pause the video when needed, or on demand. In on-demand mode, "
+"Enter describes the current moment and Shift+Enter gives more detail. I, "
+"audio introduction: the main characters and places, without spoilers. V, "
+"quality report. W, what is on screen now; ask follow-up questions in the "
+"window that opens. Q, ask more. S, explore scene. Control plus S, save "
+"project. F1, this help."
+msgstr ""
+"Oynatıcı kısayolları: Boşluk, oynat veya duraklat. Sol ve Sağ ok, 5 saniye "
+"geri veya ileri; Control ile 30 saniye. Alt artı Sol veya Sağ, önceki veya "
+"sonraki betimleme. Yukarı ve Aşağı ok, video ses düzeyi. R, son betimlemeyi "
+"tekrarla. T, zamanı söyle. A, sesli betimlemeyi aç veya kapat. D, betimleme "
+"yoğunluğunu değiştir. M, sesli betimleme modunu değiştir: duraklamalarda, "
+"gerektiğinde videoyu duraklatarak veya isteğe bağlı. İsteğe bağlı modda "
+"Enter o anı betimler, Shift+Enter daha fazla ayrıntı verir. I, sesli giriş: "
+"ana karakterler ve mekânlar, sürprizleri bozmadan. V, kalite raporu. W, şu "
+"an ekranda ne var; açılan pencerede başka sorular sorun. Q, daha fazlasını "
+"sor. S, sahneyi keşfet. Control artı S, projeyi kaydet. F1, bu yardım."
+
+#: audio_describer/ui/player_window.py:611
+msgid ""
+"What is on screen right now? Describe it briefly, including any visible "
+"text."
+msgstr "Şu anda ekranda ne var? Görünen metin dahil kısaca betimle."
+
+#: audio_describer/ui/settings_dialog.py:240
+msgid "In exports, read on-screen text in a second, lower voice"
+msgstr "Dışa aktarmalarda ekrandaki metni ikinci, daha kalın bir sesle oku"
+
+#: audio_describer/ui/main_window.py:64
+msgid "Describe an &Image or PDF...\tCtrl+I"
+msgstr "&Resim veya PDF Betimle...\tCtrl+I"
+
+#: audio_describer/ui/main_window.py:64
+msgid "Audio description of a picture, a screenshot or a PDF document"
+msgstr ""
+"Bir fotoğrafın, ekran görüntüsünün veya PDF belgesinin sesli betimlemesi"
+
+#: audio_describer/ui/main_window.py:65
+msgid "Describe My &Screen\tCtrl+Alt+Shift+D"
+msgstr "&Ekranımı Betimle\tCtrl+Alt+Shift+D"
+
+#: audio_describer/ui/main_window.py:65
+msgid ""
+"Describe what is on the screen now; the shortcut also works from any other "
+"application"
+msgstr ""
+"Şu anda ekranda olanı betimler; kısayol başka herhangi bir uygulamadan da "
+"çalışır"
+
+#: audio_describer/ui/main_window.py:339
+msgid "Describing..."
+msgstr "Betimleniyor..."
+
+#: audio_describer/ui/main_window.py:312
+msgid "Images and PDF documents"
+msgstr "Resimler ve PDF belgeleri"
+
+#: audio_describer/ui/main_window.py:313
+msgid "Describe an Image or PDF"
+msgstr "Resim veya PDF Betimle"
+
+#: audio_describer/ui/main_window.py:322
+msgid "Still describing, please wait..."
+msgstr "Betimleme sürüyor, lütfen bekleyin..."
+
+#: audio_describer/ui/main_window.py:332
+msgid "Could not capture the screen."
+msgstr "Ekran yakalanamadı."
+
+#: audio_describer/ui/main_window.py:359
+msgid "Description failed: %s"
+msgstr "Betimleme başarısız oldu: %s"
+
+#: audio_describer/ui/text_result_dialog.py:16
+msgid "&Copy"
+msgstr "&Kopyala"
+
+#: audio_describer/ui/text_result_dialog.py:9
+msgid "Description: %s"
+msgstr "Betimleme: %s"
+
+#: audio_describer/ui/text_result_dialog.py:12
+msgid "&Description:"
+msgstr "&Betimleme:"
+
+#: audio_describer/ui/edit_description_dialog.py:185
+msgid "translated dialogue"
+msgstr "çevrilmiş diyalog"
+
+#: audio_describer/ui/main_window.py:66
+msgid "&Live Screen Description\tCtrl+Alt+Shift+L"
+msgstr "&Sürekli Ekran Betimleme\tCtrl+Alt+Shift+L"
+
+#: audio_describer/ui/main_window.py:66
+msgid ""
+"Turn on or off: describe the screen each time it changes; the shortcut also "
+"works from any other application"
+msgstr ""
+"Aç veya kapat: ekran her değiştiğinde betimler; kısayol başka herhangi bir "
+"uygulamadan da çalışır"
+
+#: audio_describer/ui/main_window.py:364
+msgid ""
+"Live screen description on. Each change of the screen is described; this "
+"uses your API quota."
+msgstr ""
+"Sürekli ekran betimleme açık. Ekrandaki her değişiklik betimlenir; bu, API "
+"kotanızı kullanır."
+
+#: audio_describer/ui/main_window.py:360
+msgid "Live screen description off."
+msgstr "Sürekli ekran betimleme kapalı."
+
+#: audio_describer/ui/settings_dialog.py:157
+msgid "Translate dialogue spoken in another language (audio subtitles)"
+msgstr "Başka dilde konuşulan diyalogları çevir (sesli altyazı)"
+
+#: audio_describer/core/audio_describer.py:499
+msgid ""
+"The local model can only describe images; switch to Gemini in Settings for "
+"PDF documents."
+msgstr ""
+"Yerel model yalnızca görselleri betimleyebilir; PDF belgeleri için "
+"Ayarlar'dan Gemini'ye geçin."
+
+#: audio_describer/core/audio_describer.py:485
+msgid "Ollama refused the request (model '%(model)s'): %(detail)s"
+msgstr "Ollama isteği reddetti (model '%(model)s'): %(detail)s"
+
+#: audio_describer/core/audio_describer.py:487
+msgid ""
+"Ollama is not running on this computer. Install it from ollama.com, then "
+"run: ollama pull %s"
+msgstr ""
+"Ollama bu bilgisayarda çalışmıyor. ollama.com adresinden yükleyin, ardından "
+"şunu çalıştırın: ollama pull %s"
+
+#: audio_describer/models/evaluation_model.py:45
+msgid "not rated"
+msgstr "puanlanmadı"
+
+#: audio_describer/models/evaluation_model.py:45
+msgid "1, very poor"
+msgstr "1, çok zayıf"
+
+#: audio_describer/models/evaluation_model.py:45
+msgid "2, poor"
+msgstr "2, zayıf"
+
+#: audio_describer/models/evaluation_model.py:45
+msgid "3, fair"
+msgstr "3, orta"
+
+#: audio_describer/models/evaluation_model.py:45
+msgid "4, good"
+msgstr "4, iyi"
+
+#: audio_describer/models/evaluation_model.py:45
+msgid "5, very good"
+msgstr "5, çok iyi"
+
+#: audio_describer/models/evaluation_model.py:46
+msgid "Global listening, without the picture"
+msgstr "Genel dinleme, görüntü olmadan"
+
+#: audio_describer/models/evaluation_model.py:46
+msgid "Analysis, with the picture"
+msgstr "Analiz, görüntüyle birlikte"
+
+#: audio_describer/models/evaluation_model.py:13
+msgid ""
+"Without the picture, are the action, the characters, the place and the time "
+"understood?"
+msgstr "Görüntü olmadan eylem, karakterler, mekân ve zaman anlaşılıyor mu?"
+
+#: audio_describer/models/evaluation_model.py:14
+msgid "Does the description avoid covering dialogue?"
+msgstr "Betimleme diyalogların üzerine binmekten kaçınıyor mu?"
+
+#: audio_describer/models/evaluation_model.py:15
+msgid "Does it describe the images rather than explain the plot?"
+msgstr "Olay örgüsünü açıklamak yerine görüntüleri mi betimliyor?"
+
+#: audio_describer/models/evaluation_model.py:16
+msgid "Is it neither too sparse nor too present?"
+msgstr "Ne çok seyrek ne de çok baskın mı?"
+
+#: audio_describer/models/evaluation_model.py:17
+msgid "Does it stay inside the fiction (no actors, no filming jargon)?"
+msgstr "Kurgunun içinde kalıyor mu (oyuncu adı, çekim terimi yok)?"
+
+#: audio_describer/models/evaluation_model.py:18
+msgid "Is the language correct and clear?"
+msgstr "Dil doğru ve anlaşılır mı?"
+
+#: audio_describer/models/evaluation_model.py:19
+msgid "Are the voice and the pace pleasant and suitable?"
+msgstr "Ses ve tempo hoş ve uygun mu?"
+
+#: audio_describer/models/evaluation_model.py:20
+msgid "With the picture: is it free of factual errors and omissions?"
+msgstr "Görüntüyle: olgu hataları ve eksiklikler yok mu?"
+
+#: audio_describer/models/evaluation_model.py:21
+msgid "Are looks, faces and gestures interpreted correctly?"
+msgstr "Bakışlar, yüz ifadeleri ve jestler doğru yorumlanıyor mu?"
+
+#: audio_describer/models/evaluation_model.py:22
+msgid "Are the chronology and the rhythm of the film respected?"
+msgstr "Filmin kronolojisine ve ritmine uyuluyor mu?"
+
+#: audio_describer/models/evaluation_model.py:23
+msgid "Is each description well placed relative to sound effects and music?"
+msgstr "Her betimleme ses efektlerine ve müziğe göre doğru yerleştirilmiş mi?"
+
+#: audio_describer/models/evaluation_model.py:24
+msgid "Is on-screen text read?"
+msgstr "Ekrandaki metin okunuyor mu?"
+
+#: audio_describer/models/evaluation_model.py:25
+msgid "Does the style match the film?"
+msgstr "Üslup filme uyuyor mu?"
+
+#: audio_describer/models/evaluation_model.py:35
+msgid "measured: %(n)d of %(total)d descriptions over sound or dialogue"
+msgstr ""
+"ölçülen: %(total)d betimlemeden %(n)d tanesi ses veya diyalog üzerinde"
+
+#: audio_describer/models/evaluation_model.py:36
+msgid ""
+"measured: %(total)d descriptions, longest stretch without description "
+"%(gap)s"
+msgstr "ölçülen: %(total)d betimleme, betimlemesiz en uzun aralık %(gap)s"
+
+#: audio_describer/models/evaluation_model.py:37
+msgid "measured: %(wps).1f words per second (target 2.7 or less)"
+msgstr "ölçülen: saniyede %(wps).1f sözcük (hedef 2,7 veya daha az)"
+
+#: audio_describer/models/evaluation_model.py:38
+msgid "measured: %d descriptions marked uncertain by the AI check"
+msgstr ""
+"ölçülen: yapay zeka denetiminin belirsiz olarak işaretlediği %d betimleme"
+
+#: audio_describer/models/evaluation_model.py:39
+msgid "measured: %d descriptions read on-screen text"
+msgstr "ölçülen: ekrandaki metni okuyan %d betimleme"
+
+#: audio_describer/models/evaluation_model.py:47
+msgid "Audio description evaluation (CSA 2020 grid): %s"
+msgstr "Sesli betimleme değerlendirmesi (CSA 2020 tablosu): %s"
+
+#: audio_describer/models/evaluation_model.py:58
+msgid "Comments:"
+msgstr "Yorumlar:"
+
+#: audio_describer/ui/evaluation_dialog.py:12
+msgid "Evaluate this Audio Description"
+msgstr "Bu Sesli Betimlemeyi Değerlendir"
+
+#: audio_describer/ui/evaluation_dialog.py:46
+msgid "Save &Report..."
+msgstr "&Raporu Kaydet..."
+
+#: audio_describer/ui/evaluation_dialog.py:65
+msgid "Save Evaluation Report"
+msgstr "Değerlendirme Raporunu Kaydet"
+
+#: audio_describer/ui/evaluation_dialog.py:36
+msgid "&Comments:"
+msgstr "&Yorumlar:"
+
+#: audio_describer/ui/player_window.py:128
+msgid ""
+"Player shortcuts: Space, play or pause. Left and Right arrows, back or "
+"forward 5 seconds; with Control, 30 seconds. Alt plus Left or Right, "
+"previous or next description. Up and Down arrows, video volume. R, repeat "
+"the last description. T, announce the time. A, turn audio description on or "
+"off. D, change description density. M, change the audio description mode: in"
+" the pauses, pause the video when needed, or on demand. In on-demand mode, "
+"Enter describes the current moment and Shift+Enter gives more detail. I, "
+"audio introduction: the main characters and places, without spoilers. V, "
+"quality report. W, what is on screen now; ask follow-up questions in the "
+"window that opens. E, evaluate this audio description. Q, ask more. S, "
+"explore scene. Control plus S, save project. F1, this help."
+msgstr ""
+"Oynatıcı kısayolları: Boşluk, oynat veya duraklat. Sol ve Sağ ok, 5 saniye "
+"geri veya ileri; Control ile 30 saniye. Alt artı Sol veya Sağ, önceki veya "
+"sonraki betimleme. Yukarı ve Aşağı ok, video ses düzeyi. R, son betimlemeyi "
+"tekrarla. T, zamanı söyle. A, sesli betimlemeyi aç veya kapat. D, betimleme "
+"yoğunluğunu değiştir. M, sesli betimleme modunu değiştir: duraklamalarda, "
+"gerektiğinde videoyu duraklatarak veya isteğe bağlı. İsteğe bağlı modda "
+"Enter o anı betimler, Shift+Enter daha fazla ayrıntı verir. I, sesli giriş: "
+"ana karakterler ve mekânlar, sürprizleri bozmadan. V, kalite raporu. W, şu "
+"an ekranda ne var; açılan pencerede başka sorular sorun. E, bu sesli "
+"betimlemeyi değerlendir. Q, daha fazlasını sor. S, sahneyi keşfet. Control "
+"artı S, projeyi kaydet. F1, bu yardım."
+
+#: audio_describer/ui/settings_dialog.py:157
+msgid "Gemini (online)"
+msgstr "Gemini (çevrimiçi)"
+
+#: audio_describer/ui/settings_dialog.py:158
+msgid "Local model with Ollama (private, offline, lower quality)"
+msgstr "Ollama ile yerel model (gizli, çevrimdışı, daha düşük kalite)"
+
+#: audio_describer/ui/settings_dialog.py:159
+msgid "Images and screen described by:"
+msgstr "Görselleri ve ekranı betimleyen:"
+
+#: audio_describer/ui/settings_dialog.py:162
+msgid "Ollama vision model:"
+msgstr "Ollama görme modeli:"
+
+#: audio_describer/core/audio_describer.py:427
+msgid ""
+"Quality check: %(uncertain)d descriptions uncertain, %(style)d with style "
+"issues."
+msgstr ""
+"Kalite denetimi: %(uncertain)d betimleme belirsiz, %(style)d tanesinde üslup"
+" sorunu var."
+
+#: audio_describer/core/audio_describer.py:245
+msgid "Detecting shot changes..."
+msgstr "Plan değişiklikleri algılanıyor..."
+
+#: audio_describer/core/audio_describer.py:234
+msgid ""
+"About %(tokens)s tokens will be sent to %(model)s for %(duration)s of video."
+" Press Escape to cancel."
+msgstr ""
+"%(duration)s video için %(model)s modeline yaklaşık %(tokens)s token "
+"gönderilecek. İptal etmek için Escape'e basın."
+
+#: audio_describer/core/audio_describer.py:542
+msgid "Still working, %s elapsed."
+msgstr "Hâlâ çalışıyor, %s geçti."
+
+#: audio_describer/core/script_export.py:40
+msgid "validated"
+msgstr "onaylandı"
+
+#: audio_describer/core/script_export.py:40
+msgid "to review"
+msgstr "gözden geçirilecek"
+
+#: audio_describer/core/script_export.py:45
+msgid "In"
+msgstr "Giriş"
+
+#: audio_describer/core/script_export.py:45
+msgid "Out"
+msgstr "Çıkış"
+
+#: audio_describer/core/script_export.py:45
+msgid "Level"
+msgstr "Düzey"
+
+#: audio_describer/core/script_export.py:45
+msgid "Status"
+msgstr "Durum"
+
+#: audio_describer/core/script_export.py:45
+msgid "Notes"
+msgstr "Notlar"
+
+#: audio_describer/core/script_export.py:92
+msgid "[Description]"
+msgstr "[Betimleme]"
+
+#: audio_describer/core/script_export.py:93
+msgid "Voice"
+msgstr "Ses"
+
+#: audio_describer/models/evaluation_model.py:40
+msgid "measured: %d descriptions interpret instead of describing"
+msgstr "ölçülen: betimlemek yerine yorumlayan %d betimleme"
+
+#: audio_describer/models/evaluation_model.py:41
+msgid "measured: %d descriptions leave the fiction"
+msgstr "ölçülen: kurgunun dışına çıkan %d betimleme"
+
+#: audio_describer/models/evaluation_model.py:42
+msgid "measured: %d descriptions not in the present tense"
+msgstr "ölçülen: şimdiki zamanda olmayan %d betimleme"
+
+#: audio_describer/ui/edit_description_dialog.py:193
+msgid "style: not in the present tense"
+msgstr "üslup: şimdiki zamanda değil"
+
+#: audio_describer/ui/edit_description_dialog.py:194
+msgid "style: interprets instead of describing"
+msgstr "üslup: betimlemek yerine yorumluyor"
+
+#: audio_describer/ui/edit_description_dialog.py:195
+msgid "style: leaves the fiction (actors, camera)"
+msgstr "üslup: kurgunun dışına çıkıyor (oyuncular, kamera)"
+
+#: audio_describer/ui/edit_description_dialog.py:54
+msgid "Review status:"
+msgstr "Gözden geçirme durumu:"
+
+#: audio_describer/ui/edit_description_dialog.py:55
+msgid "To review"
+msgstr "Gözden geçirilecek"
+
+#: audio_describer/ui/edit_description_dialog.py:55
+msgid "Validated"
+msgstr "Onaylandı"
+
+#: audio_describer/ui/edit_description_dialog.py:57
+msgid "Reviewer notes:"
+msgstr "Gözden geçiren notları:"
+
+#: audio_describer/ui/edit_description_dialog.py:201
+msgid "Validated. "
+msgstr "Onaylandı. "
+
+#: audio_describer/ui/export_options_dialog.py:17
+msgid ""
+"Video with a separate audio description track (MP4, for most players and "
+"phones)"
+msgstr ""
+"Ayrı sesli betimleme parçası olan video (MP4, çoğu oynatıcı ve telefon için)"
+
+#: audio_describer/ui/export_options_dialog.py:23
+msgid ""
+"Audio description script, W3C TTML DAPT (.ttml, for professional tools)"
+msgstr ""
+"Sesli betimleme metni, W3C TTML DAPT (.ttml, profesyonel araçlar için)"
+
+#: audio_describer/ui/export_options_dialog.py:24
+msgid ""
+"Production script for review (Word .docx: timecodes, text, status, notes)"
+msgstr ""
+"Gözden geçirme için yapım metni (Word .docx: zaman kodları, metin, durum, "
+"notlar)"
+
+#: audio_describer/ui/export_options_dialog.py:25
+msgid ""
+"Full script: transcribed dialogue and descriptions (.txt, for deafblind "
+"readers; uses the AI)"
+msgstr ""
+"Tam metin: yazıya dökülmüş diyaloglar ve betimlemeler (.txt, sağır-kör "
+"okurlar için; yapay zekayı kullanır)"
+
+#: audio_describer/ui/player_export.py:105
+msgid "Transcribing the dialogue, this can take a few minutes..."
+msgstr "Diyaloglar yazıya dökülüyor, bu birkaç dakika sürebilir..."
+
+#: audio_describer/ui/player_export.py:73
+msgid "TTML DAPT scripts (*.ttml)|*.ttml"
+msgstr "TTML DAPT metinleri (*.ttml)|*.ttml"
+
+#: audio_describer/ui/player_export.py:74
+msgid "Word documents (*.docx)|*.docx"
+msgstr "Word belgeleri (*.docx)|*.docx"
+
+#: audio_describer/ui/player_export.py:129
+msgid "MP4 video (*.mp4)|*.mp4"
+msgstr "MP4 video (*.mp4)|*.mp4"
+
+#: audio_describer/ui/player_export.py:120
+msgid "Export"
+msgstr "Dışa aktar"
+
+#: audio_describer/ui/player_window.py:131
+msgid ""
+"Player shortcuts: Space, play or pause. Left and Right arrows, back or "
+"forward 5 seconds; with Control, 30 seconds. Alt plus Left or Right, "
+"previous or next description. Up and Down arrows, video volume; with Shift, "
+"how much the video is lowered during descriptions. R, repeat the last "
+"description. T, announce the time. A, turn audio description on or off. D, "
+"change description density. M, change the audio description mode: in the "
+"pauses, pause the video when needed, or on demand. In on-demand mode, Enter "
+"describes the current moment and Shift+Enter gives more detail. I, audio "
+"introduction: the main characters and places, without spoilers. V, quality "
+"report. W, what is on screen now; ask follow-up questions in the window that"
+" opens. E, evaluate this audio description. Q, ask more. S, explore scene. "
+"In braille-only output, Enter resumes the video after each description. "
+"Control plus S, save project. F1 or question mark, this help."
+msgstr ""
+"Oynatıcı kısayolları: Boşluk, oynat veya duraklat. Sol ve Sağ ok, 5 saniye "
+"geri veya ileri; Control ile 30 saniye. Alt artı Sol veya Sağ, önceki veya "
+"sonraki betimleme. Yukarı ve Aşağı ok, video ses düzeyi; Shift ile, "
+"betimlemeler sırasında videonun ne kadar kısılacağı. R, son betimlemeyi "
+"tekrarla. T, zamanı söyle. A, sesli betimlemeyi aç veya kapat. D, betimleme "
+"yoğunluğunu değiştir. M, sesli betimleme modunu değiştir: duraklamalarda, "
+"gerektiğinde videoyu duraklatarak veya isteğe bağlı. İsteğe bağlı modda "
+"Enter o anı betimler, Shift+Enter daha fazla ayrıntı verir. I, sesli giriş: "
+"ana karakterler ve mekânlar, sürprizleri bozmadan. V, kalite raporu. W, şu "
+"an ekranda ne var; açılan pencerede başka sorular sorun. E, bu sesli "
+"betimlemeyi değerlendir. Q, daha fazlasını sor. S, sahneyi keşfet. Yalnızca "
+"braille çıkışında Enter, her betimlemeden sonra videoyu sürdürür. Control "
+"artı S, projeyi kaydet. F1 veya soru işareti, bu yardım."
+
+#: audio_describer/ui/player_window.py:694
+msgid ""
+"%(count)d descriptions. %(within).0f%% within their word budget. %(overlap)d"
+" over sound or dialogue, %(uncertain)d uncertain, %(style)d with style "
+"issues. Average %(wps).1f words per second. Longest stretch without "
+"description: %(gap)s."
+msgstr ""
+"%(count)d betimleme. %%%(within).0f kelime sınırı içinde. %(overlap)d tanesi"
+" ses veya diyalog üzerinde, %(uncertain)d tanesi belirsiz, %(style)d "
+"tanesinde üslup sorunu var. Saniyede ortalama %(wps).1f kelime. Betimlemesiz"
+" en uzun bölüm: %(gap)s."
+
+#: audio_describer/ui/player_window.py:503
+msgid "Video not lowered during descriptions."
+msgstr "Betimlemeler sırasında video kısılmaz."
+
+#: audio_describer/ui/player_window.py:502
+msgid "Video lowered by %d dB during descriptions."
+msgstr "Betimlemeler sırasında video %d dB kısılır."
+
+#: audio_describer/ui/settings_dialog.py:253
+msgid "Screen reader (speech and braille)"
+msgstr "Ekran okuyucu (konuşma ve braille)"
+
+#: audio_describer/ui/settings_dialog.py:254
+msgid "App voice above, prepared in advance (exact timing)"
+msgstr "Yukarıdaki uygulama sesi, önceden hazırlanır (tam zamanlama)"
+
+#: audio_describer/ui/settings_dialog.py:255
+msgid "Braille only, the video waits for Enter"
+msgstr "Yalnızca braille, video Enter'ı bekler"
+
+#: audio_describer/ui/settings_dialog.py:259
+msgid "Also show descriptions in large text on the video"
+msgstr "Betimlemeleri video üzerinde büyük yazıyla da göster"
+
+#: audio_describer/ui/settings_dialog.py:264
+msgid "Yellow"
+msgstr "Sarı"
+
+#: audio_describer/ui/settings_dialog.py:264
+msgid "White"
+msgstr "Beyaz"
+
+#: audio_describer/ui/settings_dialog.py:264
+msgid "Cyan"
+msgstr "Camgöbeği"
+
+#: audio_describer/ui/settings_dialog.py:256
+msgid "Descriptions in the player:"
+msgstr "Oynatıcıda betimlemeler:"
+
+#: audio_describer/ui/settings_dialog.py:261
+msgid "Text size on the video:"
+msgstr "Video üzerindeki yazı boyutu:"
+
+#: audio_describer/ui/settings_dialog.py:265
+msgid "Text colour on the video:"
+msgstr "Video üzerindeki yazı rengi:"
+
+#: audio_describer/ui/edit_description_dialog.py:75
+msgid "C&haracters..."
+msgstr "&Karakterler..."
+
+#: audio_describer/ui/glossary_dialog.py:19
+msgid "&Characters kept consistent across the video:"
+msgstr "Video boyunca tutarlı tutulan &karakterler:"
+
+#: audio_describer/ui/glossary_dialog.py:66
+msgid "ID and description are required."
+msgstr "Kimlik ve açıklama zorunludur."
+
+#: audio_describer/ui/glossary_dialog.py:68
+msgid "Another character already uses this ID."
+msgstr "Bu kimliği başka bir karakter zaten kullanıyor."
+
+#: audio_describer/ui/glossary_dialog.py:79
+msgid "Add Character"
+msgstr "Karakter Ekle"
+
+#: audio_describer/ui/glossary_dialog.py:89
+#: audio_describer/ui/glossary_dialog.py:100
+msgid "Edit Character"
+msgstr "Karakteri Düzenle"
+
+#: audio_describer/ui/glossary_dialog.py:107
+msgid "Delete this character from the glossary?"
+msgstr "Bu karakter sözlükten silinsin mi?"
+
+#: audio_describer/ui/glossary_dialog.py:124
+msgid "&ID:"
+msgstr "&Kimlik:"
+
+#: audio_describer/ui/glossary_dialog.py:127
+msgid "&Name (leave empty if not revealed yet):"
+msgstr "&Ad (henüz açıklanmadıysa boş bırakın):"
+
+#: audio_describer/ui/glossary_dialog.py:130
+msgid "&Description (how to recognise them):"
+msgstr "Açık&lama (nasıl tanınır):"
+
+#: audio_describer/ui/player_vqa.py:65
+msgid "AI processing could not be completed."
+msgstr "Yapay zekâ işlemi tamamlanamadı."
+
+#: audio_describer/ui/player_vqa.py:74
+msgid "No video context available."
+msgstr "Kullanılabilir video bağlamı yok."
+
+#: audio_describer/ui/player_vqa.py:86
+#, python-format
+msgid "FFmpeg failed to extract segment: %s"
+msgstr "FFmpeg bölümü çıkaramadı: %s"
+
+#: audio_describer/ui/player_vqa.py:138
+#, python-brace-format
+msgid "Extracting {duration}s clip..."
+msgstr "{duration} sn'lik klip çıkarılıyor..."
+
+#: audio_describer/ui/player_vqa.py:145
+msgid "No time remaining in the video to analyze from the selected point."
+msgstr "Seçilen noktadan itibaren analiz edilecek video kalmadı."
+
+#: audio_describer/ui/player_vqa.py:147
+msgid "Asking AI to analyze the scene... This may take a moment."
+msgstr "Yapay zekâ sahneyi analiz ediyor... Bu biraz sürebilir."
+
+#: audio_describer/ui/player_vqa.py:179
+#, python-format
+msgid "FFmpeg failed to extract scene: %s"
+msgstr "FFmpeg sahneyi çıkaramadı: %s"
+
+#: audio_describer/ui/player_vqa.py:194
+#, python-format
+msgid "Failed to analyze scene: %s"
+msgstr "Sahne analiz edilemedi: %s"
+
+#: audio_describer/utils/update_checker.py:120
+msgid ""
+"The update is not signed by the Omni Describer team (missing or invalid "
+"signature). It was deleted. Download the new version from the official site "
+"instead."
+msgstr ""
+"Güncelleme Omni Describer ekibi tarafından imzalanmamış (imza eksik veya "
+"geçersiz). Silindi. Yeni sürümü resmi siteden indirin."
+
+#: audio_describer/ui/edit_description_dialog.py:30
+#, python-format
+msgid "Invalid time \"%s\". Use HH:MM:SS.mmm, MM:SS or seconds."
+msgstr "Geçersiz zaman \"%s\". SS:DD:SS.mmm, DD:SS veya saniye kullanın."
+
+#: audio_describer/ui/edit_description_dialog.py:32
+#, python-format
+msgid "Times must be within the video duration (0 to %s)."
+msgstr "Zamanlar video süresi içinde olmalıdır (0 ile %s arası)."
+
+#: audio_describer/ui/edit_description_dialog.py:53
+msgid "Descriptions &list:"
+msgstr "Betimleme &listesi:"
+
+#: audio_describer/ui/edit_description_dialog.py:55
+msgid "Start"
+msgstr "Başlangıç"
+
+#: audio_describer/ui/edit_description_dialog.py:55
+msgid "End"
+msgstr "Bitiş"
+
+#: audio_describer/ui/edit_description_dialog.py:55
+msgid "Text"
+msgstr "Metin"
+
+#: audio_describer/ui/edit_description_dialog.py:56
+msgid "Words/s"
+msgstr "Kelime/sn"
+
+#: audio_describer/ui/edit_description_dialog.py:76
+#: audio_describer/ui/edit_description_dialog.py:423
+msgid "Start (HH:MM:SS.mmm):"
+msgstr "Başlangıç (SS:DD:SS.mmm):"
+
+#: audio_describer/ui/edit_description_dialog.py:76
+msgid "S&tart = player position (Ctrl+[)"
+msgstr "&Başlangıç = oynatıcı konumu (Ctrl+[)"
+
+#: audio_describer/ui/edit_description_dialog.py:77
+#: audio_describer/ui/edit_description_dialog.py:426
+msgid "End (HH:MM:SS.mmm):"
+msgstr "Bitiş (SS:DD:SS.mmm):"
+
+#: audio_describer/ui/edit_description_dialog.py:77
+msgid "E&nd = player position (Ctrl+])"
+msgstr "B&itiş = oynatıcı konumu (Ctrl+])"
+
+#: audio_describer/ui/edit_description_dialog.py:93
+msgid ""
+"F8 / Shift+F8: next / previous description to review. Ctrl+P: play or pause "
+"the video. Alt+Left / Alt+Right: move the video 1 second. Ctrl+Z / Ctrl+Y in"
+" the list: undo / redo."
+msgstr ""
+"F8 / Shift+F8: incelenecek sonraki / önceki betimleme. Ctrl+P: videoyu oynat"
+" veya duraklat. Alt+Sol / Alt+Sağ: videoyu 1 saniye kaydır. Listede Ctrl+Z /"
+" Ctrl+Y: geri al / yinele."
+
+#: audio_describer/ui/edit_description_dialog.py:147
+#, python-format
+msgid "Review: %s"
+msgstr "İncelenecek: %s"
+
+#: audio_describer/ui/edit_description_dialog.py:247
+#: audio_describer/ui/edit_description_dialog.py:452
+msgid "The end time must be after the start time."
+msgstr "Bitiş, başlangıçtan sonra olmalıdır."
+
+#: audio_describer/ui/edit_description_dialog.py:275
+msgid "No changes to save."
+msgstr "Kaydedilecek değişiklik yok."
+
+#: audio_describer/ui/edit_description_dialog.py:346
+msgid "Nothing to undo."
+msgstr "Geri alınacak bir şey yok."
+
+#: audio_describer/ui/edit_description_dialog.py:346
+msgid "Nothing to redo."
+msgstr "Yinelenecek bir şey yok."
+
+#: audio_describer/ui/edit_description_dialog.py:360
+msgid "No description left to review."
+msgstr "İncelenecek betimleme kalmadı."
+
+#: audio_describer/ui/edit_description_dialog.py:388
+msgid "Undone."
+msgstr "Geri alındı."
+
+#: audio_describer/ui/edit_description_dialog.py:390
+msgid "Redone."
+msgstr "Yinelendi."
+
+#: audio_describer/ui/edit_description_dialog.py:398
+msgid "The current description has unsaved changes. Save them before closing?"
+msgstr ""
+"Geçerli betimlemede kaydedilmemiş değişiklikler var. Kapatmadan önce "
+"kaydedilsin mi?"
+
+#: audio_describer/ui/edit_description_dialog.py:399
+msgid "Unsaved Changes"
+msgstr "Kaydedilmemiş Değişiklikler"
+
+#: audio_describer/__app__real.py:127
+msgid ""
+"Welcome to Omni Describer.\n"
+"\n"
+"To describe videos, the app needs a free Gemini API key from Google AI Studio (aistudio.google.com/apikey). Press Yes to open that page and the Settings, then paste the key in the Gemini API Key field and press Test key."
+msgstr ""
+"Omni Describer'a hoş geldiniz.\n"
+"\n"
+"Videoları betimlemek için uygulamanın Google AI Studio'dan (aistudio.google.com/apikey) ücretsiz bir Gemini API anahtarına ihtiyacı var. Bu sayfayı ve Ayarlar'ı açmak için Evet'e basın, ardından anahtarı Gemini API Anahtarı alanına yapıştırıp Anahtarı test et düğmesine basın."
+
+#: audio_describer/__app__real.py:130
+msgid "First Start"
+msgstr "İlk Başlangıç"
+
+#: audio_describer/ui/edit_description_dialog.py:107
+msgid "Hea&r with the export voice (Ctrl+R)"
+msgstr "Dışa aktarma sesiyle di&nle (Ctrl+R)"
+
+#: audio_describer/ui/edit_description_dialog.py:425
+msgid "The export voice could not be played. Check the voice in Settings."
+msgstr "Dışa aktarma sesi çalınamadı. Ayarlar'daki sesi kontrol edin."
+
+#: audio_describer/ui/export_options_dialog.py:38
+msgid "Only the descriptions of the current &density, as heard in the player"
+msgstr ""
+"Yalnızca geçerli &yoğunluktaki betimlemeler, oynatıcıda duyulduğu gibi"
+
+#: audio_describer/ui/export_options_dialog.py:41
+msgid ""
+"E&xtended description: pause the picture when a description is longer than "
+"its pause (the video is re-encoded)"
+msgstr ""
+"&Genişletilmiş betimleme: bir betimleme duraklamasından uzunsa görüntüyü "
+"duraklat (video yeniden kodlanır)"
+
+#: audio_describer/ui/export_options_dialog.py:43
+msgid "Add a spoken c&redit at the end: audio description generated by AI"
+msgstr "Sona sesli bir &not ekle: sesli betimleme yapay zeka ile oluşturuldu"
+
+#: audio_describer/ui/main_window.py:65
+msgid "&Recent Projects"
+msgstr "Son Pro&jeler"
+
+#: audio_describer/ui/main_window.py:66
+msgid "Import &Descriptions from SRT or WebVTT..."
+msgstr "&Betimlemeleri SRT veya WebVTT'den İçe Aktar..."
+
+#: audio_describer/ui/main_window.py:66
+msgid ""
+"Open a video with an existing description script to listen to, edit or "
+"export it"
+msgstr ""
+"Dinlemek, düzenlemek veya dışa aktarmak için hazır betimleme metni olan bir "
+"video açın"
+
+#: audio_describer/ui/main_window.py:305
+msgid "(No recent projects)"
+msgstr "(Son proje yok)"
+
+#: audio_describer/ui/main_window.py:311
+msgid "Import Descriptions from SRT or WebVTT"
+msgstr "Betimlemeleri SRT veya WebVTT'den İçe Aktar"
+
+#: audio_describer/ui/main_window.py:311
+msgid "SRT and WebVTT files"
+msgstr "SRT ve WebVTT dosyaları"
+
+#: audio_describer/ui/main_window.py:320
+#, python-format
+msgid ""
+"Could not open the file:\n"
+"%s"
+msgstr ""
+"Dosya açılamadı:\n"
+"%s"
+
+#: audio_describer/ui/main_window.py:323
+msgid "No timed descriptions were found in this file."
+msgstr "Bu dosyada zamanlanmış betimleme bulunamadı."
+
+#: audio_describer/ui/main_window.py:325
+#, python-format
+msgid "%d descriptions found. Now choose the video they belong to."
+msgstr "%d betimleme bulundu. Şimdi ait oldukları videoyu seçin."
+
+#: audio_describer/ui/main_window.py:326
+msgid "Import"
+msgstr "İçe aktar"
+
+#: audio_describer/ui/main_window.py:330
+#, python-format
+msgid "Imported %d descriptions."
+msgstr "%d betimleme içe aktarıldı."
+
+#: audio_describer/ui/manage_prompts_dialog.py:53
+msgid "E&xport..."
+msgstr "Dı&şa aktar..."
+
+#: audio_describer/ui/manage_prompts_dialog.py:54
+msgid "&Import..."
+msgstr "&İçe aktar..."
+
+#: audio_describer/ui/manage_prompts_dialog.py:137
+msgid "Export Presets"
+msgstr "Hazır Ayarları Dışa Aktar"
+
+#: audio_describer/ui/manage_prompts_dialog.py:146
+#, python-format
+msgid ""
+"Could not save the file:\n"
+"%s"
+msgstr ""
+"Dosya kaydedilemedi:\n"
+"%s"
+
+#: audio_describer/ui/manage_prompts_dialog.py:149
+#: audio_describer/ui/manage_prompts_dialog.py:169
+msgid "Import Presets"
+msgstr "Hazır Ayarları İçe Aktar"
+
+#: audio_describer/ui/manage_prompts_dialog.py:159
+#, python-format
+msgid ""
+"This file does not contain valid presets:\n"
+"%s"
+msgstr ""
+"Bu dosya geçerli hazır ayar içermiyor:\n"
+"%s"
+
+#: audio_describer/ui/manage_prompts_dialog.py:169
+#, python-format
+msgid "%d presets imported."
+msgstr "%d hazır ayar içe aktarıldı."
+
+#: audio_describer/ui/player_export.py:373
+#, python-format
+msgid ""
+"%(n)d descriptions were too long for their pause and were cut (numbers: "
+"%(list)s). Shorten them, or export again with the extended description "
+"option."
+msgstr ""
+"%(n)d betimleme duraklamasına sığmayacak kadar uzundu ve kesildi (numaralar:"
+" %(list)s). Bunları kısaltın veya genişletilmiş betimleme seçeneğiyle "
+"yeniden dışa aktarın."
+
+#: audio_describer/ui/player_export.py:377
+#, python-format
+msgid ""
+"The picture is paused %(n)d times (%(sec).1f seconds in total) so that long "
+"descriptions are read in full."
+msgstr ""
+"Uzun betimlemelerin tamamen okunabilmesi için görüntü %(n)d kez duraklatılır"
+" (toplam %(sec).1f saniye)."
+
+#: audio_describer/ui/player_export.py:412
+msgid ""
+"The original subtitles were not kept: with the picture paused they would be "
+"out of sync."
+msgstr ""
+"Özgün altyazılar korunmadı: görüntü duraklatıldığında senkronları kayardı."
+
+#: audio_describer/ui/player_export.py:435
+msgid ""
+"The original subtitles could not be copied into this format and were not "
+"kept."
+msgstr "Özgün altyazılar bu biçime kopyalanamadığı için korunmadı."
+
+#: audio_describer/ui/player_export.py:461
+msgid "Failed to synthesize the audio introduction."
+msgstr "Sesli giriş sentezlenemedi."
+
+#: audio_describer/ui/player_window.py:132
+msgid ""
+"Player shortcuts: Space, play or pause. Left and Right arrows, back or "
+"forward 5 seconds; with Control, 30 seconds. Alt plus Left or Right, "
+"previous or next description. Up and Down arrows, video volume; with Shift, "
+"how much the video is lowered during descriptions. R, repeat the last "
+"description. T, announce the time. A, turn audio description on or off. D, "
+"change description density. M, change the audio description mode: in the "
+"pauses, pause the video when needed, or on demand. In on-demand mode, Enter "
+"describes the current moment and Shift+Enter gives more detail. I, audio "
+"introduction: the main characters and places, without spoilers; Shift+I "
+"saves it as an MP3. V, quality report. W, what is on screen now; ask follow-"
+"up questions in the window that opens. E, evaluate this audio description. "
+"Q, ask more. S, explore scene. L, next audio track of the video; C, next "
+"subtitle track or none. In on-demand mode, a soft sound tells you an "
+"essential description is available. In braille-only output, Enter resumes "
+"the video after each description. Control plus S, save project. F1 or "
+"question mark, this help."
+msgstr ""
+"Oynatıcı kısayolları: Boşluk, oynat veya duraklat. Sol ve Sağ ok, 5 saniye "
+"geri veya ileri; Control ile 30 saniye. Alt artı Sol veya Sağ, önceki veya "
+"sonraki betimleme. Yukarı ve Aşağı ok, video ses düzeyi; Shift ile, "
+"betimlemeler sırasında videonun ne kadar kısılacağı. R, son betimlemeyi "
+"tekrarla. T, zamanı söyle. A, sesli betimlemeyi aç veya kapat. D, betimleme "
+"yoğunluğunu değiştir. M, sesli betimleme modunu değiştir: duraklamalarda, "
+"gerektiğinde videoyu duraklatarak veya isteğe bağlı. İsteğe bağlı modda "
+"Enter o anı betimler, Shift+Enter daha fazla ayrıntı verir. I, sesli giriş: "
+"ana karakterler ve mekânlar, sürprizleri bozmadan; Shift+I bunu MP3 olarak "
+"kaydeder. V, kalite raporu. W, şu an ekranda ne var; açılan pencerede başka "
+"sorular sorun. E, bu sesli betimlemeyi değerlendir. Q, daha fazlasını sor. "
+"S, sahneyi keşfet. L, videonun sonraki ses parçası; C, sonraki altyazı "
+"parçası veya altyazısız. İsteğe bağlı modda hafif bir ses, temel bir "
+"betimlemenin hazır olduğunu bildirir. Yalnızca braille çıkışında Enter, her "
+"betimlemeden sonra videoyu sürdürür. Control artı S, projeyi kaydet. F1 veya"
+" soru işareti, bu yardım."
+
+#: audio_describer/ui/player_window.py:632
+msgid "This video has only one audio track."
+msgstr "Bu videoda yalnızca bir ses parçası var."
+
+#: audio_describer/ui/player_window.py:632
+msgid "This video has no subtitles."
+msgstr "Bu videoda altyazı yok."
+
+#: audio_describer/ui/player_window.py:641
+#, python-format
+msgid "Audio track: %s"
+msgstr "Ses parçası: %s"
+
+#: audio_describer/ui/player_window.py:641
+#, python-format
+msgid "Subtitles: %s"
+msgstr "Altyazı: %s"
+
+#: audio_describer/ui/player_window.py:664
+msgid "No audio introduction yet. Press I to write it first."
+msgstr "Henüz sesli giriş yok. Önce yazmak için I'ya basın."
+
+#: audio_describer/ui/player_window.py:667
+msgid "Save the Audio Introduction"
+msgstr "Sesli Girişi Kaydet"
+
+#: audio_describer/ui/player_window.py:673
+msgid "Saving the audio introduction..."
+msgstr "Sesli giriş kaydediliyor..."
+
+#: audio_describer/ui/player_window.py:690
+msgid "Audio introduction saved."
+msgstr "Sesli giriş kaydedildi."
+
+#: audio_describer/ui/settings_dialog.py:37
+msgid "Essential descriptions only"
+msgstr "Yalnızca temel betimlemeler"
+
+#: audio_describer/ui/settings_dialog.py:37
+msgid "Standard (Default)"
+msgstr "Standart (Varsayılan)"
+
+#: audio_describer/ui/settings_dialog.py:37
+msgid "All descriptions, with details"
+msgstr "Tüm betimlemeler, ayrıntılarla"
+
+#: audio_describer/ui/settings_dialog.py:129
+msgid "Gemini API Key"
+msgstr "Gemini API Anahtarı"
+
+#: audio_describer/ui/settings_dialog.py:132
+msgid "&Test key"
+msgstr "Anahtarı &test et"
+
+#: audio_describer/ui/settings_dialog.py:143
+msgid "Description density when the player opens (D changes it):"
+msgstr "Oynatıcı açıldığında betimleme yoğunluğu (D ile değişir):"
+
+#: audio_describer/ui/settings_dialog.py:247
+msgid ""
+"Pronunciation dictionary, one rule per line: word = how to say it (app voice"
+" and exports):"
+msgstr ""
+"Telaffuz sözlüğü, her satıra bir kural: kelime = nasıl söyleneceği (uygulama"
+" sesi ve dışa aktarmalar):"
+
+#: audio_describer/ui/settings_dialog.py:249
+msgid "Pronunciation dictionary"
+msgstr "Telaffuz sözlüğü"
+
+#: audio_describer/ui/settings_dialog.py:251
+msgid "In the pauses, the video keeps playing"
+msgstr "Duraklamalarda, video oynamaya devam eder"
+
+#: audio_describer/ui/settings_dialog.py:252
+msgid "Extended: pause the video when a description does not fit"
+msgstr "Genişletilmiş: bir betimleme sığmadığında videoyu duraklat"
+
+#: audio_describer/ui/settings_dialog.py:253
+msgid "On demand: Enter describes the current moment"
+msgstr "İsteğe bağlı: Enter o anı betimler"
+
+#: audio_describer/ui/settings_dialog.py:254
+msgid "Audio description mode in the player (M changes it):"
+msgstr "Oynatıcıda sesli betimleme modu (M ile değişir):"
+
+#: audio_describer/ui/settings_dialog.py:256
+msgid "Audio description mode in the player"
+msgstr "Oynatıcıda sesli betimleme modu"
+
+#: audio_describer/ui/settings_dialog.py:542
+msgid "Type or paste your Gemini API key first."
+msgstr "Önce Gemini API anahtarınızı yazın veya yapıştırın."
+
+#: audio_describer/ui/settings_dialog.py:545
+msgid "Testing the key..."
+msgstr "Anahtar test ediliyor..."
+
+#: audio_describer/ui/settings_dialog.py:559
+#, python-format
+msgid "The key does not work: %s"
+msgstr "Anahtar çalışmıyor: %s"
+
+#: audio_describer/ui/settings_dialog.py:560
+msgid "Test key"
+msgstr "Anahtarı test et"
+
+#: audio_describer/ui/settings_dialog.py:562
+#, python-format
+msgid "The key works. %d models available."
+msgstr "Anahtar çalışıyor. %d model kullanılabilir."
+
+#: audio_describer/core/ollama_video.py:107
+#, python-format
+msgid ""
+"The model '%(model)s' is not installed in Ollama. Run: ollama pull %(model)s"
+msgstr ""
+"'%(model)s' modeli Ollama'da yüklü değil. Şunu çalıştırın: ollama pull "
+"%(model)s"
+
+#: audio_describer/core/ollama_video.py:111
+msgid ""
+"Ollama took too long to answer. Try a smaller model or a shorter video."
+msgstr ""
+"Ollama'nın yanıtı çok uzun sürdü. Daha küçük bir model ya da daha kısa bir "
+"video deneyin."
+
+#: audio_describer/core/ollama_video.py:154
+msgid "FFmpeg is required to describe a video with the local model."
+msgstr "Bir videoyu yerel modelle betimlemek için FFmpeg gerekir."
+
+#: audio_describer/core/ollama_video.py:157
+msgid "Could not read the length of the video."
+msgstr "Videonun süresi okunamadı."
+
+#: audio_describer/core/ollama_video.py:159
+#, python-format
+msgid "Describing locally with Ollama (%s). Nothing leaves this computer."
+msgstr ""
+"Ollama ile yerel olarak betimleniyor (%s). Hiçbir şey bu bilgisayardan "
+"çıkmaz."
+
+#: audio_describer/core/ollama_video.py:177
+#, python-format
+msgid "Segment %(n)d of %(total)d..."
+msgstr "Bölüm %(n)d / %(total)d..."
+
+#: audio_describer/ui/edit_description_dialog.py:24
+msgid "female voice"
+msgstr "kadın sesi"
+
+#: audio_describer/ui/edit_description_dialog.py:24
+msgid "male voice"
+msgstr "erkek sesi"
+
+#: audio_describer/ui/edit_description_dialog.py:414
+msgid "Only translated dialogue has a speaker's voice."
+msgstr "Yalnızca çevrilmiş diyalogların konuşmacı sesi vardır."
+
+#: audio_describer/ui/edit_description_dialog.py:426
+msgid "Speaker's voice: unknown"
+msgstr "Konuşmacının sesi: bilinmiyor"
+
+#: audio_describer/ui/edit_description_dialog.py:426
+msgid "Speaker's voice: female"
+msgstr "Konuşmacının sesi: kadın"
+
+#: audio_describer/ui/edit_description_dialog.py:427
+msgid "Speaker's voice: male"
+msgstr "Konuşmacının sesi: erkek"
+
+#: audio_describer/ui/settings_dialog.py:171
+msgid "Ollama (local, free, private)"
+msgstr "Ollama (yerel, ücretsiz, gizli)"
+
+#: audio_describer/ui/settings_dialog.py:172
+msgid "Video descriptions:"
+msgstr "Video betimlemeleri:"
+
+#: audio_describer/ui/settings_dialog.py:275
+msgid ""
+"Read translated dialogue with a voice matching the speaker (woman or man)"
+msgstr ""
+"Çevrilmiş diyalogları konuşmacıya uygun bir sesle oku (kadın ya da erkek)"
+
+#: audio_describer/ui/settings_dialog.py:279
+msgid "Woman's voice:"
+msgstr "Kadın sesi:"
+
+#: audio_describer/ui/settings_dialog.py:279
+msgid "Man's voice:"
+msgstr "Erkek sesi:"
+
+#: audio_describer/ui/settings_dialog.py:285
+msgid "Installed Windows voice (automatic)"
+msgstr "Windows'ta yüklü ses (otomatik)"
+
+#: audio_describer/ui/settings_dialog.py:286
+#, python-format
+msgid "%(voice)s (local Piper voice, %(size)d MB)"
+msgstr "%(voice)s (yerel Piper sesi, %(size)d MB)"
+
+#: audio_describer/ui/settings_dialog.py:291
+msgid "Download and listen"
+msgstr "İndir ve dinle"
+
+#: audio_describer/ui/settings_dialog.py:639
+msgid ""
+"Choose a Piper voice first; the automatic choice uses the voices installed "
+"in Windows."
+msgstr ""
+"Önce bir Piper sesi seçin; otomatik seçim Windows'ta yüklü sesleri kullanır."
+
+#: audio_describer/ui/settings_dialog.py:642
+msgid "Local Piper voices are not available in this version."
+msgstr "Yerel Piper sesleri bu sürümde kullanılamıyor."
+
+#: audio_describer/ui/settings_dialog.py:646
+#, python-format
+msgid "Preparing the voice %s..."
+msgstr "%s sesi hazırlanıyor..."
+
+#: audio_describer/ui/settings_dialog.py:652
+msgid "This is how this voice sounds."
+msgstr "Bu ses böyle duyuluyor."
+
+#: audio_describer/ui/settings_dialog.py:662
+#, python-format
+msgid "The voice could not be prepared: %s"
+msgstr "Ses hazırlanamadı: %s"
+
+#: audio_describer/ui/settings_dialog.py:662
+msgid "no sound produced"
+msgstr "ses üretilmedi"
+
 #, python-format
 #~ msgid "Processing chunk %d of %d..."
 #~ msgstr "Parça işleniyor: %d / %d..."
@@ -2045,8 +3953,7 @@ msgstr "Uygulama yeniden başlatılıyor..."
 #~ msgstr "Karakter sözlüğü ön analizi ayarlar nedeniyle atlandı."
 
 #, fuzzy
-#~ msgid ""
-#~ "Video chunking is disabled. Generating descriptions for entire video."
+#~ msgid "Video chunking is disabled. Generating descriptions for entire video."
 #~ msgstr "İşleme tamamlandı, ancak hiçbir betimleme üretilmedi."
 
 #~ msgid "AI processing failed to provide descriptions."
@@ -2230,11 +4137,11 @@ msgstr "Uygulama yeniden başlatılıyor..."
 #~ msgstr "Metnini değiştirmek için listeden bir sesli betimleme seçin."
 
 #~ msgid ""
-#~ "List of available audio descriptions. Use arrow keys to navigate, then "
-#~ "Tab to edit."
+#~ "List of available audio descriptions. Use arrow keys to navigate, then Tab "
+#~ "to edit."
 #~ msgstr ""
-#~ "Mevcut sesli betimlemelerin listesi. Gezinmek için ok tuşlarını, "
-#~ "düzenlemek için Sekme tuşunu kullanın."
+#~ "Mevcut sesli betimlemelerin listesi. Gezinmek için ok tuşlarını, düzenlemek "
+#~ "için Sekme tuşunu kullanın."
 
 #~ msgid "Editable text of the selected audio description."
 #~ msgstr "Seçili sesli betimlemenin düzenlenebilir metni."
@@ -2304,15 +4211,15 @@ msgstr "Uygulama yeniden başlatılıyor..."
 #~ "The length of each video chunk in seconds. Shorter can be better for very "
 #~ "complex scenes."
 #~ msgstr ""
-#~ "Her bir video parçasının saniye cinsinden uzunluğu. Karmaşık sahneler "
-#~ "için daha kısa süreler daha iyi sonuç verebilir."
+#~ "Her bir video parçasının saniye cinsinden uzunluğu. Karmaşık sahneler için "
+#~ "daha kısa süreler daha iyi sonuç verebilir."
 
 #~ msgid ""
 #~ "Performs an initial pass to identify characters, which can improve naming "
 #~ "consistency in descriptions. Only applies if chunking is enabled."
 #~ msgstr ""
-#~ "Betimlemelerdeki isim tutarlılığını artırmak için karakterleri tanıyan "
-#~ "bir ön analiz yapar. Sadece parçalama etkinse geçerlidir."
+#~ "Betimlemelerdeki isim tutarlılığını artırmak için karakterleri tanıyan bir "
+#~ "ön analiz yapar. Sadece parçalama etkinse geçerlidir."
 
 #~ msgid "Gemini AI"
 #~ msgstr "Gemini AI"
@@ -2350,13 +4257,11 @@ msgstr "Uygulama yeniden başlatılıyor..."
 #~ msgid ""
 #~ "%(app_name)s v%(app_version)s\n"
 #~ "\n"
-#~ "An application to automatically generate audio descriptions for videos "
-#~ "using Gemini AI.\n"
+#~ "An application to automatically generate audio descriptions for videos using Gemini AI.\n"
 #~ "\n"
 #~ "Developed with accessibility in mind."
 #~ msgstr ""
-#~ "Gemini AI kullanarak videolar için otomatik sesli betimlemeler üreten bir "
-#~ "uygulama.\n"
+#~ "Gemini AI kullanarak videolar için otomatik sesli betimlemeler üreten bir uygulama.\n"
 #~ "\n"
 
 #, fuzzy, python-format
@@ -2373,13 +4278,11 @@ msgstr "Uygulama yeniden başlatılıyor..."
 
 #, python-brace-format
 #~ msgid ""
-#~ "This is a continuation of a previous video segment. Context of what just "
-#~ "happened: {context}\n"
+#~ "This is a continuation of a previous video segment. Context of what just happened: {context}\n"
 #~ "\n"
 #~ "Now, continue describing the new video segment."
 #~ msgstr ""
-#~ "Bu, önceki bir video bölümünün devamıdır. Az önce olanların bağlamı: "
-#~ "{context}\n"
+#~ "Bu, önceki bir video bölümünün devamıdır. Az önce olanların bağlamı: {context}\n"
 #~ "\n"
 #~ "Şimdi, yeni video bölümünü betimlemeye devam et."
 
@@ -2414,8 +4317,8 @@ msgstr "Uygulama yeniden başlatılıyor..."
 #~ "Character glossary pre-analysis enabled but video chunking is disabled. "
 #~ "Glossary might have limited effect without chunking."
 #~ msgstr ""
-#~ "Karakter sözlüğü ön analizi etkin ancak video parçalama devre dışı. "
-#~ "Sözlüğün etkisi parçalama olmadan sınırlı olabilir."
+#~ "Karakter sözlüğü ön analizi etkin ancak video parçalama devre dışı. Sözlüğün"
+#~ " etkisi parçalama olmadan sınırlı olabilir."
 
 #~ msgid "Processing completed with no data and no specific error."
 #~ msgstr "İşlem, veri veya belirli bir hata olmadan tamamlandı."
@@ -2433,8 +4336,8 @@ msgstr "Uygulama yeniden başlatılıyor..."
 
 #, python-format
 #~ msgid ""
-#~ "No descriptions were generated for %s (Gemini might not have found "
-#~ "content to describe or parsing failed)."
+#~ "No descriptions were generated for %s (Gemini might not have found content "
+#~ "to describe or parsing failed)."
 #~ msgstr ""
 #~ "%s için betimleme üretilmedi (Gemini betimleyecek içerik bulamamış veya "
 #~ "ayrıştırma başarısız olmuş olabilir)."
@@ -2494,8 +4397,7 @@ msgstr "Uygulama yeniden başlatılıyor..."
 #~ msgstr "{duration} saniyelik klip çıkarılıyor..."
 
 #~ msgid "No time remaining in the video to analyze from the selected point."
-#~ msgstr ""
-#~ "Seçilen noktadan itibaren analiz için videoda yeterli zaman kalmadı."
+#~ msgstr "Seçilen noktadan itibaren analiz için videoda yeterli zaman kalmadı."
 
 #, python-format
 #~ msgid "FFmpeg failed to extract scene: %s"
@@ -2509,92 +4411,283 @@ msgstr "Uygulama yeniden başlatılıyor..."
 #~ msgid "An unexpected error occurred in Scene Explorer: %s"
 #~ msgstr "Sahne Gezgini'nde beklenmedik bir hata oluştu: %s"
 
-# --- v2.0 New Strings ---
-
-#: audio_describer/__app__real.py
-msgid "Settings Notice"
-msgstr "Ayarlar Bildirimi"
-
-#: audio_describer/__app__real.py
-msgid "Omni Describer Web Platform"
-msgstr "Omni Betimleyici Web Platformu"
-
-#: audio_describer/__app__real.py
+#: audio_describer/core/gemini_helpers.py:266
 #, python-format
 msgid ""
-"Omni Describer is now available as a web platform!\n"
-"\n"
-"The desktop app will continue to work, but new features and improvements "
-"are now focused on the web version at:\n"
-"\n"
-"%(webapp_url)s\n"
-"\n"
-"The web platform requires no installation, no API keys, and works on "
-"all devices including Mac and mobile.\n"
-"\n"
-"Would you like to open the web platform now?\n"
-"\n"
-"(This message will only be shown once.)"
+"Gemini is overloaded right now (model %s). Nothing is wrong with your video "
+"or your key: try again in a few minutes, or choose another model in Settings."
 msgstr ""
-"Omni Betimleyici artık bir web platformu olarak kullanılabilir!\n"
-"\n"
-"Masaüstü uygulama çalışmaya devam edecek, ancak yeni özellikler ve "
-"iyileştirmeler artık şu adresteki web sürümüne odaklanmaktadır:\n"
-"\n"
-"%(webapp_url)s\n"
-"\n"
-"Web platformu kurulum gerektirmez, API anahtarına ihtiyaç duymaz ve "
-"Mac ve mobil dahil tüm cihazlarda çalışır.\n"
-"\n"
-"Web platformunu şimdi açmak ister misiniz?\n"
-"\n"
-"(Bu mesaj yalnızca bir kez gösterilecektir.)"
+"Gemini şu anda aşırı yüklü (model %s). Videonuzda ya da anahtarınızda sorun "
+"yok: birkaç dakika sonra yeniden deneyin ya da Ayarlar'dan başka bir model "
+"seçin."
 
-#: audio_describer/ui/main_window.py
-msgid "Open &Web Platform...\tCtrl+W"
-msgstr "Web &Platformunu Aç...\tCtrl+W"
+#: audio_describer/core/gemini_helpers.py:274
+#, python-format
+msgid ""
+"Gemini is overloaded right now (attempt %(attempt)d of %(max)d). Retrying in "
+"%(delay)d seconds..."
+msgstr ""
+"Gemini şu anda aşırı yüklü (deneme %(attempt)d / %(max)d). %(delay)d saniye "
+"sonra yeniden denenecek..."
 
-#: audio_describer/ui/main_window.py
-msgid "Open the Omni Describer web platform in your browser"
-msgstr "Omni Betimleyici web platformunu tarayıcınızda açın"
+#: audio_describer/core/gemini_helpers.py:259
+#, python-format
+msgid "%(old)s is still overloaded: switching to %(new)s."
+msgstr "%(old)s hâlâ aşırı yüklü: %(new)s modeline geçiliyor."
 
-#: audio_describer/ui/main_window.py
-msgid "Or try the web platform (no API key needed):"
-msgstr "Veya web platformunu deneyin (API anahtarı gerekmez):"
+msgid ""
+"This feature uses Gemini, but video descriptions are set to another AI in "
+"Settings, so nothing was sent to Google. Switch to Gemini in Settings to use"
+" it."
+msgstr ""
+"Bu özellik Gemini kullanır, ancak video betimlemeleri Ayarlar'da başka bir "
+"yapay zekaya ayarlı olduğundan Google'a hiçbir şey gönderilmedi. Kullanmak "
+"için Ayarlar'dan Gemini'ye geçin."
 
-#: audio_describer/ui/main_window.py
-msgid "Open &Web Platform"
-msgstr "Web &Platformunu Aç"
+msgid ""
+"Could not read this image. FFmpeg is required to send it to the vision "
+"service."
+msgstr ""
+"Bu görsel okunamadı. Görüntü tanıma hizmetine gönderilebilmesi için FFmpeg "
+"gereklidir."
 
-#: audio_describer/ui/main_window.py
-#: audio_describer/core/audio_describer.py
-msgid "Processing video..."
-msgstr "Video işleniyor..."
+msgid ""
+"This vision model can only describe images; switch to Gemini in Settings for"
+" PDF documents."
+msgstr ""
+"Bu görüntü tanıma modeli yalnızca görselleri betimleyebilir; PDF belgeleri "
+"için Ayarlar'dan Gemini'ye geçin."
+
+#, python-format
+msgid "Describing with %s (frames sent to the vision service)."
+msgstr "%s ile betimleniyor (kareler görüntü tanıma hizmetine gönderilir)."
+
+msgid ""
+"Set the server address and the model of the OpenAI-compatible vision service"
+" in Settings."
+msgstr ""
+"OpenAI uyumlu görüntü tanıma hizmetinin sunucu adresini ve modelini "
+"Ayarlar'da belirleyin."
+
+msgid ""
+"Use an https:// address for an online vision service; http:// is only for "
+"this computer."
+msgstr ""
+"Çevrimiçi bir görüntü tanıma hizmeti için https:// adresi kullanın; http:// "
+"yalnızca bu bilgisayar içindir."
+
+#, python-format
+msgid "The vision service refused the API key (%(code)d)."
+msgstr "Görüntü tanıma hizmeti API anahtarını reddetti (%(code)d)."
+
+#, python-format
+msgid "The vision service refused the request (model '%(model)s'): %(detail)s"
+msgstr ""
+"Görüntü tanıma hizmeti isteği reddetti (model '%(model)s'): %(detail)s"
+
+msgid ""
+"The vision service took too long to answer. Try a smaller model or a shorter"
+" video."
+msgstr ""
+"Görüntü tanıma hizmetinin yanıt vermesi çok uzun sürdü. Daha küçük bir model"
+" veya daha kısa bir video deneyin."
+
+#, python-format
+msgid "Could not reach the vision service at %s."
+msgstr "%s adresindeki görüntü tanıma hizmetine ulaşılamadı."
+
+#, python-format
+msgid "Unknown voice engine in Settings: %s"
+msgstr "Ayarlar'da bilinmeyen ses motoru: %s"
+
+#, python-format
+msgid ""
+"Settings file was corrupted and has been reset. Your previous settings could"
+" not be recovered. (Error: %s)"
+msgstr ""
+"Ayarlar dosyası bozulmuştu ve sıfırlandı. Önceki ayarlarınız kurtarılamadı. "
+"(Hata: %s)"
+
+msgid ""
+"Your previous settings could not be migrated from the old encrypted format. "
+"This typically happens after a Windows update or hardware change. Settings "
+"have been reset to defaults. You will need to re-enter your API keys."
+msgstr ""
+"Önceki ayarlarınız eski şifreli biçimden aktarılamadı. Bu genellikle bir "
+"Windows güncellemesinden veya donanım değişikliğinden sonra olur. Ayarlar "
+"varsayılanlara sıfırlandı. API anahtarlarınızı yeniden girmeniz gerekecek."
+
+msgid "Automatic (speaker's apparent gender on each line)"
+msgstr "Otomatik (her replikte konuşmacının görünen cinsiyeti)"
+
+msgid "Woman's voice"
+msgstr "Kadın sesi"
+
+msgid "Man's voice"
+msgstr "Erkek sesi"
+
+msgid "Description voice"
+msgstr "Betimleme sesi"
+
+msgid "woman"
+msgstr "kadın"
+
+msgid "man"
+msgstr "erkek"
+
+msgid "unknown"
+msgstr "belirsiz"
+
+#, python-format
+msgid "&Voice for this character's translated lines (AI saw: %s):"
+msgstr ""
+"Bu karakterin çevrilen replikleri için &ses (yapay zekanın gördüğü: %s):"
+
+msgid "&Reset Settings and Data..."
+msgstr "Ayarları ve Verileri &Sıfırla..."
+
+msgid "Restore default settings or presets, or clear downloaded data"
+msgstr ""
+"Varsayılan ayarları veya hazır ayarları geri yükleyin ya da indirilen "
+"verileri temizleyin"
+
+msgid "Reset done. Some settings apply after restarting the app."
+msgstr ""
+"Sıfırlama tamamlandı. Bazı ayarlar uygulama yeniden başlatıldıktan sonra "
+"geçerli olur."
+
+#, python-format
+msgid "%(title)s (Reason: %(reason)s)"
+msgstr "%(title)s (Neden: %(reason)s)"
+
+#, python-format
+msgid "Opening %s"
+msgstr "%s açılıyor"
+
+#, python-format
+msgid "Help file not found: %s"
+msgstr "Yardım dosyası bulunamadı: %s"
+
+#, python-format
+msgid "Could not open %(file)s: %(error)s"
+msgstr "%(file)s açılamadı: %(error)s"
+
+msgid "Reset Settings and Data"
+msgstr "Ayarları ve Verileri Sıfırla"
+
+msgid ""
+"Choose what to reset. A backup copy of your settings and presets is saved "
+"first. Projects and exported files are never touched."
+msgstr ""
+"Neyin sıfırlanacağını seçin. Önce ayarlarınızın ve hazır ayarlarınızın bir "
+"yedeği kaydedilir. Projelere ve dışa aktarılan dosyalara asla dokunulmaz."
+
+msgid "&Settings (back to defaults)"
+msgstr "&Ayarlar (varsayılanlara dön)"
+
+msgid "Also forget my &API keys"
+msgstr "API anahtarlarımı da &unut"
+
+msgid "&Prompt presets (custom presets are removed)"
+msgstr "&Hazır istemler (özel hazır istemler kaldırılır)"
+
+msgid "OpenAI &voice presets"
+msgstr "OpenAI hazır s&es ayarları"
+
+msgid "&Downloaded voices and models (downloaded again when needed)"
+msgstr "İndirilen sesler ve &modeller (gerektiğinde yeniden indirilir)"
+
+msgid "&Temporary files"
+msgstr "&Geçici dosyalar"
+
+msgid "&Reset"
+msgstr "&Sıfırla"
+
+msgid "Nothing is selected."
+msgstr "Hiçbir şey seçilmedi."
+
+msgid "Reset"
+msgstr "Sıfırla"
+
+msgid "Reset the selected items now? This cannot be undone from the app."
+msgstr ""
+"Seçilen öğeler şimdi sıfırlansın mı? Bu işlem uygulamadan geri alınamaz."
+
+msgid "Confirm Reset"
+msgstr "Sıfırlamayı Onayla"
+
+#, python-format
+msgid "The reset did not complete: %s"
+msgstr "Sıfırlama tamamlanamadı: %s"
+
+msgid "Microsoft Azure Neural Voices (online, key required)"
+msgstr "Microsoft Azure Nöral Sesleri (çevrimiçi, anahtar gerekir)"
+
+msgid "Google Cloud Text-to-Speech (online, key required)"
+msgstr "Google Cloud Metinden Sese (çevrimiçi, anahtar gerekir)"
+
+msgid ""
+"OpenAI-compatible vision service (OpenRouter, OpenAI, Claude, Mistral, LM "
+"Studio...)"
+msgstr ""
+"OpenAI uyumlu görüntü tanıma hizmeti (OpenRouter, OpenAI, Claude, Mistral, "
+"LM Studio...)"
+
+msgid "OpenAI-compatible vision service (frames)"
+msgstr "OpenAI uyumlu görüntü tanıma hizmeti (kareler)"
+
+msgid "Vision service address (OpenAI-compatible):"
+msgstr "Görüntü tanıma hizmeti adresi (OpenAI uyumlu):"
+
+msgid "Vision service model:"
+msgstr "Görüntü tanıma hizmeti modeli:"
+
+msgid "Vision service API key (empty for a local server):"
+msgstr "Görüntü tanıma hizmeti API anahtarı (yerel sunucu için boş bırakın):"
+
+msgid "Microsoft Azure Neural Voices"
+msgstr "Microsoft Azure Nöral Sesleri"
+
+msgid "Speech resource key:"
+msgstr "Konuşma kaynağı anahtarı:"
+
+msgid "Region (for example westeurope):"
+msgstr "Bölge (örneğin westeurope):"
+
+msgid "Voice (for example fr-FR-DeniseNeural):"
+msgstr "Ses (örneğin fr-FR-DeniseNeural):"
+
+msgid "Woman's voice for translated dialogue (optional):"
+msgstr "Çevrilen diyaloglar için kadın sesi (isteğe bağlı):"
+
+msgid "Man's voice for translated dialogue (optional):"
+msgstr "Çevrilen diyaloglar için erkek sesi (isteğe bağlı):"
+
+msgid "Google Cloud Text-to-Speech"
+msgstr "Google Cloud Metinden Sese"
+
+msgid "API key:"
+msgstr "API anahtarı:"
+
+msgid "Voice (for example fr-FR-Chirp3-HD-Aoede):"
+msgstr "Ses (örneğin fr-FR-Chirp3-HD-Aoede):"
 
 #: audio_describer/ui/settings_dialog.py
-msgid "1 FPS (Minimal cost, for static content)"
-msgstr "1 FPS (Minimum maliyet, statik içerik için)"
+msgid "Picture detail sent to the AI:"
+msgstr "Yapay zekâya gönderilen görüntü ayrıntısı:"
 
-#: audio_describer/core/audio_describer.py
-msgid "Video is shorter than chunk size, processing as single request."
-msgstr "Video parça boyutundan kısa, tek istek olarak işleniyor."
+#: audio_describer/ui/settings_dialog.py
+msgid "Automatic (Default)"
+msgstr "Otomatik (Varsayılan)"
 
-#: audio_describer/core/audio_describer.py
-#, python-format
-msgid "Processing chunk %d of %d (%.0fs - %.0fs)..."
-msgstr "Parça %d / %d işleniyor (%.0fs - %.0fs)..."
+#: audio_describer/ui/settings_dialog.py
+msgid "Low (cheaper, for long videos)"
+msgstr "Düşük (daha ucuz, uzun videolar için)"
 
-#: audio_describer/core/audio_describer.py
-#, python-format
-msgid "Chunk %d: parsed %d descriptions."
-msgstr "Parça %d: %d betimleme ayrıştırıldı."
+#: audio_describer/ui/settings_dialog.py
+msgid "Medium"
+msgstr "Orta"
 
-#: audio_describer/core/audio_describer.py
-#, python-format
-msgid "Chunked generation failed: %s"
-msgstr "Parçalı oluşturma başarısız oldu: %s"
-
-#: audio_describer/core/video_processor.py
-msgid "Pre-processing video for AI analysis (stripping audio)..."
-msgstr "Yapay zeka analizi için video ön işleniyor (ses kaldırılıyor)..."
-
+#: audio_describer/ui/settings_dialog.py
+msgid "High (reads small on-screen text, costs more)"
+msgstr "Yüksek (ekrandaki küçük yazıları okur, daha pahalı)"

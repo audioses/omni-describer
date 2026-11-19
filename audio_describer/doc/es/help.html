@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Omni Describer - Guía de Usuario</title>
+    <title>Omni Describer - Guía de usuario</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -73,209 +73,534 @@
         li { margin-bottom: 0.8em; }
         a { color: #2980b9; text-decoration: none; }
         a:hover { text-decoration: underline; }
+        table { border-collapse: collapse; width: 100%; margin: 1em 0; }
+        th, td { border: 1px solid #dee2e6; padding: 6px 10px; text-align: left; vertical-align: top; }
+        th { background-color: #eaf2f8; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Guía de Usuario de Omni Describer</h1>
-        <p style="text-align: center; font-size: 1.1em; color: #566573;">Dando Voz al Mundo Visual con IA.</p>
+        <h1>Guía de usuario de Omni Describer</h1>
+        <p style="text-align: center; font-size: 1.1em; color: #566573;">Dando voz al mundo visual con IA.</p>
+
+        <div class="note">
+            <strong>Aviso importante:</strong> Omni Describer ha pasado a ser una plataforma web. La aplicación de escritorio está ahora en modo de mantenimiento. Las nuevas funciones y mejoras se centran en la versión web, en <a href="https://studio.binclusive.io">studio.binclusive.io</a>. La plataforma web no requiere instalación ni claves de API, y funciona en todos los dispositivos, incluidos Mac y móviles. La aplicación de escritorio seguirá disponible para quienes la prefieran.
+        </div>
 
         <div class="backstory">
-            <p>Todo comenzó con mi amor por el cine. Cuando me di cuenta de cuántos detalles de mis escenas favoritas se perdían sin una buena audiodescripción, me surgió una idea: "Bueno, ¿no podría la IA facilitarnos este trabajo?". Soñé con una herramienta que no solo generara descripciones, sino que también diera al usuario un control creativo total. Tras meses de intenso trabajo, innumerables pruebas y muchos obstáculos técnicos superados, desarrollé Omni Describer como el producto de ese sueño.</p>
+            <p>Todo empezó con mi amor por el cine. Cuando me di cuenta de cuántos detalles de mis escenas favoritas se perdían sin una buena audiodescripción, surgió una idea: «¿Y si la IA pudiera facilitarnos esto?». Soñaba con una herramienta que no solo generara descripciones, sino que también diera el control total al usuario. Tras meses de trabajo intenso, innumerables pruebas y muchos obstáculos técnicos superados, desarrollé Omni Describer como fruto de ese sueño.</p>
         </div>
 
-        <h2>Índice de Contenidos</h2>
+        <h2>Índice de contenidos</h2>
         <ul>
-            <li><a href="#whatis">¿Qué Significa el Nombre?</a></li>
-            <li><a href="#requirements">Requisitos del Sistema</a></li>
-            <li><a href="#setup">Primeros Pasos: Configurar tus Claves de API</a></li>
-            <li><a href="#quickstart">Inicio Rápido: Generar tu Primera Descripción</a></li>
-            <li><a href="#features">Características Principales</a>
+            <li><a href="#whatis">¿Qué significa el nombre?</a></li>
+            <li><a href="#requirements">Requisitos del sistema</a></li>
+            <li><a href="#setup">Primeros pasos: configurar tus claves de API</a></li>
+            <li><a href="#quickstart">Inicio rápido: generar tu primera descripción</a>
                 <ul>
-                    <li><a href="#player">El Reproductor de Vídeo con Descripciones</a></li>
-                    <li><a href="#prompts">Gestionar Plantillas de Instrucciones (Prompts)</a></li>
-                    <li><a href="#askmore">Preguntar Más Sobre la Escena</a></li>
-                    <li><a href="#explorer">Explorador de Escenas</a></li>
-                    <li><a href="#exporting">Exportar tu Trabajo</a></li>
+                    <li><a href="#cancel">Cancelar una descripción</a></li>
                 </ul>
             </li>
-            <li><a href="#advanced-settings">Un Vistazo a la Configuración Avanzada</a></li>
-            <li><a href="#bestpractices">Consejos y Trucos para los Mejores Resultados</a></li>
-            <li><a href="#faq">Preguntas Frecuentes (FAQ)</a></li>
-            <li><a href="#shortcuts">Atajos de Teclado</a></li>
-            <li><a href="#contact">Agradecimientos, Contacto y Colaboradores</a></li>
+            <li><a href="#main-window">La ventana principal y sus menús</a>
+                <ul>
+                    <li><a href="#file-menu">El menú Archivo</a></li>
+                    <li><a href="#help-menu">El menú Ayuda</a></li>
+                </ul>
+            </li>
+            <li><a href="#features">Funciones principales</a>
+                <ul>
+                    <li><a href="#player">El reproductor de vídeo con descripciones</a></li>
+                    <li><a href="#editing">Editar las descripciones: el poder de pulir</a></li>
+                    <li><a href="#characters">Los personajes y sus voces</a></li>
+                    <li><a href="#prompts">Gestionar los preajustes de prompts</a></li>
+                    <li><a href="#askmore">Preguntar más sobre la escena</a></li>
+                    <li><a href="#explorer">Explorador de escena</a></li>
+                    <li><a href="#images">Imágenes, PDF y tu pantalla</a></li>
+                    <li><a href="#cli">Línea de comandos y modo por lotes</a></li>
+                    <li><a href="#evaluate">Evaluar una audiodescripción</a></li>
+                    <li><a href="#exporting">Exportar tu trabajo</a></li>
+                </ul>
+            </li>
+            <li><a href="#ai-backends">La IA: modelos y ajustes de Gemini</a></li>
+            <li><a href="#voices">Voces</a></li>
+            <li><a href="#language">Idioma de la interfaz e idioma de las descripciones</a></li>
+            <li><a href="#advanced-settings">Los ajustes en detalle</a>
+                <ul>
+                    <li><a href="#settings-general">Pestaña General</a></li>
+                    <li><a href="#settings-ai">Pestaña Ajustes de la IA</a></li>
+                    <li><a href="#settings-audio">Pestaña Salida de audio</a></li>
+                </ul>
+            </li>
+            <li><a href="#ai-rules">Personalizar las reglas de la IA</a></li>
+            <li><a href="#reset">Restablecer ajustes y datos</a></li>
+            <li><a href="#data-folder">Dónde se guardan tus datos</a></li>
+            <li><a href="#bestpractices">Consejos y trucos para obtener los mejores resultados</a></li>
+            <li><a href="#faq">Preguntas frecuentes (FAQ)</a></li>
+            <li><a href="#shortcuts">Atajos de teclado</a></li>
+            <li><a href="#contact">Agradecimientos, contacto y colaboradores</a></li>
         </ul>
 
-        <h2 id="whatis">¿Qué Significa el Nombre?</h2>
-        <p>El "Omni" en el nombre viene del latín y significa "todo" o "la totalidad". Elegí este nombre porque no quería que la herramienta sirviera para un único propósito. Sí, Omni Describer tiene como objetivo principal hacer los medios accesibles para personas ciegas y con discapacidad visual creando audiodescripciones. Sin embargo, su propósito no se limita a eso.</p>
-        <p>Esta es también una <strong>herramienta de exploración</strong>. Un crítico de cine, un estudiante, un artista o cualquier persona con curiosidad por los detalles visuales puede usar funciones como el "Explorador de Escenas" o "Preguntar Más" para sumergirse en las capas de un vídeo como nunca antes. Omni Describer es una ventana para ver el mundo a través de los "ojos" de la IA y entenderlo de una forma diferente. En resumen, es "un descriptor para todo, para todos".</p>
-        
-        <h2 id="requirements">Requisitos del Sistema</h2>
-        <p>Para obtener el mejor rendimiento de Omni Describer, te recomiendo cumplir los siguientes requisitos mínimos del sistema:</p>
+        <h2 id="whatis">¿Qué significa el nombre?</h2>
+        <p>El «Omni» del nombre viene del latín y significa «todo». Elegí este nombre porque no quería que la herramienta sirviera para un solo propósito. Sí, Omni Describer busca ante todo hacer accesibles los contenidos para las personas ciegas y con baja visión mediante la creación de audiodescripciones. Sin embargo, su propósito no se limita a eso.</p>
+        <p>También es una <strong>herramienta de exploración</strong>. Un crítico de cine, un estudiante, un artista o cualquier persona curiosa por los detalles visuales puede usar funciones como «Explorador de escena» o «Preguntar más» para adentrarse en las capas de un vídeo como nunca antes. Omni Describer es una ventana para ver el mundo a través de los «ojos» de la IA y entenderlo de otra manera. En resumen, es «un descriptor de todo, para todos».</p>
+
+        <h2 id="requirements">Requisitos del sistema</h2>
+        <p>Para obtener el mejor rendimiento de Omni Describer, recomiendo cumplir los siguientes requisitos mínimos del sistema:</p>
         <ul>
-            <li><strong>Sistema Operativo:</strong> Windows 10 o superior (64-bit).</li>
-            <li><strong>Memoria (RAM):</strong> Al menos 4 GB de RAM.</li>
-            <li><strong>Almacenamiento:</strong> Al menos 500 MB de espacio libre en disco para la aplicación y los archivos temporales.</li>
-            <li><strong>Conexión a Internet:</strong> Se requiere una conexión a internet activa para conectarse a los servicios de IA (Google Gemini, OpenAI) y descargar vídeos.</li>
-            <li><strong>Lector de Pantalla:</strong> Para una accesibilidad completa, se recomienda un lector de pantalla como JAWS, NVDA o el Narrador de Windows.</li>
+            <li><strong>Sistema operativo:</strong> Windows 10 o posterior (64 bits).</li>
+            <li><strong>Memoria (RAM):</strong> al menos 4 GB de RAM.</li>
+            <li><strong>Almacenamiento:</strong> al menos 500 MB de espacio libre en disco para la aplicación y los archivos temporales.</li>
+            <li><strong>Conexión a Internet:</strong> imprescindible: la IA, Google Gemini, funciona en línea. También es necesaria para las voces en línea (OpenAI, Azure, Google) y la descarga de vídeos.</li>
+            <li><strong>Lector de pantalla:</strong> para una accesibilidad completa, se recomienda un lector de pantalla como JAWS, NVDA o el Narrador de Windows.</li>
         </ul>
 
-        <h2 id="setup">Primeros Pasos: Configurar tus Claves de API</h2>
-        <p>Omni Describer utiliza servicios de inteligencia artificial en la nube para analizar y locutar las descripciones. Por lo tanto, necesitas introducir tus propias claves de API antes de poder empezar.</p>
+        <h2 id="setup">Primeros pasos: configurar tus claves de API</h2>
+        <p>Omni Describer usa Google Gemini para analizar los vídeos, las imágenes y los documentos, así que necesitas tu propia clave de API de Gemini antes de empezar. Las voces en línea tienen sus propias claves, que se describen en <a href="#voices">Voces</a>; la elección del modelo de Gemini se explica en <a href="#ai-backends">La IA: modelos y ajustes de Gemini</a>.</p>
         <ol>
-            <li><strong>Abrir Configuración:</strong> Ve al menú <strong>Archivo</strong> y selecciona <strong>Configuración...</strong> (o pulsa <span class="key">Ctrl</span> + <span class="key">,</span>).</li>
-            <li><strong>Pestaña de Configuración de IA:</strong>
+            <li><strong>Abre los ajustes:</strong> abre el menú <strong>Archivo</strong> (<span class="key">Alt</span> + <span class="key">A</span>) y elige <strong>Ajustes...</strong>, o pulsa <span class="key">Ctrl</span> + <span class="key">,</span>.</li>
+            <li><strong>Pestaña Ajustes de la IA:</strong> pulsa <span class="key">Ctrl</span> + <span class="key">Tab</span> para pasar de la pestaña General a la pestaña Ajustes de la IA y, después, <span class="key">Tab</span> para entrar en ella.
                 <ul>
-                    <li><strong>Clave de API de Gemini:</strong> Es obligatoria para el análisis de vídeo. Pega tu clave en el campo "Clave de API de Gemini:". Puedes obtener una clave gratuita en <a href="https://aistudio.google.com/app/apikey" target="_blank">Google AI Studio</a>.</li>
-                    <li><strong>Clave de API de OpenAI (para TTS):</strong> Se necesita para la síntesis de voz (TTS) de alta calidad. Pega tu clave en este campo. Aún puedes usar las voces integradas de Windows sin esta clave, pero se recomienda OpenAI para obtener los mejores resultados. Puedes obtener una clave en la <a href="https://platform.openai.com/api-keys" target="_blank">Plataforma de OpenAI</a>.</li>
+                    <li><strong>Clave de API de Gemini:</strong> necesaria para analizar vídeos con Gemini. Pega tu clave en este campo. Puedes obtener una clave gratuita en <a href="https://aistudio.google.com/app/apikey" target="_blank">Google AI Studio</a>. Luego pulsa <span class="key">Tab</span> hasta el botón <strong>Probar clave</strong> (<span class="key">Alt</span> + <span class="key">P</span>): la aplicación indica si la clave funciona y cuántos modelos puede usar.</li>
+                    <li><strong>Clave de API de OpenAI (para TTS):</strong> solo es necesaria si eliges las voces de OpenAI. Sin ella puedes seguir usando las voces integradas de Windows. Puedes obtener una clave en la <a href="https://platform.openai.com/api-keys" target="_blank">plataforma de OpenAI</a>.</li>
                 </ul>
             </li>
-            <li><strong>Guardar:</strong> Haz clic en <strong>Aplicar</strong> u <strong>OK</strong> para guardar tu configuración. ¡Ya estás listo!</li>
+            <li><strong>Guarda:</strong> pulsa <strong>Aplicar</strong> o <strong>Aceptar</strong> para guardar los ajustes. ¡Ya está todo listo!</li>
         </ol>
         <div class="note">
-            <strong>Recuerda:</strong> Tus claves de API se guardan de forma segura en tu ordenador, en el archivo de configuración de la aplicación, y nunca se envían a ningún otro lugar, excepto para conectarse a los servicios de IA correspondientes.
+            <strong>Almacenamiento seguro:</strong> tus claves de API se cifran y se guardan de forma segura en tu equipo, en el archivo de ajustes de la aplicación. Nunca se envían a ningún otro lugar, salvo para conectarse directamente a los servicios de IA correspondientes.
         </div>
 
-        <h2 id="quickstart">Inicio Rápido: Generar tu Primera Descripción</h2>
-        <p>¿Listo para empezar? Solo tienes que seguir estos sencillos pasos:</p>
+        <p data-p7="1">En el primer inicio, si no hay ninguna clave de Gemini configurada, la aplicación ofrece abrir la página de Google AI Studio y los ajustes. Responde Sí, pega la clave y pulsa <strong>Probar clave</strong>. En el primerísimo inicio también se te pide que aceptes la licencia (De acuerdo o En desacuerdo).</p>
+
+        <h2 id="quickstart">Inicio rápido: generar tu primera descripción</h2>
+        <p>¡Empecemos! Solo tienes que seguir estos sencillos pasos:</p>
         <ol>
-            <li><strong>Elige un Vídeo:</strong> Haz clic en un botón como "Archivo de Vídeo Local" en la ventana principal o selecciona tu fuente de vídeo desde el menú Archivo.</li>
-            <li><strong>Selecciona una Plantilla de Instrucción (Opcional):</strong> El menú desplegable lista instrucciones predefinidas que guían a la IA. Para tu primer intento, "Descripción Estándar" es un excelente punto de partida.</li>
-            <li><strong>Inicia el Procesamiento:</strong> La aplicación comenzará a analizar tu vídeo. Puedes seguir el progreso en el "Registro de Estado" en la parte inferior de la ventana. Esto puede tardar unos minutos, dependiendo de la duración del vídeo.</li>
+            <li><strong>Selecciona un prompt (opcional):</strong> en la ventana principal, pulsa <span class="key">Tab</span> hasta la lista «Opcional: Seleccione un preajuste de prompt para mejorar la generación» y elige un preajuste con las flechas. El cuadro de solo lectura que sigue muestra el texto completo que se enviará a la IA. Para tu primer intento, dejarlo en «(Ningún preajuste seleccionado)» es un buen punto de partida.</li>
+            <li><strong>Elige un vídeo:</strong> pulsa <span class="key">Ctrl</span> + <span class="key">O</span> para un vídeo de tu equipo, <span class="key">Ctrl</span> + <span class="key">U</span> para un enlace directo a un archivo de vídeo o <span class="key">Ctrl</span> + <span class="key">Y</span> para un enlace de YouTube. Las mismas acciones son los tres primeros botones de la ventana principal (<span class="key">Alt</span> + <span class="key">L</span>, <span class="key">Alt</span> + <span class="key">U</span>, <span class="key">Alt</span> + <span class="key">Y</span>).</li>
+            <li><strong>Espera la descripción:</strong> la aplicación descarga el vídeo si es necesario, lo prepara y lo envía a la IA. Puedes seguir el progreso en el «Registro de estado» (el lector de pantalla también anuncia los pasos principales). Esto puede tardar unos minutos, según la duración del vídeo. <span class="key">Ctrl</span> + <span class="key">Shift</span> + <span class="key">P</span> repite el último mensaje de progreso.</li>
         </ol>
-        <p>Cuando el proceso termine, el <strong>Reproductor de Vídeo con Descripciones</strong> se abrirá automáticamente, ¡y podrás empezar a disfrutar de tu vídeo recién descrito!</p>
+        <p>Cuando termine el proceso, el <strong>reproductor de vídeo con descripciones</strong> se abrirá automáticamente y podrás empezar a disfrutar de tu vídeo recién descrito. Recuerda guardar el proyecto con <span class="key">Ctrl</span> + <span class="key">S</span> en el reproductor: de lo contrario, las descripciones se pierden al cerrarlo (el reproductor te lo pregunta antes de cerrarse).</p>
 
-        <h2 id="features">Características Principales</h2>
+        <h3 id="cancel">Cancelar una descripción</h3>
+        <p>Mientras se genera una descripción, pulsa <span class="key">Escape</span> en la ventana principal o el botón <strong>Cancelar generación</strong> (<span class="key">Alt</span> + <span class="key">C</span>; el foco pasa a él cuando empieza una generación). La cancelación funciona en todas las etapas: mientras se prepara el vídeo, mientras se sube (incluso una subida larga), mientras la aplicación espera para reintentar tras un error y mientras la IA trabaja. La aplicación dice «Cancelando...» y luego «Generación cancelada.». Cerrar la aplicación también detiene una generación en curso. Mientras se ejecuta una generación, el menú Archivo y los botones de origen no están disponibles.</p>
 
-        <h3 id="player">El Reproductor de Vídeo con Descripciones</h3>
-        <p>Este es tu cine personal con descripciones. Mientras el vídeo se reproduce normalmente, tu <strong>lector de pantalla instalado</strong> (como JAWS o NVDA) leerá las audiodescripciones generadas en los momentos correctos.</p>
+        <h2 id="main-window">La ventana principal y sus menús</h2>
+        <p>La ventana principal contiene, en el orden de <span class="key">Tab</span>:</p>
+        <ol>
+            <li>Los botones <strong>Archivo de vídeo local</strong>, <strong>URL de vídeo directa</strong> y <strong>URL de vídeo de YouTube</strong>, para elegir el vídeo que se va a describir.</li>
+            <li><strong>Abrir plataforma web</strong>: abre la versión web de Omni Describer en tu navegador (allí no se necesita clave de API).</li>
+            <li>La lista de <strong>preajustes de prompt</strong> y el texto de solo lectura del preajuste seleccionado (consulta <a href="#prompts">Gestionar los preajustes de prompts</a>).</li>
+            <li>El <strong>Registro de estado</strong>, un texto de solo lectura con todo lo que ha hecho la aplicación; léelo con las flechas.</li>
+            <li>Los botones <strong>Ajustes...</strong>, <strong>Cancelar generación</strong> (solo disponible mientras se genera una descripción) y <strong>Salir</strong>.</li>
+        </ol>
+        <p>La barra de estado de la parte inferior muestra el paso actual y, durante el procesamiento, el porcentaje.</p>
+
+        <h3 id="file-menu">El menú Archivo</h3>
+        <p>Ábrelo con <span class="key">Alt</span> + <span class="key">A</span>.</p>
         <ul>
-            <li><strong>Controles de Reproducción:</strong> Usa los botones de Reproducir/Pausa, Retroceder/Avanzar o la barra de desplazamiento para navegar por el vídeo.</li>
-            <li><strong>Área de Descripción de Audio Actual:</strong> Aquí puedes seguir el texto de la descripción activa en cada momento.</li>
-            <li><strong>Editar Descripciones:</strong> Si una descripción es incorrecta, está mal sincronizada o quieres eliminarla, haz clic en el botón "Editar Descripciones..." para corregirla o borrarla fácilmente.</li>
-            <li><strong>Uso de Tokens de IA:</strong> Esta área te muestra cuántos "tokens" de IA se usaron durante el proceso, ayudándote a llevar un control de tu uso de la API.</li>
+            <li><strong>Abrir vídeo local...</strong> (<span class="key">Ctrl</span> + <span class="key">O</span>): elige un archivo de vídeo de tu equipo y descríbelo.</li>
+            <li><strong>Abrir vídeo desde URL...</strong> (<span class="key">Ctrl</span> + <span class="key">U</span>): escribe la dirección directa de un archivo de vídeo (que termine en .mp4, .webm...). Se descarga y luego se describe.</li>
+            <li><strong>Abrir desde YouTube...</strong> (<span class="key">Ctrl</span> + <span class="key">Y</span>): pega una dirección de YouTube. La calidad de descarga se configura en Ajustes, pestaña General.</li>
+            <li><strong>Abrir proyecto...</strong> (<span class="key">Ctrl</span> + <span class="key">P</span>): vuelve a abrir un proyecto guardado (archivo .omniad) en el reproductor, sin volver a consultar a la IA. Si el vídeo se ha movido, la aplicación te pide que lo localices.</li>
+            <li><strong>Proyectos recientes</strong>: un submenú con los últimos proyectos que abriste o guardaste; pulsa el número delante de un proyecto para abrirlo.</li>
+            <li><strong>Importar descripciones desde SRT o WebVTT...</strong>: abre un guion de descripciones existente (.srt o .vtt). La aplicación indica cuántas descripciones ha encontrado y luego pide el vídeo al que pertenecen. Después puedes escucharlas, editarlas o exportarlas.</li>
+            <li><strong>Describir una imagen o un PDF...</strong> (<span class="key">Ctrl</span> + <span class="key">I</span>), <strong>Describir mi pantalla</strong> (<span class="key">Ctrl</span> + <span class="key">Alt</span> + <span class="key">Shift</span> + <span class="key">D</span>) y <strong>Descripción continua de la pantalla</strong> (<span class="key">Ctrl</span> + <span class="key">Alt</span> + <span class="key">Shift</span> + <span class="key">L</span>): consulta <a href="#images">Imágenes, PDF y tu pantalla</a>.</li>
+            <li><strong>Reutilizar personajes de un proyecto...</strong> (<span class="key">Ctrl</span> + <span class="key">G</span>): para una serie, elige el proyecto de un episodio anterior; las siguientes descripciones parten de sus personajes, de modo que los nombres y las descripciones se mantienen.</li>
+            <li><strong>Gestionar preajustes de prompts...</strong>: consulta <a href="#prompts">Gestionar los preajustes de prompts</a>.</li>
+            <li><strong>Abrir plataforma web...</strong> (<span class="key">Ctrl</span> + <span class="key">W</span>): abre la versión web en tu navegador.</li>
+            <li><strong>Ajustes...</strong> (<span class="key">Ctrl</span> + <span class="key">,</span>): consulta <a href="#advanced-settings">Los ajustes en detalle</a>.</li>
+            <li><strong>Restablecer ajustes y datos...</strong>: consulta <a href="#reset">Restablecer ajustes y datos</a>.</li>
+            <li><strong>Salir</strong> (<span class="key">Alt</span> + <span class="key">F4</span>).</li>
         </ul>
 
-        <h3 id="prompts">Gestionar Plantillas de Instrucciones (Prompts)</h3>
-        <p>Las instrucciones (o prompts) son directrices potentes que determinan en qué se enfoca la IA. Cambiando la instrucción, puedes obtener descripciones con estilos muy diferentes.</p>
+        <h3 id="help-menu">El menú Ayuda</h3>
         <ul>
-            <li><strong>Seleccionar una Plantilla:</strong> Antes de procesar un vídeo, elige una plantilla del menú desplegable en la ventana principal.</li>
-            <li><strong>Gestionar Plantillas:</strong> Ve a <strong>Archivo -> Gestionar Plantillas de Instrucciones...</strong>. Aquí puedes Añadir, Editar o Eliminar tus propias instrucciones personalizadas. Es perfecto para guardar las que usas con más frecuencia.</li>
-            <li><strong>Específicas del Idioma:</strong> Tus plantillas de instrucciones se guardan por separado para cada idioma que selecciones en la Configuración.</li>
+            <li><strong>Ver ayuda</strong> (<span class="key">F1</span>): abre esta guía en tu navegador web, en el idioma de la interfaz si existe una traducción.</li>
+            <li><strong>Registro de cambios</strong>: lo que ha cambiado en cada versión.</li>
+            <li><strong>Colaboradores</strong>: las personas que ayudaron a crear y traducir la aplicación.</li>
+            <li><strong>Ver licencia</strong>: el acuerdo de licencia.</li>
+            <li><strong>Acerca de...</strong>: versión, dirección de contacto y un botón Visitar sitio web.</li>
         </ul>
 
-        <h3 id="askmore">Preguntar Más Sobre la Escena</h3>
-        <p>¿Alguna vez te has preguntado qué sostiene un personaje o qué dice un cartel en el fondo? Esta función te permite preguntar cualquier cosa que se te ocurra sobre la escena.</p>
-        <ol>
-            <li>Pausa el vídeo en el momento que te cause curiosidad.</li>
-            <li>Haz clic en el botón <strong>Preguntar Más...</strong>.</li>
-            <li>Escribe tu pregunta en el campo "Tu Nueva Pregunta:" (p. ej., "¿De qué color es el sombrero de la mujer?" o "¿Qué pone en el cartel de la pared?").</li>
-            <li>Selecciona cuántos segundos de vídeo debe analizar la IA, a partir de la posición actual del cursor.</li>
-            <li>Haz clic en "Enviar Pregunta". La respuesta de la IA aparecerá en el área de "Historial de la Conversación".</li>
-        </ol>
+        <h2 id="features">Funciones principales</h2>
 
-        <h3 id="explorer">Explorador de Escenas</h3>
-        <p>El Explorador de Escenas es una forma interactiva de entender la disposición espacial de una escena. Te coloca en una sala virtual que puedes recorrer con el teclado.</p>
+        <p data-p6="1">Antes de describir, la aplicación localiza los momentos sin habla, incluso bajo la música (detección de voz Silero, descargada una sola vez, unos 2 MB, y ejecutada en tu equipo), y los cambios de plano, y después pide a la IA que coloque ahí las descripciones. Anuncia el número aproximado de tokens antes de enviar el vídeo (Escape cancela) e informa al menos cada 25 segundos mientras trabaja.</p>
+
+        <h3 id="player">El reproductor de vídeo con descripciones</h3>
+        <p>Es tu sala de cine personal con audiodescripción. Mientras se reproduce el vídeo, las descripciones se leen en el momento justo: de forma predeterminada con tu <strong>lector de pantalla instalado</strong> (como JAWS o NVDA), o con la voz de la aplicación o en tu línea braille (consulta «Descripciones en el reproductor» en <a href="#settings-audio">Pestaña Salida de audio</a>). El foco empieza en el botón Reproducir. En el orden de <span class="key">Tab</span>, el reproductor contiene:</p>
+        <ul>
+            <li>El botón <strong>Reproducir / Pausa</strong> (dice Repetir al final del vídeo) y el <strong>deslizador de progreso del vídeo</strong>: las flechas sobre el deslizador te mueven por el vídeo.</li>
+            <li>Los botones <strong>Rebobinar 5s</strong> (<span class="key">Alt</span> + <span class="key">R</span>) y <strong>Avanzar 5s</strong> (<span class="key">Alt</span> + <span class="key">A</span>), y el deslizador <strong>Vol</strong> (el volumen del vídeo, que se recuerda para la próxima vez).</li>
+            <li><strong>Audiodescripción actual:</strong> el texto de la descripción que se está leyendo; puedes revisarlo con las teclas de lectura de tu lector de pantalla.</li>
+            <li><strong>Uso de tokens de IA:</strong> cuántos «tokens» de IA se han usado, para ayudarte a controlar el uso de la API.</li>
+            <li>Los botones <strong>Explorar escena...</strong>, <strong>Preguntar más...</strong>, <strong>Editar descripciones...</strong>, <strong>Ajustes...</strong> y <strong>Exportar...</strong>, que se describen a continuación.</li>
+        </ul>
+        <p>La mayoría de las acciones tienen además un atajo de una sola tecla que funciona esté donde esté el foco: consulta <a href="#shortcuts">Atajos de teclado</a> (o pulsa <span class="key">F1</span> o <span class="key">?</span> en el reproductor para oírlos). Al cerrar el reproductor, te pregunta si quieres guardar el proyecto si algo ha cambiado; un vídeo descargado se elimina al cerrar, salvo que hayas guardado un proyecto (en ese caso el vídeo se copia junto al proyecto).</p>
+
+        <p>Ajustes > Salida de audio, «Descripciones en el reproductor»: tu lector de pantalla (voz y braille, la opción predeterminada); la voz de la aplicación elegida arriba, preparada de antemano para que el vídeo se atenúe o se pause exactamente el tiempo necesario; o solo braille, donde el vídeo se pausa después de cada descripción hasta que pulses Intro. «Mostrar también las descripciones en letra grande sobre el vídeo» muestra cada descripción sobre la imagen, con el tamaño y el color que elijas, para espectadores con baja visión.</p>
+
+        <h3 id="editing">Editar las descripciones: el poder de pulir</h3>
+        <p>La IA ofrece un punto de partida fantástico, pero la verdadera calidad llega con el pulido. El botón «Editar descripciones...» del reproductor abre un potente editor que te da el control total sobre cada aspecto de tu proyecto. Primero debe estar cargado el vídeo.</p>
+        <ul>
+            <li><strong>Seleccionar y modificar:</strong> la lista superior (<span class="key">Alt</span> + <span class="key">L</span>) tiene una fila por descripción: inicio, fin, texto, palabras por segundo, estado de revisión y nivel. Al seleccionar una fila, se carga debajo y el vídeo se mueve a ese punto. <span class="key">Intro</span> sobre una fila lleva a su texto.</li>
+            <li><strong>Ajustar las marcas de tiempo:</strong> edita los campos <code>Inicio</code> y <code>Fin</code> (HH:MM:SS.mmm), o fíjalos según la posición del reproductor con los botones «Inicio = posición del reproductor» (<span class="key">Alt</span> + <span class="key">I</span> o <span class="key">Ctrl</span> + <span class="key">[</span>) y «Fin = posición del reproductor» (<span class="key">Alt</span> + <span class="key">F</span> o <span class="key">Ctrl</span> + <span class="key">]</span>). Al cambiar la hora de inicio, la hora de fin se desplaza automáticamente para conservar la duración de la descripción. Todas las horas se validan para que queden dentro de los límites del vídeo.</li>
+            <li><strong>Reescribir el texto:</strong> edita libremente el texto de la descripción para hacerlo más claro, añadir detalles o corregir imprecisiones.</li>
+            <li><strong>Estado de revisión y notas del revisor:</strong> marca una descripción como «Para revisar» o «Validada» y añade una nota; ambos se guardan con el proyecto y aparecen en el guion de producción de Word.</li>
+            <li><strong>Añadir nueva...</strong> (<span class="key">Alt</span> + <span class="key">A</span>): abre un pequeño diálogo donde indicas el inicio, el fin y el texto de una nueva descripción; el inicio es la posición actual del reproductor.</li>
+            <li><strong>Eliminar</strong> (<span class="key">Alt</span> + <span class="key">E</span>, o <span class="key">Supr</span> en la lista): elimina la descripción seleccionada tras confirmarlo.</li>
+            <li><strong>Personajes...</strong> (<span class="key">Alt</span> + <span class="key">P</span>): abre el glosario de personajes, consulta <a href="#characters">Los personajes y sus voces</a>.</li>
+            <li><strong>Escuchar con la voz de exportación</strong> (<span class="key">Alt</span> + <span class="key">U</span> o <span class="key">Ctrl</span> + <span class="key">R</span>): reproduce el texto con la voz usada en las exportaciones de audio, diccionario de pronunciación incluido.</li>
+            <li><strong>Guardar cambios</strong> (<span class="key">Alt</span> + <span class="key">G</span> o <span class="key">Ctrl</span> + <span class="key">S</span>) y <strong>Cerrar</strong> (o <span class="key">Escape</span>).</li>
+            <li><strong>Atajos:</strong> F8 / Shift+F8: descripción siguiente / anterior por revisar. Ctrl+P: reproducir o pausar el vídeo. Alt+Izquierda / Alt+Derecha: mover el vídeo 1 segundo. Ctrl+Z / Ctrl+Y en la lista: deshacer / rehacer. Ctrl+G sobre una línea de diálogo traducido: cambiar la voz del hablante (indeterminado, mujer, hombre). Las horas se escriben como HH:MM:SS.mmm (también valen MM:SS o segundos); pasar a otra descripción conserva tus cambios, y al cerrar se te pregunta si hay alguno sin guardar.</li>
+        </ul>
+        <div class="note">
+            <strong>Guarda tu trabajo:</strong> al cerrar el editor, tu lista de descripciones actualizada vuelve al reproductor y se usa para la reproducción y las exportaciones. Para conservarla después de cerrar el reproductor, guarda el proyecto en el reproductor con <span class="key">Ctrl</span> + <span class="key">S</span>.
+        </div>
+
+        <p>Para la revisión profesional, cada descripción tiene un estado (para revisar o validada) y notas del revisor, que se guardan con el proyecto. Tras la generación, una revisión de la IA marca además las descripciones que no están en presente, que interpretan sentimientos en lugar de describir lo que se ve o que se salen de la ficción (nombres de actores, jerga de cámara); aparecen con «Revisar» en el editor, y V en el reproductor las cuenta. Cambiar el texto borra estas marcas. Las entradas demasiado largas para su pausa o que caen sobre diálogos también empiezan por «Revisar».</p>
+
+        <h3 id="characters">Los personajes y sus voces</h3>
+        <p>La IA mantiene un glosario de personajes para que cada persona se describa igual en todo el vídeo y se nombre solo cuando su nombre se haya pronunciado o mostrado. Ábrelo desde el editor con <strong>Personajes...</strong> (<span class="key">Alt</span> + <span class="key">P</span>).</p>
+        <ul>
+            <li>La lista muestra el ID, el nombre («Sin nombre» hasta que se revele), la descripción y la voz de cada personaje. <span class="key">Intro</span> edita el personaje seleccionado y <span class="key">Supr</span> lo elimina (tras confirmarlo).</li>
+            <li><strong>Añadir...</strong> (<span class="key">Alt</span> + <span class="key">A</span>), <strong>Editar...</strong> (<span class="key">Alt</span> + <span class="key">E</span>), <strong>Eliminar</strong> (<span class="key">Alt</span> + <span class="key">E</span>), y luego <strong>Aceptar</strong> para conservar los cambios o <strong>Cancelar</strong>.</li>
+            <li>En el formulario del personaje: <strong>ID</strong> (un identificador único, obligatorio), <strong>Nombre</strong> (déjalo vacío si aún no se ha revelado), <strong>Descripción</strong> (cómo reconocerlo, obligatoria).</li>
+            <li><strong>Voz para los diálogos traducidos de este personaje:</strong> cuando se traducen diálogos en otro idioma (consulta <a href="#images">subtítulos sonoros</a>), elige qué voz lee las frases de este personaje en las exportaciones de audio y con la voz de la aplicación:
+                <ul>
+                    <li><strong>Automática</strong> (predeterminada): el género aparente de quien habla, línea por línea.</li>
+                    <li><strong>Voz de mujer</strong> o <strong>Voz de hombre</strong>: siempre esa voz para este personaje.</li>
+                    <li><strong>Voz de las descripciones</strong>: la misma voz que las descripciones.</li>
+                </ul>
+                La etiqueta termina con «según la IA: mujer», «hombre» o «indeterminado»: el género que percibió la IA, que tu elección anula sin borrarlo.</li>
+            <li>Dar un nombre nuevo a un personaje también lo cambia en todas las descripciones; la aplicación indica cuántas descripciones se han actualizado.</li>
+        </ul>
+        <p>Para reutilizar los personajes de un episodio anterior, usa Archivo &gt; Reutilizar personajes de un proyecto (<span class="key">Ctrl</span> + <span class="key">G</span>) antes de describir el siguiente.</p>
+
+        <h3 id="prompts">Gestionar los preajustes de prompts</h3>
+        <p>Los prompts son instrucciones adicionales que le dicen a la IA en qué centrarse. Cambiando el prompt puedes obtener descripciones de estilos muy distintos.</p>
+        <ul>
+            <li><strong>Seleccionar un preajuste:</strong> antes de procesar un vídeo, elige un preajuste en la lista de prompts de la ventana principal.</li>
+            <li><strong>Gestionar los preajustes:</strong> ve a <strong>Archivo &gt; Gestionar preajustes de prompts...</strong>. La lista muestra el nombre y el texto de cada preajuste. Botones: <strong>Añadir...</strong> (<span class="key">Alt</span> + <span class="key">A</span>), <strong>Editar...</strong> (<span class="key">Alt</span> + <span class="key">E</span>, o <span class="key">Intro</span> sobre un preajuste), <strong>Eliminar</strong> (<span class="key">Alt</span> + <span class="key">E</span>), <strong>Exportar...</strong> (<span class="key">Alt</span> + <span class="key">X</span>), <strong>Importar...</strong> (<span class="key">Alt</span> + <span class="key">I</span>) y <strong>Cerrar</strong>. Un preajuste tiene un nombre y un texto de prompt, ambos obligatorios.</li>
+            <li><strong>Una lista por idioma de la interfaz:</strong> el diálogo gestiona los preajustes del idioma actual de la interfaz (lo indica en la parte superior). Al cambiar la interfaz a otro idioma se muestra la lista de ese idioma.</li>
+        </ul>
+
+        <p data-p7="1">Los preajustes existen en los diez idiomas de la interfaz. Los preajustes predeterminados se incluyen con la aplicación como archivos JSON en su carpeta <code>prompts</code>, un archivo por idioma (<code>en.json</code>, <code>fr.json</code>...); tu propia lista se guarda en tu carpeta de datos (<code>prompts.json</code>). <strong>Exportar...</strong> guarda tus preajustes en un archivo JSON para compartirlos con otros audiodescriptores; <strong>Importar...</strong> añade los preajustes de un archivo así (un preajuste con el mismo nombre se sustituye). Archivo &gt; Restablecer ajustes y datos puede recuperar los preajustes predeterminados.</p>
+
+        <h3 id="askmore">Preguntar más sobre la escena</h3>
+        <p>¿Te has preguntado alguna vez qué sostiene un personaje o qué dice un cartel del fondo? Esta función te permite preguntar cualquier cosa sobre la escena. Usa Gemini.</p>
+        <ol>
+            <li>Pausa el vídeo en el momento que te despierta curiosidad.</li>
+            <li>Pulsa <span class="key">Q</span> o el botón <strong>Preguntar más...</strong>.</li>
+            <li>Escribe tu pregunta en el campo «Su nueva pregunta:» (por ejemplo, «¿De qué color es el sombrero de la mujer?» o «¿Qué dice lo que está escrito en la pared?»).</li>
+            <li>Elige en «Duración del contexto del vídeo (segundos)» cuántos segundos de vídeo alrededor del momento actual debe analizar la IA (de 1 a 60; 5 de forma predeterminada).</li>
+            <li>Pulsa <strong>Enviar pregunta</strong> (<span class="key">Alt</span> + <span class="key">E</span>). La respuesta de la IA aparece en el área «Historial de la conversación» y puedes hacer más preguntas: la IA recuerda la conversación.</li>
+            <li><strong>Añadir a las descripciones</strong> (<span class="key">Alt</span> + <span class="key">A</span>) añade la última respuesta como nueva descripción en el momento actual. <strong>Cerrar</strong> vuelve al reproductor.</li>
+        </ol>
+        <p>La tecla <span class="key">W</span> del reproductor pregunta directamente «¿Qué hay en pantalla ahora mismo?» y muestra la respuesta en esta ventana.</p>
+
+        <h3 id="explorer">Explorador de escena</h3>
+        <p>El Explorador de escena te dice qué hay en la imagen y dónde. Cada objeto viene con una posición horaria: las 12 es la parte superior de la imagen, las 3 el borde derecho y las 6 la parte inferior. Es una ventana normal, que leen tu lector de pantalla y tu línea braille. Usa Gemini.</p>
         <ol>
             <li>Pausa el vídeo en una escena que quieras explorar en detalle.</li>
-            <li>Haz clic en el botón <strong>Explorar Escena...</strong> y luego en "Analizar Escena".</li>
+            <li>Pulsa <span class="key">S</span> o el botón <strong>Explorar escena...</strong>.</li>
+            <li>En las opciones, elige la «Duración del análisis (segundos)» (de 1 a 10; 3 de forma predeterminada) y, si quieres, escribe en qué centrarse; luego pulsa <strong>Analizar escena</strong> (<span class="key">Intro</span>).</li>
         </ol>
-        <p>Ahora estás en el Explorador de Escenas. Usa tu teclado para explorar:</p>
+        <p>La ventana del Explorador de escena tiene tres partes; muévete entre ellas con Tab:</p>
         <ul>
-            <li><span class="key">Teclas de Flecha</span>: Mueve tu posición virtual en una cuadrícula.</li>
-            <li><span class="key">D</span>: Proporciona una descripción detallada de la disposición general de la escena.</li>
-            <li><span class="key">L</span>: Anuncia una lista de todos los objetos en la escena.</li>
-            <li><span class="key">Shift</span> + <span class="key">L</span>: Cambia al "Modo de Salto" para seleccionar un objeto e ir directamente a él.</li>
-            <li><span class="key">Enter</span>: Obtén una descripción detallada del objeto más cercano.</li>
-            <li><span class="key">Escape</span>: Cierra el Explorador de Escenas.</li>
+            <li><strong>Escena</strong> (<span class="key">Alt</span> + <span class="key">E</span>): un resumen de toda la escena.</li>
+            <li><strong>Objetos</strong> (<span class="key">Alt</span> + <span class="key">O</span>): los objetos con su posición horaria. Al recorrer la lista suena un sonido situado a la izquierda o a la derecha según dónde esté el objeto (usa auriculares estéreo).</li>
+            <li><strong>Detalles</strong> (<span class="key">Alt</span> + <span class="key">D</span>): cómo es el objeto seleccionado y qué está haciendo.</li>
+            <li><span class="key">Escape</span>: cierra el Explorador de escena.</li>
         </ul>
 
-        <h3 id="exporting">Exportar tu Trabajo</h3>
-        <p>Cuando estés satisfecho con tus descripciones, puedes exportarlas desde la Ventana del Reproductor en diferentes formatos:</p>
+        <h3 id="images">Imágenes, PDF y tu pantalla</h3>
+        <p><strong>Archivo &gt; Describir una imagen o un PDF</strong> (Ctrl+I) describe una foto, una captura de pantalla o un documento PDF: primero el tema principal, luego las personas, los colores y cualquier texto visible, leído literalmente. En un PDF: la maquetación, las imágenes, los gráficos y las tablas con sus valores clave, y después un resumen por sección. El resultado se abre en una ventana que puedes leer línea por línea o copiar con el botón <strong>Copiar</strong> (<span class="key">Alt</span> + <span class="key">C</span>). Imágenes compatibles: PNG, JPG, WEBP, GIF, BMP y HEIC.</p>
+        <p><strong>Describir mi pantalla</strong> (Ctrl+Alt+Shift+D) funciona desde cualquier aplicación: un navegador, una videollamada, un juego. La pantalla se captura, se describe y tu lector de pantalla lee la respuesta. La captura se elimina después.</p>
+        <p><strong>Descripción continua de la pantalla</strong> (Ctrl+Alt+Shift+L, activar o desactivar) revisa la pantalla cada 3 segundos y solo la describe cuando ha cambiado de forma notable, diciendo únicamente lo nuevo. Cada descripción consume tu cuota de API: desactívala cuando ya no la necesites.</p>
+        <p><strong>Subtítulos sonoros:</strong> en Ajustes &gt; Ajustes de la IA, «Traducir los diálogos en otro idioma» añade la traducción de las frases en otro idioma (anime en versión original, películas extranjeras), precedida del nombre de quien habla. Igual que el texto en pantalla, se anuncian con un sonido breve y se leen con la segunda voz en las exportaciones; con «Leer el diálogo traducido con una voz que corresponda al hablante» se leen con una voz de mujer o de hombre (consulta <a href="#voices">Voces</a>).</p>
+
+        <p>Con varias pantallas, se describe la que muestra la ventana activa. En el modo continuo, la nueva descripción espera a una pausa en lo que el equipo está reproduciendo (hasta 8 segundos) antes de leerse.</p>
+
+        <h3 id="cli">Línea de comandos y modo por lotes</h3>
+        <p>Para describir muchos archivos sin la interfaz, usa la línea de comandos. Las carpetas se procesan archivo por archivo; las imágenes y los PDF reciben una descripción en texto (<code>name_description.txt</code>). Se usan los mismos ajustes y la misma clave de API que en la aplicación.</p>
+        <pre dir="ltr"><code>python -m audio_describer.cli film.mp4 episodes --lang fr --export vtt,srt,txt,project --out out</code></pre>
+        <p>La aplicación instalada tiene la misma línea de comandos: <code>OmniDescriber.exe --cli</code> seguido de las mismas opciones. Todas las opciones:</p>
         <ul>
-            <li><strong>Exportar a .TXT:</strong> Un archivo de texto simple con marcas de tiempo.</li>
-            <li><strong>Exportar a .SRT:</strong> Un archivo de subtítulos estándar que puedes usar en reproductores de vídeo como VLC.</li>
-            <li><strong>Exportar Audio (MP3):</strong> Quizás la función más emocionante. Locuta tus descripciones con la voz que seleccionaste en Configuración (SAPI5 u OpenAI), la mezcla con el audio original del vídeo y baja automáticamente el sonido de fondo durante las descripciones para crear un archivo MP3 listo para escuchar en cualquier lugar.</li>
+            <li><code>inputs</code>: uno o varios vídeos, imágenes, PDF o carpetas.</li>
+            <li><code>--lang</code>: código del idioma de las descripciones (fr, en, es...), solo para esta ejecución; predeterminado: el ajuste de la aplicación.</li>
+            <li><code>--export</code>: lista separada por comas entre vtt, srt, txt, dapt, docx, project, mkv, mp4, mp3 y m4a. Predeterminado: <code>vtt,project</code>.</li>
+            <li><code>--density low|medium|high</code>: conserva en las exportaciones solo las descripciones esenciales (low) o todas (high, predeterminado); el proyecto lo conserva todo.</li>
+            <li><code>--extended</code>: en las exportaciones de audio y vídeo, pausa la imagen cuando una descripción es más larga que su pausa.</li>
+            <li><code>--no-credit</code>: sin mención hablada de la IA al final de las exportaciones de audio y vídeo.</li>
+            <li><code>--watch</code>: sigue en ejecución y describe cada archivo nuevo copiado en las carpetas (una vez terminada la copia). <span class="key">Ctrl</span> + <span class="key">C</span> lo detiene.</li>
+            <li><code>--out</code>: carpeta de salida (predeterminada: la carpeta actual).</li>
+            <li><code>--prompt</code>: instrucciones adicionales para la IA, como un preajuste de prompt.</li>
         </ul>
 
-        <h2 id="advanced-settings">Un Vistazo a la Configuración Avanzada</h2>
-        <p>La ventana de Configuración (<span class="key">Ctrl</span> + <span class="key">,</span>) te da un control minucioso sobre el comportamiento de Omni Describer.</p>
+        <h3 id="evaluate">Evaluar una audiodescripción</h3>
+        <p>Pulsa E en el reproductor para abrir el cuestionario de la guía de audiodescripción de 2020 del regulador audiovisual francés (CSA). El vídeo se pausa. La primera pestaña es para escuchar sin imagen; la segunda, para comprobar con la imagen (<span class="key">Ctrl</span> + <span class="key">Tab</span> cambia de pestaña). Valora cada pregunta de 1 a 5 (o déjala «sin valorar») y añade comentarios; los valores medidos (descripciones sobre diálogos, palabras por segundo, descripciones dudosas, texto en pantalla) se muestran junto a las preguntas a las que se refieren. No hay puntuación global: la guía considera que una media no tiene sentido. Aceptar guarda las respuestas con el proyecto (guárdalo con Ctrl+S), y Guardar informe (<span class="key">Alt</span> + <span class="key">I</span>) escribe un archivo de texto.</p>
 
-        <h3>Pestaña de Configuración de IA</h3>
+        <h3 id="exporting">Exportar tu trabajo</h3>
+        <p>Cuando estés satisfecho con tus descripciones, pulsa el botón <strong>Exportar...</strong> del reproductor. Elige un formato con las flechas, configura las opciones bajo la lista, pulsa <strong>Continuar</strong> (<span class="key">Intro</span>) y elige dónde guardar. Los formatos:</p>
         <ul>
-            <li><strong>Tasa de Fotogramas para Análisis de IA:</strong> Determina el número de fotogramas por segundo que se envían a la IA. Un valor más bajo (p. ej., 5 FPS) puede reducir los costes de la API, pero introduce la posibilidad de omitir acciones muy rápidas.</li>
-            <li><strong>Enviar Vídeo Solo (Sin Audio) a la IA:</strong> Esta es una opción útil para evitar que el audio del vídeo (diálogos, música, efectos) confunda a la IA. En lugar de intentar describir una explosión que oye, la IA se centrará solo en lo que ocurre visualmente.</li>
-            <li><strong>Desactivar Filtros de Seguridad (Usar con precaución):</strong> Esta opción puede permitir a la IA procesar contenido y generar descripciones que normalmente marcaría como sensibles. Sin embargo, esto no es un pase libre absoluto. El resultado final sigue estando sujeto a las políticas de seguridad fundamentales de Google, y no hay garantía de que todos los filtros se omitan. Recuerda que eres responsable de cómo utilizas esta función.</li>
+            <li><strong>Vídeo con una pista de audiodescripción separada (MKV)</strong>: se conservan las pistas originales y la descripción es una pista de audio adicional.</li>
+            <li><strong>Vídeo con una pista de audiodescripción independiente (MP4)</strong>: lo mismo, para la mayoría de reproductores y teléfonos.</li>
+            <li><strong>Audio MP3</strong>: pone voz a tus descripciones con la voz seleccionada en los ajustes, la mezcla con el sonido original y baja el fondo durante las descripciones, para crear un MP3 que puedes escuchar en cualquier lugar.</li>
+            <li><strong>Solo la pista de audiodescripción (M4A)</strong>: solo las descripciones locutadas, colocadas en sus tiempos.</li>
+            <li><strong>Descripciones WebVTT (.vtt)</strong>: para reproductores y plataformas web.</li>
+            <li><strong>Archivo de subtítulos SRT</strong>: las descripciones como subtítulos con sus tiempos, para reproductores como VLC.</li>
+            <li><strong>Archivo de texto plano (.txt)</strong>: una descripción por línea, sin tiempos.</li>
+            <li><strong>Guion W3C TTML DAPT (.ttml)</strong>: para herramientas profesionales de audiodescripción.</li>
+            <li><strong>Guion de producción (Word .docx)</strong>: códigos de tiempo, texto, nivel, estado y notas, para la revisión.</li>
+            <li><strong>Guion completo (.txt)</strong>: la IA transcribe los diálogos y los intercala con las descripciones, una alternativa en texto para lectores sordociegos (WCAG 1.2.8). Usa Gemini y puede tardar unos minutos.</li>
+        </ul>
+        <p>Las exportaciones de audio y vídeo necesitan FFmpeg (incluido con la aplicación) y locutan cada descripción; una ventana de progreso te permite seguir y cancelar la exportación.</p>
+
+        <p data-p7="1">Opciones de la ventana de exportación: <strong>Solo las descripciones de la densidad actual</strong> (<span class="key">Alt</span> + <span class="key">D</span>, activada de forma predeterminada) exporta lo que oyes en el reproductor (tecla D); <strong>Audiodescripción extendida</strong> (<span class="key">Alt</span> + <span class="key">X</span>, solo MKV, MP4 y MP3; activada de forma predeterminada cuando el reproductor está en modo extendido) pausa la imagen cuando una descripción es más larga que su pausa, en lugar de cortarla (el vídeo se vuelve a codificar y no se conservan los subtítulos originales); la <strong>mención hablada</strong> (<span class="key">Alt</span> + <span class="key">M</span>, formatos de audio y vídeo) añade al final una frase que indica que la audiodescripción se ha generado con IA. Sin la opción extendida, el mensaje final enumera las descripciones que se cortaron. La pista de audiodescripción lleva el nombre en el idioma de las descripciones, los subtítulos del original se conservan cuando es posible y, con sonido 5.1, las descripciones se colocan en el canal central. En el reproductor, <span class="key">Shift</span> + <span class="key">I</span> guarda la introducción sonora como MP3 para publicarla antes del programa.</p>
+
+        <h2 id="ai-backends">La IA: modelos y ajustes de Gemini</h2>
+        <p>Omni Describer usa Google Gemini para todo: las descripciones de vídeo, las imágenes, los documentos PDF y tu pantalla, Preguntar más, el Explorador de escena, la introducción sonora y la transcripción de los diálogos del guion completo. Gemini recibe el vídeo entero con su banda sonora: oye los diálogos y coloca las descripciones en las pausas reales en lugar de hablar encima de las personas. Solo necesitas una clave de API de Gemini; puedes obtenerla gratis en <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a> (consulta <a href="#setup">Primeros pasos</a>).</p>
+        <p><strong>Elegir un modelo:</strong> en Ajustes, pestaña Ajustes de la IA, <strong>Modelo de Gemini</strong>. <strong>Actualizar lista de modelos</strong> pide a Google la lista actual de modelos que puede usar tu clave. El predeterminado, <code>gemini-3.8-flash</code>, ofrece un buen equilibrio entre calidad, velocidad y coste para la mayoría de los vídeos.</p>
+        <ul>
+            <li><strong>Nivel gratuito</strong> (sin facturación, dentro de los límites diarios de Google): <code>gemini-4-hydrogen</code>, el modelo general más reciente, más lento cuando el nivel de razonamiento es Alto; <code>gemini-3.8-flash</code> (predeterminado) y <code>gemini-3.6-flash</code>; <code>gemini-3.5-flash-lite</code> y <code>gemini-3.1-flash-lite</code>, los más baratos y rápidos, con menor calidad.</li>
+            <li><strong>Solo de pago</strong> (con la facturación activada en tu cuenta de Google): <code>gemini-4-neon</code>, <code>gemini-4-carbon</code> y <code>gemini-4-argon</code>.</li>
+            <li>Los modelos <code>gemini-2.5</code> y <code>gemini-2.0</code> están obsoletos o desactivados: si aún tienes uno seleccionado, elige un modelo más reciente.</li>
+        </ul>
+        <p>Elige un modelo Flash-Lite para borradores rápidos, vídeos muy largos o cuando se te acaba la cuota diaria. Elige <code>gemini-4-hydrogen</code> para una película en la que la calidad de las descripciones importe más que el tiempo de espera.</p>
+        <p>Los demás ajustes de la IA se describen en <a href="#settings-ai">Pestaña Ajustes de la IA</a>; en resumen:</p>
+        <ul>
+            <li><strong>Nivel de razonamiento (Gemini 3 y posteriores):</strong> cuánto razona el modelo antes de responder. Bajo es más rápido y barato; Alto ayuda con películas complejas, pero es más lento.</li>
+            <li><strong>Detalle de las imágenes enviadas a la IA:</strong> cuánto detalle de cada fotograma del vídeo recibe Gemini. Bajo o Medio bastan para la mayoría de los vídeos y permiten que los vídeos largos quepan y cuesten menos; Alto ayuda a leer textos pequeños en pantalla, créditos o carteles, pero cuesta unas 3 o 4 veces más por fotograma. Automático (predeterminado) deja que Gemini decida.</li>
+            <li><strong>Deshabilitar filtros de seguridad:</strong> activado de forma predeterminada, para que las películas con escenas violentas o delicadas se describan igualmente.</li>
+            <li><strong>Habilitar división en fragmentos para vídeos largos:</strong> analiza un vídeo largo por partes, una tras otra; úsalo cuando un vídeo largo falla o se detiene antes de tiempo.</li>
         </ul>
 
-        <h3>Pestaña de Salida de Audio</h3>
+        <h2 id="voices">Voces</h2>
+        <p>La voz elegida en Ajustes, pestaña <strong>Salida de audio</strong>, lee las descripciones en las exportaciones de audio y vídeo, en el botón «Escuchar» del editor y en el reproductor cuando «Descripciones en el reproductor» está en la voz de la aplicación. (Con el modo predeterminado de lector de pantalla, es la propia voz de tu lector de pantalla la que las lee durante la reproducción.) Elige el <strong>Motor de texto a voz</strong> con las flechas; los campos de ese motor aparecen debajo. Pulsa <strong>Probar</strong> en el grupo «Probar voz» para oír el texto escrito encima.</p>
         <ul>
-            <li><strong>Motor de Síntesis de Voz (TTS):</strong>
-                <ul>
-                    <li><strong>SAPI5 (Integrado en Windows):</strong> Usa las voces compatibles con SAPI5 que vienen con Windows o que hayas instalado. No requiere una clave de API adicional. La calidad del audio variará según la calidad de las voces instaladas en tu sistema.</li>
-                    <li><strong>OpenAI TTS (Alta Calidad):</strong> Generalmente produce voces más naturales y fluidas. Usar esta opción requiere una clave de API de OpenAI y un método de pago asociado a tu cuenta.</li>
-                </ul>
-            </li>
+            <li><strong>TTS de OpenAI (alta calidad)</strong>: voces naturales; necesita una cuenta de pago de OpenAI y la clave de API de OpenAI (pestaña Ajustes de la IA). Elige un <strong>Preajuste de voz</strong>; <strong>Gestionar preajustes de voz...</strong> permite añadir, editar y eliminar preajustes, cada uno con un nombre, una voz base de OpenAI (alloy, echo, fable, onyx, nova, shimmer, coral, ash, ballad, sage), una velocidad e instrucciones de tono («Habla con un tono tranquilo y cálido»).</li>
+            <li><strong>SAPI5 (voces de 64 bits)</strong> y <strong>SAPI5 (voces de 32 bits)</strong>: voces instaladas en Windows, sin clave. La opción de 32 bits da acceso a voces más antiguas de sistemas anteriores.</li>
+            <li><strong>Windows OneCore (voces modernas)</strong>: las voces modernas de Windows (las que usa el Narrador), sin conexión y sin clave.</li>
+            <li>Para SAPI5 y OneCore, elige la <strong>Voz</strong> y la <strong>Velocidad</strong> (de 50 a 200 %).</li>
+            <li><strong>Voces neuronales de Microsoft Azure (en línea, requiere clave)</strong>: campos <strong>Clave del recurso de Speech</strong> (de un recurso Speech de Azure), <strong>Región</strong> (por ejemplo <code>westeurope</code>), <strong>Voz</strong> (por ejemplo <code>fr-FR-DeniseNeural</code>) y, opcionalmente, una <strong>Voz de mujer</strong> y una <strong>Voz de hombre para los diálogos traducidos</strong>.</li>
+            <li><strong>Google Cloud Text-to-Speech (en línea, requiere clave)</strong>: campos <strong>Clave de API</strong>, <strong>Voz</strong> (por ejemplo <code>fr-FR-Chirp3-HD-Aoede</code>) y, opcionalmente, una <strong>Voz de mujer</strong> y una <strong>Voz de hombre para los diálogos traducidos</strong>.</li>
         </ul>
-        
-        <h2 id="bestpractices">Consejos y Trucos para los Mejores Resultados</h2>
-        <p>Crear grandes audiodescripciones es un arte. Aunque la IA es un asistente eficaz en este arte, obtendrás los mejores resultados si la guías correctamente.</p>
-        
-        <h3>El Poder de las Instrucciones: Tus Notas de Director</h3>
+        <h3 id="dialogue-voices">Diálogos traducidos leídos con una voz que corresponde al hablante</h3>
+        <p>Cuando se traducen diálogos en otro idioma (subtítulos sonoros) y está marcada la casilla <strong>Leer el diálogo traducido con una voz que corresponda al hablante (mujer u hombre)</strong> (opción predeterminada), cada frase traducida se lee con una voz de mujer o de hombre. La aplicación elige, en este orden:</p>
+        <ol>
+            <li>con Azure o Google, la voz de mujer o de hombre escrita en los campos de ese motor;</li>
+            <li>si no, la <strong>Voz de mujer</strong> o la <strong>Voz de hombre</strong> elegidas bajo la casilla: o bien «Voz instalada en Windows (automática)», que toma una voz de Windows de ese género en el idioma de las descripciones, o bien una <strong>voz Piper local</strong>. Las voces Piper son voces gratuitas y de alta calidad que funcionan sin conexión en tu equipo. Elige una en la lista (se muestra su tamaño) y pulsa <strong>Descargar y escuchar</strong>: se descarga una sola vez (unos 20 MB, con suma de verificación comprobada) y se reproduce una muestra. La lista muestra las voces Piper del idioma de las descripciones;</li>
+            <li>si ninguna está disponible, la voz habitual de las descripciones.</li>
+        </ol>
+        <p>La voz que recibe cada hablante se puede fijar por personaje (consulta <a href="#characters">Los personajes y sus voces</a>) o por línea en el editor con <span class="key">Ctrl</span> + <span class="key">G</span>.</p>
+
+        <h2 id="language">Idioma de la interfaz e idioma de las descripciones</h2>
+        <ul>
+            <li><strong>Idioma de la interfaz</strong> (Ajustes, pestaña General, «Idioma de la aplicación»): con «Detectar idioma automáticamente al iniciar» (la opción predeterminada), la aplicación sigue el idioma de visualización de Windows cada vez que se inicia, así que cambiar el idioma de Windows cambia el de la aplicación en el siguiente inicio. Elige un idioma en la lista para fijarlo. El cambio se aplica tras reiniciar la aplicación. Disponibles: árabe, inglés, francés, italiano, portugués, ruso, español, turco, ucraniano y vietnamita.</li>
+            <li><strong>Idioma de las descripciones</strong> (Ajustes, pestaña Ajustes de la IA, «Idioma de las descripciones»): el idioma en que escribe la IA. «Igual que la interfaz» (la opción predeterminada) sigue el idioma de la interfaz; puedes elegir cualquier otro idioma de la lista, por ejemplo una interfaz en español con descripciones en inglés para una conferencia en inglés. La opción de línea de comandos <code>--lang</code> lo sustituye durante una ejecución.</li>
+        </ul>
+        <p>Los preajustes de prompts siguen el idioma de la interfaz; las reglas de la IA siguen el idioma de las descripciones (consulta <a href="#ai-rules">Personalizar las reglas de la IA</a>).</p>
+
+        <h2 id="advanced-settings">Los ajustes en detalle</h2>
+        <p>La ventana de ajustes (<span class="key">Ctrl</span> + <span class="key">,</span>, o el botón Ajustes de la ventana principal o del reproductor) tiene tres pestañas; pulsa <span class="key">Ctrl</span> + <span class="key">Tab</span> para pasar de una a otra y <span class="key">Tab</span> para moverte entre los campos de una pestaña. En la parte inferior: <strong>Aplicar</strong> guarda sin cerrar (disponible cuando algo ha cambiado), <strong>Aceptar</strong> guarda y cierra, <strong>Cancelar</strong> cierra sin guardar.</p>
+
+        <h3 id="settings-general">Pestaña General</h3>
+        <ul>
+            <li><strong>Calidad de descarga de vídeos de YouTube:</strong> Mejor disponible, o de 1080p a 144p (360p de forma predeterminada). Una calidad menor se descarga más rápido y suele bastar para la IA.</li>
+            <li><strong>Idioma de la aplicación (requiere reinicio):</strong> consulta <a href="#language">Idioma de la interfaz e idioma de las descripciones</a>.</li>
+            <li><strong>Nivel de registro:</strong> Info (predeterminado), Depuración (más detalle, útil para informar de un problema) o Deshabilitado. El archivo de registro está en <code>%LOCALAPPDATA%\OmniDescriber\logs</code>.</li>
+            <li><strong>Permitir que las descripciones interrumpan el habla actual:</strong> si está marcada, una nueva descripción empieza a leerse de inmediato, aunque la anterior no haya terminado. Desmarcada (opción predeterminada), cada descripción termina por completo antes de que empiece la siguiente.</li>
+        </ul>
+
+        <h3 id="settings-ai">Pestaña Ajustes de la IA</h3>
+        <ul>
+            <li><strong>Clave de API de Gemini</strong> y el botón <strong>Probar clave</strong>: consulta <a href="#setup">Primeros pasos</a>.</li>
+            <li><strong>Clave de API de OpenAI (para TTS):</strong> solo para las voces de OpenAI.</li>
+            <li><strong>Tasa de fotogramas para análisis de la IA:</strong> determina cuántos fotogramas por segundo se envían a la IA: original, 10, 5, 2 o 1 FPS. Un valor más bajo puede reducir mucho los costes de la API y ayudar a evitar los límites de procesamiento, pero la IA puede perderse acciones muy rápidas.</li>
+            <li><strong>Densidad de descripciones al abrir el reproductor:</strong> solo las descripciones esenciales, estándar (predeterminada) o todas las descripciones con detalles. La tecla D del reproductor la cambia en cualquier momento sin una nueva petición a la IA.</li>
+            <li><strong>Idioma de las descripciones:</strong> consulta <a href="#language">Idioma de la interfaz e idioma de las descripciones</a>.</li>
+            <li><strong>Estilo de descripción:</strong> Objetivo (predeterminado) o Subjetivo, evocador.</li>
+            <li><strong>Centrarse en:</strong> General (predeterminado), Personajes, Acciones e instrucciones, Escenarios y ambiente, o Texto en pantalla.</li>
+            <li><strong>Máximo de palabras por descripción:</strong> un límite superior a la longitud de cada descripción (40 de forma predeterminada); 0 significa que solo la duración de la pausa la limita.</li>
+            <li><strong>Explicitación:</strong> Describir solo lo visible; Describir y nombrar (predeterminado), por ejemplo el lugar o un objeto conocido; o Describir, nombrar y explicar brevemente.</li>
+            <li><strong>Traducir los diálogos en otro idioma (subtítulos sonoros):</strong> desactivada de forma predeterminada; consulta <a href="#images">subtítulos sonoros</a>.</li>
+            <li><strong>Revisar las descripciones con una segunda pasada de la IA:</strong> activada de forma predeterminada; una revisión solo de texto marca las descripciones dudosas con «Revisar» en el editor.</li>
+            <li><strong>Mencionar colores:</strong> activada de forma predeterminada; desmárcala si los colores no te dicen nada.</li>
+            <li><strong>Modelo de Gemini:</strong> una lista de modelos de solo lectura (el predeterminado se indica en la etiqueta). <strong>Actualizar lista de modelos</strong> (<span class="key">Alt</span> + <span class="key">A</span>) pregunta a Google qué modelos puede usar tu clave y rellena la lista.</li>
+            <li><strong>Nivel de razonamiento (Gemini 3 y posteriores):</strong> Bajo (más rápido, más barato), Medio (predeterminado) o Alto (más lento, para películas complejas).</li>
+            <li><strong>Detalle de las imágenes enviadas a la IA:</strong> Automático (predeterminado), Bajo (más barato, para vídeos largos), Medio o Alto (lee textos pequeños en pantalla, cuesta más). Fija cuánto detalle de cada fotograma del vídeo recibe la IA (la «media resolution» de Gemini). Bajo o Medio bastan para la mayoría de los vídeos; Alto cuesta unas 3 o 4 veces más tokens por fotograma. Consulta <a href="#ai-backends">La IA</a>.</li>
+            <li><strong>Enviar solo vídeo (sin audio) a la IA:</strong> no recomendado: sin el sonido, la IA ya no puede evitar hablar encima de los diálogos.</li>
+            <li><strong>Deshabilitar filtros de seguridad (usar con precaución):</strong> activada de forma predeterminada. Permite a la IA procesar contenido que de otro modo podría marcar como sensible, pero el resultado sigue sujeto a las políticas de seguridad básicas del proveedor de IA. Eres responsable del uso que hagas de esta función.</li>
+            <li><strong>Habilitar división en fragmentos para vídeos largos:</strong> divide el vídeo en partes, las analiza una tras otra y une los resultados. Recomendado para vídeos largos. <strong>Duración del fragmento (segundos)</strong> (de 30 a 2400; 600 de forma predeterminada) solo está disponible cuando la división está marcada.</li>
+            <li><strong>Detectar pausas en la banda sonora antes de describir (recomendado):</strong> activada de forma predeterminada; localiza los momentos sin habla para colocar ahí las descripciones.</li>
+        </ul>
+
+        <h3 id="settings-audio">Pestaña Salida de audio</h3>
+        <ul>
+            <li><strong>Motor de texto a voz</strong> y sus campos (preajuste de voz de OpenAI, voz y velocidad de SAPI5/OneCore, clave, región y voces de Azure o Google), y el grupo <strong>Probar voz</strong>: consulta <a href="#voices">Voces</a>.</li>
+            <li><strong>Diccionario de pronunciación:</strong> una regla por línea, como <code>Hermione = her-my-oh-nee</code>, usada por la voz de la aplicación, las exportaciones y el botón de escucha del editor (palabras completas, en mayúsculas o minúsculas).</li>
+            <li><strong>Modo de audiodescripción en el reproductor:</strong> en las pausas (el vídeo sigue reproduciéndose, predeterminado), extendido (el vídeo se pausa cuando una descripción no cabe) o a petición (Intro describe el momento actual). M lo cambia en el reproductor.</li>
+            <li><strong>Audio original atenuado durante las descripciones (-dB):</strong> cuánto baja el sonido del vídeo mientras se lee una descripción, en el reproductor y en las exportaciones (9 dB de forma predeterminada; se recomienda de 6 a 12; 0 = sin atenuar). Shift+Arriba y Shift+Abajo lo cambian desde el reproductor.</li>
+            <li><strong>Nivel de la voz de audiodescripción en las exportaciones (dB):</strong> hace que la voz de las descripciones suene más alta o más baja que el programa en las exportaciones (de -20 a +20; 0 = sin cambios).</li>
+            <li><strong>En las exportaciones, leer el texto en pantalla con una segunda voz más grave:</strong> activada de forma predeterminada, para distinguir un cartel o un título leído de una descripción.</li>
+            <li><strong>Leer el diálogo traducido con una voz que corresponda al hablante</strong>, <strong>Voz de mujer</strong>, <strong>Voz de hombre</strong> y los botones <strong>Descargar y escuchar</strong>: consulta <a href="#dialogue-voices">Diálogos traducidos</a>.</li>
+            <li><strong>Descripciones en el reproductor:</strong> Lector de pantalla (voz y braille, predeterminado); Voz de la aplicación elegida arriba, preparada de antemano (sincronización exacta); o Solo braille, el vídeo espera a Intro.</li>
+            <li><strong>Mostrar también las descripciones en letra grande sobre el vídeo</strong>, <strong>Tamaño del texto en el vídeo</strong> (de 16 a 120; 40 de forma predeterminada) y <strong>Color del texto en el vídeo</strong> (amarillo, blanco o cian): para espectadores con baja visión.</li>
+        </ul>
+
+        <h2 id="ai-rules">Personalizar las reglas de la IA</h2>
+        <p>Todo lo que la aplicación envía a la IA, además de tu preajuste de prompt, está escrito en un archivo de texto que puedes leer y modificar: las 12 reglas profesionales de audiodescripción (colocar las descripciones en las pausas, presupuesto de palabras, presente, objetividad, personajes, texto en pantalla, cambios de escena, no describir lo que se oye, sin censura, sin spoilers, adaptarse al contenido, niveles), la lista de campos de salida que debe devolver la IA y las líneas que añaden los ajustes Estilo, Centrarse en, Explicitación, colores y subtítulos sonoros.</p>
+        <ul>
+            <li>El texto integrado está en <code>prompts\rules\en.json</code> dentro de la carpeta de la aplicación (en la aplicación instalada, dentro de la carpeta <code>_internal</code> junto a <code>OmniDescriber.exe</code>). No edites ese archivo: las actualizaciones lo sustituyen.</li>
+            <li>Para cambiar las reglas, crea un archivo llamado <code>ad_rules.json</code> en tu carpeta de datos, <code>%APPDATA%\Describer</code> (escribe esto en el cuadro Ejecutar de Windows, <span class="key">Windows</span> + <span class="key">R</span>, para abrirla). Copia en él solo las claves de <code>en.json</code> que quieras cambiar; un archivo parcial vale, las demás claves conservan su valor integrado. Conserva los marcadores entre llaves, como <code>{language}</code> o <code>{max_words}</code>: la aplicación los rellena. Una clave de tipo incorrecto, o un archivo que no sea JSON válido, se ignora (y se anota en el registro), así que una errata no puede detener las descripciones.</li>
+            <li>Cuando el idioma de las descripciones no es el inglés, se usa una traducción <code>prompts\rules\&lt;language&gt;.json</code> (por ejemplo <code>fr.json</code>) si existe; tu <code>ad_rules.json</code> se aplica encima.</li>
+            <li>El archivo se vuelve a leer en cada descripción: tus cambios se aplican a la siguiente descripción sin reiniciar la aplicación.</li>
+            <li>Archivo &gt; Restablecer ajustes y datos, «Preajustes de prompt», elimina tu <code>ad_rules.json</code> (se conserva una copia de seguridad), de modo que vuelven a aplicarse las reglas integradas.</li>
+        </ul>
+
+        <h2 id="reset">Restablecer ajustes y datos</h2>
+        <p><strong>Archivo &gt; Restablecer ajustes y datos...</strong> restaura un estado limpio. Marca lo que quieras restablecer, pulsa <strong>Restablecer</strong> (<span class="key">Alt</span> + <span class="key">R</span>) y confirma:</p>
+        <ul>
+            <li><strong>Ajustes (volver a los valores predeterminados)</strong> (<span class="key">Alt</span> + <span class="key">J</span>): todos los ajustes vuelven a sus valores predeterminados. Tus claves de API (Gemini, OpenAI, Azure, Google) se conservan...</li>
+            <li>...salvo que marques también <strong>Olvidar también mis claves de API</strong> (<span class="key">Alt</span> + <span class="key">O</span>), disponible solo cuando Ajustes está marcado.</li>
+            <li><strong>Preajustes de prompt (se eliminan los preajustes personalizados)</strong> (<span class="key">Alt</span> + <span class="key">P</span>): vuelven los preajustes predeterminados de todos los idiomas y se elimina tu <code>ad_rules.json</code>.</li>
+            <li><strong>Preajustes de voz de OpenAI</strong> (<span class="key">Alt</span> + <span class="key">V</span>): vuelven los preajustes predeterminados.</li>
+            <li><strong>Voces y modelos descargados</strong> (<span class="key">Alt</span> + <span class="key">D</span>): elimina las voces Piper y el modelo de detección de voz; se vuelven a descargar cuando hace falta.</li>
+            <li><strong>Archivos temporales</strong> (<span class="key">Alt</span> + <span class="key">T</span>): elimina la carpeta temporal propia de la aplicación (vídeos descargados y procesados), nada más.</li>
+        </ul>
+        <p>Antes de restablecer los ajustes o los preajustes, se guarda una copia de seguridad de los archivos en la subcarpeta <code>backups</code> de tu carpeta de datos, en una carpeta con la fecha y la hora, de modo que un restablecimiento por error se puede deshacer copiando de nuevo los archivos. Los proyectos (.omniad) y los archivos exportados nunca se modifican. Algunos ajustes, como el idioma de la interfaz, se aplican tras reiniciar la aplicación.</p>
+
+        <h2 id="data-folder">Dónde se guardan tus datos</h2>
+        <ul>
+            <li><strong>Carpeta de datos:</strong> <code>%APPDATA%\Describer</code>, es decir, <code>C:\Users\&lt;tu nombre&gt;\AppData\Roaming\Describer</code>. Contiene tus ajustes y claves cifrados (<code>settings.dat2</code>), tus preajustes de prompts (<code>prompts.json</code>), tus propias reglas de la IA (<code>ad_rules.json</code>, si lo has creado) y la carpeta <code>backups</code>.</li>
+            <li><strong>Voces y modelos descargados, y el registro:</strong> <code>%LOCALAPPDATA%\OmniDescriber</code> (voces Piper, el modelo de detección de voz y la carpeta <code>logs</code>).</li>
+            <li><strong>Archivos temporales:</strong> <code>%TEMP%\OmniDescriber</code>.</li>
+            <li><strong>Proyectos y exportaciones:</strong> donde tú los guardes.</li>
+        </ul>
+
+        <h2 id="bestpractices">Consejos y trucos para obtener los mejores resultados</h2>
+        <p>Crear buenas audiodescripciones es un arte. Aunque la IA es una ayudante eficaz, obtendrás los mejores resultados si la guías correctamente.</p>
+
+        <h3>El poder de los prompts: tus notas de dirección</h3>
         <div class="note">
-            La aplicación enseña a la IA una serie de <strong>reglas fundamentales</strong> (como no hablar sobre los diálogos). Piensa en el área de <strong>Plantilla de Instrucción</strong> de la pantalla principal como el lugar donde dejas tus <strong>notas de director</strong> para ese vídeo en concreto. Una buena nota ayuda a la IA a centrarse en un estilo o detalle, mientras que una instrucción ambigua puede llevar a resultados inesperados.
+            La aplicación tiene un conjunto de <strong>reglas fundamentales</strong> que enseña a la IA (como no hablar encima de los diálogos; consulta <a href="#ai-rules">Personalizar las reglas de la IA</a>). Piensa en el área de <strong>preajustes de prompt</strong> de la pantalla principal como el lugar donde das tus <strong>notas de dirección</strong> para ese vídeo concreto. Una buena nota ayuda a la IA a centrarse en un estilo o un detalle concreto.
         </div>
-        
-        <h4>¿Cuándo (y Cómo) Usar una Instrucción?</h4>
-        <p>La mayoría de las veces, la IA puede producir resultados excelentes sin una instrucción especial, basándose únicamente en sus reglas fundamentales. Te recomiendo usar esta función solo cuando tengas un objetivo específico en mente.</p>
-        
-        <div class="best-practice">
-            <strong>Consejo #1: La Instrucción "Enfócate en los Nombres"</strong><br>
-            En un vídeo con muchos personajes donde los nombres son importantes, la IA a veces puede dudar en usar un nombre. Para priorizar el seguimiento de nombres, puedes crear una instrucción personalizada:
-            <code>Para este vídeo, tu máxima prioridad es identificar y usar los nombres correctos de los personajes tan pronto como se digan en el diálogo. Esto es más importante que ser demasiado conciso. Mientras te centras en esto, intenta cumplir el resto de las reglas del sistema lo mejor que puedas.</code>
-        </div>
-        
-        <div class="best-practice">
-            <strong>Consejo #2: La Instrucción "Describe la Atmósfera"</strong><br>
-            En películas visualmente ricas donde la atmósfera es clave, puedes guiar a la IA para que se centre en el entorno:
-            <code>Concéntrate en describir el escenario, la atmósfera y los detalles ambientales. Para crear un mundo visual rico, menciona la iluminación, los colores y el estado de ánimo general de la escena. Presta menos atención a los movimientos menores de los personajes a menos que sean críticos.</code>
-        </div>
-        
-        <h4>¿Qué Evitar en las Instrucciones?</h4>
-        <p>Para obtener los mejores resultados, es importante evitar instrucciones que contradigan los principios de funcionamiento básicos de la IA. Como la IA siempre intenta seguir las instrucciones, darle una instrucción errónea puede hacer que malinterprete el vídeo.</p>
-        <ul>
-            <li><strong>Ejemplo de Instrucción Incorrecta:</strong> <code>"Cuéntame todo lo que pasa."</code> Esto puede hacer que la IA sea demasiado insensible, haciendo que se centre en detalles sin importancia como "(el personaje está hablando)" en lugar de la acción significativa.</li>
-            <li><strong>Ejemplo de Instrucción Incorrecta:</strong> <code>"Dime qué dicen los personajes."</code> Esto puede hacer que viole la regla de "describir solo lo visual" y que describa los diálogos, como "el personaje dijo que cogiera esto."</li>
-        </ul>
-        <p>En resumen: Usa las instrucciones no para cambiar las reglas fundamentales de una buena audiodescripción, sino para guiar a la IA en un enfoque específico.</p>
 
-        <h2 id="faq">Preguntas Frecuentes (FAQ)</h2>
-        <p><strong>P: ¿Están seguras mis claves de API?</strong><br>
-        R: Sí. Tus claves se almacenan solo en tu ordenador y nunca se comparten con nadie, excepto para conectarse a los servicios de Google/OpenAI.</p>
-        
+        <div class="best-practice">
+            <strong>Consejo: el prompt «Céntrate en los nombres»</strong><br>
+            En un vídeo con muchos personajes, puedes crear un prompt personalizado para dar prioridad al seguimiento de los nombres:
+            <code>Tu máxima prioridad en este vídeo es identificar y usar los nombres correctos de los personajes en cuanto se pronuncien.</code>
+        </div>
+
+        <div class="best-practice">
+            <strong>Consejo: el prompt «Describe el ambiente»</strong><br>
+            Para películas visualmente ricas, guía a la IA para que se centre en el entorno:
+            <code>Céntrate en describir el escenario, el ambiente y los detalles del entorno. Menciona la iluminación, los colores y el tono general de la escena.</code>
+        </div>
+
+        <h3>Qué evitar en los prompts</h3>
+        <p>Evita las instrucciones que contradigan los principios fundamentales de la IA (describir solo lo visual, no hablar encima de los diálogos). Darle una instrucción defectuosa puede producir malos resultados.</p>
+        <ul>
+            <li><strong>Mal prompt:</strong> <code>"Cuéntame todo lo que pasa."</code> Es demasiado vago y puede hacer que la IA describa detalles sin importancia.</li>
+            <li><strong>Mal prompt:</strong> <code>"Dime lo que dicen los personajes."</code> Esto le hará incumplir la regla de «solo lo visual».</li>
+        </ul>
+        <p>En resumen: usa los prompts para orientar la atención de la IA, no para cambiar las reglas fundamentales de una buena audiodescripción. Para cambiar las propias reglas, usa <code>ad_rules.json</code>.</p>
+
+        <h2 id="faq">Preguntas frecuentes (FAQ)</h2>
+        <p><strong>P: Mis claves de API no funcionan. ¿Qué hago?</strong><br>
+        R: Primero, comprueba que has copiado la clave completa correctamente y usa el botón <strong>Probar clave</strong> junto a la clave de Gemini. Para OpenAI, asegúrate de haber configurado un método de pago en tu cuenta, ya que su servicio de TTS no es gratuito. Para Gemini, asegúrate de que la API está habilitada en tu proyecto de Google Cloud.</p>
+
+        <p><strong>P: El proceso falló con un error «MAX_TOKENS». ¿Qué significa?</strong><br>
+        R: Significa que tu vídeo es demasiado largo o visualmente complejo para que la IA lo procese de una sola vez. Es un límite de capacidad, no un error de contenido. La mejor solución es ir a <strong>Ajustes &gt; Ajustes de la IA</strong> y activar <strong>«Habilitar división en fragmentos para vídeos largos»</strong>. Así el vídeo se dividirá automáticamente en partes más pequeñas y manejables para la IA.</p>
+
+        <p><strong>P: La IA no pudo generar descripciones por los «filtros de seguridad». ¿Qué puedo hacer?</strong><br>
+        R: Es un problema conocido: el sistema de seguridad de la IA puede ser demasiado prudente. Tienes varias opciones, en este orden: 1) Ve a <strong>Ajustes &gt; Ajustes de la IA</strong> y asegúrate de que <strong>«Deshabilitar filtros de seguridad»</strong> está marcado. 2) Si no basta, reduce la «Tasa de fotogramas para análisis de la IA» para enviar menos datos a la IA. 3) Como último recurso, elige un modelo más potente en la lista <strong>Modelo de Gemini</strong>, como <code>gemini-4-hydrogen</code> (nivel gratuito) o <code>gemini-4-argon</code> (solo de pago, con facturación activada). Pueden gestionar mejor el contenido sensible, pero son más lentos.</p>
+
+        <p><strong>P: Faltan algunas de mis voces antiguas en la lista de SAPI5. ¿Dónde están?</strong><br>
+        R: Los sistemas Windows modernos son de 64 bits, pero muchas voces de síntesis clásicas y muy queridas eran de 32 bits. En los ajustes, en la pestaña «Salida de audio», verás opciones de motor distintas para «SAPI5 (voces de 64 bits)» y «SAPI5 (voces de 32 bits)». Para acceder a tus voces antiguas, selecciona simplemente el motor de 32 bits.</p>
+
         <p><strong>P: ¿Por qué tarda tanto en generar las descripciones?</strong><br>
-        R: El tiempo depende de la duración de tu vídeo, tu velocidad de internet (para subir el vídeo a la IA), la tasa de fotogramas que hayas seleccionado y la carga actual de los servicios de IA. Se recomienda encarecidamente usar la función "Activar Fragmentación de Vídeo" para vídeos largos.</p>
-        
-        <p><strong>P: ¿Por qué la IA no describió algo que vi en pantalla?</strong><br>
-        R: La IA está entrenada para preferir el silencio antes que cometer un error o hablar sobre un diálogo. Puedes usar la función "Preguntar Más..." para consultar sobre momentos específicos o seleccionar el nivel de detalle "Detallado" en la Configuración.</p>
+        R: El tiempo depende de la duración del vídeo, de la velocidad de tu conexión (para la subida a la IA), de la tasa de fotogramas seleccionada y de la carga actual de los servicios de IA. Se recomienda mucho usar la «división en fragmentos» para vídeos largos. Puedes detenerlo en cualquier momento con Escape.</p>
 
-        <h2 id="shortcuts">Atajos de Teclado</h2>
+        <h2 id="shortcuts">Atajos de teclado</h2>
+        <h3 id="shortcuts-main">En la ventana principal</h3>
         <ul>
-            <li><span class="key">Ctrl</span> + <span class="key">O</span>: Abrir Vídeo Local</li>
-            <li><span class="key">Ctrl</span> + <span class="key">U</span>: Abrir desde URL Directa</li>
+            <li><span class="key">Ctrl</span> + <span class="key">O</span>: Abrir vídeo local</li>
+            <li><span class="key">Ctrl</span> + <span class="key">U</span>: Abrir desde una URL directa</li>
             <li><span class="key">Ctrl</span> + <span class="key">Y</span>: Abrir desde YouTube</li>
-            <li><span class="key">Ctrl</span> + <span class="key">,</span>: Abrir Configuración</li>
-            <li><span class="key">F1</span>: Ver Ayuda</li>
+            <li><span class="key">Ctrl</span> + <span class="key">P</span>: Abrir proyecto (.omniad)</li>
+            <li><span class="key">Ctrl</span> + <span class="key">G</span>: Reutilizar los personajes de un episodio anterior (series)</li>
+            <li><span class="key">Ctrl</span> + <span class="key">I</span>: Describir una imagen o un PDF</li>
+            <li><span class="key">Ctrl</span> + <span class="key">Alt</span> + <span class="key">Shift</span> + <span class="key">D</span>: Describir mi pantalla, desde cualquier aplicación</li>
+            <li><span class="key">Ctrl</span> + <span class="key">Alt</span> + <span class="key">Shift</span> + <span class="key">L</span>: Activar o desactivar la descripción continua de la pantalla, desde cualquier aplicación</li>
+            <li><span class="key">Ctrl</span> + <span class="key">W</span>: Abrir la plataforma web</li>
+            <li><span class="key">Ctrl</span> + <span class="key">,</span>: Abrir los ajustes</li>
+            <li><span class="key">Escape</span>: Cancelar la generación en curso</li>
+            <li><span class="key">Ctrl</span> + <span class="key">Shift</span> + <span class="key">P</span>: Repetir el último mensaje de progreso</li>
+            <li><span class="key">F1</span>: Ver ayuda</li>
+            <li><span class="key">Alt</span> + <span class="key">F4</span>: Salir</li>
         </ul>
 
-        <h2 id="contact">Agradecimientos, Contacto y Colaboradores</h2>
-        <p>¡Muchas gracias por usar Omni Describer! Esta aplicación es un reflejo de mi deseo de hacer los medios visuales más accesibles y agradables para todos. Que usuarios como tú usen esta herramienta y den su opinión es la mayor motivación para seguir desarrollándola.</p>
-        
-        <h3>Comentarios y Soporte</h3>
-        <p>¿Tienes una pregunta, un informe de error o una idea para una nueva función? ¡Me encantaría saber de ti! La mejor manera de contactarme es por correo electrónico. Tus comentarios son invaluables para hacer que Omni Describer sea aún mejor.</p>
+        <h3 id="shortcuts-player">En el reproductor de vídeo</h3>
+        <p>Estas teclas funcionan sea cual sea el control que tenga el foco, salvo que los cuadros de texto de la descripción y de los tokens conservan sus propias teclas de lectura, y las flechas siguen ajustando el deslizador de volumen cuando tiene el foco. F1, Ctrl+S y Alt+Izquierda / Alt+Derecha funcionan en todas partes.</p>
         <ul>
-            <li><strong>Correo Electrónico:</strong> <a href="mailto:info@audioses.com">info [arroba] audioses [punto] com</a>. (Por favor, reemplaza '[arroba]' con '@' y '[punto]' con '.' al enviar.)</li>
-            <li><strong>Sitio Web:</strong> <a href="https://audioses.com" target="_blank">audioses.com</a></li>
+            <li><span class="key">Espacio</span>: Reproducir / pausar</li>
+            <li><span class="key">Izquierda</span> / <span class="key">Derecha</span>: Retroceder / avanzar 5 segundos</li>
+            <li><span class="key">Ctrl</span> + <span class="key">Izquierda</span> / <span class="key">Derecha</span>: Retroceder / avanzar 30 segundos</li>
+            <li><span class="key">Alt</span> + <span class="key">Izquierda</span> / <span class="key">Derecha</span>: Descripción anterior / siguiente (salta a ella y la lee)</li>
+            <li><span class="key">Arriba</span> / <span class="key">Abajo</span>: Volumen del vídeo (de 5 en 5)</li>
+            <li><span class="key">R</span>: Repetir la última descripción</li>
+            <li><span class="key">T</span>: Anunciar el tiempo actual y la duración total</li>
+            <li><span class="key">A</span>: Activar o desactivar la audiodescripción</li>
+            <li><span class="key">D</span>: Cambiar la densidad de las descripciones: baja (solo lo esencial), media, alta (todos los detalles). Se aplica al instante, sin nueva petición a la IA.</li>
+            <li><span class="key">M</span>: Modo de audiodescripción: en las pausas (el vídeo sigue reproduciéndose), extendido (el vídeo se pausa cuando una descripción es demasiado larga para su pausa y luego continúa) o a petición (no se lee nada automáticamente)</li>
+            <li><span class="key">Intro</span> (modo a petición): pausar y describir brevemente el momento actual; <span class="key">Shift</span> + <span class="key">Intro</span>: todo lo descrito en los últimos 15 segundos</li>
+            <li><span class="key">Intro</span> (modo solo braille): reanudar el vídeo tras una descripción</li>
+            <li><span class="key">Q</span>: Preguntar más sobre el momento actual</li>
+            <li><span class="key">S</span>: Explorar la escena actual</li>
+            <li><span class="key">I</span>: Introducción sonora: personajes principales, su aspecto y los lugares, sin spoilers, para escuchar antes del programa. La IA la redacta la primera vez y luego se guarda con el proyecto.</li>
+            <li><span class="key">Shift</span> + <span class="key">I</span>: Guardar la introducción sonora como MP3</li>
+            <li><span class="key">V</span>: Informe de calidad: número de descripciones, proporción dentro de su presupuesto de palabras, descripciones sobre sonido o marcadas como dudosas por la revisión de la IA, palabras por segundo, tramo más largo sin descripción.</li>
+            <li><span class="key">W</span>: Qué hay en pantalla ahora, incluido el texto visible. La respuesta aparece en la ventana Preguntar más, donde puedes seguir haciendo preguntas: la IA recuerda la conversación.</li>
+            <li><span class="key">E</span>: Evaluar esta audiodescripción con el cuestionario CSA 2020; las respuestas se guardan con el proyecto y se pueden exportar como informe.</li>
+            <li><span class="key">L</span>: Siguiente pista de audio del vídeo (por ejemplo, una audiodescripción ya existente)</li>
+            <li><span class="key">C</span>: Siguiente pista de subtítulos, o ninguna</li>
+            <li><span class="key">Shift+Arriba / Shift+Abajo</span>: Atenuar más o menos el vídeo mientras se lee una descripción (de 0 a 24 dB, de 3 en 3 dB).</li>
+            <li><span class="key">?</span>: Igual que F1: leer la lista de atajos del reproductor.</li>
+            <li><span class="key">Ctrl</span> + <span class="key">S</span>: Guardar el proyecto (<span class="key">Ctrl</span> + <span class="key">Shift</span> + <span class="key">S</span>: Guardar como)</li>
+            <li><span class="key">F1</span>: Leer esta lista de atajos</li>
+        </ul>
+        <p>Mientras se lee una descripción, el volumen del vídeo baja 9 dB (nunca se silencia; se ajusta en Ajustes &gt; Salida de audio) y vuelve a subir suavemente, como recomiendan las guías profesionales de audiodescripción. Suena un sonido breve antes de una descripción que lee texto en pantalla. En el modo a petición, un sonido suave indica que hay una descripción esencial disponible. Con el modo de lector de pantalla, las descripciones se leen al volumen de tu lector de pantalla; en las exportaciones, su nivel se configura en Ajustes &gt; Salida de audio.</p>
+
+        <h3 id="shortcuts-editor">En el editor de descripciones</h3>
+        <ul>
+            <li><span class="key">F8</span> / <span class="key">Shift</span> + <span class="key">F8</span>: Descripción siguiente / anterior por revisar</li>
+            <li><span class="key">Ctrl</span> + <span class="key">P</span>: Reproducir o pausar el vídeo</li>
+            <li><span class="key">Alt</span> + <span class="key">Izquierda</span> / <span class="key">Derecha</span>: Mover el vídeo 1 segundo</li>
+            <li><span class="key">Ctrl</span> + <span class="key">[</span> / <span class="key">Ctrl</span> + <span class="key">]</span>: Fijar el inicio / el fin en la posición del reproductor</li>
+            <li><span class="key">Ctrl</span> + <span class="key">R</span>: Escuchar el texto con la voz de exportación</li>
+            <li><span class="key">Ctrl</span> + <span class="key">G</span>: Cambiar la voz del hablante de una línea traducida (indeterminado, mujer, hombre)</li>
+            <li><span class="key">Ctrl</span> + <span class="key">S</span>: Guardar los cambios</li>
+            <li><span class="key">Ctrl</span> + <span class="key">Z</span> / <span class="key">Ctrl</span> + <span class="key">Y</span> (fuera de los campos de texto): Deshacer / rehacer</li>
+            <li><span class="key">Supr</span> en la lista: Eliminar la descripción</li>
+            <li><span class="key">Escape</span>: Cerrar (pregunta si quieres guardar los cambios pendientes)</li>
+        </ul>
+
+        <h3 id="shortcuts-dialogs">En los demás diálogos</h3>
+        <ul>
+            <li>Personajes y Gestionar preajustes de prompts: <span class="key">Intro</span> sobre un elemento lo edita; en Personajes, <span class="key">Supr</span> elimina el personaje seleccionado.</li>
+            <li>Ajustes y Evaluación: <span class="key">Ctrl</span> + <span class="key">Tab</span> / <span class="key">Ctrl</span> + <span class="key">Shift</span> + <span class="key">Tab</span> cambian de pestaña.</li>
+            <li>Todos los diálogos: <span class="key">Escape</span> cierra o cancela; a las letras subrayadas se llega con <span class="key">Alt</span> más la letra, tal como se indica en esta guía.</li>
+        </ul>
+
+        <h2 id="contact">Agradecimientos, contacto y colaboradores</h2>
+        <p>¡Muchas gracias por usar Omni Describer! Esta aplicación refleja mi deseo de hacer que los contenidos visuales sean más accesibles y agradables para todos. Que usuarios como tú usen esta herramienta y aporten sus comentarios es la mayor motivación para seguir desarrollándola.</p>
+
+        <h3>Comentarios y soporte</h3>
+        <p>¿Tienes una pregunta, un informe de error o una idea para una nueva función? ¡Me encantará saber de ti! La mejor forma de contactarme es por correo electrónico. Tus comentarios son muy valiosos para que Omni Describer sea aún mejor.</p>
+        <ul>
+            <li><strong>Correo electrónico:</strong> <a href="mailto:info@audioses.com">info@audioses.com</a></li>
+            <li><strong>Sitio web:</strong> <a href="https://audioses.com" target="_blank">audioses.com</a></li>
         </ul>
     </div>
 </body>

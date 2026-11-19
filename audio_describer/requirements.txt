@@ -1,16 +1,22 @@
 wxPython>=4.2.5
-# For Gemini API - the app imports both the new SDK (google.genai) and the
-# legacy one (google.generativeai.types for HarmCategory/HarmBlockThreshold).
+# Gemini API (google-genai SDK only; the legacy google-generativeai is no longer used)
 google-genai
-google-generativeai
 accessible-output2
 yt-dlp
 # python-vlc bindings for the media player; the libvlc runtime is bundled in
 # bin/vlc/ (frozen builds) or taken from a system VLC install (see README).
 python-vlc
 pyttsx3
-pydub
+# Core Audio peak meter (live screen description waits for silence); also used by pyttsx3
+comtypes
+# OpenAI TTS engine (offered first in Settings > Audio Output)
+openai
 winsdk
 simpleaudio
 pygame
+# Silero speech detection (finds pauses in the dialogue even under music); optional at run time
+onnxruntime
+numpy
 cryptography==49.0.0
+# Local Piper voices (translated dialogue read by gender). 1.13.x: 2.0 dropped the built-in espeak-ng front end.
+sherpa-onnx==1.13.8

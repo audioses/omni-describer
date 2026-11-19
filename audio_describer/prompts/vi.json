@@ -1,0 +1,94 @@
+[
+    {
+        "name": "Trailer phim",
+        "prompt": "Đây là trailer phim. Tập trung vào những cảnh quay nhanh, ấn tượng và mang tính biểu tượng. Ưu tiên mô tả các khoảnh khắc hành động then chốt, màn giới thiệu nhân vật đầy kịch tính và mọi chữ trên màn hình như ngày phát hành hoặc logo hãng phim. Tạo cảm giác hào hứng và gợi mở cốt truyện mà không tiết lộ nội dung. Lời mô tả phải cực kỳ ngắn gọn để vừa khít giữa các đoạn cắt cảnh nhanh."
+    },
+    {
+        "name": "Phim hành động",
+        "prompt": "Đây là phim hành động. Tập trung vào phần dàn dựng cốt lõi của các pha hành động: những cú đấm, cú đá, pha né tránh đáng chú ý và việc sử dụng vũ khí. Mô tả các sự kiện quy mô lớn như vụ nổ hay rượt đuổi bằng ô tô. Giữ lời mô tả súc tích và mạnh mẽ để theo kịp nhịp độ dồn dập."
+    },
+    {
+        "name": "Phim tình cảm",
+        "prompt": "Đây là phim tình cảm. Ưu tiên mô tả khoảng cách giữa các nhân vật, những cái chạm đầy ý nghĩa (như nắm tay) và những biểu cảm khuôn mặt đáng chú ý thể hiện tình cảm, nỗi khao khát hay xung đột. Mô tả bầu không khí lãng mạn của bối cảnh (ví dụ: “bữa tối dưới ánh nến”, “dạo bước trên bãi biển dưới ánh trăng”)."
+    },
+    {
+        "name": "Hài / Sitcom",
+        "prompt": "Đây là nội dung hài. Tập trung vào các miếng hài hình ảnh, hài hình thể và những tình huống phi lý. Mô tả các phản ứng cường điệu và biểu cảm hài hước là mấu chốt của tiếng cười. Mô tả miếng hài ngay khi nó diễn ra để người nghe cùng cười với mọi người, và hãy ngắn gọn; nếu buộc phải mô tả sớm, tuyệt đối không để lộ điểm gây cười."
+    },
+    {
+        "name": "Khoa học viễn tưởng / Giả tưởng",
+        "prompt": "Đây là tác phẩm khoa học viễn tưởng/giả tưởng. Tập trung mô tả những yếu tố độc đáo của thế giới trong phim. Mô tả công nghệ tương lai, sinh vật kỳ ảo, hiệu ứng phép thuật và những phong cảnh như ở thế giới khác. Giải thích điều gì khiến các yếu tố hình ảnh khác với thế giới thực (ví dụ: “Một con tàu với cánh buồm phát sáng bay xuyên qua tinh vân màu tím.”)."
+    },
+    {
+        "name": "Meme / Video lan truyền",
+        "prompt": "Đây là một video meme ngắn hoặc video lan truyền. Mục tiêu là mô tả trò đùa hình ảnh cốt lõi hoặc sự việc bất ngờ một cách súc tích nhất có thể. Xác định chủ thể chính và hành động duy nhất khiến video trở nên hài hước hoặc thú vị. Chú thích trên màn hình đặc biệt quan trọng (ví dụ: “Một chú mèo đeo kính râm gật gù theo nhịp nhạc. Chú thích: Đang phiêu.”)."
+    },
+    {
+        "name": "Tài liệu / Giáo dục",
+        "prompt": "Đây là video tài liệu/giáo dục. Ưu tiên mô tả chữ trên màn hình, nhãn, đồ họa, bản đồ và tư liệu lưu trữ. Với con người, tập trung vào hành động của họ liên quan đến chủ đề (ví dụ: “Nhà sinh vật học chỉ vào một loài cây cụ thể.”). Giữ giọng điệu trung lập, mang tính thông tin."
+    },
+    {
+        "name": "Nấu ăn / Công thức",
+        "prompt": "Đây là video nấu ăn. Mô tả cụ thể từng nguyên liệu khi được cho vào và các kỹ thuật nấu được thể hiện (ví dụ: “thái hạt lựu củ hành”, “áp chảo miếng bít tết”). Mô tả trạng thái và kết cấu của món ăn ở những giai đoạn then chốt (ví dụ: “Nước sốt sánh lại, bóng mượt.”)."
+    },
+    {
+        "name": "Tự làm / Hướng dẫn",
+        "prompt": "Đây là video hướng dẫn hoặc tự làm (DIY). Tập trung vào quy trình từng bước. Mô tả rõ ràng các dụng cụ và vật liệu cụ thể được sử dụng. Mô tả chi tiết thao tác đang được thực hiện trên đồ vật, và mô tả trạng thái của đồ vật trước và sau thao tác (ví dụ: “Người thợ mộc khoan một lỗ xuyên qua điểm đã đánh dấu trên tấm ván.”)."
+    },
+    {
+        "name": "Trò chơi / Let's Play",
+        "prompt": "Đây là bản ghi hình trò chơi điện tử. Ưu tiên mô tả các thành phần giao diện quan trọng trên màn hình (HUD) như thanh máu, số đạn hoặc bản đồ nhỏ nếu chúng thay đổi. Mô tả hành động của nhân vật chính/nhân vật đại diện trong thế giới trò chơi (ví dụ: “Nhân vật tung phép lửa”, “Nhân vật nhảy sang bục tiếp theo.”)."
+    },
+    {
+        "name": "Bài giảng / Trình chiếu",
+        "prompt": "Đây là bài giảng, khóa học hoặc bài thuyết trình. Đọc nguyên văn mọi tiêu đề slide, gạch đầu dòng, công thức và nhãn biểu đồ dưới dạng chữ trên màn hình khi chúng xuất hiện hoặc thay đổi. Mô tả sơ đồ theo cấu trúc của chúng (trục, xu hướng, các ô và mũi tên). Không mô tả người nói, ngoại trừ những cử chỉ chỉ vào nội dung."
+    },
+    {
+        "name": "Anime / Hoạt hình",
+        "prompt": "Đây là tác phẩm hoạt hình. Mô tả nhân vật theo thiết kế hình ảnh cố định của họ (màu và kiểu tóc, trang phục) và dùng cùng một cách gọi mỗi lần. Đọc các biển hiệu và chú thích trên màn hình. Mô tả ngắn gọn các hiệu ứng cách điệu (đường tốc độ, giọt mồ hôi, biến hình chibi) qua ý nghĩa hình ảnh mà chúng truyền tải."
+    },
+    {
+        "name": "Trẻ em",
+        "prompt": "Đây là nội dung dành cho trẻ nhỏ. Dùng từ ngữ đơn giản, cụ thể và câu ngắn. Nêu tên màu sắc và hình dạng. Mô tả rõ ràng những hành động vui nhộn. Tránh cách diễn đạt gây sợ hãi."
+    },
+    {
+        "name": "Kinh dị / Giật gân",
+        "prompt": "Đây là phim kinh dị hoặc giật gân. Không bao giờ lấp đầy những khoảng lặng tạo nên sự căng thẳng; chỉ mô tả những gì thiết yếu, thật ngắn gọn, và nếu có thể thì ngay trước một cú hù. Mô tả bóng tối, những chuyển động ở rìa khung hình và những gì nhân vật nhìn thấy, mà không tiết lộ điều bộ phim vẫn còn che giấu."
+    },
+    {
+        "name": "MV / Hòa nhạc",
+        "prompt": "Đây là video ca nhạc hoặc buổi hòa nhạc. Lời bài hát được hát gần như suốt thời gian: chỉ mô tả trong các đoạn nhạc không lời và giữa các đoạn hát, và chỉ những hình ảnh quan trọng nhất (người biểu diễn, thay đổi bối cảnh, vũ đạo). Hãy để âm nhạc có khoảng thở."
+    },
+    {
+        "name": "Thể thao",
+        "prompt": "Đây là chương trình truyền hình thể thao. Bình luận viên thường đã nói về diễn biến: chỉ mô tả những gì phần bình luận không nhắc đến, chẳng hạn bảng tỷ số, các pha chiếu lại, màn ăn mừng của cầu thủ và khán giả. Đọc tỷ số và đồng hồ trên màn hình."
+    },
+    {
+        "name": "Tin tức / Phỏng vấn",
+        "prompt": "Đây là bản tin hoặc cuộc phỏng vấn. Đọc nguyên văn tên và chức danh ở dải chữ phía dưới, chú thích và đồ họa. Mô tả ngắn gọn địa điểm và tư liệu lưu trữ. Không bao giờ nói đè lên người đang nói."
+    },
+    {
+        "name": "Không lời thoại / Phim câm",
+        "prompt": "Video này có ít hoặc không có lời thoại. Mô tả liên tục nhưng chừa khoảng thở cho âm nhạc và những khoảng lặng có chủ ý. Theo sát câu chuyện từng hành động một, từ tổng quát đến chi tiết."
+    },
+    {
+        "name": "Múa / Biên đạo",
+        "prompt": "Đây là một tiết mục múa hoặc một bài biên đạo. Mô tả từng động tác theo bộ phận cơ thể và hướng (hai tay lướt qua đầu, một vòng xoay sang trái), đội hình, động tác nâng, lúc vào sân khấu và trang phục khi xuất hiện lần đầu. Đặt mô tả vào các đoạn nhạc không lời; không bao giờ nói đè lên lời hát."
+    },
+    {
+        "name": "Thể dục / Yoga",
+        "prompt": "Đây là video tập luyện hoặc yoga mà người xem tập theo cùng lúc. Với mỗi động tác mới, nêu tư thế bắt đầu, rồi bộ phận cơ thể, bên (trái hay phải của huấn luyện viên), hướng và số lần lặp được thể hiện. Đọc tên bài tập và đồng hồ đếm trên màn hình. Chỉ mô tả ngoại hình và bối cảnh một lần, ở đầu video."
+    },
+    {
+        "name": "Thiên nhiên / Động vật hoang dã",
+        "prompt": "Đây là phim về thiên nhiên hoặc động vật hoang dã. Chỉ gọi tên loài khi lời bình hoặc chữ trên màn hình xác định nó hoặc khi không thể nhầm lẫn; nếu không, nêu kích thước, hình dáng, màu sắc và chuyển động. Mô tả hành vi (săn mồi, kiếm ăn, tìm bạn tình) và sự thay đổi của cảnh quan và thời tiết. Lời bình thường đã giải thích hành động: chỉ bổ sung những gì nó không nói."
+    },
+    {
+        "name": "Vlog / Nói trước máy quay",
+        "prompt": "Đây là vlog hoặc video một người nói trước máy quay phần lớn thời gian. Mô tả người nói và bối cảnh một lần ở đầu, sau đó chỉ mô tả thay đổi: cảnh chèn, đồ vật đưa ra trước máy quay, chữ trên màn hình, emoji và sticker chèn lên, và những phản ứng nhìn thấy được làm thay đổi ý nghĩa lời nói."
+    },
+    {
+        "name": "Đánh giá sản phẩm / Đập hộp",
+        "prompt": "Đây là video đánh giá sản phẩm hoặc đập hộp. Đọc thương hiệu, mẫu, giá và thông số hiện trên màn hình hoặc trên bao bì. Mô tả hình dáng sản phẩm, kích thước so với đồ vật quen thuộc, chất liệu, nút bấm và cổng kết nối, và từng món lấy ra khỏi hộp. Mô tả phần trình diễn qua kết quả nhìn thấy được."
+    }
+]

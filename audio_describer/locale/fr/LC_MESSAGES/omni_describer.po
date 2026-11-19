@@ -1,3 +1,4 @@
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
@@ -116,7 +117,8 @@ msgstr "Le traitement de la vidéo a expiré ou a échoué. État final : %s"
 
 #: audio_describer/core/audio_describer.py:125
 msgid "Video ready. Preparing AI request for descriptions..."
-msgstr "Vidéo prête. Préparation de la requête à l'IA pour les descriptions..."
+msgstr ""
+"Vidéo prête. Préparation de la requête à l'IA pour les descriptions..."
 
 #: audio_describer/core/audio_describer.py:132
 msgid "Requesting audio descriptions from AI..."
@@ -125,7 +127,8 @@ msgstr "Demande des audiodescriptions à l'IA..."
 #: audio_describer/core/audio_describer.py:143
 msgid "Failed to parse timed descriptions from AI's JSON response."
 msgstr ""
-"Échec de l'analyse des descriptions synchronisées de la réponse JSON de l'IA."
+"Échec de l'analyse des descriptions synchronisées de la réponse JSON de "
+"l'IA."
 
 #: audio_describer/core/audio_describer.py:145
 #, python-format
@@ -164,6 +167,8 @@ msgid ""
 "AI process stopped while generating glossary due to token limit. Try "
 "simplifying the video or adjusting settings."
 msgstr ""
+"L'IA s'est arrêtée pendant la création du glossaire (limite de jetons "
+"atteinte). Essayez de simplifier la vidéo ou d'ajuster les paramètres."
 
 #: audio_describer/core/audio_describer.py:209
 #, python-format
@@ -232,7 +237,8 @@ msgstr "La requête à l'IA a été bloquée pour la raison suivante : %s"
 
 #: audio_describer/core/gemini_helpers.py:184
 msgid "AI returned no answer or an invalid response structure."
-msgstr "L'IA n'a retourné aucune réponse ou une structure de réponse invalide."
+msgstr ""
+"L'IA n'a retourné aucune réponse ou une structure de réponse invalide."
 
 #: audio_describer/core/gemini_helpers.py:195
 msgid ""
@@ -348,7 +354,8 @@ msgstr ""
 #: audio_describer/core/youtube_downloader.py:199
 msgid "Timeout fetching video information."
 msgstr ""
-"Délai d'attente dépassé lors de la récupération des informations de la vidéo."
+"Délai d'attente dépassé lors de la récupération des informations de la "
+"vidéo."
 
 #: audio_describer/core/youtube_downloader.py:205
 #, python-format
@@ -374,10 +381,11 @@ msgid "Best Available"
 msgstr "Meilleure Disponible"
 
 #: audio_describer/core/youtube_downloader.py:275
-msgid "Could not retrieve video info; cannot reliably predict output filename."
+msgid ""
+"Could not retrieve video info; cannot reliably predict output filename."
 msgstr ""
-"Impossible de récupérer les informations de la vidéo ; impossible de prédire "
-"de manière fiable le nom du fichier de sortie."
+"Impossible de récupérer les informations de la vidéo ; impossible de prédire"
+" de manière fiable le nom du fichier de sortie."
 
 #: audio_describer/core/youtube_downloader.py:325
 #, python-format
@@ -408,8 +416,8 @@ msgstr "Erreur inattendue pendant le téléchargement de %s : %s"
 
 #: audio_describer/core/youtube_downloader.py:346
 msgid ""
-"Standalone test: config_model.app_settings seems empty, loading defaults for "
-"test."
+"Standalone test: config_model.app_settings seems empty, loading defaults for"
+" test."
 msgstr ""
 "Test autonome : config_model.app_settings semble vide, chargement des "
 "valeurs par défaut pour le test."
@@ -440,8 +448,7 @@ msgid ""
 "Attempting to download YouTube video: %s (Quality from settings: %s)"
 msgstr ""
 "\n"
-"Tentative de téléchargement de la vidéo YouTube : %s (Qualité des "
-"paramètres : %s)"
+"Tentative de téléchargement de la vidéo YouTube : %s (Qualité des paramètres : %s)"
 
 #: audio_describer/core/youtube_downloader.py:396
 #, python-format
@@ -484,8 +491,7 @@ msgid ""
 "Downloader self-test finished. Check console and app_log.txt for details."
 msgstr ""
 "\n"
-"Auto-test du téléchargeur terminé. Consultez la console et app_log.txt pour "
-"les détails."
+"Auto-test du téléchargeur terminé. Consultez la console et app_log.txt pour les détails."
 
 #: audio_describer/core/youtube_downloader.py:414
 #, python-format
@@ -666,7 +672,8 @@ msgstr "(Aucune description disponible)"
 #, python-format
 msgid "Start time must be within the video duration (0 to %.2f sec)."
 msgstr ""
-"L'heure de début doit être comprise dans la durée de la vidéo (0 à %.2f sec)."
+"L'heure de début doit être comprise dans la durée de la vidéo (0 à %.2f "
+"sec)."
 
 #: audio_describer/ui/edit_description_dialog.py:148
 msgid "Invalid start time. Please enter a valid number."
@@ -756,21 +763,19 @@ msgstr "Options d'exportation"
 
 #: audio_describer/ui/export_options_dialog.py:16
 msgid "MP3 Audio (Descriptions mixed with original video)"
-msgstr ""
+msgstr "Audio MP3 (descriptions mixées avec le son de la vidéo)"
 
 #: audio_describer/ui/export_options_dialog.py:17
 msgid "SRT Subtitle File (Descriptions as subtitles)"
-msgstr ""
+msgstr "Fichier de sous-titres SRT (descriptions en sous-titres)"
 
 #: audio_describer/ui/export_options_dialog.py:18
-#, fuzzy
-#| msgid "Plain Text File (.txt)"
 msgid "Plain Text File (.txt) (Descriptions line-by-line)"
-msgstr "Fichier texte brut (.txt)"
+msgstr "Fichier texte brut (.txt) (une description par ligne)"
 
 #: audio_describer/ui/export_options_dialog.py:26
 msgid "Select Export Format"
-msgstr ""
+msgstr "Choisir le format d'export"
 
 #: audio_describer/ui/export_options_dialog.py:39
 msgid "&Continue"
@@ -835,8 +840,8 @@ msgstr "Licence et conditions d'utilisation"
 msgid "You have already agreed to these terms."
 msgstr "Vous avez déjà accepté ces conditions."
 
-#: audio_describer/ui/license_dialog.py:47
-#: ⁨dist/run_app - Kopya/_internal/_tk_data/fontchooser.tcl⁩:217
+#: audio_describer/ui/license_dialog.py:47 ⁨dist/run_app -
+#: Kopya/_internal/_tk_data/fontchooser.tcl⁩:217
 #: dist/run_app/_internal/_tk_data/fontchooser.tcl:217
 msgid "OK"
 msgstr "OK"
@@ -985,8 +990,8 @@ msgstr "Traiter une vidéo à partir d'une URL YouTube"
 #: audio_describer/ui/main_window.py:96
 msgid "Optional: Select a prompt preset to enhance generation:"
 msgstr ""
-"Optionnel : Sélectionnez un préréglage d'invite pour améliorer la "
-"génération :"
+"Optionnel : Sélectionnez un préréglage d'invite pour améliorer la génération"
+" :"
 
 #: audio_describer/ui/main_window.py:100
 msgid "Select an optional prompt preset."
@@ -1129,32 +1134,24 @@ msgstr "Génération de contenu bloquée"
 #: audio_describer/ui/main_window.py:349
 #, python-format
 msgid ""
-"The AI was unable to generate descriptions because its content safety "
-"filters were triggered.\n"
+"The AI was unable to generate descriptions because its content safety filters were triggered.\n"
 "\n"
 "Reason: %s\n"
 "\n"
-"This can sometimes happen with content that is violent, sensitive, or "
-"complex. Here are some things you can try:\n"
+"This can sometimes happen with content that is violent, sensitive, or complex. Here are some things you can try:\n"
 "\n"
-"1. Go to Settings -> AI Settings and enable 'Disable Safety Filters'. (Use "
-"with caution)\n"
-"2. Reduce the 'Frame Rate for AI Analysis' in settings to send less data to "
-"the AI.\n"
+"1. Go to Settings -> AI Settings and enable 'Disable Safety Filters'. (Use with caution)\n"
+"2. Reduce the 'Frame Rate for AI Analysis' in settings to send less data to the AI.\n"
 "3. Try a different video if the issue persists."
 msgstr ""
-"L'IA n'a pas pu générer de descriptions car ses filtres de sécurité de "
-"contenu ont été déclenchés.\n"
+"L'IA n'a pas pu générer de descriptions car ses filtres de sécurité de contenu ont été déclenchés.\n"
 "\n"
 "Raison : %s\n"
 "\n"
-"Cela peut parfois se produire avec un contenu violent, sensible ou complexe. "
-"Voici quelques solutions que vous pouvez essayer :\n"
+"Cela peut parfois se produire avec un contenu violent, sensible ou complexe. Voici quelques solutions que vous pouvez essayer :\n"
 "\n"
-"1. Allez dans Paramètres -> Paramètres IA et activez 'Désactiver les filtres "
-"de sécurité'. (À utiliser avec prudence)\n"
-"2. Réduisez la 'Fréquence d'images pour l'analyse IA' dans les paramètres "
-"pour envoyer moins de données à l'IA.\n"
+"1. Allez dans Paramètres -> Paramètres IA et activez 'Désactiver les filtres de sécurité'. (À utiliser avec prudence)\n"
+"2. Réduisez la 'Fréquence d'images pour l'analyse IA' dans les paramètres pour envoyer moins de données à l'IA.\n"
 "3. Essayez une autre vidéo si le problème persiste."
 
 #: audio_describer/ui/main_window.py:360
@@ -1163,32 +1160,21 @@ msgstr "Limite de traitement atteinte"
 
 #: audio_describer/ui/main_window.py:362
 msgid ""
-"The AI stopped because the video is too long or complex to process in a "
-"single pass.\n"
+"The AI stopped because the video is too long or complex to process in a single pass.\n"
 "\n"
-"This is a capacity limit, not a content safety issue. Here are the best ways "
-"to solve this:\n"
+"This is a capacity limit, not a content safety issue. Here are the best ways to solve this:\n"
 "\n"
-"1. (Recommended) Go to Settings -> AI Settings and enable 'Video Chunking'. "
-"This will automatically split the video into manageable parts for the AI.\n"
-"2. Reduce the 'Frame Rate for AI Analysis' in settings to make the video "
-"simpler for the AI.\n"
-"3. If you are an advanced user, you can try specifying a more powerful model "
-"in the 'Gemini Model Override' setting."
+"1. (Recommended) Go to Settings -> AI Settings and enable 'Video Chunking'. This will automatically split the video into manageable parts for the AI.\n"
+"2. Reduce the 'Frame Rate for AI Analysis' in settings to make the video simpler for the AI.\n"
+"3. If you are an advanced user, you can try specifying a more powerful model in the 'Gemini Model Override' setting."
 msgstr ""
-"L'IA s'est arrêtée car la vidéo est trop longue ou complexe pour être "
-"traitée en une seule fois.\n"
+"L'IA s'est arrêtée car la vidéo est trop longue ou complexe pour être traitée en une seule fois.\n"
 "\n"
-"Il s'agit d'une limite de capacité, pas d'un problème de sécurité du "
-"contenu. Voici les meilleures façons de résoudre ce problème :\n"
+"Il s'agit d'une limite de capacité, pas d'un problème de sécurité du contenu. Voici les meilleures façons de résoudre ce problème :\n"
 "\n"
-"1. (Recommandé) Allez dans Paramètres -> Paramètres IA et activez "
-"'Segmentation de la vidéo'. Cela divisera automatiquement la vidéo en "
-"parties gérables pour l'IA.\n"
-"2. Réduisez la 'Fréquence d'images pour l'analyse IA' dans les paramètres "
-"pour simplifier la vidéo pour l'IA.\n"
-"3. Si vous êtes un utilisateur avancé, vous pouvez essayer de spécifier un "
-"modèle plus puissant dans le paramètre 'Remplacement du modèle Gemini'."
+"1. (Recommandé) Allez dans Paramètres -> Paramètres IA et activez 'Segmentation de la vidéo'. Cela divisera automatiquement la vidéo en parties gérables pour l'IA.\n"
+"2. Réduisez la 'Fréquence d'images pour l'analyse IA' dans les paramètres pour simplifier la vidéo pour l'IA.\n"
+"3. Si vous êtes un utilisateur avancé, vous pouvez essayer de spécifier un modèle plus puissant dans le paramètre 'Remplacement du modèle Gemini'."
 
 #: audio_describer/ui/main_window.py:372
 #, python-format
@@ -1222,7 +1208,8 @@ msgid ""
 "Processing complete, but the AI did not generate any descriptions for this "
 "video."
 msgstr ""
-"Traitement terminé, mais l'IA n'a généré aucune description pour cette vidéo."
+"Traitement terminé, mais l'IA n'a généré aucune description pour cette "
+"vidéo."
 
 #: audio_describer/ui/main_window.py:401
 msgid "Processing Note"
@@ -1230,13 +1217,11 @@ msgstr "Note de traitement"
 
 #: audio_describer/ui/main_window.py:480
 msgid ""
-"An application to automatically generate audio descriptions for videos using "
-"Gemini AI.\n"
+"An application to automatically generate audio descriptions for videos using Gemini AI.\n"
 "\n"
 "Developed with accessibility in mind."
 msgstr ""
-"Une application pour générer automatiquement des audiodescriptions pour les "
-"vidéos en utilisant l'IA Gemini.\n"
+"Une application pour générer automatiquement des audiodescriptions pour les vidéos en utilisant l'IA Gemini.\n"
 "\n"
 "Développée en tenant compte de l'accessibilité."
 
@@ -1346,7 +1331,8 @@ msgstr "Lecteur vidéo avec descriptions"
 
 #: audio_describer/ui/player_window.py:57
 msgid "VLC library is not installed. Playback will be unavailable."
-msgstr "La bibliothèque VLC n'est pas installée. La lecture sera indisponible."
+msgstr ""
+"La bibliothèque VLC n'est pas installée. La lecture sera indisponible."
 
 #: audio_describer/ui/player_window.py:83
 #: audio_describer/ui/player_window.py:208
@@ -1518,8 +1504,8 @@ msgstr "Une erreur est survenue dans l'Explorateur de scène."
 #: audio_describer/ui/scene_explorer_dialog.py:56
 msgid ""
 "Scene Explorer opened. Use arrow keys to move. Press D for scene "
-"description, L to list all objects, and Shift + L to enter jump mode. Escape "
-"to close."
+"description, L to list all objects, and Shift + L to enter jump mode. Escape"
+" to close."
 msgstr ""
 "Explorateur de scène ouvert. Utilisez les touches fléchées pour vous "
 "déplacer. Appuyez sur D pour la description de la scène, L pour lister tous "
@@ -1606,7 +1592,7 @@ msgstr "Détection auto. au démarrage"
 
 #: audio_describer/ui/settings_dialog.py:37
 msgid "Arabic"
-msgstr ""
+msgstr "Arabe"
 
 #: audio_describer/ui/settings_dialog.py:38
 msgid "English"
@@ -1618,15 +1604,15 @@ msgstr "Espagnol"
 
 #: audio_describer/ui/settings_dialog.py:40
 msgid "French"
-msgstr ""
+msgstr "Français"
 
 #: audio_describer/ui/settings_dialog.py:41
 msgid "Italian"
-msgstr ""
+msgstr "Italien"
 
 #: audio_describer/ui/settings_dialog.py:42
 msgid "Portuguese"
-msgstr ""
+msgstr "Portugais"
 
 #: audio_describer/ui/settings_dialog.py:43
 msgid "Russian"
@@ -1844,10 +1830,8 @@ msgid "Downloading Update"
 msgstr "Téléchargement de la mise à jour"
 
 #: audio_describer/utils/update_checker.py:43
-#, fuzzy
-#| msgid "Downloading from URL..."
 msgid "Downloading..."
-msgstr "Téléchargement depuis l'URL..."
+msgstr "Téléchargement..."
 
 #: audio_describer/utils/update_checker.py:68
 msgid "Updater component not found."
@@ -1861,25 +1845,25 @@ msgstr "Échec du téléchargement ou de l'application de la mise à jour : {}"
 msgid "Update Error"
 msgstr "Erreur de mise à jour"
 
-#: ⁨dist/run_app - Kopya/_internal/_tk_data/fontchooser.tcl⁩:17
-#: ⁨dist/run_app - Kopya/_internal/_tk_data/fontchooser.tcl⁩:374
+#: ⁨dist/run_app - Kopya/_internal/_tk_data/fontchooser.tcl⁩:17 ⁨dist/run_app
+#: - Kopya/_internal/_tk_data/fontchooser.tcl⁩:374
 #: dist/run_app/_internal/_tk_data/fontchooser.tcl:17
 #: dist/run_app/_internal/_tk_data/fontchooser.tcl:374
 msgid "Regular"
 msgstr ""
 
-#: ⁨dist/run_app - Kopya/_internal/_tk_data/fontchooser.tcl⁩:18
-#: ⁨dist/run_app - Kopya/_internal/_tk_data/fontchooser.tcl⁩:383
-#: ⁨dist/run_app - Kopya/_internal/_tk_data/fontchooser.tcl⁩:466
+#: ⁨dist/run_app - Kopya/_internal/_tk_data/fontchooser.tcl⁩:18 ⁨dist/run_app
+#: - Kopya/_internal/_tk_data/fontchooser.tcl⁩:383 ⁨dist/run_app -
+#: Kopya/_internal/_tk_data/fontchooser.tcl⁩:466
 #: dist/run_app/_internal/_tk_data/fontchooser.tcl:18
 #: dist/run_app/_internal/_tk_data/fontchooser.tcl:383
 #: dist/run_app/_internal/_tk_data/fontchooser.tcl:466
 msgid "Italic"
 msgstr ""
 
-#: ⁨dist/run_app - Kopya/_internal/_tk_data/fontchooser.tcl⁩:19
-#: ⁨dist/run_app - Kopya/_internal/_tk_data/fontchooser.tcl⁩:381
-#: ⁨dist/run_app - Kopya/_internal/_tk_data/fontchooser.tcl⁩:463
+#: ⁨dist/run_app - Kopya/_internal/_tk_data/fontchooser.tcl⁩:19 ⁨dist/run_app
+#: - Kopya/_internal/_tk_data/fontchooser.tcl⁩:381 ⁨dist/run_app -
+#: Kopya/_internal/_tk_data/fontchooser.tcl⁩:463
 #: dist/run_app/_internal/_tk_data/fontchooser.tcl:19
 #: dist/run_app/_internal/_tk_data/fontchooser.tcl:381
 #: dist/run_app/_internal/_tk_data/fontchooser.tcl:463
@@ -1891,15 +1875,15 @@ msgstr ""
 msgid "AaBbYyZz01"
 msgstr ""
 
-#: ⁨dist/run_app - Kopya/_internal/_tk_data/fontchooser.tcl⁩:85
-#: ⁨dist/run_app - Kopya/_internal/_tk_data/fontchooser.tcl⁩:152
+#: ⁨dist/run_app - Kopya/_internal/_tk_data/fontchooser.tcl⁩:85 ⁨dist/run_app
+#: - Kopya/_internal/_tk_data/fontchooser.tcl⁩:152
 #: dist/run_app/_internal/_tk_data/fontchooser.tcl:85
 #: dist/run_app/_internal/_tk_data/fontchooser.tcl:152
 msgid "Font"
 msgstr ""
 
-#: ⁨dist/run_app - Kopya/_internal/_tk_data/fontchooser.tcl⁩:182
-#: ⁨dist/run_app - Kopya/_internal/_tk_data/fontchooser.tcl⁩:187
+#: ⁨dist/run_app - Kopya/_internal/_tk_data/fontchooser.tcl⁩:182 ⁨dist/run_app
+#: - Kopya/_internal/_tk_data/fontchooser.tcl⁩:187
 #: dist/run_app/_internal/_tk_data/fontchooser.tcl:182
 #: dist/run_app/_internal/_tk_data/fontchooser.tcl:187
 msgid "&Size:"
@@ -1945,8 +1929,8 @@ msgstr ""
 msgid "Sample"
 msgstr ""
 
-#: ⁨dist/run_app - Kopya/_internal/_tk_data/fontchooser.tcl⁩:379
-#: ⁨dist/run_app - Kopya/_internal/_tk_data/fontchooser.tcl⁩:469
+#: ⁨dist/run_app - Kopya/_internal/_tk_data/fontchooser.tcl⁩:379 ⁨dist/run_app
+#: - Kopya/_internal/_tk_data/fontchooser.tcl⁩:469
 #: dist/run_app/_internal/_tk_data/fontchooser.tcl:379
 #: dist/run_app/_internal/_tk_data/fontchooser.tcl:469
 msgid "Bold Italic"
@@ -1989,6 +1973,2324 @@ msgstr ""
 #: updaterorg.py:74
 msgid "Relaunching application..."
 msgstr ""
+
+#: audio_describer/__app__real.py:127
+msgid ""
+"Omni Describer is now available as a web platform!\n"
+"\n"
+"The desktop app will continue to work, but new features and improvements are now focused on the web version at:\n"
+"\n"
+"%(webapp_url)s\n"
+"\n"
+"The web platform requires no installation, no API keys, and works on all devices including Mac and mobile.\n"
+"\n"
+"Would you like to open the web platform now?\n"
+"\n"
+"(This message will only be shown once.)"
+msgstr ""
+"Omni Describer est maintenant disponible en plateforme web !\n"
+"\n"
+"L'application de bureau continue de fonctionner, mais les nouveautés et améliorations se concentrent désormais sur la version web :\n"
+"\n"
+"%(webapp_url)s\n"
+"\n"
+"La plateforme web ne demande ni installation ni clé API, et fonctionne sur tous les appareils, y compris Mac et mobile.\n"
+"\n"
+"Voulez-vous ouvrir la plateforme web maintenant ?\n"
+"\n"
+"(Ce message ne s'affichera qu'une fois.)"
+
+#: audio_describer/__app__real.py:140
+msgid "Omni Describer Web Platform"
+msgstr "Plateforme web Omni Describer"
+
+#: audio_describer/__app__real.py:95
+msgid "Settings Notice"
+msgstr "Avis sur les paramètres"
+
+#: audio_describer/core/audio_describer.py:30
+msgid "Generation cancelled by user."
+msgstr "Génération annulée par l'utilisateur."
+
+#: audio_describer/core/audio_describer.py:223
+msgid "Detecting pauses in the soundtrack..."
+msgstr "Détection des pauses dans la bande son..."
+
+#: audio_describer/core/audio_describer.py:313
+msgid "%(count)d descriptions ready, %(flagged)d to review."
+msgstr "%(count)d descriptions prêtes, %(flagged)d à vérifier."
+
+#: audio_describer/core/audio_describer.py:488
+msgid "Warning: 'audio_descriptions' key was not a list."
+msgstr "Attention : la clé 'audio_descriptions' n'était pas une liste."
+
+#: audio_describer/core/audio_describer.py:493
+msgid "Warning: 'character_glossary' key was not a list."
+msgstr "Attention : la clé 'character_glossary' n'était pas une liste."
+
+#: audio_describer/core/audio_describer.py:246
+msgid "Requesting descriptions from AI..."
+msgstr "Demande des descriptions à l'IA..."
+
+#: audio_describer/core/audio_describer.py:324
+msgid "Generation failed: %s"
+msgstr "Échec de la génération : %s"
+
+#: audio_describer/core/audio_describer.py:418
+msgid "Invalid timestamp format: %s"
+msgstr "Format d'horodatage invalide : %s"
+
+#: audio_describer/core/audio_describer.py:515
+msgid "Error: Could not decode the AI's JSON response: %s"
+msgstr "Erreur : impossible de décoder la réponse JSON de l'IA : %s"
+
+#: audio_describer/core/audio_describer.py:226
+msgid "Found %d pauses in the soundtrack."
+msgstr "%d pauses trouvées dans la bande son."
+
+#: audio_describer/core/audio_describer.py:248
+msgid "Chunk %(n)d of %(total)d, %(pct)d%% done."
+msgstr "Partie %(n)d sur %(total)d, %(pct)d%% terminé."
+
+#: audio_describer/core/audio_describer.py:302
+msgid "Chunk %d: parsed %d descriptions."
+msgstr "Partie %d : %d descriptions analysées."
+
+#: audio_describer/core/audio_describer.py:524
+msgid "Successfully parsed a fallback JSON object."
+msgstr "Objet JSON de secours analysé avec succès."
+
+#: audio_describer/core/audio_describer.py:527
+msgid "Fallback JSON parsing also failed."
+msgstr "L'analyse JSON de secours a aussi échoué."
+
+#: audio_describer/core/gemini_helpers.py:272
+msgid "Failed after %d retries."
+msgstr "Échec après %d tentatives."
+
+#: audio_describer/core/gemini_helpers.py:263
+msgid ""
+"Rate limit hit (attempt %(attempt)d/%(max)d). Retrying in %(delay)d "
+"seconds..."
+msgstr ""
+"Limite de requêtes atteinte (tentative %(attempt)d/%(max)d). Nouvel essai "
+"dans %(delay)d secondes..."
+
+#: audio_describer/core/video_processor.py:140
+msgid "Pre-processing video for AI analysis (stripping audio)..."
+msgstr "Préparation de la vidéo pour l'analyse IA (suppression du son)..."
+
+#: audio_describer/ui/edit_description_dialog.py:58
+msgid "Descriptions"
+msgstr "Descriptions"
+
+#: audio_describer/ui/edit_description_dialog.py:157
+msgid "too long"
+msgstr "trop longue"
+
+#: audio_describer/ui/edit_description_dialog.py:157
+msgid "over sound"
+msgstr "sur du son"
+
+#: audio_describer/ui/edit_description_dialog.py:65
+msgid "ID"
+msgstr "ID"
+
+#: audio_describer/ui/edit_description_dialog.py:66
+msgid "Name"
+msgstr "Nom"
+
+#: audio_describer/ui/edit_description_dialog.py:67
+msgid "Description"
+msgstr "Description"
+
+#: audio_describer/ui/edit_description_dialog.py:82
+msgid "Characters"
+msgstr "Personnages"
+
+#: audio_describer/ui/edit_description_dialog.py:161
+msgid "Review: %s. "
+msgstr "À vérifier : %s. "
+
+#: audio_describer/ui/edit_description_dialog.py:164
+msgid "%(time)s, level %(level)d, %(wps).1f words per second: %(text)s"
+msgstr "%(time)s, niveau %(level)d, %(wps).1f mots par seconde : %(text)s"
+
+#: audio_describer/ui/export_options_dialog.py:16
+msgid ""
+"Video with a separate audio description track (MKV, original tracks kept)"
+msgstr ""
+"Vidéo avec une piste d'audiodescription séparée (MKV, pistes d'origine "
+"conservées)"
+
+#: audio_describer/ui/export_options_dialog.py:18
+msgid "Audio description track only (M4A)"
+msgstr "Piste d'audiodescription seule (M4A)"
+
+#: audio_describer/ui/export_options_dialog.py:19
+msgid "WebVTT descriptions (.vtt, for web players and platforms)"
+msgstr "Descriptions WebVTT (.vtt, pour lecteurs web et plateformes)"
+
+#: audio_describer/ui/file_dialogs.py:85
+msgid "Invalid URL"
+msgstr "URL invalide"
+
+#: audio_describer/ui/file_dialogs.py:87
+msgid ""
+"The YouTube URL you entered does not appear to be valid.\n"
+"\n"
+"Please use a valid format, such as:\n"
+"youtube.com/watch?v=VIDEO_ID\n"
+"youtu.be/VIDEO_ID\n"
+"youtube.com/shorts/VIDEO_ID"
+msgstr ""
+"L'URL YouTube saisie ne semble pas valide.\n"
+"\n"
+"Utilisez un format valide, par exemple :\n"
+"youtube.com/watch?v=VIDEO_ID\n"
+"youtu.be/VIDEO_ID\n"
+"youtube.com/shorts/VIDEO_ID"
+
+#: audio_describer/ui/file_dialogs.py:95
+msgid ""
+"The URL you entered does not appear to be valid.\n"
+"\n"
+"Please check the format (e.g., it should start with 'http://' or 'https://')."
+msgstr ""
+"L'URL saisie ne semble pas valide.\n"
+"\n"
+"Vérifiez le format (elle doit commencer par 'http://' ou 'https://')."
+
+#: audio_describer/ui/main_window.py:63
+msgid "Open &Project...\tCtrl+P"
+msgstr "Ouvrir un &projet...\tCtrl+P"
+
+#: audio_describer/ui/main_window.py:63
+msgid "Reopen a saved audio description project"
+msgstr "Rouvrir un projet d'audiodescription enregistré"
+
+#: audio_describer/ui/main_window.py:64
+msgid "Reuse &Characters from a Project...\tCtrl+G"
+msgstr "Réutiliser les &personnages d'un projet...\tCtrl+G"
+
+#: audio_describer/ui/main_window.py:64
+msgid "Keep the same character names and descriptions as an earlier episode"
+msgstr ""
+"Garder les mêmes noms et descriptions de personnages qu'un épisode précédent"
+
+#: audio_describer/ui/main_window.py:68
+msgid "Open &Web Platform...\tCtrl+W"
+msgstr "Ouvrir la plateforme &web...\tCtrl+W"
+
+#: audio_describer/ui/main_window.py:68
+msgid "Open the Omni Describer web platform in your browser"
+msgstr "Ouvrir la plateforme web Omni Describer dans le navigateur"
+
+#: audio_describer/ui/main_window.py:138
+msgid "Cancel the running generation (Escape)"
+msgstr "Annuler la génération en cours (Échap)"
+
+#: audio_describer/ui/main_window.py:252
+msgid "Enter a valid YouTube video URL:"
+msgstr "Saisissez une URL de vidéo YouTube valide :"
+
+#: audio_describer/ui/main_window.py:276
+msgid "Omni Describer projects (*%s)|*%s"
+msgstr "Projets Omni Describer (*%s)|*%s"
+
+#: audio_describer/ui/main_window.py:104
+msgid "Or try the web platform (no API key needed):"
+msgstr "Ou essayez la plateforme web (sans clé API) :"
+
+#: audio_describer/ui/main_window.py:106
+msgid "Open &Web Platform"
+msgstr "Ouvrir la plateforme &web"
+
+#: audio_describer/ui/main_window.py:137
+msgid "&Cancel Generation"
+msgstr "&Annuler la génération"
+
+#: audio_describer/ui/main_window.py:273
+msgid "Cancelling... the current step will finish first."
+msgstr "Annulation... l'étape en cours va d'abord se terminer."
+
+#: audio_describer/ui/main_window.py:277
+msgid "Open Project"
+msgstr "Ouvrir un projet"
+
+#: audio_describer/ui/main_window.py:288
+msgid "Video Not Found"
+msgstr "Vidéo introuvable"
+
+#: audio_describer/ui/main_window.py:292
+msgid "Project opened: %d descriptions."
+msgstr "Projet ouvert : %d descriptions."
+
+#: audio_describer/ui/main_window.py:303
+msgid "Reuse Characters from a Project"
+msgstr "Réutiliser les personnages d'un projet"
+
+#: audio_describer/ui/main_window.py:313
+msgid "%d characters will be reused for the next descriptions."
+msgstr "%d personnages seront réutilisés pour les prochaines descriptions."
+
+#: audio_describer/ui/main_window.py:377
+msgid "Asking AI to generate descriptions and glossary..."
+msgstr "Demande des descriptions et du glossaire à l'IA..."
+
+#: audio_describer/ui/main_window.py:288
+msgid ""
+"The project's video was not found:\n"
+"%s\n"
+"\n"
+"Please locate it."
+msgstr ""
+"La vidéo du projet est introuvable :\n"
+"%s\n"
+"\n"
+"Veuillez la localiser."
+
+#: audio_describer/ui/main_window.py:383
+msgid "Processing video..."
+msgstr "Traitement de la vidéo..."
+
+#: audio_describer/ui/main_window.py:419
+msgid "Generation cancelled."
+msgstr "Génération annulée."
+
+#: audio_describer/ui/main_window.py:285
+msgid ""
+"Could not open project:\n"
+"%s"
+msgstr ""
+"Impossible d'ouvrir le projet :\n"
+"%s"
+
+#: audio_describer/ui/main_window.py:466
+msgid "Identified %d characters."
+msgstr "%d personnages identifiés."
+
+#: audio_describer/ui/manage_voices_dialog.py:11
+msgid "Manage OpenAI Voice Presets"
+msgstr "Gérer les voix OpenAI prédéfinies"
+
+#: audio_describer/ui/player_export.py:117
+msgid "Exporting File"
+msgstr "Export du fichier"
+
+#: audio_describer/ui/player_export.py:117
+msgid "Starting..."
+msgstr "Démarrage..."
+
+#: audio_describer/ui/player_export.py:59
+msgid "No descriptions to export."
+msgstr "Aucune description à exporter."
+
+#: audio_describer/ui/player_export.py:59
+msgid "Export Note"
+msgstr "Export"
+
+#: audio_describer/ui/player_export.py:78
+msgid "SRT Subtitles (*.srt)|*.srt"
+msgstr "Sous-titres SRT (*.srt)|*.srt"
+
+#: audio_describer/ui/player_export.py:79
+msgid "WebVTT descriptions (*.vtt)|*.vtt"
+msgstr "Descriptions WebVTT (*.vtt)|*.vtt"
+
+#: audio_describer/ui/player_export.py:80
+msgid "Text files (*.txt)|*.txt"
+msgstr "Fichiers texte (*.txt)|*.txt"
+
+#: audio_describer/ui/player_export.py:82
+msgid "All files|*.*"
+msgstr "Tous les fichiers|*.*"
+
+#: audio_describer/ui/player_export.py:84
+msgid "Save Exported Text File"
+msgstr "Enregistrer le fichier texte exporté"
+
+#: audio_describer/ui/player_export.py:105
+msgid "Matroska video (*.mkv)|*.mkv"
+msgstr "Vidéo Matroska (*.mkv)|*.mkv"
+
+#: audio_describer/ui/player_export.py:106
+msgid "MP3 Audio (*.mp3)|*.mp3"
+msgstr "Audio MP3 (*.mp3)|*.mp3"
+
+#: audio_describer/ui/player_export.py:107
+msgid "M4A Audio (*.m4a)|*.m4a"
+msgstr "Audio M4A (*.m4a)|*.m4a"
+
+#: audio_describer/ui/player_export.py:111
+msgid "Save Exported File"
+msgstr "Enregistrer le fichier exporté"
+
+#: audio_describer/ui/player_export.py:226
+msgid "Mixing audio tracks..."
+msgstr "Mixage des pistes audio..."
+
+#: audio_describer/ui/player_export.py:266
+msgid "Export Complete."
+msgstr "Export terminé."
+
+#: audio_describer/ui/player_export.py:133
+msgid "FFmpeg could not convert a synthesized clip: %s"
+msgstr "FFmpeg n'a pas pu convertir un extrait synthétisé : %s"
+
+#: audio_describer/ui/player_export.py:220
+msgid "FFmpeg is required for audio and video export."
+msgstr "FFmpeg est nécessaire pour l'export audio et vidéo."
+
+#: audio_describer/ui/player_export.py:99
+msgid "Error saving file: %s"
+msgstr "Erreur lors de l'enregistrement du fichier : %s"
+
+#: audio_describer/ui/player_export.py:170
+msgid "Synthesizing description %d of %d..."
+msgstr "Synthèse de la description %d sur %d..."
+
+#: audio_describer/ui/player_export.py:264
+msgid ""
+"FFmpeg failed to create the export:\n"
+"%s"
+msgstr ""
+"FFmpeg n'a pas pu créer l'export :\n"
+"%s"
+
+#: audio_describer/ui/player_export.py:176
+msgid "Failed to synthesize description #%d."
+msgstr "Échec de la synthèse de la description n°%d."
+
+#: audio_describer/ui/player_window.py:126
+msgid ""
+"Player shortcuts: Space, play or pause. Left and Right arrows, back or "
+"forward 5 seconds; with Control, 30 seconds. Alt plus Left or Right, "
+"previous or next description. Up and Down arrows, video volume. R, repeat "
+"the last description. T, announce the time. A, turn audio description on or "
+"off. D, change description density. M, change the audio description mode: in"
+" the pauses, pause the video when needed, or on demand. In on-demand mode, "
+"Enter describes the current moment and Shift+Enter gives more detail. Q, ask"
+" more. S, explore scene. Control plus S, save project. F1, this help."
+msgstr ""
+"Raccourcis du lecteur : Espace, lecture ou pause. Flèches gauche et droite, "
+"reculer ou avancer de 5 secondes ; avec Contrôle, 30 secondes. Alt plus "
+"gauche ou droite, description précédente ou suivante. Flèches haut et bas, "
+"volume de la vidéo. R, répéter la dernière description. T, annoncer le "
+"temps. A, activer ou couper l'audiodescription. D, changer la densité des "
+"descriptions. M, changer le mode d'audiodescription : dans les pauses, pause"
+" de la vidéo si nécessaire, ou à la demande. En mode à la demande, Entrée "
+"décrit le moment présent et Maj+Entrée donne plus de détails. Q, poser une "
+"question. S, explorer la scène. Contrôle plus S, enregistrer le projet. F1, "
+"cette aide."
+
+#: audio_describer/ui/player_window.py:541
+msgid "Density low: essential descriptions only."
+msgstr "Densité faible : descriptions essentielles seulement."
+
+#: audio_describer/ui/player_window.py:542
+msgid "Density medium: essential and important descriptions."
+msgstr "Densité moyenne : descriptions essentielles et importantes."
+
+#: audio_describer/ui/player_window.py:543
+msgid "Density high: all descriptions, including details."
+msgstr "Densité élevée : toutes les descriptions, détails compris."
+
+#: audio_describer/ui/player_window.py:551
+msgid "Mode: descriptions in the pauses, the video keeps playing."
+msgstr "Mode : descriptions dans les pauses, la vidéo continue."
+
+#: audio_describer/ui/player_window.py:552
+msgid "Mode: extended, the video pauses when a description does not fit."
+msgstr ""
+"Mode : étendu, la vidéo se met en pause quand une description ne tient pas."
+
+#: audio_describer/ui/player_window.py:553
+msgid ""
+"Mode: on demand. Press Enter to describe the current moment, Shift+Enter for"
+" more detail."
+msgstr ""
+"Mode : à la demande. Appuyez sur Entrée pour décrire le moment présent, "
+"Maj+Entrée pour plus de détails."
+
+#: audio_describer/ui/player_window.py:562
+msgid "No description for this moment. Press Q to ask the AI."
+msgstr ""
+"Aucune description pour ce moment. Appuyez sur Q pour interroger l'IA."
+
+#: audio_describer/ui/player_window.py:645
+msgid "Project saved."
+msgstr "Projet enregistré."
+
+#: audio_describer/ui/player_window.py:178
+msgid ""
+"VLC library is not installed or could not be loaded. Playback will be "
+"unavailable."
+msgstr ""
+"La bibliothèque VLC n'est pas installée ou n'a pas pu être chargée. La "
+"lecture sera indisponible."
+
+#: audio_describer/ui/player_window.py:569
+msgid "No descriptions."
+msgstr "Aucune description."
+
+#: audio_describer/ui/player_window.py:593
+msgid "%(pos)s of %(total)s"
+msgstr "%(pos)s sur %(total)s"
+
+#: audio_describer/ui/player_window.py:605
+msgid "Audio description on."
+msgstr "Audiodescription activée."
+
+#: audio_describer/ui/player_window.py:605
+msgid "Audio description off."
+msgstr "Audiodescription coupée."
+
+#: audio_describer/ui/player_window.py:544
+msgid "%d descriptions."
+msgstr "%d descriptions."
+
+#: audio_describer/ui/player_window.py:580
+msgid "No next description."
+msgstr "Pas de description suivante."
+
+#: audio_describer/ui/player_window.py:580
+msgid "No previous description."
+msgstr "Pas de description précédente."
+
+#: audio_describer/ui/player_window.py:617
+msgid "Save Project"
+msgstr "Enregistrer le projet"
+
+#: audio_describer/ui/player_window.py:630
+msgid "Copying video next to the project..."
+msgstr "Copie de la vidéo à côté du projet..."
+
+#: audio_describer/ui/player_window.py:654
+msgid ""
+"Save this project before closing? Otherwise the generated descriptions will "
+"be lost."
+msgstr ""
+"Enregistrer ce projet avant de fermer ? Sinon, les descriptions générées "
+"seront perdues."
+
+#: audio_describer/ui/player_window.py:655
+msgid "Unsaved Descriptions"
+msgstr "Descriptions non enregistrées"
+
+#: audio_describer/ui/player_window.py:638
+msgid ""
+"Could not save the project:\n"
+"%s"
+msgstr ""
+"Impossible d'enregistrer le projet :\n"
+"%s"
+
+#: audio_describer/ui/player_window.py:658
+msgid "Are you sure you want to close the player?"
+msgstr "Voulez-vous vraiment fermer le lecteur ?"
+
+#: audio_describer/ui/player_window.py:659
+msgid "Confirm Close"
+msgstr "Confirmer la fermeture"
+
+#: audio_describer/ui/player_window.py:508
+msgid "Volume %d"
+msgstr "Volume %d"
+
+#: audio_describer/ui/player_window.py:510
+msgid "No description yet."
+msgstr "Aucune description pour l'instant."
+
+#: audio_describer/ui/settings_dialog.py:156
+msgid "Gemini Model"
+msgstr "Modèle Gemini"
+
+#: audio_describer/ui/settings_dialog.py:452
+msgid "Loading model list..."
+msgstr "Chargement de la liste des modèles..."
+
+#: audio_describer/ui/settings_dialog.py:50
+msgid "Vietnamese"
+msgstr "Vietnamien"
+
+#: audio_describer/ui/settings_dialog.py:55
+msgid "Low (faster, cheaper)"
+msgstr "Bas (plus rapide, moins cher)"
+
+#: audio_describer/ui/settings_dialog.py:55
+msgid "Medium (Default)"
+msgstr "Moyen (par défaut)"
+
+#: audio_describer/ui/settings_dialog.py:56
+msgid "High (slower, for complex films)"
+msgstr "Élevé (plus lent, pour les films complexes)"
+
+#: audio_describer/ui/settings_dialog.py:58
+msgid "Objective (Default)"
+msgstr "Objectif (par défaut)"
+
+#: audio_describer/ui/settings_dialog.py:58
+msgid "Subjective, evocative"
+msgstr "Subjectif, évocateur"
+
+#: audio_describer/ui/settings_dialog.py:59
+msgid "General (Default)"
+msgstr "Général (par défaut)"
+
+#: audio_describer/ui/settings_dialog.py:60
+msgid "Actions and instructions"
+msgstr "Actions et instructions"
+
+#: audio_describer/ui/settings_dialog.py:60
+msgid "Settings and atmosphere"
+msgstr "Décors et ambiance"
+
+#: audio_describer/ui/settings_dialog.py:61
+msgid "On-screen text"
+msgstr "Texte à l'écran"
+
+#: audio_describer/ui/settings_dialog.py:69
+msgid "1 FPS (Minimal cost, for static content)"
+msgstr "1 IPS (coût minimal, pour contenu statique)"
+
+#: audio_describer/ui/settings_dialog.py:150
+msgid "Mention colours"
+msgstr "Mentionner les couleurs"
+
+#: audio_describer/ui/settings_dialog.py:158
+msgid "&Refresh model list"
+msgstr "&Actualiser la liste des modèles"
+
+#: audio_describer/ui/settings_dialog.py:167
+msgid ""
+"Send Video Only (No Audio) to AI - not recommended: the AI can no longer "
+"avoid dialogue"
+msgstr ""
+"Envoyer la vidéo sans le son à l'IA (déconseillé : l'IA ne peut plus éviter "
+"les dialogues)"
+
+#: audio_describer/ui/settings_dialog.py:175
+msgid "Detect pauses in the soundtrack before describing (recommended)"
+msgstr "Détecter les pauses de la bande son avant de décrire (recommandé)"
+
+#: audio_describer/ui/settings_dialog.py:53
+msgid "Same as interface"
+msgstr "Comme l'interface"
+
+#: audio_describer/ui/settings_dialog.py:81
+msgid "Windows OneCore (Modern Voices)"
+msgstr "Windows OneCore (voix modernes)"
+
+#: audio_describer/ui/settings_dialog.py:138
+msgid "Description Language:"
+msgstr "Langue des descriptions :"
+
+#: audio_describer/ui/settings_dialog.py:141
+msgid "Description Style:"
+msgstr "Style de description :"
+
+#: audio_describer/ui/settings_dialog.py:144
+msgid "Focus On:"
+msgstr "Mettre l'accent sur :"
+
+#: audio_describer/ui/settings_dialog.py:147
+msgid "Maximum Words per Description (0 = fit the pause):"
+msgstr "Nombre maximal de mots par description (0 = selon la pause) :"
+
+#: audio_describer/ui/settings_dialog.py:161
+msgid "Thinking Level (Gemini 3 and later):"
+msgstr "Niveau de réflexion (Gemini 3 et suivants) :"
+
+#: audio_describer/ui/settings_dialog.py:224
+msgid ""
+"Original audio lowered during descriptions (-dB, player and export; 6 to 12 "
+"recommended):"
+msgstr ""
+"Son d'origine baissé pendant les descriptions (-dB, lecteur et export ; 6 à "
+"12 recommandé) :"
+
+#: audio_describer/ui/settings_dialog.py:339
+msgid "Windows OneCore Settings"
+msgstr "Paramètres Windows OneCore"
+
+#: audio_describer/ui/settings_dialog.py:471
+msgid "%d models available."
+msgstr "%d modèles disponibles."
+
+#: audio_describer/ui/settings_dialog.py:153
+msgid "Gemini Model (empty = default %s):"
+msgstr "Modèle Gemini (vide = %s par défaut) :"
+
+#: audio_describer/ui/settings_dialog.py:466
+msgid "Could not load the model list: %s"
+msgstr "Impossible de charger la liste des modèles : %s"
+
+#: audio_describer/ui/settings_dialog.py:466
+msgid "no models returned"
+msgstr "aucun modèle renvoyé"
+
+#: audio_describer/utils/update_checker.py:101
+msgid ""
+"The downloaded update is damaged or was modified (checksum mismatch). It was"
+" deleted."
+msgstr ""
+"La mise à jour téléchargée est endommagée ou a été modifiée (somme de "
+"contrôle différente). Elle a été supprimée."
+
+#: audio_describer/utils/update_checker.py:116
+msgid ""
+"The updater component seems to be missing. The application will now attempt "
+"to download the necessary updater to proceed."
+msgstr ""
+"Le composant de mise à jour semble manquant. L'application va tenter de le "
+"télécharger pour continuer."
+
+#: audio_describer/utils/update_checker.py:117
+msgid "Updater Missing"
+msgstr "Composant de mise à jour manquant"
+
+#: audio_describer/utils/update_checker.py:138
+msgid ""
+"Could not download the required updater component. The update cannot proceed.\n"
+"\n"
+"Please try again later or contact support.\n"
+"\n"
+"Error: {}"
+msgstr ""
+"Impossible de télécharger le composant de mise à jour. La mise à jour ne peut pas continuer.\n"
+"\n"
+"Réessayez plus tard ou contactez le support.\n"
+"\n"
+"Erreur : {}"
+
+#: audio_describer/core/audio_describer.py:348
+msgid ""
+"Detected content: %(genre)s, for %(audience)s, spoken language %(lang)s. "
+"Choose a preset or a focus to change it."
+msgstr ""
+"Contenu détecté : %(genre)s, pour %(audience)s, langue parlée %(lang)s. "
+"Choisissez un préréglage ou un accent pour le changer."
+
+#: audio_describer/ui/settings_dialog.py:227
+msgid "Audio description voice level in exports (dB, 0 = unchanged):"
+msgstr ""
+"Niveau de la voix d'audiodescription dans les exports (dB, 0 = inchangé) :"
+
+#: audio_describer/core/audio_describer.py:372
+msgid "Checking the descriptions for inconsistencies..."
+msgstr "Vérification des descriptions (incohérences)..."
+
+#: audio_describer/core/audio_describer.py:393
+msgid "Quality check: %d descriptions marked uncertain."
+msgstr "Contrôle qualité : %d descriptions marquées incertaines."
+
+#: audio_describer/ui/edit_description_dialog.py:171
+msgid "Rename Character"
+msgstr "Renommer le personnage"
+
+#: audio_describer/ui/edit_description_dialog.py:184
+msgid "uncertain, check with Ask More"
+msgstr "incertaine, à vérifier avec une question"
+
+#: audio_describer/ui/edit_description_dialog.py:155
+msgid "Select a character first."
+msgstr "Sélectionnez d'abord un personnage."
+
+#: audio_describer/ui/edit_description_dialog.py:159
+msgid "New name for this character:"
+msgstr "Nouveau nom pour ce personnage :"
+
+#: audio_describer/ui/edit_description_dialog.py:171
+msgid "Character renamed. %d descriptions updated."
+msgstr "Personnage renommé. %d descriptions mises à jour."
+
+#: audio_describer/ui/edit_description_dialog.py:81
+msgid "&Rename Character..."
+msgstr "&Renommer le personnage..."
+
+#: audio_describer/ui/player_window.py:128
+msgid ""
+"Player shortcuts: Space, play or pause. Left and Right arrows, back or "
+"forward 5 seconds; with Control, 30 seconds. Alt plus Left or Right, "
+"previous or next description. Up and Down arrows, video volume. R, repeat "
+"the last description. T, announce the time. A, turn audio description on or "
+"off. D, change description density. M, change the audio description mode: in"
+" the pauses, pause the video when needed, or on demand. In on-demand mode, "
+"Enter describes the current moment and Shift+Enter gives more detail. I, "
+"audio introduction: the main characters and places, without spoilers. V, "
+"quality report. Q, ask more. S, explore scene. Control plus S, save project."
+" F1, this help."
+msgstr ""
+"Raccourcis du lecteur : Espace, lecture ou pause. Flèches gauche et droite, "
+"reculer ou avancer de 5 secondes ; avec Contrôle, 30 secondes. Alt plus "
+"gauche ou droite, description précédente ou suivante. Flèches haut et bas, "
+"volume de la vidéo. R, répéter la dernière description. T, annoncer le "
+"temps. A, activer ou couper l'audiodescription. D, changer la densité des "
+"descriptions. M, changer le mode d'audiodescription : dans les pauses, pause"
+" de la vidéo si nécessaire, ou à la demande. En mode à la demande, Entrée "
+"décrit le moment présent et Maj+Entrée donne plus de détails. I, "
+"introduction audio : les personnages et lieux principaux, sans divulgâcher. "
+"V, rapport de qualité. Q, poser une question. S, explorer la scène. Contrôle"
+" plus S, enregistrer le projet. F1, cette aide."
+
+#: audio_describer/ui/player_window.py:577
+msgid "Writing the audio introduction. It will be read when ready."
+msgstr ""
+"Rédaction de l'introduction audio. Elle sera lue dès qu'elle sera prête."
+
+#: audio_describer/ui/player_window.py:605
+msgid ""
+"%(count)d descriptions. %(within).0f%% within their word budget. %(overlap)d"
+" over sound or dialogue, %(uncertain)d uncertain. Average %(wps).1f words "
+"per second. Longest stretch without description: %(gap)s."
+msgstr ""
+"%(count)d descriptions. %(within).0f%% respectent leur budget de mots. "
+"%(overlap)d sur du son ou un dialogue, %(uncertain)d incertaines. En moyenne"
+" %(wps).1f mots par seconde. Plus long passage sans description : %(gap)s."
+
+#: audio_describer/ui/player_window.py:571
+msgid "The audio introduction is being written..."
+msgstr "L'introduction audio est en cours de rédaction..."
+
+#: audio_describer/ui/player_window.py:593
+msgid "Could not write the audio introduction: %s"
+msgstr "Impossible de rédiger l'introduction audio : %s"
+
+#: audio_describer/ui/player_window.py:593
+msgid "empty answer"
+msgstr "réponse vide"
+
+#: audio_describer/ui/settings_dialog.py:63
+msgid "Describe only what is visible"
+msgstr "Décrire seulement ce qui est visible"
+
+#: audio_describer/ui/settings_dialog.py:64
+msgid "Describe and name (Default)"
+msgstr "Décrire et nommer (par défaut)"
+
+#: audio_describer/ui/settings_dialog.py:65
+msgid "Describe, name and briefly explain"
+msgstr "Décrire, nommer et expliquer brièvement"
+
+#: audio_describer/ui/settings_dialog.py:157
+msgid "Check the descriptions with a second AI pass (marks uncertain ones)"
+msgstr ""
+"Vérifier les descriptions par une seconde passe de l'IA (marque celles qui "
+"sont incertaines)"
+
+#: audio_describer/ui/settings_dialog.py:154
+msgid "Explicitation:"
+msgstr "Explicitation :"
+
+#: audio_describer/ui/scene_explorer_dialog.py:33
+msgid "in the centre"
+msgstr "au centre"
+
+#: audio_describer/ui/scene_explorer_dialog.py:36
+msgid "at %d o'clock"
+msgstr "à %d heures"
+
+#: audio_describer/ui/scene_explorer_dialog.py:35
+msgid "at %d o'clock, near the edge"
+msgstr "à %d heures, près du bord"
+
+#: audio_describer/ui/scene_explorer_dialog.py:49
+msgid "&Scene:"
+msgstr "&Scène :"
+
+#: audio_describer/ui/scene_explorer_dialog.py:53
+msgid "&Objects (12 o'clock is the top of the picture):"
+msgstr "&Objets (12 heures est le haut de l'image) :"
+
+#: audio_describer/ui/scene_explorer_dialog.py:57
+msgid "&Details:"
+msgstr "&Détails :"
+
+#: audio_describer/ui/player_window.py:128
+msgid ""
+"Player shortcuts: Space, play or pause. Left and Right arrows, back or "
+"forward 5 seconds; with Control, 30 seconds. Alt plus Left or Right, "
+"previous or next description. Up and Down arrows, video volume. R, repeat "
+"the last description. T, announce the time. A, turn audio description on or "
+"off. D, change description density. M, change the audio description mode: in"
+" the pauses, pause the video when needed, or on demand. In on-demand mode, "
+"Enter describes the current moment and Shift+Enter gives more detail. I, "
+"audio introduction: the main characters and places, without spoilers. V, "
+"quality report. W, what is on screen now; ask follow-up questions in the "
+"window that opens. Q, ask more. S, explore scene. Control plus S, save "
+"project. F1, this help."
+msgstr ""
+"Raccourcis du lecteur : Espace, lecture ou pause. Flèches gauche et droite, "
+"reculer ou avancer de 5 secondes ; avec Contrôle, 30 secondes. Alt plus "
+"gauche ou droite, description précédente ou suivante. Flèches haut et bas, "
+"volume de la vidéo. R, répéter la dernière description. T, annoncer le "
+"temps. A, activer ou couper l'audiodescription. D, changer la densité des "
+"descriptions. M, changer le mode d'audiodescription : dans les pauses, pause"
+" de la vidéo si nécessaire, ou à la demande. En mode à la demande, Entrée "
+"décrit le moment présent et Maj+Entrée donne plus de détails. I, "
+"introduction audio : les personnages et lieux principaux, sans divulgâcher. "
+"V, rapport de qualité. W, ce qu'il y a à l'écran maintenant ; posez d'autres"
+" questions dans la fenêtre qui s'ouvre. Q, poser une question. S, explorer "
+"la scène. Contrôle plus S, enregistrer le projet. F1, cette aide."
+
+#: audio_describer/ui/player_window.py:611
+msgid ""
+"What is on screen right now? Describe it briefly, including any visible "
+"text."
+msgstr ""
+"Qu'y a-t-il à l'écran en ce moment ? Décris-le brièvement, y compris le "
+"texte visible."
+
+#: audio_describer/ui/settings_dialog.py:240
+msgid "In exports, read on-screen text in a second, lower voice"
+msgstr ""
+"Dans les exports, lire le texte à l'écran avec une seconde voix, plus grave"
+
+#: audio_describer/ui/main_window.py:64
+msgid "Describe an &Image or PDF...\tCtrl+I"
+msgstr "Décrire une &image ou un PDF...\tCtrl+I"
+
+#: audio_describer/ui/main_window.py:64
+msgid "Audio description of a picture, a screenshot or a PDF document"
+msgstr ""
+"Audiodescription d'une photo, d'une capture d'écran ou d'un document PDF"
+
+#: audio_describer/ui/main_window.py:65
+msgid "Describe My &Screen\tCtrl+Alt+Shift+D"
+msgstr "Décrire mon &écran\tCtrl+Alt+Shift+D"
+
+#: audio_describer/ui/main_window.py:65
+msgid ""
+"Describe what is on the screen now; the shortcut also works from any other "
+"application"
+msgstr ""
+"Décrit ce qu'il y a à l'écran maintenant ; le raccourci fonctionne aussi "
+"depuis n'importe quelle autre application"
+
+#: audio_describer/ui/main_window.py:339
+msgid "Describing..."
+msgstr "Description en cours..."
+
+#: audio_describer/ui/main_window.py:312
+msgid "Images and PDF documents"
+msgstr "Images et documents PDF"
+
+#: audio_describer/ui/main_window.py:313
+msgid "Describe an Image or PDF"
+msgstr "Décrire une image ou un PDF"
+
+#: audio_describer/ui/main_window.py:322
+msgid "Still describing, please wait..."
+msgstr "Description toujours en cours, veuillez patienter..."
+
+#: audio_describer/ui/main_window.py:332
+msgid "Could not capture the screen."
+msgstr "Impossible de capturer l'écran."
+
+#: audio_describer/ui/main_window.py:359
+msgid "Description failed: %s"
+msgstr "Échec de la description : %s"
+
+#: audio_describer/ui/text_result_dialog.py:16
+msgid "&Copy"
+msgstr "&Copier"
+
+#: audio_describer/ui/text_result_dialog.py:9
+msgid "Description: %s"
+msgstr "Description : %s"
+
+#: audio_describer/ui/text_result_dialog.py:12
+msgid "&Description:"
+msgstr "&Description :"
+
+#: audio_describer/ui/edit_description_dialog.py:185
+msgid "translated dialogue"
+msgstr "dialogue traduit"
+
+#: audio_describer/ui/main_window.py:66
+msgid "&Live Screen Description\tCtrl+Alt+Shift+L"
+msgstr "Description de l'écran en &continu\tCtrl+Alt+Shift+L"
+
+#: audio_describer/ui/main_window.py:66
+msgid ""
+"Turn on or off: describe the screen each time it changes; the shortcut also "
+"works from any other application"
+msgstr ""
+"Activer ou désactiver : décrit l'écran à chaque changement ; le raccourci "
+"fonctionne aussi depuis n'importe quelle autre application"
+
+#: audio_describer/ui/main_window.py:364
+msgid ""
+"Live screen description on. Each change of the screen is described; this "
+"uses your API quota."
+msgstr ""
+"Description de l'écran en continu activée. Chaque changement de l'écran est "
+"décrit ; cela consomme votre quota d'API."
+
+#: audio_describer/ui/main_window.py:360
+msgid "Live screen description off."
+msgstr "Description de l'écran en continu désactivée."
+
+#: audio_describer/ui/settings_dialog.py:157
+msgid "Translate dialogue spoken in another language (audio subtitles)"
+msgstr "Traduire les dialogues dans une autre langue (sous-titres audio)"
+
+#: audio_describer/core/audio_describer.py:499
+msgid ""
+"The local model can only describe images; switch to Gemini in Settings for "
+"PDF documents."
+msgstr ""
+"Le modèle local ne peut décrire que des images ; pour les documents PDF, "
+"choisissez Gemini dans les paramètres."
+
+#: audio_describer/core/audio_describer.py:485
+msgid "Ollama refused the request (model '%(model)s'): %(detail)s"
+msgstr "Ollama a refusé la requête (modèle '%(model)s') : %(detail)s"
+
+#: audio_describer/core/audio_describer.py:487
+msgid ""
+"Ollama is not running on this computer. Install it from ollama.com, then "
+"run: ollama pull %s"
+msgstr ""
+"Ollama n'est pas lancé sur cet ordinateur. Installez-le depuis ollama.com, "
+"puis exécutez : ollama pull %s"
+
+#: audio_describer/models/evaluation_model.py:45
+msgid "not rated"
+msgstr "non noté"
+
+#: audio_describer/models/evaluation_model.py:45
+msgid "1, very poor"
+msgstr "1, très insuffisant"
+
+#: audio_describer/models/evaluation_model.py:45
+msgid "2, poor"
+msgstr "2, insuffisant"
+
+#: audio_describer/models/evaluation_model.py:45
+msgid "3, fair"
+msgstr "3, moyen"
+
+#: audio_describer/models/evaluation_model.py:45
+msgid "4, good"
+msgstr "4, bon"
+
+#: audio_describer/models/evaluation_model.py:45
+msgid "5, very good"
+msgstr "5, très bon"
+
+#: audio_describer/models/evaluation_model.py:46
+msgid "Global listening, without the picture"
+msgstr "Écoute globale, sans l'image"
+
+#: audio_describer/models/evaluation_model.py:46
+msgid "Analysis, with the picture"
+msgstr "Analyse, avec l'image"
+
+#: audio_describer/models/evaluation_model.py:13
+msgid ""
+"Without the picture, are the action, the characters, the place and the time "
+"understood?"
+msgstr ""
+"Sans l'image, comprend-on l'action, les personnages, le lieu et l'époque ?"
+
+#: audio_describer/models/evaluation_model.py:14
+msgid "Does the description avoid covering dialogue?"
+msgstr "La description évite-t-elle de couvrir les dialogues ?"
+
+#: audio_describer/models/evaluation_model.py:15
+msgid "Does it describe the images rather than explain the plot?"
+msgstr "Décrit-elle les images plutôt que d'expliquer l'intrigue ?"
+
+#: audio_describer/models/evaluation_model.py:16
+msgid "Is it neither too sparse nor too present?"
+msgstr "N'est-elle ni trop pauvre ni trop présente ?"
+
+#: audio_describer/models/evaluation_model.py:17
+msgid "Does it stay inside the fiction (no actors, no filming jargon)?"
+msgstr "Reste-t-elle dans la fiction (ni acteurs, ni jargon de tournage) ?"
+
+#: audio_describer/models/evaluation_model.py:18
+msgid "Is the language correct and clear?"
+msgstr "La langue est-elle correcte et claire ?"
+
+#: audio_describer/models/evaluation_model.py:19
+msgid "Are the voice and the pace pleasant and suitable?"
+msgstr "La voix et le débit sont-ils agréables et adaptés ?"
+
+#: audio_describer/models/evaluation_model.py:20
+msgid "With the picture: is it free of factual errors and omissions?"
+msgstr "Avec l'image : est-elle exempte d'erreurs factuelles et d'omissions ?"
+
+#: audio_describer/models/evaluation_model.py:21
+msgid "Are looks, faces and gestures interpreted correctly?"
+msgstr "Les regards, les visages et les gestes sont-ils bien interprétés ?"
+
+#: audio_describer/models/evaluation_model.py:22
+msgid "Are the chronology and the rhythm of the film respected?"
+msgstr "La chronologie et le rythme du film sont-ils respectés ?"
+
+#: audio_describer/models/evaluation_model.py:23
+msgid "Is each description well placed relative to sound effects and music?"
+msgstr ""
+"Chaque description est-elle bien placée par rapport aux bruitages et à la "
+"musique ?"
+
+#: audio_describer/models/evaluation_model.py:24
+msgid "Is on-screen text read?"
+msgstr "Le texte à l'écran est-il lu ?"
+
+#: audio_describer/models/evaluation_model.py:25
+msgid "Does the style match the film?"
+msgstr "Le style correspond-il au film ?"
+
+#: audio_describer/models/evaluation_model.py:35
+msgid "measured: %(n)d of %(total)d descriptions over sound or dialogue"
+msgstr ""
+"mesuré : %(n)d descriptions sur %(total)d empiètent sur le son ou les "
+"dialogues"
+
+#: audio_describer/models/evaluation_model.py:36
+msgid ""
+"measured: %(total)d descriptions, longest stretch without description "
+"%(gap)s"
+msgstr ""
+"mesuré : %(total)d descriptions, plus long passage sans description %(gap)s"
+
+#: audio_describer/models/evaluation_model.py:37
+msgid "measured: %(wps).1f words per second (target 2.7 or less)"
+msgstr "mesuré : %(wps).1f mots par seconde (objectif 2,7 ou moins)"
+
+#: audio_describer/models/evaluation_model.py:38
+msgid "measured: %d descriptions marked uncertain by the AI check"
+msgstr ""
+"mesuré : %d descriptions jugées incertaines par la vérification de l'IA"
+
+#: audio_describer/models/evaluation_model.py:39
+msgid "measured: %d descriptions read on-screen text"
+msgstr "mesuré : %d descriptions lisent du texte à l'écran"
+
+#: audio_describer/models/evaluation_model.py:47
+msgid "Audio description evaluation (CSA 2020 grid): %s"
+msgstr "Évaluation de l'audiodescription (grille CSA 2020) : %s"
+
+#: audio_describer/models/evaluation_model.py:58
+msgid "Comments:"
+msgstr "Commentaires :"
+
+#: audio_describer/ui/evaluation_dialog.py:12
+msgid "Evaluate this Audio Description"
+msgstr "Évaluer cette audiodescription"
+
+#: audio_describer/ui/evaluation_dialog.py:46
+msgid "Save &Report..."
+msgstr "Enregistrer le &rapport..."
+
+#: audio_describer/ui/evaluation_dialog.py:65
+msgid "Save Evaluation Report"
+msgstr "Enregistrer le rapport d'évaluation"
+
+#: audio_describer/ui/evaluation_dialog.py:36
+msgid "&Comments:"
+msgstr "&Commentaires :"
+
+#: audio_describer/ui/player_window.py:128
+msgid ""
+"Player shortcuts: Space, play or pause. Left and Right arrows, back or "
+"forward 5 seconds; with Control, 30 seconds. Alt plus Left or Right, "
+"previous or next description. Up and Down arrows, video volume. R, repeat "
+"the last description. T, announce the time. A, turn audio description on or "
+"off. D, change description density. M, change the audio description mode: in"
+" the pauses, pause the video when needed, or on demand. In on-demand mode, "
+"Enter describes the current moment and Shift+Enter gives more detail. I, "
+"audio introduction: the main characters and places, without spoilers. V, "
+"quality report. W, what is on screen now; ask follow-up questions in the "
+"window that opens. E, evaluate this audio description. Q, ask more. S, "
+"explore scene. Control plus S, save project. F1, this help."
+msgstr ""
+"Raccourcis du lecteur : Espace, lecture ou pause. Flèches gauche et droite, "
+"reculer ou avancer de 5 secondes ; avec Contrôle, 30 secondes. Alt plus "
+"gauche ou droite, description précédente ou suivante. Flèches haut et bas, "
+"volume de la vidéo. R, répéter la dernière description. T, annoncer le "
+"temps. A, activer ou couper l'audiodescription. D, changer la densité des "
+"descriptions. M, changer le mode d'audiodescription : dans les pauses, pause"
+" de la vidéo si nécessaire, ou à la demande. En mode à la demande, Entrée "
+"décrit le moment présent et Maj+Entrée donne plus de détails. I, "
+"introduction audio : les personnages et lieux principaux, sans divulgâcher. "
+"V, rapport de qualité. W, ce qu'il y a à l'écran maintenant ; posez d'autres"
+" questions dans la fenêtre qui s'ouvre. E, évaluer cette audiodescription. "
+"Q, poser une question. S, explorer la scène. Contrôle plus S, enregistrer le"
+" projet. F1, cette aide."
+
+#: audio_describer/ui/settings_dialog.py:157
+msgid "Gemini (online)"
+msgstr "Gemini (en ligne)"
+
+#: audio_describer/ui/settings_dialog.py:158
+msgid "Local model with Ollama (private, offline, lower quality)"
+msgstr "Modèle local avec Ollama (privé, hors ligne, qualité moindre)"
+
+#: audio_describer/ui/settings_dialog.py:159
+msgid "Images and screen described by:"
+msgstr "Images et écran décrits par :"
+
+#: audio_describer/ui/settings_dialog.py:162
+msgid "Ollama vision model:"
+msgstr "Modèle de vision Ollama :"
+
+#: audio_describer/core/audio_describer.py:427
+msgid ""
+"Quality check: %(uncertain)d descriptions uncertain, %(style)d with style "
+"issues."
+msgstr ""
+"Contrôle qualité : %(uncertain)d descriptions incertaines, %(style)d avec "
+"des problèmes de style."
+
+#: audio_describer/core/audio_describer.py:245
+msgid "Detecting shot changes..."
+msgstr "Détection des changements de plan..."
+
+#: audio_describer/core/audio_describer.py:234
+msgid ""
+"About %(tokens)s tokens will be sent to %(model)s for %(duration)s of video."
+" Press Escape to cancel."
+msgstr ""
+"Environ %(tokens)s jetons seront envoyés à %(model)s pour %(duration)s de "
+"vidéo. Appuyez sur Échap pour annuler."
+
+#: audio_describer/core/audio_describer.py:542
+msgid "Still working, %s elapsed."
+msgstr "Toujours en cours, temps écoulé : %s."
+
+#: audio_describer/core/script_export.py:40
+msgid "validated"
+msgstr "validée"
+
+#: audio_describer/core/script_export.py:40
+msgid "to review"
+msgstr "à vérifier"
+
+#: audio_describer/core/script_export.py:45
+msgid "In"
+msgstr "Début"
+
+#: audio_describer/core/script_export.py:45
+msgid "Out"
+msgstr "Fin"
+
+#: audio_describer/core/script_export.py:45
+msgid "Level"
+msgstr "Niveau"
+
+#: audio_describer/core/script_export.py:45
+msgid "Status"
+msgstr "Statut"
+
+#: audio_describer/core/script_export.py:45
+msgid "Notes"
+msgstr "Notes"
+
+#: audio_describer/core/script_export.py:92
+msgid "[Description]"
+msgstr "[Description]"
+
+#: audio_describer/core/script_export.py:93
+msgid "Voice"
+msgstr "Voix"
+
+#: audio_describer/models/evaluation_model.py:40
+msgid "measured: %d descriptions interpret instead of describing"
+msgstr "mesuré : %d descriptions interprètent au lieu de décrire"
+
+#: audio_describer/models/evaluation_model.py:41
+msgid "measured: %d descriptions leave the fiction"
+msgstr "mesuré : %d descriptions sortent de la fiction"
+
+#: audio_describer/models/evaluation_model.py:42
+msgid "measured: %d descriptions not in the present tense"
+msgstr "mesuré : %d descriptions ne sont pas au présent"
+
+#: audio_describer/ui/edit_description_dialog.py:193
+msgid "style: not in the present tense"
+msgstr "style : pas au présent"
+
+#: audio_describer/ui/edit_description_dialog.py:194
+msgid "style: interprets instead of describing"
+msgstr "style : interprète au lieu de décrire"
+
+#: audio_describer/ui/edit_description_dialog.py:195
+msgid "style: leaves the fiction (actors, camera)"
+msgstr "style : sort de la fiction (acteurs, caméra)"
+
+#: audio_describer/ui/edit_description_dialog.py:54
+msgid "Review status:"
+msgstr "Statut de vérification :"
+
+#: audio_describer/ui/edit_description_dialog.py:55
+msgid "To review"
+msgstr "À vérifier"
+
+#: audio_describer/ui/edit_description_dialog.py:55
+msgid "Validated"
+msgstr "Validée"
+
+#: audio_describer/ui/edit_description_dialog.py:57
+msgid "Reviewer notes:"
+msgstr "Notes du relecteur :"
+
+#: audio_describer/ui/edit_description_dialog.py:201
+msgid "Validated. "
+msgstr "Validée. "
+
+#: audio_describer/ui/export_options_dialog.py:17
+msgid ""
+"Video with a separate audio description track (MP4, for most players and "
+"phones)"
+msgstr ""
+"Vidéo avec une piste d'audiodescription séparée (MP4, pour la plupart des "
+"lecteurs et téléphones)"
+
+#: audio_describer/ui/export_options_dialog.py:23
+msgid ""
+"Audio description script, W3C TTML DAPT (.ttml, for professional tools)"
+msgstr ""
+"Script d'audiodescription, W3C TTML DAPT (.ttml, pour les outils "
+"professionnels)"
+
+#: audio_describer/ui/export_options_dialog.py:24
+msgid ""
+"Production script for review (Word .docx: timecodes, text, status, notes)"
+msgstr ""
+"Script de production à relire (Word .docx : codes temporels, texte, statut, "
+"notes)"
+
+#: audio_describer/ui/export_options_dialog.py:25
+msgid ""
+"Full script: transcribed dialogue and descriptions (.txt, for deafblind "
+"readers; uses the AI)"
+msgstr ""
+"Script complet : dialogues transcrits et descriptions (.txt, pour les "
+"lecteurs sourdaveugles ; utilise l'IA)"
+
+#: audio_describer/ui/player_export.py:105
+msgid "Transcribing the dialogue, this can take a few minutes..."
+msgstr "Transcription des dialogues, cela peut prendre quelques minutes..."
+
+#: audio_describer/ui/player_export.py:73
+msgid "TTML DAPT scripts (*.ttml)|*.ttml"
+msgstr "Scripts TTML DAPT (*.ttml)|*.ttml"
+
+#: audio_describer/ui/player_export.py:74
+msgid "Word documents (*.docx)|*.docx"
+msgstr "Documents Word (*.docx)|*.docx"
+
+#: audio_describer/ui/player_export.py:129
+msgid "MP4 video (*.mp4)|*.mp4"
+msgstr "Vidéo MP4 (*.mp4)|*.mp4"
+
+#: audio_describer/ui/player_export.py:120
+msgid "Export"
+msgstr "Exporter"
+
+#: audio_describer/ui/player_window.py:131
+msgid ""
+"Player shortcuts: Space, play or pause. Left and Right arrows, back or "
+"forward 5 seconds; with Control, 30 seconds. Alt plus Left or Right, "
+"previous or next description. Up and Down arrows, video volume; with Shift, "
+"how much the video is lowered during descriptions. R, repeat the last "
+"description. T, announce the time. A, turn audio description on or off. D, "
+"change description density. M, change the audio description mode: in the "
+"pauses, pause the video when needed, or on demand. In on-demand mode, Enter "
+"describes the current moment and Shift+Enter gives more detail. I, audio "
+"introduction: the main characters and places, without spoilers. V, quality "
+"report. W, what is on screen now; ask follow-up questions in the window that"
+" opens. E, evaluate this audio description. Q, ask more. S, explore scene. "
+"In braille-only output, Enter resumes the video after each description. "
+"Control plus S, save project. F1 or question mark, this help."
+msgstr ""
+"Raccourcis du lecteur : Espace, lecture ou pause. Flèches gauche et droite, "
+"reculer ou avancer de 5 secondes ; avec Contrôle, 30 secondes. Alt plus "
+"gauche ou droite, description précédente ou suivante. Flèches haut et bas, "
+"volume de la vidéo ; avec Maj, de combien la vidéo est baissée pendant les "
+"descriptions. R, répéter la dernière description. T, annoncer le temps. A, "
+"activer ou couper l'audiodescription. D, changer la densité des "
+"descriptions. M, changer le mode d'audiodescription : dans les pauses, pause"
+" de la vidéo si nécessaire, ou à la demande. En mode à la demande, Entrée "
+"décrit le moment présent et Maj+Entrée donne plus de détails. I, "
+"introduction audio : les personnages et lieux principaux, sans divulgâcher. "
+"V, rapport de qualité. W, ce qui est à l'écran maintenant ; posez d'autres "
+"questions dans la fenêtre qui s'ouvre. E, évaluer cette audiodescription. Q,"
+" poser une question. S, explorer la scène. En sortie braille seul, Entrée "
+"reprend la vidéo après chaque description. Contrôle plus S, enregistrer le "
+"projet. F1 ou point d'interrogation, cette aide."
+
+#: audio_describer/ui/player_window.py:694
+msgid ""
+"%(count)d descriptions. %(within).0f%% within their word budget. %(overlap)d"
+" over sound or dialogue, %(uncertain)d uncertain, %(style)d with style "
+"issues. Average %(wps).1f words per second. Longest stretch without "
+"description: %(gap)s."
+msgstr ""
+"%(count)d descriptions. %(within).0f%% respectent leur budget de mots. "
+"%(overlap)d sur du son ou un dialogue, %(uncertain)d incertaines, %(style)d "
+"avec des problèmes de style. En moyenne %(wps).1f mots par seconde. Plus "
+"long passage sans description : %(gap)s."
+
+#: audio_describer/ui/player_window.py:503
+msgid "Video not lowered during descriptions."
+msgstr "Vidéo non baissée pendant les descriptions."
+
+#: audio_describer/ui/player_window.py:502
+msgid "Video lowered by %d dB during descriptions."
+msgstr "Vidéo baissée de %d dB pendant les descriptions."
+
+#: audio_describer/ui/settings_dialog.py:253
+msgid "Screen reader (speech and braille)"
+msgstr "Lecteur d'écran (parole et braille)"
+
+#: audio_describer/ui/settings_dialog.py:254
+msgid "App voice above, prepared in advance (exact timing)"
+msgstr "Voix de l'application ci-dessus, préparée à l'avance (minutage exact)"
+
+#: audio_describer/ui/settings_dialog.py:255
+msgid "Braille only, the video waits for Enter"
+msgstr "Braille seul, la vidéo attend Entrée"
+
+#: audio_describer/ui/settings_dialog.py:259
+msgid "Also show descriptions in large text on the video"
+msgstr "Afficher aussi les descriptions en gros caractères sur la vidéo"
+
+#: audio_describer/ui/settings_dialog.py:264
+msgid "Yellow"
+msgstr "Jaune"
+
+#: audio_describer/ui/settings_dialog.py:264
+msgid "White"
+msgstr "Blanc"
+
+#: audio_describer/ui/settings_dialog.py:264
+msgid "Cyan"
+msgstr "Cyan"
+
+#: audio_describer/ui/settings_dialog.py:256
+msgid "Descriptions in the player:"
+msgstr "Descriptions dans le lecteur :"
+
+#: audio_describer/ui/settings_dialog.py:261
+msgid "Text size on the video:"
+msgstr "Taille du texte sur la vidéo :"
+
+#: audio_describer/ui/settings_dialog.py:265
+msgid "Text colour on the video:"
+msgstr "Couleur du texte sur la vidéo :"
+
+#: audio_describer/ui/edit_description_dialog.py:75
+msgid "C&haracters..."
+msgstr "&Personnages..."
+
+#: audio_describer/ui/glossary_dialog.py:19
+msgid "&Characters kept consistent across the video:"
+msgstr "&Personnages gardés cohérents dans toute la vidéo :"
+
+#: audio_describer/ui/glossary_dialog.py:66
+msgid "ID and description are required."
+msgstr "L'identifiant et la description sont obligatoires."
+
+#: audio_describer/ui/glossary_dialog.py:68
+msgid "Another character already uses this ID."
+msgstr "Un autre personnage utilise déjà cet identifiant."
+
+#: audio_describer/ui/glossary_dialog.py:79
+msgid "Add Character"
+msgstr "Ajouter un personnage"
+
+#: audio_describer/ui/glossary_dialog.py:89
+#: audio_describer/ui/glossary_dialog.py:100
+msgid "Edit Character"
+msgstr "Modifier le personnage"
+
+#: audio_describer/ui/glossary_dialog.py:107
+msgid "Delete this character from the glossary?"
+msgstr "Supprimer ce personnage du glossaire ?"
+
+#: audio_describer/ui/glossary_dialog.py:124
+msgid "&ID:"
+msgstr "&Identifiant :"
+
+#: audio_describer/ui/glossary_dialog.py:127
+msgid "&Name (leave empty if not revealed yet):"
+msgstr "&Nom (laisser vide s'il n'est pas encore révélé) :"
+
+#: audio_describer/ui/glossary_dialog.py:130
+msgid "&Description (how to recognise them):"
+msgstr "&Description (comment le reconnaître) :"
+
+#: audio_describer/ui/player_vqa.py:65
+msgid "AI processing could not be completed."
+msgstr "Le traitement par l'IA n'a pas pu aboutir."
+
+#: audio_describer/ui/player_vqa.py:74
+msgid "No video context available."
+msgstr "Aucun extrait vidéo disponible."
+
+#: audio_describer/ui/player_vqa.py:86
+#, python-format
+msgid "FFmpeg failed to extract segment: %s"
+msgstr "FFmpeg n'a pas pu extraire le segment : %s"
+
+#: audio_describer/ui/player_vqa.py:138
+#, python-brace-format
+msgid "Extracting {duration}s clip..."
+msgstr "Extraction d'un extrait de {duration} s..."
+
+#: audio_describer/ui/player_vqa.py:145
+msgid "No time remaining in the video to analyze from the selected point."
+msgstr "Il ne reste plus de vidéo à analyser à partir de ce point."
+
+#: audio_describer/ui/player_vqa.py:147
+msgid "Asking AI to analyze the scene... This may take a moment."
+msgstr "L'IA analyse la scène... Cela peut prendre un moment."
+
+#: audio_describer/ui/player_vqa.py:179
+#, python-format
+msgid "FFmpeg failed to extract scene: %s"
+msgstr "FFmpeg n'a pas pu extraire la scène : %s"
+
+#: audio_describer/ui/player_vqa.py:194
+#, python-format
+msgid "Failed to analyze scene: %s"
+msgstr "Échec de l'analyse de la scène : %s"
+
+#: audio_describer/utils/update_checker.py:120
+msgid ""
+"The update is not signed by the Omni Describer team (missing or invalid "
+"signature). It was deleted. Download the new version from the official site "
+"instead."
+msgstr ""
+"Cette mise à jour n'est pas signée par l'équipe Omni Describer (signature "
+"absente ou invalide). Elle a été supprimée. Téléchargez plutôt la nouvelle "
+"version depuis le site officiel."
+
+#: audio_describer/ui/edit_description_dialog.py:30
+#, python-format
+msgid "Invalid time \"%s\". Use HH:MM:SS.mmm, MM:SS or seconds."
+msgstr "Heure invalide « %s ». Utilisez HH:MM:SS.mmm, MM:SS ou des secondes."
+
+#: audio_describer/ui/edit_description_dialog.py:32
+#, python-format
+msgid "Times must be within the video duration (0 to %s)."
+msgstr "Les heures doivent être dans la durée de la vidéo (0 à %s)."
+
+#: audio_describer/ui/edit_description_dialog.py:53
+msgid "Descriptions &list:"
+msgstr "&Liste des descriptions :"
+
+#: audio_describer/ui/edit_description_dialog.py:55
+msgid "Start"
+msgstr "Début"
+
+#: audio_describer/ui/edit_description_dialog.py:55
+msgid "End"
+msgstr "Fin"
+
+#: audio_describer/ui/edit_description_dialog.py:55
+msgid "Text"
+msgstr "Texte"
+
+#: audio_describer/ui/edit_description_dialog.py:56
+msgid "Words/s"
+msgstr "Mots/s"
+
+#: audio_describer/ui/edit_description_dialog.py:76
+#: audio_describer/ui/edit_description_dialog.py:423
+msgid "Start (HH:MM:SS.mmm):"
+msgstr "Début (HH:MM:SS.mmm) :"
+
+#: audio_describer/ui/edit_description_dialog.py:76
+msgid "S&tart = player position (Ctrl+[)"
+msgstr "&Début = position du lecteur (Ctrl+[)"
+
+#: audio_describer/ui/edit_description_dialog.py:77
+#: audio_describer/ui/edit_description_dialog.py:426
+msgid "End (HH:MM:SS.mmm):"
+msgstr "Fin (HH:MM:SS.mmm) :"
+
+#: audio_describer/ui/edit_description_dialog.py:77
+msgid "E&nd = player position (Ctrl+])"
+msgstr "&Fin = position du lecteur (Ctrl+])"
+
+#: audio_describer/ui/edit_description_dialog.py:93
+msgid ""
+"F8 / Shift+F8: next / previous description to review. Ctrl+P: play or pause "
+"the video. Alt+Left / Alt+Right: move the video 1 second. Ctrl+Z / Ctrl+Y in"
+" the list: undo / redo."
+msgstr ""
+"F8 / Maj+F8 : description à relire suivante / précédente. Ctrl+P : lecture "
+"ou pause de la vidéo. Alt+Gauche / Alt+Droite : déplacer la vidéo d'une "
+"seconde. Ctrl+Z / Ctrl+Y dans la liste : annuler / rétablir."
+
+#: audio_describer/ui/edit_description_dialog.py:147
+#, python-format
+msgid "Review: %s"
+msgstr "À relire : %s"
+
+#: audio_describer/ui/edit_description_dialog.py:247
+#: audio_describer/ui/edit_description_dialog.py:452
+msgid "The end time must be after the start time."
+msgstr "La fin doit être après le début."
+
+#: audio_describer/ui/edit_description_dialog.py:275
+msgid "No changes to save."
+msgstr "Aucune modification à enregistrer."
+
+#: audio_describer/ui/edit_description_dialog.py:346
+msgid "Nothing to undo."
+msgstr "Rien à annuler."
+
+#: audio_describer/ui/edit_description_dialog.py:346
+msgid "Nothing to redo."
+msgstr "Rien à rétablir."
+
+#: audio_describer/ui/edit_description_dialog.py:360
+msgid "No description left to review."
+msgstr "Plus aucune description à relire."
+
+#: audio_describer/ui/edit_description_dialog.py:388
+msgid "Undone."
+msgstr "Annulé."
+
+#: audio_describer/ui/edit_description_dialog.py:390
+msgid "Redone."
+msgstr "Rétabli."
+
+#: audio_describer/ui/edit_description_dialog.py:398
+msgid "The current description has unsaved changes. Save them before closing?"
+msgstr ""
+"La description en cours a des modifications non enregistrées. Les "
+"enregistrer avant de fermer ?"
+
+#: audio_describer/ui/edit_description_dialog.py:399
+msgid "Unsaved Changes"
+msgstr "Modifications non enregistrées"
+
+#: audio_describer/__app__real.py:127
+msgid ""
+"Welcome to Omni Describer.\n"
+"\n"
+"To describe videos, the app needs a free Gemini API key from Google AI Studio (aistudio.google.com/apikey). Press Yes to open that page and the Settings, then paste the key in the Gemini API Key field and press Test key."
+msgstr ""
+"Bienvenue dans Omni Describer.\n"
+"\n"
+"Pour décrire des vidéos, l'application a besoin d'une clé API Gemini gratuite, à obtenir sur Google AI Studio (aistudio.google.com/apikey). Appuyez sur Oui pour ouvrir cette page et les paramètres, puis collez la clé dans le champ Clé API Gemini et appuyez sur Tester la clé."
+
+#: audio_describer/__app__real.py:130
+msgid "First Start"
+msgstr "Premier démarrage"
+
+#: audio_describer/ui/edit_description_dialog.py:107
+msgid "Hea&r with the export voice (Ctrl+R)"
+msgstr "É&couter avec la voix d'export (Ctrl+R)"
+
+#: audio_describer/ui/edit_description_dialog.py:425
+msgid "The export voice could not be played. Check the voice in Settings."
+msgstr ""
+"Impossible de lire la voix d'export. Vérifiez la voix dans les paramètres."
+
+#: audio_describer/ui/export_options_dialog.py:38
+msgid "Only the descriptions of the current &density, as heard in the player"
+msgstr ""
+"Seulement les descriptions de la &densité actuelle, comme dans le lecteur"
+
+#: audio_describer/ui/export_options_dialog.py:41
+msgid ""
+"E&xtended description: pause the picture when a description is longer than "
+"its pause (the video is re-encoded)"
+msgstr ""
+"Audiodescription é&tendue : mettre l'image en pause quand une description "
+"dépasse sa pause (la vidéo est réencodée)"
+
+#: audio_describer/ui/export_options_dialog.py:43
+msgid "Add a spoken c&redit at the end: audio description generated by AI"
+msgstr ""
+"Ajouter une &mention parlée à la fin : audiodescription générée par IA"
+
+#: audio_describer/ui/main_window.py:65
+msgid "&Recent Projects"
+msgstr "Projets &récents"
+
+#: audio_describer/ui/main_window.py:66
+msgid "Import &Descriptions from SRT or WebVTT..."
+msgstr "Importer des &descriptions depuis SRT ou WebVTT..."
+
+#: audio_describer/ui/main_window.py:66
+msgid ""
+"Open a video with an existing description script to listen to, edit or "
+"export it"
+msgstr ""
+"Ouvrir une vidéo avec un script de descriptions existant pour l'écouter, le "
+"modifier ou l'exporter"
+
+#: audio_describer/ui/main_window.py:305
+msgid "(No recent projects)"
+msgstr "(Aucun projet récent)"
+
+#: audio_describer/ui/main_window.py:311
+msgid "Import Descriptions from SRT or WebVTT"
+msgstr "Importer des descriptions depuis SRT ou WebVTT"
+
+#: audio_describer/ui/main_window.py:311
+msgid "SRT and WebVTT files"
+msgstr "Fichiers SRT et WebVTT"
+
+#: audio_describer/ui/main_window.py:320
+#, python-format
+msgid ""
+"Could not open the file:\n"
+"%s"
+msgstr ""
+"Impossible d'ouvrir le fichier :\n"
+"%s"
+
+#: audio_describer/ui/main_window.py:323
+msgid "No timed descriptions were found in this file."
+msgstr "Aucune description horodatée n'a été trouvée dans ce fichier."
+
+#: audio_describer/ui/main_window.py:325
+#, python-format
+msgid "%d descriptions found. Now choose the video they belong to."
+msgstr ""
+"%d descriptions trouvées. Choisissez maintenant la vidéo correspondante."
+
+#: audio_describer/ui/main_window.py:326
+msgid "Import"
+msgstr "Importer"
+
+#: audio_describer/ui/main_window.py:330
+#, python-format
+msgid "Imported %d descriptions."
+msgstr "%d descriptions importées."
+
+#: audio_describer/ui/manage_prompts_dialog.py:53
+msgid "E&xport..."
+msgstr "E&xporter..."
+
+#: audio_describer/ui/manage_prompts_dialog.py:54
+msgid "&Import..."
+msgstr "&Importer..."
+
+#: audio_describer/ui/manage_prompts_dialog.py:137
+msgid "Export Presets"
+msgstr "Exporter les préréglages"
+
+#: audio_describer/ui/manage_prompts_dialog.py:146
+#, python-format
+msgid ""
+"Could not save the file:\n"
+"%s"
+msgstr ""
+"Impossible d'enregistrer le fichier :\n"
+"%s"
+
+#: audio_describer/ui/manage_prompts_dialog.py:149
+#: audio_describer/ui/manage_prompts_dialog.py:169
+msgid "Import Presets"
+msgstr "Importer des préréglages"
+
+#: audio_describer/ui/manage_prompts_dialog.py:159
+#, python-format
+msgid ""
+"This file does not contain valid presets:\n"
+"%s"
+msgstr ""
+"Ce fichier ne contient pas de préréglages valides :\n"
+"%s"
+
+#: audio_describer/ui/manage_prompts_dialog.py:169
+#, python-format
+msgid "%d presets imported."
+msgstr "%d préréglages importés."
+
+#: audio_describer/ui/player_export.py:373
+#, python-format
+msgid ""
+"%(n)d descriptions were too long for their pause and were cut (numbers: "
+"%(list)s). Shorten them, or export again with the extended description "
+"option."
+msgstr ""
+"%(n)d descriptions étaient trop longues pour leur pause et ont été coupées "
+"(numéros : %(list)s). Raccourcissez-les, ou exportez à nouveau avec l'option"
+" d'audiodescription étendue."
+
+#: audio_describer/ui/player_export.py:377
+#, python-format
+msgid ""
+"The picture is paused %(n)d times (%(sec).1f seconds in total) so that long "
+"descriptions are read in full."
+msgstr ""
+"L'image est mise en pause %(n)d fois (%(sec).1f secondes au total) pour que "
+"les descriptions longues soient lues en entier."
+
+#: audio_describer/ui/player_export.py:412
+msgid ""
+"The original subtitles were not kept: with the picture paused they would be "
+"out of sync."
+msgstr ""
+"Les sous-titres d'origine n'ont pas été conservés : avec les pauses de "
+"l'image, ils seraient désynchronisés."
+
+#: audio_describer/ui/player_export.py:435
+msgid ""
+"The original subtitles could not be copied into this format and were not "
+"kept."
+msgstr ""
+"Les sous-titres d'origine n'ont pas pu être copiés dans ce format et n'ont "
+"pas été conservés."
+
+#: audio_describer/ui/player_export.py:461
+msgid "Failed to synthesize the audio introduction."
+msgstr "Échec de la synthèse de l'introduction audio."
+
+#: audio_describer/ui/player_window.py:132
+msgid ""
+"Player shortcuts: Space, play or pause. Left and Right arrows, back or "
+"forward 5 seconds; with Control, 30 seconds. Alt plus Left or Right, "
+"previous or next description. Up and Down arrows, video volume; with Shift, "
+"how much the video is lowered during descriptions. R, repeat the last "
+"description. T, announce the time. A, turn audio description on or off. D, "
+"change description density. M, change the audio description mode: in the "
+"pauses, pause the video when needed, or on demand. In on-demand mode, Enter "
+"describes the current moment and Shift+Enter gives more detail. I, audio "
+"introduction: the main characters and places, without spoilers; Shift+I "
+"saves it as an MP3. V, quality report. W, what is on screen now; ask follow-"
+"up questions in the window that opens. E, evaluate this audio description. "
+"Q, ask more. S, explore scene. L, next audio track of the video; C, next "
+"subtitle track or none. In on-demand mode, a soft sound tells you an "
+"essential description is available. In braille-only output, Enter resumes "
+"the video after each description. Control plus S, save project. F1 or "
+"question mark, this help."
+msgstr ""
+"Raccourcis du lecteur : Espace, lecture ou pause. Flèches gauche et droite, "
+"reculer ou avancer de 5 secondes ; avec Contrôle, 30 secondes. Alt plus "
+"gauche ou droite, description précédente ou suivante. Flèches haut et bas, "
+"volume de la vidéo ; avec Maj, de combien la vidéo est baissée pendant les "
+"descriptions. R, répéter la dernière description. T, annoncer le temps. A, "
+"activer ou couper l'audiodescription. D, changer la densité des "
+"descriptions. M, changer le mode d'audiodescription : dans les pauses, pause"
+" de la vidéo si nécessaire, ou à la demande. En mode à la demande, Entrée "
+"décrit le moment présent et Maj+Entrée donne plus de détails. I, "
+"introduction audio : les personnages et lieux principaux, sans divulgâcher ;"
+" Maj+I l'enregistre en MP3. V, rapport de qualité. W, ce qui est à l'écran "
+"maintenant ; posez d'autres questions dans la fenêtre qui s'ouvre. E, "
+"évaluer cette audiodescription. Q, poser une question. S, explorer la scène."
+" L, piste audio suivante de la vidéo ; C, piste de sous-titres suivante ou "
+"aucune. En mode à la demande, un son discret signale qu'une description "
+"essentielle est disponible. En sortie braille seul, Entrée reprend la vidéo "
+"après chaque description. Contrôle plus S, enregistrer le projet. F1 ou "
+"point d'interrogation, cette aide."
+
+#: audio_describer/ui/player_window.py:632
+msgid "This video has only one audio track."
+msgstr "Cette vidéo n'a qu'une seule piste audio."
+
+#: audio_describer/ui/player_window.py:632
+msgid "This video has no subtitles."
+msgstr "Cette vidéo n'a pas de sous-titres."
+
+#: audio_describer/ui/player_window.py:641
+#, python-format
+msgid "Audio track: %s"
+msgstr "Piste audio : %s"
+
+#: audio_describer/ui/player_window.py:641
+#, python-format
+msgid "Subtitles: %s"
+msgstr "Sous-titres : %s"
+
+#: audio_describer/ui/player_window.py:664
+msgid "No audio introduction yet. Press I to write it first."
+msgstr ""
+"Pas encore d'introduction audio. Appuyez d'abord sur I pour la rédiger."
+
+#: audio_describer/ui/player_window.py:667
+msgid "Save the Audio Introduction"
+msgstr "Enregistrer l'introduction audio"
+
+#: audio_describer/ui/player_window.py:673
+msgid "Saving the audio introduction..."
+msgstr "Enregistrement de l'introduction audio..."
+
+#: audio_describer/ui/player_window.py:690
+msgid "Audio introduction saved."
+msgstr "Introduction audio enregistrée."
+
+#: audio_describer/ui/settings_dialog.py:37
+msgid "Essential descriptions only"
+msgstr "Descriptions essentielles seulement"
+
+#: audio_describer/ui/settings_dialog.py:37
+msgid "Standard (Default)"
+msgstr "Standard (par défaut)"
+
+#: audio_describer/ui/settings_dialog.py:37
+msgid "All descriptions, with details"
+msgstr "Toutes les descriptions, avec les détails"
+
+#: audio_describer/ui/settings_dialog.py:129
+msgid "Gemini API Key"
+msgstr "Clé API Gemini"
+
+#: audio_describer/ui/settings_dialog.py:132
+msgid "&Test key"
+msgstr "&Tester la clé"
+
+#: audio_describer/ui/settings_dialog.py:143
+msgid "Description density when the player opens (D changes it):"
+msgstr "Densité des descriptions à l'ouverture du lecteur (D la change) :"
+
+#: audio_describer/ui/settings_dialog.py:247
+msgid ""
+"Pronunciation dictionary, one rule per line: word = how to say it (app voice"
+" and exports):"
+msgstr ""
+"Dictionnaire de prononciation, une règle par ligne : mot = comment le dire "
+"(voix de l'application et exports) :"
+
+#: audio_describer/ui/settings_dialog.py:249
+msgid "Pronunciation dictionary"
+msgstr "Dictionnaire de prononciation"
+
+#: audio_describer/ui/settings_dialog.py:251
+msgid "In the pauses, the video keeps playing"
+msgstr "Dans les pauses, la vidéo continue"
+
+#: audio_describer/ui/settings_dialog.py:252
+msgid "Extended: pause the video when a description does not fit"
+msgstr "Étendu : mettre la vidéo en pause quand une description ne tient pas"
+
+#: audio_describer/ui/settings_dialog.py:253
+msgid "On demand: Enter describes the current moment"
+msgstr "À la demande : Entrée décrit le moment présent"
+
+#: audio_describer/ui/settings_dialog.py:254
+msgid "Audio description mode in the player (M changes it):"
+msgstr "Mode d'audiodescription dans le lecteur (M le change) :"
+
+#: audio_describer/ui/settings_dialog.py:256
+msgid "Audio description mode in the player"
+msgstr "Mode d'audiodescription dans le lecteur"
+
+#: audio_describer/ui/settings_dialog.py:542
+msgid "Type or paste your Gemini API key first."
+msgstr "Saisissez ou collez d'abord votre clé API Gemini."
+
+#: audio_describer/ui/settings_dialog.py:545
+msgid "Testing the key..."
+msgstr "Test de la clé..."
+
+#: audio_describer/ui/settings_dialog.py:559
+#, python-format
+msgid "The key does not work: %s"
+msgstr "La clé ne fonctionne pas : %s"
+
+#: audio_describer/ui/settings_dialog.py:560
+msgid "Test key"
+msgstr "Tester la clé"
+
+#: audio_describer/ui/settings_dialog.py:562
+#, python-format
+msgid "The key works. %d models available."
+msgstr "La clé fonctionne. %d modèles disponibles."
+
+#: audio_describer/core/ollama_video.py:107
+#, python-format
+msgid ""
+"The model '%(model)s' is not installed in Ollama. Run: ollama pull %(model)s"
+msgstr ""
+"Le modèle « %(model)s » n'est pas installé dans Ollama. Exécutez : ollama "
+"pull %(model)s"
+
+#: audio_describer/core/ollama_video.py:111
+msgid ""
+"Ollama took too long to answer. Try a smaller model or a shorter video."
+msgstr ""
+"Ollama a mis trop de temps à répondre. Essayez un modèle plus petit ou une "
+"vidéo plus courte."
+
+#: audio_describer/core/ollama_video.py:154
+msgid "FFmpeg is required to describe a video with the local model."
+msgstr "FFmpeg est nécessaire pour décrire une vidéo avec le modèle local."
+
+#: audio_describer/core/ollama_video.py:157
+msgid "Could not read the length of the video."
+msgstr "Impossible de lire la durée de la vidéo."
+
+#: audio_describer/core/ollama_video.py:159
+#, python-format
+msgid "Describing locally with Ollama (%s). Nothing leaves this computer."
+msgstr "Description locale avec Ollama (%s). Rien ne quitte cet ordinateur."
+
+#: audio_describer/core/ollama_video.py:177
+#, python-format
+msgid "Segment %(n)d of %(total)d..."
+msgstr "Segment %(n)d sur %(total)d..."
+
+#: audio_describer/ui/edit_description_dialog.py:24
+msgid "female voice"
+msgstr "voix de femme"
+
+#: audio_describer/ui/edit_description_dialog.py:24
+msgid "male voice"
+msgstr "voix d'homme"
+
+#: audio_describer/ui/edit_description_dialog.py:414
+msgid "Only translated dialogue has a speaker's voice."
+msgstr "Seuls les dialogues traduits ont une voix de locuteur."
+
+#: audio_describer/ui/edit_description_dialog.py:426
+msgid "Speaker's voice: unknown"
+msgstr "Voix du locuteur : inconnue"
+
+#: audio_describer/ui/edit_description_dialog.py:426
+msgid "Speaker's voice: female"
+msgstr "Voix du locuteur : femme"
+
+#: audio_describer/ui/edit_description_dialog.py:427
+msgid "Speaker's voice: male"
+msgstr "Voix du locuteur : homme"
+
+#: audio_describer/ui/settings_dialog.py:171
+msgid "Ollama (local, free, private)"
+msgstr "Ollama (local, gratuit, privé)"
+
+#: audio_describer/ui/settings_dialog.py:172
+msgid "Video descriptions:"
+msgstr "Descriptions vidéo :"
+
+#: audio_describer/ui/settings_dialog.py:275
+msgid ""
+"Read translated dialogue with a voice matching the speaker (woman or man)"
+msgstr ""
+"Lire les dialogues traduits avec une voix correspondant au locuteur (femme "
+"ou homme)"
+
+#: audio_describer/ui/settings_dialog.py:279
+msgid "Woman's voice:"
+msgstr "Voix de femme :"
+
+#: audio_describer/ui/settings_dialog.py:279
+msgid "Man's voice:"
+msgstr "Voix d'homme :"
+
+#: audio_describer/ui/settings_dialog.py:285
+msgid "Installed Windows voice (automatic)"
+msgstr "Voix installée dans Windows (automatique)"
+
+#: audio_describer/ui/settings_dialog.py:286
+#, python-format
+msgid "%(voice)s (local Piper voice, %(size)d MB)"
+msgstr "%(voice)s (voix Piper locale, %(size)d Mo)"
+
+#: audio_describer/ui/settings_dialog.py:291
+msgid "Download and listen"
+msgstr "Télécharger et écouter"
+
+#: audio_describer/ui/settings_dialog.py:639
+msgid ""
+"Choose a Piper voice first; the automatic choice uses the voices installed "
+"in Windows."
+msgstr ""
+"Choisissez d'abord une voix Piper ; le choix automatique utilise les voix "
+"installées dans Windows."
+
+#: audio_describer/ui/settings_dialog.py:642
+msgid "Local Piper voices are not available in this version."
+msgstr "Les voix Piper locales ne sont pas disponibles dans cette version."
+
+#: audio_describer/ui/settings_dialog.py:646
+#, python-format
+msgid "Preparing the voice %s..."
+msgstr "Préparation de la voix %s..."
+
+#: audio_describer/ui/settings_dialog.py:652
+msgid "This is how this voice sounds."
+msgstr "Voici comment sonne cette voix."
+
+#: audio_describer/ui/settings_dialog.py:662
+#, python-format
+msgid "The voice could not be prepared: %s"
+msgstr "La voix n'a pas pu être préparée : %s"
+
+#: audio_describer/ui/settings_dialog.py:662
+msgid "no sound produced"
+msgstr "aucun son produit"
+
+#: audio_describer/core/gemini_helpers.py:266
+#, python-format
+msgid ""
+"Gemini is overloaded right now (model %s). Nothing is wrong with your video "
+"or your key: try again in a few minutes, or choose another model in "
+"Settings."
+msgstr ""
+"Gemini est surchargé en ce moment (modèle %s). Votre vidéo et votre clé ne "
+"sont pas en cause : réessayez dans quelques minutes, ou choisissez un autre "
+"modèle dans les Paramètres."
+
+#: audio_describer/core/gemini_helpers.py:274
+#, python-format
+msgid ""
+"Gemini is overloaded right now (attempt %(attempt)d of %(max)d). Retrying in"
+" %(delay)d seconds..."
+msgstr ""
+"Gemini est surchargé en ce moment (tentative %(attempt)d sur %(max)d). "
+"Nouvel essai dans %(delay)d secondes..."
+
+#: audio_describer/core/gemini_helpers.py:259
+#, python-format
+msgid "%(old)s is still overloaded: switching to %(new)s."
+msgstr "%(old)s est toujours surchargé : passage à %(new)s."
+
+msgid ""
+"This feature uses Gemini, but video descriptions are set to another AI in "
+"Settings, so nothing was sent to Google. Switch to Gemini in Settings to use"
+" it."
+msgstr ""
+"Cette fonction utilise Gemini, mais les descriptions vidéo sont confiées à "
+"une autre IA dans les paramètres : rien n'a donc été envoyé à Google. "
+"Choisissez Gemini dans les paramètres pour l'utiliser."
+
+msgid ""
+"Could not read this image. FFmpeg is required to send it to the vision "
+"service."
+msgstr ""
+"Impossible de lire cette image. FFmpeg est nécessaire pour l'envoyer au "
+"service de vision."
+
+msgid ""
+"This vision model can only describe images; switch to Gemini in Settings for"
+" PDF documents."
+msgstr ""
+"Ce modèle de vision ne peut décrire que des images ; pour les documents PDF,"
+" choisissez Gemini dans les paramètres."
+
+#, python-format
+msgid "Describing with %s (frames sent to the vision service)."
+msgstr "Description avec %s (images envoyées au service de vision)."
+
+msgid ""
+"Set the server address and the model of the OpenAI-compatible vision service"
+" in Settings."
+msgstr ""
+"Indiquez dans les paramètres l'adresse du serveur et le modèle du service de"
+" vision compatible OpenAI."
+
+msgid ""
+"Use an https:// address for an online vision service; http:// is only for "
+"this computer."
+msgstr ""
+"Utilisez une adresse https:// pour un service de vision en ligne ; http:// "
+"est réservé à cet ordinateur."
+
+#, python-format
+msgid "The vision service refused the API key (%(code)d)."
+msgstr "Le service de vision a refusé la clé API (%(code)d)."
+
+#, python-format
+msgid "The vision service refused the request (model '%(model)s'): %(detail)s"
+msgstr ""
+"Le service de vision a refusé la requête (modèle « %(model)s ») : %(detail)s"
+
+msgid ""
+"The vision service took too long to answer. Try a smaller model or a shorter"
+" video."
+msgstr ""
+"Le service de vision a mis trop de temps à répondre. Essayez un modèle plus "
+"petit ou une vidéo plus courte."
+
+#, python-format
+msgid "Could not reach the vision service at %s."
+msgstr "Impossible de joindre le service de vision à l'adresse %s."
+
+#, python-format
+msgid "Unknown voice engine in Settings: %s"
+msgstr "Moteur vocal inconnu dans les paramètres : %s"
+
+#, python-format
+msgid ""
+"Settings file was corrupted and has been reset. Your previous settings could"
+" not be recovered. (Error: %s)"
+msgstr ""
+"Le fichier de paramètres était corrompu et a été réinitialisé. Vos "
+"paramètres précédents n'ont pas pu être récupérés. (Erreur : %s)"
+
+msgid ""
+"Your previous settings could not be migrated from the old encrypted format. "
+"This typically happens after a Windows update or hardware change. Settings "
+"have been reset to defaults. You will need to re-enter your API keys."
+msgstr ""
+"Vos paramètres précédents n'ont pas pu être migrés depuis l'ancien format "
+"chiffré. Cela arrive généralement après une mise à jour de Windows ou un "
+"changement de matériel. Les paramètres ont été réinitialisés à leurs valeurs"
+" par défaut. Vous devrez saisir à nouveau vos clés API."
+
+msgid "Automatic (speaker's apparent gender on each line)"
+msgstr ""
+"Automatique (genre apparent de la personne qui parle, réplique par réplique)"
+
+msgid "Woman's voice"
+msgstr "Voix de femme"
+
+msgid "Man's voice"
+msgstr "Voix d'homme"
+
+msgid "Description voice"
+msgstr "Voix des descriptions"
+
+msgid "woman"
+msgstr "femme"
+
+msgid "man"
+msgstr "homme"
+
+msgid "unknown"
+msgstr "indéterminé"
+
+#, python-format
+msgid "&Voice for this character's translated lines (AI saw: %s):"
+msgstr ""
+"&Voix pour les répliques traduites de ce personnage (genre selon l'IA : %s) "
+":"
+
+msgid "&Reset Settings and Data..."
+msgstr "Réi&nitialiser les paramètres et les données..."
+
+msgid "Restore default settings or presets, or clear downloaded data"
+msgstr ""
+"Restaurer les paramètres ou les préréglages par défaut, ou effacer les "
+"données téléchargées"
+
+msgid "Reset done. Some settings apply after restarting the app."
+msgstr ""
+"Réinitialisation effectuée. Certains paramètres s'appliqueront après le "
+"redémarrage de l'application."
+
+#, python-format
+msgid "%(title)s (Reason: %(reason)s)"
+msgstr "%(title)s (Raison : %(reason)s)"
+
+#, python-format
+msgid "Opening %s"
+msgstr "Ouverture de %s"
+
+#, python-format
+msgid "Help file not found: %s"
+msgstr "Fichier d'aide introuvable : %s"
+
+#, python-format
+msgid "Could not open %(file)s: %(error)s"
+msgstr "Impossible d'ouvrir %(file)s : %(error)s"
+
+msgid "Reset Settings and Data"
+msgstr "Réinitialiser les paramètres et les données"
+
+msgid ""
+"Choose what to reset. A backup copy of your settings and presets is saved "
+"first. Projects and exported files are never touched."
+msgstr ""
+"Choisissez ce qu'il faut réinitialiser. Une copie de sauvegarde de vos "
+"paramètres et préréglages est d'abord enregistrée. Les projets et les "
+"fichiers exportés ne sont jamais modifiés."
+
+msgid "&Settings (back to defaults)"
+msgstr "&Paramètres (retour aux valeurs par défaut)"
+
+msgid "Also forget my &API keys"
+msgstr "Oublier aussi mes &clés API"
+
+msgid "&Prompt presets (custom presets are removed)"
+msgstr "Préréglages d'&invite (les préréglages personnalisés sont supprimés)"
+
+msgid "OpenAI &voice presets"
+msgstr "Préréglages de &voix OpenAI"
+
+msgid "&Downloaded voices and models (downloaded again when needed)"
+msgstr "Voix et modèles &téléchargés (téléchargés à nouveau si nécessaire)"
+
+msgid "&Temporary files"
+msgstr "Fichiers temp&oraires"
+
+msgid "&Reset"
+msgstr "&Réinitialiser"
+
+msgid "Nothing is selected."
+msgstr "Rien n'est sélectionné."
+
+msgid "Reset"
+msgstr "Réinitialiser"
+
+msgid "Reset the selected items now? This cannot be undone from the app."
+msgstr ""
+"Réinitialiser maintenant les éléments sélectionnés ? Cette opération ne peut"
+" pas être annulée depuis l'application."
+
+msgid "Confirm Reset"
+msgstr "Confirmer la réinitialisation"
+
+#, python-format
+msgid "The reset did not complete: %s"
+msgstr "La réinitialisation n'a pas abouti : %s"
+
+msgid "Microsoft Azure Neural Voices (online, key required)"
+msgstr "Voix neuronales Microsoft Azure (en ligne, clé requise)"
+
+msgid "Google Cloud Text-to-Speech (online, key required)"
+msgstr "Google Cloud Text-to-Speech (en ligne, clé requise)"
+
+msgid ""
+"OpenAI-compatible vision service (OpenRouter, OpenAI, Claude, Mistral, LM "
+"Studio...)"
+msgstr ""
+"Service de vision compatible OpenAI (OpenRouter, OpenAI, Claude, Mistral, LM"
+" Studio...)"
+
+msgid "OpenAI-compatible vision service (frames)"
+msgstr "Service de vision compatible OpenAI (images)"
+
+msgid "Vision service address (OpenAI-compatible):"
+msgstr "Adresse du service de vision (compatible OpenAI) :"
+
+msgid "Vision service model:"
+msgstr "Modèle du service de vision :"
+
+msgid "Vision service API key (empty for a local server):"
+msgstr "Clé API du service de vision (vide pour un serveur local) :"
+
+msgid "Microsoft Azure Neural Voices"
+msgstr "Voix neuronales Microsoft Azure"
+
+msgid "Speech resource key:"
+msgstr "Clé de la ressource Speech :"
+
+msgid "Region (for example westeurope):"
+msgstr "Région (par exemple westeurope) :"
+
+msgid "Voice (for example fr-FR-DeniseNeural):"
+msgstr "Voix (par exemple fr-FR-DeniseNeural) :"
+
+msgid "Woman's voice for translated dialogue (optional):"
+msgstr "Voix de femme pour les dialogues traduits (facultatif) :"
+
+msgid "Man's voice for translated dialogue (optional):"
+msgstr "Voix d'homme pour les dialogues traduits (facultatif) :"
+
+msgid "Google Cloud Text-to-Speech"
+msgstr "Google Cloud Text-to-Speech"
+
+msgid "API key:"
+msgstr "Clé API :"
+
+msgid "Voice (for example fr-FR-Chirp3-HD-Aoede):"
+msgstr "Voix (par exemple fr-FR-Chirp3-HD-Aoede) :"
 
 #~ msgid "AI did not return a successful response for descriptions."
 #~ msgstr "L'IA n'a pas retourné de réponse positive pour les descriptions."
@@ -2039,11 +4341,11 @@ msgstr ""
 #~ msgstr "Accélérer les descriptions longues pour les adapter"
 
 #~ msgid ""
-#~ "If a description is too long for the available silence, speed it up to "
-#~ "try and make it fit."
+#~ "If a description is too long for the available silence, speed it up to try "
+#~ "and make it fit."
 #~ msgstr ""
-#~ "Si une description est trop longue pour le silence disponible, "
-#~ "l'accélérer pour essayer de l'adapter."
+#~ "Si une description est trop longue pour le silence disponible, l'accélérer "
+#~ "pour essayer de l'adapter."
 
 #~ msgid "Maximum speed-up:"
 #~ msgstr "Accélération maximale :"
@@ -2083,3 +4385,23 @@ msgstr ""
 
 #~ msgid "something whent wrong while updating."
 #~ msgstr "un problème est survenu lors de la mise à jour."
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Picture detail sent to the AI:"
+msgstr "Détail des images envoyées à l'IA :"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Automatic (Default)"
+msgstr "Automatique (par défaut)"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Low (cheaper, for long videos)"
+msgstr "Faible (moins cher, pour les longues vidéos)"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Medium"
+msgstr "Moyen"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "High (reads small on-screen text, costs more)"
+msgstr "Élevé (lit les petits textes à l'écran, plus coûteux)"

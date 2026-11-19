@@ -24,8 +24,8 @@ on your PATH or in `audio_describer/bin/`.
 3. Follow the conventions in [AGENTS.md](AGENTS.md) (logging via
    `app_logger`, user-facing strings through `_()`, no hardcoded secrets or
    binary paths).
-4. There's no automated test suite yet. Manually run the app and exercise the
-   flow you touched. If your change adds non-trivial logic (a parser, a
+4. Run `python -m unittest discover -s tests` (stdlib only, also run in CI),
+   then run the app and exercise the flow you touched. If your change adds non-trivial logic (a parser, a
    branch with real consequences), a small `test_*.py` is appreciated but not
    required for small fixes.
 5. Open a PR describing what changed and why, and how you tested it.
@@ -40,6 +40,15 @@ update one:
 2. Regenerate the compiled catalog: `msgfmt omni_describer.po -o
    omni_describer.mo`.
 3. Commit both the `.po` and `.mo`.
+
+Default prompt presets are plain JSON, one file per language: `audio_describer/prompts/<lang>.json`
+(a list of `{"name": ..., "prompt": ...}`). To translate them, copy `en.json` to your language code
+and translate the values; no code change is needed. A language without a file gets the English presets.
+The app follows the Windows display language unless one is chosen in Settings.
+
+The audio description rules and every other text sent to the AI are in `audio_describer/prompts/rules/en.json`.
+`rules/<lang>.json` (the description language) and the user's own `ad_rules.json` in the app's data folder
+override it key by key, so a partial file is fine. Keep the `{placeholders}`; the app fills them in.
 
 ## Building a release executable
 

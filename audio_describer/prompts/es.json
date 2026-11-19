@@ -1,0 +1,94 @@
+[
+    {
+        "name": "Tráiler de película",
+        "prompt": "Esto es un tráiler de película. Céntrate en los planos rápidos, impactantes y emblemáticos. Describe con prioridad los momentos de acción clave, las presentaciones espectaculares de los personajes y cualquier texto en pantalla, como fechas de estreno o logotipos de estudios. Transmite emoción e insinúa la trama sin revelar spoilers. Las descripciones deben ser extremadamente breves para caber entre los cortes rápidos."
+    },
+    {
+        "name": "Película de acción",
+        "prompt": "Esto es una película de acción. Céntrate en lo esencial de la coreografía de la acción: puñetazos, patadas, esquivas y uso de armas relevantes. Describe los acontecimientos a gran escala, como explosiones o persecuciones en coche. Mantén las descripciones concisas e impactantes para acompañar el ritmo trepidante."
+    },
+    {
+        "name": "Película romántica",
+        "prompt": "Esto es una película romántica. Describe con prioridad la cercanía entre los personajes, los contactos significativos (como tomarse de la mano) y las expresiones faciales relevantes que muestran cariño, anhelo o conflicto. Describe la atmósfera romántica del lugar (por ejemplo, «cena a la luz de las velas», «paseo por una playa a la luz de la luna»)."
+    },
+    {
+        "name": "Comedia / Sitcom",
+        "prompt": "Esto es un contenido cómico. Céntrate en los gags visuales, el humor físico y las situaciones absurdas. Describe las reacciones exageradas y las expresiones cómicas que son clave para el chiste. Describe el gag en el momento en que ocurre para que el oyente se ría a la vez que todos, y sé breve; si la descripción tiene que ir antes, nunca reveles el remate."
+    },
+    {
+        "name": "Ciencia ficción / Fantasía",
+        "prompt": "Esto es una obra de ciencia ficción o fantasía. Céntrate en describir los elementos propios de ese mundo. Describe la tecnología futurista, las criaturas fantásticas, los efectos mágicos y los paisajes de otro mundo. Explica en qué se diferencian los elementos visuales del mundo real (por ejemplo, «Una nave con velas luminosas surca una nebulosa púrpura.»)."
+    },
+    {
+        "name": "Meme / Vídeo viral",
+        "prompt": "Esto es un meme o un vídeo viral corto. El objetivo es describir el chiste visual central o el suceso inesperado de la forma más concisa posible. Identifica el sujeto principal y la acción concreta que hace que el vídeo sea gracioso o interesante. Los rótulos en pantalla son muy importantes (por ejemplo, «Un gato con gafas de sol mueve la cabeza al ritmo de la música. Rótulo: Disfrutando.»)."
+    },
+    {
+        "name": "Documental / Educativo",
+        "prompt": "Esto es un vídeo documental o educativo. Describe con prioridad el texto en pantalla, las etiquetas, los gráficos, los mapas y las imágenes de archivo. En cuanto a las personas, céntrate en sus acciones relacionadas con el tema (por ejemplo, «La bióloga señala una planta concreta.»). Mantén un tono neutro e informativo."
+    },
+    {
+        "name": "Cocina / Receta",
+        "prompt": "Esto es un vídeo de cocina. Describe los ingredientes concretos a medida que se añaden y las técnicas culinarias que se muestran (por ejemplo, «picar la cebolla en dados», «sellar el filete»). Describe el aspecto y la textura de los alimentos en las etapas clave (por ejemplo, «La salsa espesa hasta quedar brillante.»)."
+    },
+    {
+        "name": "Bricolaje / Tutorial",
+        "prompt": "Esto es un tutorial o un vídeo de bricolaje. Céntrate en el proceso paso a paso. Describe con claridad las herramientas y los materiales concretos que se utilizan. Detalla la acción que se realiza sobre el objeto y describe el estado del objeto antes y después de la acción (por ejemplo, «El carpintero taladra un agujero en el punto marcado de la tabla.»)."
+    },
+    {
+        "name": "Videojuegos / Let's Play",
+        "prompt": "Esto es una grabación de un videojuego. Describe con prioridad los elementos de la interfaz esenciales en pantalla (el HUD), como las barras de vida, la munición o los minimapas cuando cambian. Describe las acciones del personaje principal o avatar dentro del mundo del juego (por ejemplo, «El personaje lanza un hechizo de fuego», «El avatar salta a la siguiente plataforma.»)."
+    },
+    {
+        "name": "Clase / Diapositivas",
+        "prompt": "Esto es una clase, un curso o una presentación. Lee literalmente cada título de diapositiva, viñeta, fórmula y etiqueta de gráfico como texto en pantalla cuando aparezca o cambie. Describe los diagramas por su estructura (ejes, tendencia, cuadros y flechas). No describas al ponente más allá de los gestos que señalan el contenido."
+    },
+    {
+        "name": "Anime / Animación",
+        "prompt": "Esto es una obra de animación. Describe a los personajes por su diseño visual fijo (color y peinado, vestuario) y usa siempre la misma descripción. Lee los carteles y rótulos en pantalla. Describe brevemente los efectos estilizados (líneas de velocidad, gotas de sudor, transformaciones chibi) según lo que transmiten visualmente."
+    },
+    {
+        "name": "Infantil",
+        "prompt": "Esto es un contenido para niños pequeños. Usa palabras sencillas y concretas y frases cortas. Nombra los colores y las formas. Describe con claridad las acciones divertidas. Evita expresiones que den miedo."
+    },
+    {
+        "name": "Terror / Suspense",
+        "prompt": "Esto es una película de terror o de suspense. Nunca llenes los silencios que generan tensión; describe solo lo esencial, brevemente, justo antes de un susto cuando sea posible. Describe las sombras, los movimientos en el borde del encuadre y lo que ven los personajes, sin revelar lo que la película aún oculta."
+    },
+    {
+        "name": "Videoclip / Concierto",
+        "prompt": "Esto es un videoclip o un concierto. La mayor parte del tiempo se cantan letras: describe solo durante los pasajes instrumentales y entre estrofas, y únicamente los elementos visuales más importantes (intérpretes, cambios de escenario, coreografía). Deja respirar la música."
+    },
+    {
+        "name": "Deporte",
+        "prompt": "Esto es una retransmisión deportiva. Los comentarios suelen cubrir la acción: describe solo lo que los comentaristas no dicen, como el marcador sobreimpreso, las repeticiones, las celebraciones de los jugadores y el público. Lee el marcador y el reloj que aparecen en pantalla."
+    },
+    {
+        "name": "Noticias / Entrevista",
+        "prompt": "Esto es un reportaje informativo o una entrevista. Lee literalmente los nombres y cargos de los rótulos, los subtítulos y los gráficos. Describe brevemente los lugares y las imágenes de archivo. Nunca hables por encima de quienes intervienen."
+    },
+    {
+        "name": "Sin diálogo / Mudo",
+        "prompt": "Este vídeo tiene pocos diálogos o ninguno. Describe de forma continua, pero deja espacio a la música y a los silencios intencionados. Sigue la historia acción por acción, de lo general a lo particular."
+    },
+    {
+        "name": "Danza / Coreografía",
+        "prompt": "Esto es una actuación de danza o una coreografía. Describe cada movimiento por la parte del cuerpo y la dirección (los brazos barren por encima de la cabeza, un giro hacia la izquierda), las formaciones, los portés, las entradas y el vestuario en su primera aparición. Sitúa las descripciones en las frases instrumentales; nunca cubras las letras cantadas."
+    },
+    {
+        "name": "Fitness / Yoga",
+        "prompt": "Esto es un vídeo de ejercicio o yoga que el espectador sigue a la vez. Para cada movimiento nuevo, da la posición inicial y luego la parte del cuerpo, el lado (izquierda o derecha del instructor), la dirección y el número de repeticiones mostrado. Lee los nombres de los ejercicios y los temporizadores en pantalla. Describe el aspecto y el lugar una sola vez, al principio."
+    },
+    {
+        "name": "Naturaleza / Fauna",
+        "prompt": "Esto es un documental de naturaleza o fauna. Nombra una especie solo si la narración o un texto en pantalla la identifica o si es inconfundible; si no, da su tamaño, forma, color y movimiento. Describe los comportamientos (caza, alimentación, cortejo) y los cambios de paisaje y de clima. La narración suele explicar la acción: añade solo lo que no dice."
+    },
+    {
+        "name": "Vlog / A cámara",
+        "prompt": "Esto es un vlog o una persona que habla a cámara la mayor parte del tiempo. Describe a la persona y el lugar una sola vez, al principio, y después solo los cambios: planos de recurso, objetos mostrados a cámara, textos en pantalla, emojis y pegatinas superpuestos, y reacciones visibles que cambian el sentido de lo que se dice."
+    },
+    {
+        "name": "Reseña de producto / Unboxing",
+        "prompt": "Esto es una reseña de producto o un unboxing. Lee la marca, el modelo, el precio y las especificaciones que aparecen en pantalla o en el embalaje. Describe la forma del producto, su tamaño comparado con objetos conocidos, sus materiales, botones y puertos, y cada elemento que sale de la caja. Describe las demostraciones por su resultado visible."
+    }
+]

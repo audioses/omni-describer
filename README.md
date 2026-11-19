@@ -47,13 +47,33 @@ to everyone who tested, translated, and used it along the way — see
   YouTube URL and let the app download it.
 - **Editable output** — review, rewrite, and fine-tune every generated
   description before exporting.
+- **Professional rules** — descriptions follow the main AD guidelines (Netflix,
+  DCMP, ACB, CSA/Arcom, Ofcom, CAB/AMI, ADLAB), are placed in detected pauses with
+  a word budget, tagged by level (1–3), and checked by a second AI review pass.
+- **Accessible player** — density levels, inline / extended / on-demand modes,
+  Ask More questions and a Scene Explorer about the moment you paused on, audio
+  introduction, braille and large-text output.
 - **Text-to-speech** — descriptions are synthesized to audio (Windows OneCore
-  voices via `winsdk`, with a 32-bit SAPI5 fallback) and mixed into the final
-  export.
+  voices via `winsdk`, a 32-bit SAPI5 fallback, or OpenAI TTS) and mixed into
+  the final export.
+- **Exports** — MKV/MP4 with a tagged AD track named in the description
+  language, AD-only audio, WebVTT, DAPT, DOCX and full script; optional
+  extended description (the picture pauses instead of cutting a long
+  description), spoken AI credit, export at the player's density, source
+  subtitles kept, AD on the centre channel for 5.1. Projects save and reopen
+  (File → Recent Projects); SRT/WebVTT scripts can be imported.
+- **Voice control** — pronunciation dictionary, listen to a line with the
+  export voice from the editor, audio introduction saved as MP3 (Shift+I).
+- **Images, PDFs and your screen** — describe a picture or document (Ctrl+I),
+  or the screen with a global hotkey.
+- **Voices matching the speaker** — translated dialogue is read with a woman's
+  or a man's voice: an installed Windows voice, or a free local Piper voice
+  (downloaded once, ~20 MB, checksum verified). Ctrl+G in the editor fixes it.
 - **Character glossary** — recurring characters/entities get tracked
   consistently across chunks instead of being re-described from scratch.
-- **Multi-language UI** — English, Turkish, and several community-contributed
-  translations (see [Acknowledgments](#acknowledgments)).
+- **Multi-language UI** — ten languages (en, ar, es, fr, it, pt, ru, tr, uk,
+  vi) for the interface, the help and the prompt presets; presets can be
+  exported and imported to share them (see [Acknowledgments](#acknowledgments)).
 
 ## Platform support
 
@@ -97,10 +117,34 @@ you redistribute a build with these binaries included.
 
 ### Configuration
 
-On first launch, open **Settings → AI** and paste in your own Gemini (and
-optionally OpenAI) API key. Keys are saved locally in your user data folder
-(lightly obfuscated, not committed to any repo) — nothing here ships with or
+On first launch the app offers to open Google AI Studio and **Settings → AI**:
+paste in your own Gemini (and optionally OpenAI) API key and press **Test key**. Keys are saved locally in your user data folder
+(encrypted with Windows DPAPI for your account, not committed to any repo) — nothing here ships with or
 requires a hardcoded key.
+
+### Command line and batch mode
+
+From a source checkout, with the API key already set in the app:
+
+```bash
+python -m audio_describer.cli film.mp4 episodes/ --lang fr --export vtt,srt,txt,project --out out/
+```
+
+Videos get the chosen exports (`project` is an `.omniad` file the app can
+open); images and PDFs get a `_description.txt`. A failed file does not stop
+the batch; the exit code is 1 if any file failed.
+
+Other options: `--density low|medium|high` (descriptions kept in the
+exports; the project keeps all), exports `dapt`, `docx`, `mkv`, `mp4`, `mp3`,
+`m4a`, `--extended` (pause the picture for long descriptions in video/MP3
+exports), `--no-credit` (no spoken AI credit at the end), and `--watch` to
+keep processing new files copied into the folders.
+The compiled app runs the same command line with `OmniDescriber.exe --cli ...`.
+
+Speech detection (finding pauses under music) uses Silero VAD through
+`onnxruntime`; its 2 MB model is downloaded once from a pinned release and
+checked by SHA-256. Without `onnxruntime` the app falls back to ffmpeg
+silence detection.
 
 ## Project layout
 

@@ -99,6 +99,7 @@ class AudioDescriberApp(wx.App):
 
         # Show one-time webapp migration banner
         self._show_webapp_banner_if_needed(config_model)
+        wx.CallAfter(self._first_run_key_prompt)
 
         # MODIFICATION: Start the update check in the background AFTER the UI is shown.
         self.StartBackgroundUpdateCheck()
@@ -110,6 +111,29 @@ class AudioDescriberApp(wx.App):
         }, interrupt=True)
 
         return True
+
+    def _first_run_key_prompt(self):
+        """First run (audit §8): without a Gemini key nothing works, so say so and open Settings."""
+        from audio_describer.core import gemini_helpers
+        from audio_describer.ui.settings_dialog import SettingsDialog
+        import webbrowser
+        _ = audio_describer.i18n_setup._
+        from audio_describer.models import config_model
+        try:
+            if gemini_helpers.api_key_configured():
+                return
+        except Exception:
+            return
+        answer = wx.MessageBox(
+            _("Welcome to Omni Describer.\n\nTo describe videos, the app needs a free Gemini API key from Google AI Studio "
+              "(aistudio.google.com/apikey). Press Yes to open that page and the Settings, then paste the key in "
+              "the Gemini API Key field and press Test key."),
+            _("First Start"), wx.YES_NO | wx.ICON_INFORMATION, self.main_frame)
+        if answer != wx.YES:
+            return
+        webbrowser.open("https://aistudio.google.com/apikey")
+        with SettingsDialog(self.main_frame) as dlg:
+            dlg.ShowModal()
 
     def _show_webapp_banner_if_needed(self, config_model):
         """Shows a one-time banner informing users about the web platform."""
@@ -158,6 +182,8 @@ class AudioDescriberApp(wx.App):
         from audio_describer.utils import update_checker
         import audio_describer.config as app_config
         _ = audio_describer.i18n_setup._
+        if getattr(sys, "frozen", False):
+            update_checker.install_pending_updater()
         
         thread = threading.Thread(
             target=update_checker.check_for_updates,

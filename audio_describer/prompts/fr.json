@@ -1,0 +1,94 @@
+[
+    {
+        "name": "Bande-annonce",
+        "prompt": "Il s'agit d'une bande-annonce de film. Concentrez-vous sur les plans rapides, percutants et emblématiques. Décrivez en priorité les moments d'action clés, les présentations spectaculaires des personnages et tout texte à l'écran, comme les dates de sortie ou les logos des studios. Créez un sentiment d'excitation et suggérez l'intrigue sans rien dévoiler. Les descriptions doivent être extrêmement brèves pour tenir entre les coupes rapides."
+    },
+    {
+        "name": "Film d'action",
+        "prompt": "Il s'agit d'un film d'action. Concentrez-vous sur l'essentiel de la chorégraphie de l'action : les coups de poing, coups de pied, esquives et usages d'armes marquants. Décrivez les événements de grande ampleur comme les explosions ou les courses-poursuites en voiture. Gardez des descriptions concises et percutantes pour suivre le rythme effréné."
+    },
+    {
+        "name": "Film romantique",
+        "prompt": "Il s'agit d'un film romantique. Décrivez en priorité la proximité entre les personnages, les gestes tendres significatifs (comme se tenir la main) et les expressions marquantes qui traduisent l'affection, le désir ou le conflit. Décrivez l'atmosphère romantique du lieu (par exemple, « dîner aux chandelles », « promenade sur une plage au clair de lune »)."
+    },
+    {
+        "name": "Comédie / Sitcom",
+        "prompt": "Il s'agit d'un contenu comique. Concentrez-vous sur les gags visuels, le comique de situation physique et les situations absurdes. Décrivez les réactions exagérées et les mimiques comiques essentielles à la blague. Décrivez le gag au moment où il se produit pour que l'auditeur rie en même temps que tout le monde, et soyez bref ; si la description doit venir plus tôt, ne dévoilez jamais la chute."
+    },
+    {
+        "name": "Science-fiction / Fantasy",
+        "prompt": "Il s'agit d'une œuvre de science-fiction ou de fantasy. Concentrez-vous sur les éléments propres à cet univers. Décrivez les technologies futuristes, les créatures fantastiques, les effets magiques et les paysages d'un autre monde. Expliquez en quoi les éléments visuels diffèrent du monde réel (par exemple, « Un vaisseau aux voiles lumineuses traverse une nébuleuse violette. »)."
+    },
+    {
+        "name": "Mème / Vidéo virale",
+        "prompt": "Il s'agit d'un mème ou d'une courte vidéo virale. L'objectif est de décrire le gag visuel central ou l'événement inattendu de la manière la plus concise possible. Identifiez le sujet principal et l'action unique qui rend la vidéo drôle ou intéressante. Les légendes à l'écran sont très importantes (par exemple, « Un chat portant des lunettes de soleil hoche la tête en rythme. Légende : Dans le mood. »)."
+    },
+    {
+        "name": "Documentaire / Éducatif",
+        "prompt": "Il s'agit d'une vidéo documentaire ou éducative. Décrivez en priorité le texte à l'écran, les étiquettes, les graphiques, les cartes et les images d'archives. Pour les personnes, concentrez-vous sur leurs actions en lien avec le sujet traité (par exemple, « La biologiste désigne une plante précise. »). Gardez un ton neutre et informatif."
+    },
+    {
+        "name": "Cuisine / Recette",
+        "prompt": "Il s'agit d'une vidéo de cuisine. Décrivez les ingrédients précis au moment où ils sont ajoutés et les techniques culinaires montrées (par exemple, « couper l'oignon en dés », « saisir le steak »). Décrivez l'aspect et la texture des aliments aux étapes clés (par exemple, « La sauce épaissit et devient brillante. »)."
+    },
+    {
+        "name": "Bricolage / Tutoriel",
+        "prompt": "Il s'agit d'un tutoriel ou d'une vidéo de bricolage. Concentrez-vous sur le processus étape par étape. Décrivez clairement les outils et les matériaux utilisés. Détaillez l'action effectuée sur l'objet, et décrivez l'état de l'objet avant et après l'action (par exemple, « Le menuisier perce un trou à l'endroit marqué sur la planche. »)."
+    },
+    {
+        "name": "Jeu vidéo / Let's Play",
+        "prompt": "Il s'agit d'un enregistrement de jeu vidéo. Décrivez en priorité les éléments d'interface essentiels à l'écran (le HUD), comme les barres de vie, le nombre de munitions ou les mini-cartes lorsqu'ils changent. Décrivez les actions du personnage principal ou de l'avatar dans l'univers du jeu (par exemple, « Le personnage lance un sort de feu », « L'avatar saute sur la plateforme suivante. »)."
+    },
+    {
+        "name": "Cours / Diapositives",
+        "prompt": "Il s'agit d'un cours, d'une formation ou d'une présentation. Lisez mot pour mot chaque titre de diapositive, puce, formule et légende de graphique comme texte à l'écran, dès qu'il apparaît ou change. Décrivez les schémas par leur structure (axes, tendance, cases et flèches). Ne décrivez pas l'intervenant au-delà des gestes qui désignent le contenu."
+    },
+    {
+        "name": "Anime / Animation",
+        "prompt": "Il s'agit d'une œuvre d'animation. Décrivez les personnages par leur apparence constante (couleur et coupe de cheveux, tenue) et utilisez toujours la même désignation. Lisez les panneaux et les légendes à l'écran. Décrivez brièvement les effets stylisés (lignes de vitesse, gouttes de sueur, transformations en chibi) par ce qu'ils expriment visuellement."
+    },
+    {
+        "name": "Enfants",
+        "prompt": "Il s'agit d'un contenu pour jeunes enfants. Utilisez des mots simples et concrets et des phrases courtes. Nommez les couleurs et les formes. Décrivez clairement les actions amusantes. Évitez les formulations effrayantes."
+    },
+    {
+        "name": "Horreur / Thriller",
+        "prompt": "Il s'agit d'un film d'horreur ou d'un thriller. Ne remplissez jamais les silences qui font monter la tension ; décrivez uniquement l'essentiel, brièvement, juste avant une frayeur si possible. Décrivez les ombres, les mouvements en bord de cadre et ce que voient les personnages, sans révéler ce que le film cache encore."
+    },
+    {
+        "name": "Clip / Concert",
+        "prompt": "Il s'agit d'un clip musical ou d'un concert. Les paroles sont chantées la plupart du temps : décrivez uniquement pendant les passages instrumentaux et entre les couplets, et seulement les éléments visuels les plus importants (interprètes, changements de décor, chorégraphie). Laissez respirer la musique."
+    },
+    {
+        "name": "Sport",
+        "prompt": "Il s'agit d'une retransmission sportive. Les commentaires couvrent généralement l'action : décrivez uniquement ce que les commentateurs ne disent pas, comme l'incrustation du score, les ralentis, les célébrations des joueurs et le public. Lisez le score et le chronomètre affichés à l'écran."
+    },
+    {
+        "name": "Actualités / Interview",
+        "prompt": "Il s'agit d'un reportage d'actualité ou d'une interview. Lisez mot pour mot les noms et fonctions des bandeaux, les légendes et les graphiques. Décrivez brièvement les lieux et les images d'archives. Ne parlez jamais par-dessus les intervenants."
+    },
+    {
+        "name": "Sans dialogue / Muet",
+        "prompt": "Cette vidéo comporte peu ou pas de dialogues. Décrivez en continu, mais laissez respirer la musique et les silences voulus. Suivez l'histoire action par action, du général au particulier."
+    },
+    {
+        "name": "Danse / Chorégraphie",
+        "prompt": "Il s'agit d'un spectacle de danse ou d'une chorégraphie. Décris chaque mouvement par la partie du corps et la direction (les bras balaient au-dessus de la tête, une pirouette vers la gauche), les formations, les portés, les entrées, et les costumes à leur première apparition. Place les descriptions sur les phrases instrumentales ; ne couvre jamais les paroles chantées."
+    },
+    {
+        "name": "Fitness / Yoga",
+        "prompt": "Il s'agit d'une vidéo de sport ou de yoga que le spectateur suit en même temps. Pour chaque nouveau mouvement, donne la position de départ, puis la partie du corps, le côté (gauche ou droite de l'instructeur), la direction et le nombre de répétitions montré. Lis les noms d'exercices et les minuteurs à l'écran. Décris l'apparence et le lieu une seule fois, au début."
+    },
+    {
+        "name": "Nature / Animaux",
+        "prompt": "Il s'agit d'un film nature ou animalier. Nomme une espèce seulement si la narration ou un texte à l'écran l'identifie ou si elle est reconnaissable sans doute possible ; sinon, donne sa taille, sa forme, sa couleur et son mouvement. Décris les comportements (chasse, alimentation, parade) et les changements de paysage et de météo. La narration explique souvent l'action : n'ajoute que ce qu'elle ne dit pas."
+    },
+    {
+        "name": "Vlog / Face caméra",
+        "prompt": "Il s'agit d'un vlog ou d'une personne qui parle face caméra la plupart du temps. Décris la personne et le lieu une seule fois, au début, puis seulement les changements : plans de coupe, objets montrés à la caméra, textes à l'écran, émojis et autocollants incrustés, et réactions visibles qui changent le sens de ce qui est dit."
+    },
+    {
+        "name": "Test produit / Déballage",
+        "prompt": "Il s'agit d'un test de produit ou d'un déballage. Lis la marque, le modèle, le prix et les caractéristiques affichés à l'écran ou sur l'emballage. Décris la forme du produit, sa taille comparée à des objets familiers, ses matériaux, boutons et prises, et chaque élément qui sort de la boîte. Décris les démonstrations par leur résultat visible."
+    }
+]

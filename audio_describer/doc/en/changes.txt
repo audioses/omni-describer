@@ -1,5 +1,81 @@
 Note: explicit credit is given to ideas that were presented once and were not suggested anywhere. Because I am unable to keep an entire list of names as the contact flow is huge. I would like to personally thank everyone who suggests additions to make this application to be the best.
 
+Unreleased - Sprint P3: beyond video
+
+New Features:
+Describe an image or PDF (File menu, Ctrl+I): photo, screenshot or document described for a blind reader, visible text read exactly; the result can be read line by line or copied.
+Describe My Screen (Ctrl+Alt+Shift+D, works from any application): the main screen is captured, described and read by your screen reader; the capture is deleted afterwards.
+Live Screen Description (Ctrl+Alt+Shift+L, on or off): the screen is checked every 3 seconds and described only when it changed noticeably (perceptual hash), saying just what is new.
+Audio subtitles (Settings > AI, off by default): dialogue in another language is translated, introduced by the speaker, announced by the on-screen text sound and read in the second voice in exports.
+Player output (Settings > Audio Output): screen reader, the app voice prepared in advance (exact ducking and pauses), or braille only (the video waits for Enter after each description); optional large description text on the video, with size and colour. Shift+Up/Down sets how much the video is lowered during descriptions; ? speaks the shortcuts like F1.
+Pause detection: Silero speech detection finds moments without speech even under music (model downloaded once, 2 MB, checked, run locally; falls back to silence detection); shot changes are detected and given to the AI as anchors.
+The approximate number of tokens is announced before the video is sent; generation gives news at least every 25 seconds; time to first description and longest silence are logged.
+AI check of style: past tense, interpretation instead of description, leaving the fiction (actors, camera); shown in the editor, counted by V and in the evaluation.
+Professional review: status (to review / validated) and notes per description, saved in the project.
+New exports: MP4 with a separate audio description track, W3C TTML DAPT script, production script in Word (.docx), full script with transcribed dialogue (WCAG 1.2.8).
+Command line: --density, --watch (watched folders), exports dapt, docx, mkv, mp4, mp3, m4a; available in the installed app as OmniDescriber.exe --cli.
+Describe my screen: the screen showing the active window is used; live mode waits for a pause in the computer's sound before speaking.
+Evaluate this audio description (E in the player): the CSA 2020 questionnaire in two phases (listening without the picture, then checking with it), each question rated 1 to 5 with comments, measured values shown next to the questions they inform, no overall score. Saved with the project; Save Report writes a text file.
+Command line and batch mode: python -m audio_describer.cli <videos, images, PDFs or folders> --lang fr --export vtt,srt,txt,project --out <folder>. Uses the app's settings and API key; a failed file does not stop the batch.
+
+Unreleased - Sprint P2 (part 1): quality and introduction
+
+New Features:
+Audio introduction (I in the player): the main characters, their look and the places, without spoilers, to hear before the programme (Ofcom 4.14). Written by the AI from the script the first time, then saved with the project.
+Quality report (V in the player): share of descriptions within their word budget, descriptions over sound, uncertain ones, words per second, longest stretch without description.
+AI quality check: after generation, a second text-only pass marks descriptions that are probably wrong (contradictory names, impossible sequences) as uncertain; the editor shows them with "Review". Can be turned off in Settings > AI.
+Explicitation setting (Settings > AI): describe only, describe and name, or describe, name and briefly explain (ADLAB).
+Rename a character in the editor's Characters tab: every description using the old name is updated.
+Descriptions and messages are also shown on the braille display (NVDA, JAWS).
+What is on screen (W in the player): describes the current picture, including visible text; follow-up questions in the Ask More window, which now remembers the conversation.
+Second voice: in audio and video exports, on-screen text is read in a lower voice so it stands out from the description (can be turned off in Settings > Audio Output).
+Scene Explorer rebuilt as an ordinary window that screen readers and braille displays read: scene summary, list of objects with clock positions (12 o'clock = top of the picture), a stereo cue placed left or right for each object, and their details. Replaces the old pygame window, which screen readers could not read.
+All new messages and help entries translated into the 10 interface languages.
+
+Unreleased - Sprint P1: Gemini 3.8, pauses, density, accessible exports
+
+New Features:
+Default model is now gemini-3.8-flash (Gemini 2.5 is deprecated). Settings > AI lets you pick a model from the list your API key can use (Refresh model list), and choose the thinking level.
+Description language is now separate from the interface language (Settings > AI > Description Language).
+Pause detection: before calling the AI, the soundtrack is analysed locally (free) to find pauses; the AI is told where they are and how many words fit in each.
+Density levels: every description is tagged essential, important or detail. Press D in the player to switch between low, medium and high density instantly, without regenerating.
+Three audio description modes (M in the player): in the pauses with ducking; extended, where the video pauses when a description does not fit, then resumes (WCAG 1.2.7); and on demand, where Enter describes the current moment and Shift+Enter gives more detail.
+Personalisation in Settings > AI: objective or subjective style, focus (characters, actions, settings, on-screen text), mention colours or not, maximum words per description.
+Series: File > Reuse Characters from a Project (Ctrl+G) starts a new episode with the names and descriptions of an earlier one.
+All interface languages (Arabic, English, French, Italian, Portuguese, Russian, Spanish, Turkish, Ukrainian, Vietnamese) translated for all new and previously untranslated messages; the help's shortcut section is translated too. New Arabic help page. The Italian help now opens (it was named help.htm).
+The AI now identifies the genre, audience and spoken language of the video, announces them, and adapts its descriptions (children, horror, music, lectures, sport, anime, foreign subtitles).
+Audio description voice level in exports (Settings > Audio Output), separate from the programme level.
+Users who already have prompt presets receive the new presets once; presets they delete afterwards do not come back.
+Long videos: each chunk now receives the characters and last descriptions of the previous ones, so names and descriptors stay consistent.
+On-screen text is announced by a short sound before it is read.
+New exports: video with a separate audio description track (MKV, all original audio and subtitle tracks kept, track marked for visually impaired users), audio description track only (M4A), and WebVTT descriptions. Exports are now built by FFmpeg with smooth ducking and loudness normalisation (EBU R128), and no longer load the whole film's audio into memory.
+New prompt presets: Lecture / Slides, Anime, Kids, Horror, Music Video, Sport, News, No Dialogue. Languages without their own presets now show the English ones.
+The description editor shows time, level, words per second and a "Review" warning for descriptions that are too long or over dialogue.
+
+Security:
+API keys are now encrypted with Windows DPAPI (your Windows account). Old settings files are read and converted on the next save.
+Updates are checked against the SHA256 published by GitHub, unsafe archive paths are rejected, and network calls time out.
+
+Unreleased - Accessibility audit, sprint P0
+
+New Features:
+Player keyboard shortcuts that work whatever control has focus: Space play/pause, Left/Right 5 s, Ctrl+Left/Right 30 s, Alt+Left/Right previous/next description, Up/Down volume, R repeat description, T announce time, A audio description on/off, Q ask more, S explore scene, Ctrl+S save project, F1 spoken shortcut list.
+Audio ducking: the video is lowered (9 dB by default, never muted) while a description is spoken, with smooth ramps.
+Projects: save your descriptions as a .omniad file (Ctrl+S in the player) and reopen them with File > Open Project (Ctrl+P). Closing the player with unsaved descriptions now asks to save. Downloaded videos are copied next to the project.
+Cancel Generation button (or Escape) in the main window. Ctrl+Shift+P repeats the last status message.
+Progress is now announced during generation: chunk number and percentage, retries and errors. Upload polling plays a short sound instead of staying silent.
+The AI prompt now follows professional audio description standards (Netflix, DCMP, ACB, CSA, Ofcom): complete present-tense sentences sized to the pause (about 2.7 words per second), on-screen text read verbatim, no interpretation of emotions, no spoilers.
+
+Fixes:
+Timestamps past one hour (HH:MM:SS) are no longer silently dropped.
+OneCore voices no longer speak twice too fast.
+The 32-bit SAPI5 helper is now really built as 32-bit.
+OpenAI TTS is only offered when the openai library is installed (and it is now in the requirements).
+Very short descriptions are no longer skipped by the player.
+Settings are written atomically, so a crash can no longer wipe your API keys.
+Logs now live in %LOCALAPPDATA%\OmniDescriber\logs and rotate instead of being overwritten at each launch.
+Character glossary entries are merged across chunks instead of duplicated.
+
 v2.0 - Maintenance Mode Release
 
 Important Notice:

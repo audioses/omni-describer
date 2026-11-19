@@ -2,93 +2,11 @@
 import json
 import os
 # from . import config_model  <- This was causing the circular import.
+from .. import config
 from ..utils.logger import app_logger
 
 PROMPTS_FILE_NAME = "prompts.json"
 PROMPTS_FILE_PATH = None # Initialize as None
-
-DEFAULT_PROMPTS = {
-    "en": [
-        {
-            "name": "Movie Trailer",
-            "prompt": "This is a movie trailer. Focus on fast-paced, impactful, and iconic shots. Prioritize describing key action moments, dramatic character introductions, and any on-screen text like release dates or studio logos. Create a sense of excitement and hint at the plot without revealing spoilers. Descriptions must be extremely brief to fit between quick cuts."
-        },
-        {
-            "name": "Action Movie",
-            "prompt": "This is an action movie . Focus on the core choreography of the action: significant punches, kicks, dodges, and use of weapons. Describe large-scale events like explosions or car chases. Keep descriptions concise and impactful to match the high-energy pacing."
-        },
-        {
-            "name": "Romantic Movie",
-            "prompt": "This is a romantic movie. Prioritize describing the characters' proximity to each other, meaningful touches (like holding hands), and significant facial expressions that show affection, longing, or conflict. Describe the romantic atmosphere of the setting (e.g., 'candlelit dinner,' 'walk on a moonlit beach')."
-        },
-        {
-            "name": "Comedy / Sitcom",
-            "prompt": "This is a comedic content. Focus on the visual gags, physical comedy, and absurd situations. Describe exaggerated reactions and comical expressions that are key to the joke. The timing of the description is crucial to land the punchline, so be brief and place it right after the visual gag occurs."
-        },
-        {
-            "name": "Sci-Fi / Fantasy",
-            "prompt": "This is a sci-fi/fantasy . Focus on describing the unique world elements. Describe futuristic technology, fantastical creatures, magical effects, and otherworldly landscapes. Explain what makes the visual elements different from the real world (e.g., 'A ship with glowing sails flies through a purple nebula.')."
-        },
-        {
-            "name": "Meme / Viral Video",
-            "prompt": "This is a short meme or viral video. The goal is to describe the core visual joke or unexpected event as concisely as possible. Identify the key subject and the one action that makes the video funny or interesting. On-screen captions are highly important (e.g., 'A cat wearing sunglasses nods its head to a beat. Caption: Vibing.')."
-        },
-        {
-            "name": "Documentary / Educational",
-            "prompt": "This is a documentary/educational video. Prioritize describing on-screen text, labels, graphics, maps, and archival footage. For people, focus on their actions as they relate to the subject matter (e.g., 'The biologist points to a specific plant.'). Maintain a neutral, informative tone."
-        },
-        {
-            "name": "Cooking / Recipe",
-            "prompt": "This is a cooking video. Describe the specific ingredients as they are added and the cooking techniques shown (e.g., 'dicing the onion,' 'searing the steak'). Describe the visual state and texture of the food at key stages (e.g., 'The sauce thickens to a glossy consistency.')."
-        },
-        {
-            "name": "DIY / Tutorial",
-            "prompt": "This is a tutorial or DIY video. Focus on the step-by-step process. Clearly describe the specific tools and materials used. Detail the action being performed on the object, and describe the state of the object before and after the action (e.g., 'He drills a hole through the marked spot on the plank.')."
-        },
-        {
-            "name": "Gaming / Let's Play",
-            "prompt": "This is a video game recording. Prioritize describing critical on-screen UI elements (the HUD), such as health bars, ammo count, or mini-maps if they change. Describe the main character/avatar's actions within the game world (e.g., 'The character casts a fire spell,' 'They jump to the next platform.')."
-        }
-    ],
-    "tr": [
-        {
-            "name": "Fragman",
-            "prompt": "Bu bir film fragmanıdır. Hızlı tempolu, etkili ve ikonik çekimlere odaklan. Kilit aksiyon anlarını, dramatik karakter girişlerini ve vizyon tarihleri veya stüdyo logoları gibi ekrandaki metinleri betimlemeye öncelik ver. Spoiler  vermeden bir heyecan hissi yarat ve konuya dair ipuçları ver. Betimlemeler, hızlı kesitler arasına sığabilmesi için son derece kısa olmalıdır."
-        },
-        {
-            "name": "Aksiyon Film",
-            "prompt": "Bu bir aksiyon videosudur. Aksiyonun temel koreografisine odaklan: önemli yumruklar, tekmeler, kaçışlar ve silah kullanımı. Patlamalar veya araba kovalamacaları gibi büyük ölçekli olayları betimle. Yüksek enerjili tempoya uymak için betimlemeleri kısa ve etkili tut."
-        },
-        {
-            "name": "Romantik Film",
-            "prompt": "Bu bir romantik videodur. Karakterlerin birbirine olan yakınlığını, (el ele tutuşmak gibi) anlamlı dokunuşlarını ve sevgi, özlem veya çatışma gösteren önemli yüz ifadelerini betimlemeye öncelik ver. Mekanın romantik atmosferini betimle (örneğin, 'mum ışığında bir akşam yemeği,' 'ay ışığında bir kumsalda yürüyüş')."
-        },
-        {
-            "name": "Komedi / Sitcom",
-            "prompt": "Bu bir komedi videosudur. Görsel şakalara, fiziksel komediye ve absürt durumlara odaklan. Şakanın anahtarı olan abartılı tepkileri ve komik ifadeleri betimle. Betimlemenin zamanlaması, esprinin etkili olması için kritiktir, bu yüzden kısa ol ve görsel şaka gerçekleştikten hemen sonra yerleştir."
-        },
-        {
-            "name": "Bilim Kurgu / Fantastik",
-            "prompt": "Bu bir bilim kurgu/fantastik videosudur. Benzersiz dünya unsurlarını betimlemeye odaklan. Fütüristik teknolojiyi, fantastik yaratıkları, sihirli efektleri ve dünya dışı manzaraları betimle. Görsel unsurları gerçek dünyadan farklı kılan şeyleri açıkla (örneğin, 'Parlayan yelkenleri olan bir gemi, mor bir bulutsunun içinde uçuyor.')."
-        },
-        {
-            "name": "Meme / Viral Video",
-            "prompt": "Bu kısa bir meme veya viral videodur. Amaç, temel görsel şakayı veya beklenmedik olayı mümkün olan en kısa şekilde betimlemektir. Videoyu komik veya ilginç kılan ana özneyi ve tek eylemi belirle. Ekran üzerindeki yazılar son derece önemlidir (örneğin, 'Güneş gözlüğü takan bir kedi, bir ritme başını sallıyor. Altyazı: Modunda.')."
-        },
-        {
-            "name": "Belgesel / Bilgilendirici",
-            "prompt": "Bu bir belgesel/eğitici videodur. Ekrandaki metinleri, etiketleri, grafikleri, haritaları ve arşiv görüntülerini betimlemeye öncelik ver. İnsanlar için, konuyla ilgili eylemlerine odaklan (örneğin, \"Biyolog belirli bir bitkiyi işaret ediyor\"). Sade ve bilgilendirici bir ton kullan."},
-        {
-            "name": "Yemek / Tarif",
-            "prompt": "Bu bir yemek pişirme videosudur. Eklenen belirli malzemeleri ve gösterilen pişirme tekniklerini (örneğin, 'soğanı küp küp doğruyor,' 'bifteği mühürlüyor') betimle. Yemeğin kilit aşamalardaki görsel durumunu ve dokusunu betimle (örneğin, 'Sos, parlak bir kıvama gelene kadar koyulaşır.')."},
-        {
-            "name": "Kendin Yap / Eğitici Video",
-            "prompt": "Bu bir eğitici veya kendin yap videosudur. Adım adım ilerleyen sürece odaklan. Kullanılan belirli araçları ve malzemeleri net bir şekilde betimle. Nesne üzerinde gerçekleştirilen eylemi ve eylemden önceki ve sonraki durumunu detaylandır (örneğin, 'Tahtanın üzerindeki işaretli noktaya bir delik açıyor.')."},
-        {
-            "name": "Oyun / Oynanış Videosu Odağı",
-            "prompt": "Bu bir video oyunu kaydıdır. Sağlık çubukları, mermi sayısı veya mini haritalar gibi kritik ekran arayüzü (HUD) ögelerini, değiştiklerinde betimlemeye öncelik ver. Ana karakterin/avatarın oyun dünyasındaki eylemlerini betimle (örneğin, 'Karakter bir ateş büyüsü yapıyor,' 'Bir sonraki platforma zıyplıyor)."}
-    ]
-}
 
 # In-memory cache for prompts
 _prompts_cache = {}
@@ -105,7 +23,8 @@ def _get_prompts_file_path():
 
 def _get_default_prompts_for_lang(lang_code):
     """Returns a copy of the default prompts for a specific language."""
-    return DEFAULT_PROMPTS.get(lang_code, []).copy()
+    # Languages without their own presets get the English ones (the AI still writes in the description language).
+    return list(DEFAULT_PROMPTS.get(lang_code) or DEFAULT_PROMPTS.get("en", []))
 
 def load_prompts():
     """Loads all prompts from the JSON file into the cache."""
@@ -128,12 +47,95 @@ def load_prompts():
             if lang_code not in _prompts_cache:
                 _prompts_cache[lang_code] = default_list.copy()
                 updated = True
+        updated |= _merge_new_defaults()
+        updated |= sum(_repair_hint_text(v) for v in _prompts_cache.values() if isinstance(v, list)) > 0
         if updated:
             save_prompts()
         app_logger.info(f"Prompts loaded successfully from {file_path}.")
     except (json.JSONDecodeError, IOError) as e:
         app_logger.error(f"Error loading prompts from {file_path}: {e}. Using default prompts.")
         _prompts_cache = DEFAULT_PROMPTS.copy()
+
+# Bump when presets are added to DEFAULT_PROMPTS so existing users receive them once.
+PROMPT_DEFAULTS_VERSION = 4
+
+
+# SHA-256 (first 16 hex) of default preset texts replaced in v4 (examples starting with a pronoun,
+# typos). A user preset still holding one of these exact texts was never edited, so it is
+# upgraded to the current default of the same name; edited presets are never touched.
+_SUPERSEDED_DEFAULT_HASHES = frozenset({
+    'af968ffa01ae43ea', '53d94dd9b7fb42d1', 'f5f32b14fffbf78c', '975297d903354fd8', 'a48c3eb6f72a35ff',
+    '02c4b6b4e63ac109', '49458cb69d149c0f', 'becadfd6b05696f9', '60136ba8f7666c67', '340fe84cceb6f806',
+    '9cafc4bee5375fa2', '6d3639972c886fc7', 'edb2fc04f6ef6625', 'ac9dab449b85d49a', '25858182b14ca542',
+    'd9fb9eb2a2612cad', 'a41c542ba6d2752e', '572e1e8bc26dcc50', '083ee301032b1be1', '6a32cee906c6736a',
+    'aca413102e8e948e', 'e9ed7287321c3a61',
+})
+
+
+def _text_hash(text):
+    import hashlib
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()[:16]
+
+
+def _upgrade_unedited_presets(user_list, default_list):
+    """Replace untouched old default texts by the current default; returns how many changed."""
+    current = {p["name"]: p["prompt"] for p in default_list}
+    changed = 0
+    for preset in user_list:
+        new_text = current.get(preset.get("name"))
+        if new_text and preset.get("prompt") != new_text and _text_hash(preset.get("prompt") or "") in _SUPERSEDED_DEFAULT_HASHES:
+            preset["prompt"] = new_text
+            changed += 1
+    return changed
+
+
+# Older versions wrote the fields' accessible names into the fields themselves (TextCtrl.SetLabel),
+# so saved presets can start with these hints. English + current UI language are stripped on load.
+_FIELD_HINTS = ("A short, descriptive name for the prompt preset.", "The full text of the prompt to be sent to the AI.")
+
+
+def _repair_hint_text(presets):
+    """Remove field hints glued into preset names/texts by the old dialog bug; returns how many fixed."""
+    hints = set(_FIELD_HINTS)
+    try:
+        from ..i18n_setup import _
+        hints |= {_(h) for h in _FIELD_HINTS}
+    except Exception:  # no wx (tests, CLI without UI): English only
+        pass
+    fixed = 0
+    for preset in presets:
+        for key in ("name", "prompt"):
+            value = preset.get(key) or ""
+            cleaned = value
+            for hint in hints:
+                cleaned = cleaned.replace(hint, "")
+            if cleaned != value and cleaned.strip():
+                preset[key] = cleaned.strip()
+                fixed += 1
+    return fixed
+
+
+def _merge_new_defaults():
+    """Add default presets the user has never seen (by name). Runs once per version,
+    so a preset the user deletes afterwards does not come back."""
+    from . import config_model
+    if (config_model.get_setting("prompt_defaults_version") or 0) >= PROMPT_DEFAULTS_VERSION:
+        return False
+    added = 0
+    for lang_code, default_list in DEFAULT_PROMPTS.items():
+        user_list = _prompts_cache.setdefault(lang_code, [])
+        added += _upgrade_unedited_presets(user_list, default_list)
+        names = {p.get("name") for p in user_list}
+        for preset in default_list:
+            if preset["name"] not in names:
+                user_list.append(dict(preset))
+                added += 1
+    if config_model.app_settings is not None:
+        config_model.app_settings["prompt_defaults_version"] = PROMPT_DEFAULTS_VERSION
+        config_model.save_settings(config_model.app_settings)
+    app_logger.info(f"Merged {added} new default prompt presets.")
+    return added > 0
+
 
 def save_prompts():
     """Saves the current state of the prompts cache to the JSON file."""
@@ -170,4 +172,43 @@ def set_prompts_for_language(lang_code, prompts_list):
     _prompts_cache[lang_code] = prompts_list
     return save_prompts()
 
-# REMOVED the line "load_prompts()" from the end of the file.
+
+MAX_PRESETS, MAX_PRESET_CHARS = 200, 20000
+
+
+def validate_presets(data):
+    """Imported preset file (untrusted): a list of {name, prompt} strings. Returns clean copies or raises ValueError."""
+    if not isinstance(data, list) or not data or len(data) > MAX_PRESETS:
+        raise ValueError("expected a list of 1 to %d presets" % MAX_PRESETS)
+    out = []
+    for item in data:
+        name = item.get("name") if isinstance(item, dict) else None
+        prompt = item.get("prompt") if isinstance(item, dict) else None
+        if not (isinstance(name, str) and isinstance(prompt, str) and name.strip() and prompt.strip()):
+            raise ValueError("each preset needs a text name and prompt")
+        if len(name) > 200 or len(prompt) > MAX_PRESET_CHARS:
+            raise ValueError("preset too long: %s" % name[:50])
+        out.append({"name": name.strip(), "prompt": prompt.strip()})
+    return out
+
+
+def _load_default_presets():
+    """Default presets live in prompts/<language>.json, one file per language (fr.json, en.json...).
+    Translating or adding a language is adding a file there; no code change."""
+    folder = config.get_prompts_dir()
+    presets = {}
+    for file_name in sorted(os.listdir(folder)) if os.path.isdir(folder) else ():
+        lang, ext = os.path.splitext(file_name)
+        if ext.lower() != ".json":
+            continue
+        try:
+            with open(os.path.join(folder, file_name), encoding="utf-8") as f:
+                presets[lang.lower()] = validate_presets(json.load(f))
+        except (OSError, ValueError, AttributeError) as e:  # a broken translation must not stop the app
+            app_logger.error(f"Default presets {file_name} skipped: {e}")
+    if "en" not in presets:
+        app_logger.error(f"No English default presets found in {folder}.")
+    return presets
+
+
+DEFAULT_PROMPTS = _load_default_presets()

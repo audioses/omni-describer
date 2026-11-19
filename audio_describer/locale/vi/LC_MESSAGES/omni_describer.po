@@ -1,3 +1,4 @@
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
@@ -105,7 +106,8 @@ msgstr "Đang xử lý video (lần thử %d)... trạng thái: %s"
 #: core/audio_describer.py:121
 #, python-format
 msgid "Video processing timed out or failed. Final state: %s"
-msgstr "Xử lý video đã hết thời gian chờ hoặc thất bại. Trạng thái cuối cùng: %s"
+msgstr ""
+"Xử lý video đã hết thời gian chờ hoặc thất bại. Trạng thái cuối cùng: %s"
 
 #: core/audio_describer.py:125
 msgid "Video ready. Preparing AI request for descriptions..."
@@ -117,12 +119,18 @@ msgstr "Đang yêu cầu mô tả âm thanh từ AI..."
 
 #: core/audio_describer.py:143
 msgid "Failed to parse timed descriptions from AI's JSON response."
-msgstr "Không thể phân tích cú pháp các mô tả theo thời gian từ phản hồi JSON của AI."
+msgstr ""
+"Không thể phân tích cú pháp các mô tả theo thời gian từ phản hồi JSON của "
+"AI."
 
 #: core/audio_describer.py:145
 #, python-format
-msgid "Successfully parsed %d raw descriptions. Correcting timestamps and duplicates..."
-msgstr "Đã phân tích thành công %d mô tả thô. Đang sửa lại mốc thời gian và các mô tả trùng lặp..."
+msgid ""
+"Successfully parsed %d raw descriptions. Correcting timestamps and "
+"duplicates..."
+msgstr ""
+"Đã phân tích thành công %d mô tả thô. Đang sửa lại mốc thời gian và các mô "
+"tả trùng lặp..."
 
 #: core/audio_describer.py:149
 msgid "No descriptions remained after all post-processing."
@@ -148,8 +156,12 @@ msgid "VQA request failed: %s"
 msgstr "Yêu cầu Hỏi-Đáp Video (VQA) thất bại: %s"
 
 #: core/audio_describer.py:202
-msgid "AI process stopped while generating glossary due to token limit. Try simplifying the video or adjusting settings."
-msgstr "Quá trình xử lý của AI đã dừng khi đang tạo bảng chú giải do giới hạn token. Hãy thử đơn giản hóa video hoặc điều chỉnh cài đặt."
+msgid ""
+"AI process stopped while generating glossary due to token limit. Try "
+"simplifying the video or adjusting settings."
+msgstr ""
+"Quá trình xử lý của AI đã dừng khi đang tạo bảng chú giải do giới hạn token."
+" Hãy thử đơn giản hóa video hoặc điều chỉnh cài đặt."
 
 #: core/audio_describer.py:209
 #, python-format
@@ -180,8 +192,12 @@ msgstr "Đang đảm bảo thời lượng mô tả tối thiểu..."
 
 #: core/audio_describer.py:258
 #, python-format
-msgid "Timestamp correction complete. %(count)d descriptions processed, %(adjusted_count)d had timestamps adjusted."
-msgstr "Hoàn tất việc sửa mốc thời gian. Đã xử lý %(count)d mô tả, trong đó %(adjusted_count)d mô tả đã được điều chỉnh mốc thời gian."
+msgid ""
+"Timestamp correction complete. %(count)d descriptions processed, "
+"%(adjusted_count)d had timestamps adjusted."
+msgstr ""
+"Hoàn tất việc sửa mốc thời gian. Đã xử lý %(count)d mô tả, trong đó "
+"%(adjusted_count)d mô tả đã được điều chỉnh mốc thời gian."
 
 #: core/audio_describer.py:267
 #, python-format
@@ -193,12 +209,20 @@ msgid "Not named"
 msgstr "Chưa đặt tên"
 
 #: core/gemini_helpers.py:73
-msgid "Google's Gemini SDK could not be loaded. This might be due to a compatibility issue or a corrupted installation."
-msgstr "Không thể tải SDK Gemini của Google. Điều này có thể do vấn đề tương thích hoặc cài đặt bị lỗi."
+msgid ""
+"Google's Gemini SDK could not be loaded. This might be due to a "
+"compatibility issue or a corrupted installation."
+msgstr ""
+"Không thể tải SDK Gemini của Google. Điều này có thể do vấn đề tương thích "
+"hoặc cài đặt bị lỗi."
 
 #: core/gemini_helpers.py:77
-msgid "A critical error occurred while loading Google's Gemini SDK, which may be due to a system incompatibility."
-msgstr "Đã xảy ra lỗi nghiêm trọng khi tải SDK Gemini của Google, có thể do không tương thích hệ thống."
+msgid ""
+"A critical error occurred while loading Google's Gemini SDK, which may be "
+"due to a system incompatibility."
+msgstr ""
+"Đã xảy ra lỗi nghiêm trọng khi tải SDK Gemini của Google, có thể do không "
+"tương thích hệ thống."
 
 #: core/gemini_helpers.py:116
 msgid "Gemini API Key is not configured in settings."
@@ -219,8 +243,10 @@ msgid "AI returned no answer or an invalid response structure."
 msgstr "AI không trả về câu trả lời hoặc cấu trúc phản hồi không hợp lệ."
 
 #: core/gemini_helpers.py:227
-msgid "AI process stopped because it reached its processing limit (MAX_TOKENS)."
-msgstr "Quá trình xử lý của AI đã dừng vì đạt đến giới hạn xử lý (MAX_TOKENS)."
+msgid ""
+"AI process stopped because it reached its processing limit (MAX_TOKENS)."
+msgstr ""
+"Quá trình xử lý của AI đã dừng vì đạt đến giới hạn xử lý (MAX_TOKENS)."
 
 #: core/gemini_helpers.py:233
 #, python-format
@@ -288,8 +314,12 @@ msgstr "Tải xuống từ URL trực tiếp %s thất bại: %s"
 
 #: core/video_processor.py:273
 #, python-format
-msgid "Failed to download from YouTube URL %(url)s. Initial error: %(initial_error)s. Fallback attempt also failed: %(fallback_error)s"
-msgstr "Tải xuống từ URL YouTube %(url)s thất bại. Lỗi ban đầu: %(initial_error)s. Nỗ lực tải dự phòng cũng thất bại: %(fallback_error)s"
+msgid ""
+"Failed to download from YouTube URL %(url)s. Initial error: "
+"%(initial_error)s. Fallback attempt also failed: %(fallback_error)s"
+msgstr ""
+"Tải xuống từ URL YouTube %(url)s thất bại. Lỗi ban đầu: %(initial_error)s. "
+"Nỗ lực tải dự phòng cũng thất bại: %(fallback_error)s"
 
 #: core/youtube_downloader.py:147 core/youtube_downloader.py:221
 #, python-format
@@ -306,8 +336,12 @@ msgid "yt-dlp returned no information for the video."
 msgstr "yt-dlp không trả về thông tin nào cho video."
 
 #: core/youtube_downloader.py:191
-msgid "yt-dlp command not found. Please ensure yt-dlp is installed and in your system PATH, or bundled correctly."
-msgstr "Không tìm thấy lệnh yt-dlp. Vui lòng đảm bảo yt-dlp đã được cài đặt và nằm trong PATH hệ thống, hoặc được đóng gói đúng cách."
+msgid ""
+"yt-dlp command not found. Please ensure yt-dlp is installed and in your "
+"system PATH, or bundled correctly."
+msgstr ""
+"Không tìm thấy lệnh yt-dlp. Vui lòng đảm bảo yt-dlp đã được cài đặt và nằm "
+"trong PATH hệ thống, hoặc được đóng gói đúng cách."
 
 #: core/youtube_downloader.py:199
 msgid "Timeout fetching video information."
@@ -334,18 +368,28 @@ msgid "Best Available"
 msgstr "Chất lượng Tốt nhất Hiện có"
 
 #: core/youtube_downloader.py:275
-msgid "Could not retrieve video info; cannot reliably predict output filename."
-msgstr "Không thể truy xuất thông tin video; không thể dự đoán chính xác tên tệp đầu ra."
+msgid ""
+"Could not retrieve video info; cannot reliably predict output filename."
+msgstr ""
+"Không thể truy xuất thông tin video; không thể dự đoán chính xác tên tệp đầu"
+" ra."
 
 #: core/youtube_downloader.py:325
 #, python-format
-msgid "Download completed but output file not found. Check logs for details in %s."
-msgstr "Tải xuống hoàn tất nhưng không tìm thấy tệp đầu ra. Kiểm tra nhật ký để biết chi tiết trong %s."
+msgid ""
+"Download completed but output file not found. Check logs for details in %s."
+msgstr ""
+"Tải xuống hoàn tất nhưng không tìm thấy tệp đầu ra. Kiểm tra nhật ký để biết"
+" chi tiết trong %s."
 
 #: core/youtube_downloader.py:328
 #, python-format
-msgid "yt-dlp command not found. Please ensure yt-dlp is installed and in your system PATH, or bundled correctly at %s."
-msgstr "Không tìm thấy lệnh yt-dlp. Vui lòng đảm bảo yt-dlp đã được cài đặt và nằm trong PATH hệ thống, hoặc được đóng gói đúng cách tại %s."
+msgid ""
+"yt-dlp command not found. Please ensure yt-dlp is installed and in your "
+"system PATH, or bundled correctly at %s."
+msgstr ""
+"Không tìm thấy lệnh yt-dlp. Vui lòng đảm bảo yt-dlp đã được cài đặt và nằm "
+"trong PATH hệ thống, hoặc được đóng gói đúng cách tại %s."
 
 #: core/youtube_downloader.py:334
 #, python-format
@@ -358,8 +402,12 @@ msgid "Unexpected error during download for %s: %s"
 msgstr "Lỗi không mong muốn trong quá trình tải xuống cho %s: %s"
 
 #: core/youtube_downloader.py:346
-msgid "Standalone test: config_model.app_settings seems empty, loading defaults for test."
-msgstr "Kiểm tra độc lập: có vẻ config_model.app_settings trống, đang tải các giá trị mặc định để kiểm tra."
+msgid ""
+"Standalone test: config_model.app_settings seems empty, loading defaults for"
+" test."
+msgstr ""
+"Kiểm tra độc lập: có vẻ config_model.app_settings trống, đang tải các giá "
+"trị mặc định để kiểm tra."
 
 #: core/youtube_downloader.py:383
 #, python-format
@@ -484,8 +532,10 @@ msgid "Instructions (for Tone, Emotion, etc.):"
 msgstr "Hướng dẫn (về Tông giọng, Cảm xúc, v.v.):"
 
 #: ui/add_edit_voice_dialog.py:44
-msgid "Describe the desired tone. Example: 'Speak in a cheerful and positive tone.'"
-msgstr "Mô tả tông giọng mong muốn. Ví dụ: 'Nói với tông giọng vui vẻ và tích cực.'"
+msgid ""
+"Describe the desired tone. Example: 'Speak in a cheerful and positive tone.'"
+msgstr ""
+"Mô tả tông giọng mong muốn. Ví dụ: 'Nói với tông giọng vui vẻ và tích cực.'"
 
 #: ui/add_edit_voice_dialog.py:74
 msgid "A preset name is required."
@@ -598,7 +648,9 @@ msgstr "(Không có mô tả nào)"
 #: ui/edit_description_dialog.py:142
 #, python-format
 msgid "Start time must be within the video duration (0 to %.2f sec)."
-msgstr "Thời gian bắt đầu phải nằm trong khoảng thời lượng của video (từ 0 đến %.2f giây)."
+msgstr ""
+"Thời gian bắt đầu phải nằm trong khoảng thời lượng của video (từ 0 đến %.2f "
+"giây)."
 
 #: ui/edit_description_dialog.py:148
 msgid "Invalid start time. Please enter a valid number."
@@ -610,8 +662,13 @@ msgstr "Đầu vào không hợp lệ"
 
 #: ui/edit_description_dialog.py:160 ui/edit_description_dialog.py:257
 #, python-format
-msgid "Invalid time range. Times must be within the video duration (0 to %.2f sec) and end time must be after start time."
-msgstr "Khoảng thời gian không hợp lệ. Thời gian phải nằm trong khoảng thời lượng của video (từ 0 đến %.2f giây) và thời gian kết thúc phải sau thời gian bắt đầu."
+msgid ""
+"Invalid time range. Times must be within the video duration (0 to %.2f sec) "
+"and end time must be after start time."
+msgstr ""
+"Khoảng thời gian không hợp lệ. Thời gian phải nằm trong khoảng thời lượng "
+"của video (từ 0 đến %.2f giây) và thời gian kết thúc phải sau thời gian bắt "
+"đầu."
 
 #: ui/edit_description_dialog.py:162 ui/edit_description_dialog.py:254
 msgid "Description text cannot be empty."
@@ -663,8 +720,12 @@ msgid "Optional: Specific things to focus on:"
 msgstr "Tùy chọn: Những điều cụ thể cần tập trung vào:"
 
 #: ui/explore_scene_options_dialog.py:35
-msgid "Example: 'Focus on the expressions of the people' or 'Describe the text on any signs'"
-msgstr "Ví dụ: 'Tập trung vào biểu cảm của mọi người' hoặc 'Mô tả văn bản trên các biển báo'"
+msgid ""
+"Example: 'Focus on the expressions of the people' or 'Describe the text on "
+"any signs'"
+msgstr ""
+"Ví dụ: 'Tập trung vào biểu cảm của mọi người' hoặc 'Mô tả văn bản trên các "
+"biển báo'"
 
 #: ui/explore_scene_options_dialog.py:49
 msgid "&Analyze Scene"
@@ -900,7 +961,8 @@ msgstr "Xử lý một video từ một URL YouTube"
 
 #: ui/main_window.py:96
 msgid "Optional: Select a prompt preset to enhance generation:"
-msgstr "Tùy chọn: Chọn một thiết lập sẵn của lời nhắc để cải thiện việc tạo mô tả:"
+msgstr ""
+"Tùy chọn: Chọn một thiết lập sẵn của lời nhắc để cải thiện việc tạo mô tả:"
 
 #: ui/main_window.py:100
 msgid "Select an optional prompt preset."
@@ -1015,7 +1077,9 @@ msgstr "Đang yêu cầu AI tạo mô tả..."
 
 #: ui/main_window.py:317
 msgid "AI processing failed to provide descriptions for an unknown reason."
-msgstr "Xử lý của AI đã thất bại trong việc cung cấp mô tả vì một lý do không xác định."
+msgstr ""
+"Xử lý của AI đã thất bại trong việc cung cấp mô tả vì một lý do không xác "
+"định."
 
 #: ui/main_window.py:319
 msgid "Finalizing descriptions..."
@@ -1106,7 +1170,9 @@ msgid "Ready for next video."
 msgstr "Sẵn sàng cho video tiếp theo."
 
 #: ui/main_window.py:399
-msgid "Processing complete, but the AI did not generate any descriptions for this video."
+msgid ""
+"Processing complete, but the AI did not generate any descriptions for this "
+"video."
 msgstr "Xử lý hoàn tất, nhưng AI không tạo ra bất kỳ mô tả nào cho video này."
 
 #: ui/main_window.py:401
@@ -1223,8 +1289,12 @@ msgid "Video Player with Descriptions"
 msgstr "Trình phát Video với Mô tả"
 
 #: ui/player_window.py:135
-msgid "VLC library is not installed or could not be loaded. Playback will be unavailable."
-msgstr "Thư viện VLC chưa được cài đặt hoặc không thể tải. Chức năng phát lại sẽ không khả dụng."
+msgid ""
+"VLC library is not installed or could not be loaded. Playback will be "
+"unavailable."
+msgstr ""
+"Thư viện VLC chưa được cài đặt hoặc không thể tải. Chức năng phát lại sẽ "
+"không khả dụng."
 
 #: ui/player_window.py:161 ui/player_window.py:286
 msgid "Play"
@@ -1388,16 +1458,26 @@ msgid "An error occurred in the Scene Explorer."
 msgstr "Đã xảy ra lỗi trong Trình khám phá Cảnh."
 
 #: ui/scene_explorer_dialog.py:56
-msgid "Scene Explorer opened. Use arrow keys to move. Press D for scene description, L to list all objects, and Shift + L to enter jump mode. Escape to close."
-msgstr "Trình khám phá Cảnh đã mở. Sử dụng các phím mũi tên để di chuyển. Nhấn D để xem mô tả cảnh, L để liệt kê tất cả các đối tượng, và Shift + L để vào chế độ nhảy. Escape để đóng."
+msgid ""
+"Scene Explorer opened. Use arrow keys to move. Press D for scene "
+"description, L to list all objects, and Shift + L to enter jump mode. Escape"
+" to close."
+msgstr ""
+"Trình khám phá Cảnh đã mở. Sử dụng các phím mũi tên để di chuyển. Nhấn D để "
+"xem mô tả cảnh, L để liệt kê tất cả các đối tượng, và Shift + L để vào chế "
+"độ nhảy. Escape để đóng."
 
 #: ui/scene_explorer_dialog.py:117
 msgid "There are no objects to jump to."
 msgstr "Không có đối tượng nào để nhảy tới."
 
 #: ui/scene_explorer_dialog.py:122
-msgid "Jump mode. Use up and down arrows to select an object. Press Enter to jump, or Escape to exit jump mode."
-msgstr "Chế độ nhảy. Sử dụng mũi tên lên và xuống để chọn một đối tượng. Nhấn Enter để nhảy tới, hoặc Escape để thoát chế độ nhảy."
+msgid ""
+"Jump mode. Use up and down arrows to select an object. Press Enter to jump, "
+"or Escape to exit jump mode."
+msgstr ""
+"Chế độ nhảy. Sử dụng mũi tên lên và xuống để chọn một đối tượng. Nhấn Enter "
+"để nhảy tới, hoặc Escape để thoát chế độ nhảy."
 
 #: ui/scene_explorer_dialog.py:127
 msgid "Exited jump mode. Now exploring."
@@ -1720,3 +1800,2290 @@ msgstr "Tải xuống hoặc áp dụng bản cập nhật thất bại: {}"
 #: utils/update_checker.py:89
 msgid "Update Error"
 msgstr "Lỗi Cập nhật"
+
+#: audio_describer/__app__real.py:127
+msgid ""
+"Omni Describer is now available as a web platform!\n"
+"\n"
+"The desktop app will continue to work, but new features and improvements are now focused on the web version at:\n"
+"\n"
+"%(webapp_url)s\n"
+"\n"
+"The web platform requires no installation, no API keys, and works on all devices including Mac and mobile.\n"
+"\n"
+"Would you like to open the web platform now?\n"
+"\n"
+"(This message will only be shown once.)"
+msgstr ""
+"Omni Describer hiện đã có phiên bản nền tảng web!\n"
+"\n"
+"Ứng dụng máy tính vẫn tiếp tục hoạt động, nhưng các tính năng và cải tiến mới hiện tập trung vào phiên bản web tại:\n"
+"\n"
+"%(webapp_url)s\n"
+"\n"
+"Nền tảng web không cần cài đặt, không cần khóa API và hoạt động trên mọi thiết bị, kể cả Mac và điện thoại di động.\n"
+"\n"
+"Bạn có muốn mở nền tảng web ngay bây giờ không?\n"
+"\n"
+"(Thông báo này chỉ hiển thị một lần.)"
+
+#: audio_describer/__app__real.py:140
+msgid "Omni Describer Web Platform"
+msgstr "Nền tảng web Omni Describer"
+
+#: audio_describer/__app__real.py:95
+msgid "Settings Notice"
+msgstr "Thông báo cài đặt"
+
+#: audio_describer/core/audio_describer.py:30
+msgid "Generation cancelled by user."
+msgstr "Người dùng đã hủy quá trình tạo."
+
+#: audio_describer/core/audio_describer.py:231
+msgid "Detecting pauses in the soundtrack..."
+msgstr "Đang phát hiện các khoảng lặng trong âm thanh..."
+
+#: audio_describer/core/audio_describer.py:323
+msgid "%(count)d descriptions ready, %(flagged)d to review."
+msgstr "%(count)d mô tả đã sẵn sàng, %(flagged)d mô tả cần xem lại."
+
+#: audio_describer/core/audio_describer.py:348
+msgid ""
+"Detected content: %(genre)s, for %(audience)s, spoken language %(lang)s. "
+"Choose a preset or a focus to change it."
+msgstr ""
+"Nội dung được phát hiện: %(genre)s, dành cho %(audience)s, ngôn ngữ nói "
+"%(lang)s. Chọn một thiết lập sẵn hoặc trọng tâm để thay đổi."
+
+#: audio_describer/core/audio_describer.py:510
+msgid "Warning: 'audio_descriptions' key was not a list."
+msgstr "Cảnh báo: khóa 'audio_descriptions' không phải là danh sách."
+
+#: audio_describer/core/audio_describer.py:515
+msgid "Warning: 'character_glossary' key was not a list."
+msgstr "Cảnh báo: khóa 'character_glossary' không phải là danh sách."
+
+#: audio_describer/core/audio_describer.py:254
+msgid "Requesting descriptions from AI..."
+msgstr "Đang yêu cầu AI tạo mô tả..."
+
+#: audio_describer/core/audio_describer.py:334
+msgid "Generation failed: %s"
+msgstr "Tạo thất bại: %s"
+
+#: audio_describer/core/audio_describer.py:440
+msgid "Invalid timestamp format: %s"
+msgstr "Định dạng dấu thời gian không hợp lệ: %s"
+
+#: audio_describer/core/audio_describer.py:537
+msgid "Error: Could not decode the AI's JSON response: %s"
+msgstr "Lỗi: Không thể giải mã phản hồi JSON của AI: %s"
+
+#: audio_describer/core/audio_describer.py:234
+msgid "Found %d pauses in the soundtrack."
+msgstr "Đã tìm thấy %d khoảng lặng trong âm thanh."
+
+#: audio_describer/core/audio_describer.py:256
+msgid "Chunk %(n)d of %(total)d, %(pct)d%% done."
+msgstr "Đoạn %(n)d trên %(total)d, đã xong %(pct)d%%."
+
+#: audio_describer/core/audio_describer.py:312
+msgid "Chunk %d: parsed %d descriptions."
+msgstr "Đoạn %d: đã phân tích %d mô tả."
+
+#: audio_describer/core/audio_describer.py:546
+msgid "Successfully parsed a fallback JSON object."
+msgstr "Đã phân tích thành công đối tượng JSON dự phòng."
+
+#: audio_describer/core/audio_describer.py:549
+msgid "Fallback JSON parsing also failed."
+msgstr "Phân tích JSON dự phòng cũng thất bại."
+
+#: audio_describer/core/gemini_helpers.py:272
+msgid "Failed after %d retries."
+msgstr "Thất bại sau %d lần thử lại."
+
+#: audio_describer/core/gemini_helpers.py:263
+msgid ""
+"Rate limit hit (attempt %(attempt)d/%(max)d). Retrying in %(delay)d "
+"seconds..."
+msgstr ""
+"Đã vượt giới hạn tần suất (lần thử %(attempt)d/%(max)d). Thử lại sau "
+"%(delay)d giây..."
+
+#: audio_describer/core/video_processor.py:140
+msgid "Pre-processing video for AI analysis (stripping audio)..."
+msgstr "Đang tiền xử lý video để AI phân tích (loại bỏ âm thanh)..."
+
+#: audio_describer/ui/edit_description_dialog.py:58
+msgid "Descriptions"
+msgstr "Mô tả"
+
+#: audio_describer/ui/edit_description_dialog.py:157
+msgid "too long"
+msgstr "quá dài"
+
+#: audio_describer/ui/edit_description_dialog.py:157
+msgid "over sound"
+msgstr "đè lên âm thanh"
+
+#: audio_describer/ui/edit_description_dialog.py:65
+msgid "ID"
+msgstr "ID"
+
+#: audio_describer/ui/edit_description_dialog.py:66
+msgid "Name"
+msgstr "Tên"
+
+#: audio_describer/ui/edit_description_dialog.py:67
+msgid "Description"
+msgstr "Mô tả"
+
+#: audio_describer/ui/edit_description_dialog.py:82
+msgid "Characters"
+msgstr "Nhân vật"
+
+#: audio_describer/ui/edit_description_dialog.py:161
+msgid "Review: %s. "
+msgstr "Cần xem lại: %s. "
+
+#: audio_describer/ui/edit_description_dialog.py:164
+msgid "%(time)s, level %(level)d, %(wps).1f words per second: %(text)s"
+msgstr "%(time)s, mức %(level)d, %(wps).1f từ mỗi giây: %(text)s"
+
+#: audio_describer/ui/export_options_dialog.py:16
+msgid ""
+"Video with a separate audio description track (MKV, original tracks kept)"
+msgstr "Video có rãnh mô tả âm thanh riêng (MKV, giữ nguyên các rãnh gốc)"
+
+#: audio_describer/ui/export_options_dialog.py:18
+msgid "Audio description track only (M4A)"
+msgstr "Chỉ rãnh mô tả âm thanh (M4A)"
+
+#: audio_describer/ui/export_options_dialog.py:19
+msgid "WebVTT descriptions (.vtt, for web players and platforms)"
+msgstr "Mô tả WebVTT (.vtt, cho trình phát và nền tảng web)"
+
+#: audio_describer/ui/file_dialogs.py:85
+msgid "Invalid URL"
+msgstr "URL không hợp lệ"
+
+#: audio_describer/ui/file_dialogs.py:87
+msgid ""
+"The YouTube URL you entered does not appear to be valid.\n"
+"\n"
+"Please use a valid format, such as:\n"
+"youtube.com/watch?v=VIDEO_ID\n"
+"youtu.be/VIDEO_ID\n"
+"youtube.com/shorts/VIDEO_ID"
+msgstr ""
+"URL YouTube bạn nhập có vẻ không hợp lệ.\n"
+"\n"
+"Vui lòng dùng định dạng hợp lệ, ví dụ:\n"
+"youtube.com/watch?v=VIDEO_ID\n"
+"youtu.be/VIDEO_ID\n"
+"youtube.com/shorts/VIDEO_ID"
+
+#: audio_describer/ui/file_dialogs.py:95
+msgid ""
+"The URL you entered does not appear to be valid.\n"
+"\n"
+"Please check the format (e.g., it should start with 'http://' or 'https://')."
+msgstr ""
+"URL bạn nhập có vẻ không hợp lệ.\n"
+"\n"
+"Vui lòng kiểm tra định dạng (ví dụ: phải bắt đầu bằng 'http://' hoặc 'https://')."
+
+#: audio_describer/ui/main_window.py:63
+msgid "Open &Project...\tCtrl+P"
+msgstr "Mở &Dự án...\tCtrl+P"
+
+#: audio_describer/ui/main_window.py:63
+msgid "Reopen a saved audio description project"
+msgstr "Mở lại một dự án mô tả âm thanh đã lưu"
+
+#: audio_describer/ui/main_window.py:64
+msgid "Reuse &Characters from a Project...\tCtrl+G"
+msgstr "Dùng lại &Nhân vật từ một Dự án...\tCtrl+G"
+
+#: audio_describer/ui/main_window.py:64
+msgid "Keep the same character names and descriptions as an earlier episode"
+msgstr "Giữ nguyên tên và mô tả nhân vật như một tập trước"
+
+#: audio_describer/ui/main_window.py:68
+msgid "Open &Web Platform...\tCtrl+W"
+msgstr "Mở Nền tảng &Web...\tCtrl+W"
+
+#: audio_describer/ui/main_window.py:68
+msgid "Open the Omni Describer web platform in your browser"
+msgstr "Mở nền tảng web Omni Describer trong trình duyệt"
+
+#: audio_describer/ui/main_window.py:138
+msgid "Cancel the running generation (Escape)"
+msgstr "Hủy quá trình tạo đang chạy (Escape)"
+
+#: audio_describer/ui/main_window.py:252
+msgid "Enter a valid YouTube video URL:"
+msgstr "Nhập URL video YouTube hợp lệ:"
+
+#: audio_describer/ui/main_window.py:276
+msgid "Omni Describer projects (*%s)|*%s"
+msgstr "Dự án Omni Describer (*%s)|*%s"
+
+#: audio_describer/ui/main_window.py:104
+msgid "Or try the web platform (no API key needed):"
+msgstr "Hoặc dùng thử nền tảng web (không cần khóa API):"
+
+#: audio_describer/ui/main_window.py:106
+msgid "Open &Web Platform"
+msgstr "Mở Nền tảng &Web"
+
+#: audio_describer/ui/main_window.py:137
+msgid "&Cancel Generation"
+msgstr "&Hủy quá trình tạo"
+
+#: audio_describer/ui/main_window.py:273
+msgid "Cancelling... the current step will finish first."
+msgstr "Đang hủy... bước hiện tại sẽ hoàn tất trước."
+
+#: audio_describer/ui/main_window.py:277
+msgid "Open Project"
+msgstr "Mở Dự án"
+
+#: audio_describer/ui/main_window.py:288
+msgid "Video Not Found"
+msgstr "Không tìm thấy Video"
+
+#: audio_describer/ui/main_window.py:292
+msgid "Project opened: %d descriptions."
+msgstr "Đã mở dự án: %d mô tả."
+
+#: audio_describer/ui/main_window.py:303
+msgid "Reuse Characters from a Project"
+msgstr "Dùng lại Nhân vật từ một Dự án"
+
+#: audio_describer/ui/main_window.py:313
+msgid "%d characters will be reused for the next descriptions."
+msgstr "%d nhân vật sẽ được dùng lại cho các mô tả tiếp theo."
+
+#: audio_describer/ui/main_window.py:377
+msgid "Asking AI to generate descriptions and glossary..."
+msgstr "Đang yêu cầu AI tạo mô tả và bảng chú giải..."
+
+#: audio_describer/ui/main_window.py:288
+msgid ""
+"The project's video was not found:\n"
+"%s\n"
+"\n"
+"Please locate it."
+msgstr ""
+"Không tìm thấy video của dự án:\n"
+"%s\n"
+"\n"
+"Vui lòng chỉ định vị trí của nó."
+
+#: audio_describer/ui/main_window.py:383
+msgid "Processing video..."
+msgstr "Đang xử lý video..."
+
+#: audio_describer/ui/main_window.py:419
+msgid "Generation cancelled."
+msgstr "Đã hủy quá trình tạo."
+
+#: audio_describer/ui/main_window.py:285
+msgid ""
+"Could not open project:\n"
+"%s"
+msgstr ""
+"Không thể mở dự án:\n"
+"%s"
+
+#: audio_describer/ui/main_window.py:466
+msgid "Identified %d characters."
+msgstr "Đã nhận diện %d nhân vật."
+
+#: audio_describer/ui/manage_voices_dialog.py:11
+msgid "Manage OpenAI Voice Presets"
+msgstr "Quản lý Thiết lập sẵn Giọng nói OpenAI"
+
+#: audio_describer/ui/player_export.py:117
+msgid "Exporting File"
+msgstr "Đang xuất tệp"
+
+#: audio_describer/ui/player_export.py:117
+msgid "Starting..."
+msgstr "Đang bắt đầu..."
+
+#: audio_describer/ui/player_export.py:59
+msgid "No descriptions to export."
+msgstr "Không có mô tả nào để xuất."
+
+#: audio_describer/ui/player_export.py:59
+msgid "Export Note"
+msgstr "Lưu ý khi xuất"
+
+#: audio_describer/ui/player_export.py:78
+msgid "SRT Subtitles (*.srt)|*.srt"
+msgstr "Phụ đề SRT (*.srt)|*.srt"
+
+#: audio_describer/ui/player_export.py:79
+msgid "WebVTT descriptions (*.vtt)|*.vtt"
+msgstr "Mô tả WebVTT (*.vtt)|*.vtt"
+
+#: audio_describer/ui/player_export.py:80
+msgid "Text files (*.txt)|*.txt"
+msgstr "Tệp văn bản (*.txt)|*.txt"
+
+#: audio_describer/ui/player_export.py:82
+msgid "All files|*.*"
+msgstr "Tất cả tệp|*.*"
+
+#: audio_describer/ui/player_export.py:84
+msgid "Save Exported Text File"
+msgstr "Lưu tệp văn bản đã xuất"
+
+#: audio_describer/ui/player_export.py:105
+msgid "Matroska video (*.mkv)|*.mkv"
+msgstr "Video Matroska (*.mkv)|*.mkv"
+
+#: audio_describer/ui/player_export.py:106
+msgid "MP3 Audio (*.mp3)|*.mp3"
+msgstr "Âm thanh MP3 (*.mp3)|*.mp3"
+
+#: audio_describer/ui/player_export.py:107
+msgid "M4A Audio (*.m4a)|*.m4a"
+msgstr "Âm thanh M4A (*.m4a)|*.m4a"
+
+#: audio_describer/ui/player_export.py:111
+msgid "Save Exported File"
+msgstr "Lưu tệp đã xuất"
+
+#: audio_describer/ui/player_export.py:227
+msgid "Mixing audio tracks..."
+msgstr "Đang trộn các rãnh âm thanh..."
+
+#: audio_describer/ui/player_export.py:267
+msgid "Export Complete."
+msgstr "Xuất tệp hoàn tất."
+
+#: audio_describer/ui/player_export.py:133
+msgid "FFmpeg could not convert a synthesized clip: %s"
+msgstr "FFmpeg không thể chuyển đổi một đoạn âm thanh đã tổng hợp: %s"
+
+#: audio_describer/ui/player_export.py:221
+msgid "FFmpeg is required for audio and video export."
+msgstr "Cần có FFmpeg để xuất âm thanh và video."
+
+#: audio_describer/ui/player_export.py:99
+msgid "Error saving file: %s"
+msgstr "Lỗi khi lưu tệp: %s"
+
+#: audio_describer/ui/player_export.py:170
+msgid "Synthesizing description %d of %d..."
+msgstr "Đang tổng hợp mô tả %d trên %d..."
+
+#: audio_describer/ui/player_export.py:265
+msgid ""
+"FFmpeg failed to create the export:\n"
+"%s"
+msgstr ""
+"FFmpeg không thể tạo tệp xuất:\n"
+"%s"
+
+#: audio_describer/ui/player_export.py:176
+msgid "Failed to synthesize description #%d."
+msgstr "Không thể tổng hợp mô tả số %d."
+
+#: audio_describer/ui/player_window.py:126
+msgid ""
+"Player shortcuts: Space, play or pause. Left and Right arrows, back or "
+"forward 5 seconds; with Control, 30 seconds. Alt plus Left or Right, "
+"previous or next description. Up and Down arrows, video volume. R, repeat "
+"the last description. T, announce the time. A, turn audio description on or "
+"off. D, change description density. M, change the audio description mode: in"
+" the pauses, pause the video when needed, or on demand. In on-demand mode, "
+"Enter describes the current moment and Shift+Enter gives more detail. Q, ask"
+" more. S, explore scene. Control plus S, save project. F1, this help."
+msgstr ""
+"Phím tắt trình phát: Phím cách, phát hoặc tạm dừng. Mũi tên Trái và Phải, "
+"lùi hoặc tiến 5 giây; kèm Control, 30 giây. Alt cộng Trái hoặc Phải, mô tả "
+"trước hoặc tiếp theo. Mũi tên Lên và Xuống, âm lượng video. R, lặp lại mô tả"
+" cuối cùng. T, đọc thời gian. A, bật hoặc tắt mô tả âm thanh. D, thay đổi "
+"mật độ mô tả. M, thay đổi chế độ mô tả âm thanh: trong các khoảng lặng, tạm "
+"dừng video khi cần, hoặc theo yêu cầu. Ở chế độ theo yêu cầu, Enter mô tả "
+"khoảnh khắc hiện tại và Shift+Enter cho thêm chi tiết. Q, hỏi thêm. S, khám "
+"phá cảnh. Control cộng S, lưu dự án. F1, trợ giúp này."
+
+#: audio_describer/ui/player_window.py:541
+msgid "Density low: essential descriptions only."
+msgstr "Mật độ thấp: chỉ các mô tả thiết yếu."
+
+#: audio_describer/ui/player_window.py:542
+msgid "Density medium: essential and important descriptions."
+msgstr "Mật độ trung bình: các mô tả thiết yếu và quan trọng."
+
+#: audio_describer/ui/player_window.py:543
+msgid "Density high: all descriptions, including details."
+msgstr "Mật độ cao: tất cả mô tả, kể cả chi tiết."
+
+#: audio_describer/ui/player_window.py:551
+msgid "Mode: descriptions in the pauses, the video keeps playing."
+msgstr "Chế độ: mô tả trong các khoảng lặng, video vẫn tiếp tục phát."
+
+#: audio_describer/ui/player_window.py:552
+msgid "Mode: extended, the video pauses when a description does not fit."
+msgstr "Chế độ: mở rộng, video tạm dừng khi một mô tả không vừa."
+
+#: audio_describer/ui/player_window.py:553
+msgid ""
+"Mode: on demand. Press Enter to describe the current moment, Shift+Enter for"
+" more detail."
+msgstr ""
+"Chế độ: theo yêu cầu. Nhấn Enter để mô tả khoảnh khắc hiện tại, Shift+Enter "
+"để có thêm chi tiết."
+
+#: audio_describer/ui/player_window.py:562
+msgid "No description for this moment. Press Q to ask the AI."
+msgstr "Không có mô tả cho khoảnh khắc này. Nhấn Q để hỏi AI."
+
+#: audio_describer/ui/player_window.py:645
+msgid "Project saved."
+msgstr "Đã lưu dự án."
+
+#: audio_describer/ui/player_window.py:569
+msgid "No descriptions."
+msgstr "Không có mô tả."
+
+#: audio_describer/ui/player_window.py:593
+msgid "%(pos)s of %(total)s"
+msgstr "%(pos)s trên %(total)s"
+
+#: audio_describer/ui/player_window.py:605
+msgid "Audio description on."
+msgstr "Đã bật mô tả âm thanh."
+
+#: audio_describer/ui/player_window.py:605
+msgid "Audio description off."
+msgstr "Đã tắt mô tả âm thanh."
+
+#: audio_describer/ui/player_window.py:544
+msgid "%d descriptions."
+msgstr "%d mô tả."
+
+#: audio_describer/ui/player_window.py:580
+msgid "No next description."
+msgstr "Không có mô tả tiếp theo."
+
+#: audio_describer/ui/player_window.py:580
+msgid "No previous description."
+msgstr "Không có mô tả trước đó."
+
+#: audio_describer/ui/player_window.py:617
+msgid "Save Project"
+msgstr "Lưu Dự án"
+
+#: audio_describer/ui/player_window.py:630
+msgid "Copying video next to the project..."
+msgstr "Đang sao chép video vào cạnh dự án..."
+
+#: audio_describer/ui/player_window.py:654
+msgid ""
+"Save this project before closing? Otherwise the generated descriptions will "
+"be lost."
+msgstr "Lưu dự án này trước khi đóng? Nếu không, các mô tả đã tạo sẽ bị mất."
+
+#: audio_describer/ui/player_window.py:655
+msgid "Unsaved Descriptions"
+msgstr "Mô tả chưa được lưu"
+
+#: audio_describer/ui/player_window.py:638
+msgid ""
+"Could not save the project:\n"
+"%s"
+msgstr ""
+"Không thể lưu dự án:\n"
+"%s"
+
+#: audio_describer/ui/player_window.py:658
+msgid "Are you sure you want to close the player?"
+msgstr "Bạn có chắc chắn muốn đóng trình phát không?"
+
+#: audio_describer/ui/player_window.py:659
+msgid "Confirm Close"
+msgstr "Xác nhận Đóng"
+
+#: audio_describer/ui/player_window.py:508
+msgid "Volume %d"
+msgstr "Âm lượng %d"
+
+#: audio_describer/ui/player_window.py:510
+msgid "No description yet."
+msgstr "Chưa có mô tả."
+
+#: audio_describer/ui/settings_dialog.py:156
+msgid "Gemini Model"
+msgstr "Mô hình Gemini"
+
+#: audio_describer/ui/settings_dialog.py:457
+msgid "Loading model list..."
+msgstr "Đang tải danh sách mô hình..."
+
+#: audio_describer/ui/settings_dialog.py:50
+msgid "Vietnamese"
+msgstr "Tiếng Việt"
+
+#: audio_describer/ui/settings_dialog.py:55
+msgid "Low (faster, cheaper)"
+msgstr "Thấp (nhanh hơn, rẻ hơn)"
+
+#: audio_describer/ui/settings_dialog.py:55
+msgid "Medium (Default)"
+msgstr "Trung bình (Mặc định)"
+
+#: audio_describer/ui/settings_dialog.py:56
+msgid "High (slower, for complex films)"
+msgstr "Cao (chậm hơn, cho phim phức tạp)"
+
+#: audio_describer/ui/settings_dialog.py:58
+msgid "Objective (Default)"
+msgstr "Khách quan (Mặc định)"
+
+#: audio_describer/ui/settings_dialog.py:58
+msgid "Subjective, evocative"
+msgstr "Chủ quan, gợi cảm xúc"
+
+#: audio_describer/ui/settings_dialog.py:59
+msgid "General (Default)"
+msgstr "Tổng quát (Mặc định)"
+
+#: audio_describer/ui/settings_dialog.py:60
+msgid "Actions and instructions"
+msgstr "Hành động và hướng dẫn"
+
+#: audio_describer/ui/settings_dialog.py:60
+msgid "Settings and atmosphere"
+msgstr "Bối cảnh và không khí"
+
+#: audio_describer/ui/settings_dialog.py:61
+msgid "On-screen text"
+msgstr "Chữ trên màn hình"
+
+#: audio_describer/ui/settings_dialog.py:69
+msgid "1 FPS (Minimal cost, for static content)"
+msgstr "1 FPS (Chi phí tối thiểu, cho nội dung tĩnh)"
+
+#: audio_describer/ui/settings_dialog.py:150
+msgid "Mention colours"
+msgstr "Nhắc đến màu sắc"
+
+#: audio_describer/ui/settings_dialog.py:158
+msgid "&Refresh model list"
+msgstr "&Làm mới danh sách mô hình"
+
+#: audio_describer/ui/settings_dialog.py:167
+msgid ""
+"Send Video Only (No Audio) to AI - not recommended: the AI can no longer "
+"avoid dialogue"
+msgstr ""
+"Chỉ gửi Video (Không có âm thanh) cho AI - không khuyến nghị: AI sẽ không "
+"thể tránh lời thoại"
+
+#: audio_describer/ui/settings_dialog.py:175
+msgid "Detect pauses in the soundtrack before describing (recommended)"
+msgstr ""
+"Phát hiện các khoảng lặng trong âm thanh trước khi mô tả (khuyến nghị)"
+
+#: audio_describer/ui/settings_dialog.py:53
+msgid "Same as interface"
+msgstr "Giống ngôn ngữ giao diện"
+
+#: audio_describer/ui/settings_dialog.py:81
+msgid "Windows OneCore (Modern Voices)"
+msgstr "Windows OneCore (Giọng nói hiện đại)"
+
+#: audio_describer/ui/settings_dialog.py:138
+msgid "Description Language:"
+msgstr "Ngôn ngữ mô tả:"
+
+#: audio_describer/ui/settings_dialog.py:141
+msgid "Description Style:"
+msgstr "Phong cách mô tả:"
+
+#: audio_describer/ui/settings_dialog.py:144
+msgid "Focus On:"
+msgstr "Tập trung vào:"
+
+#: audio_describer/ui/settings_dialog.py:147
+msgid "Maximum Words per Description (0 = fit the pause):"
+msgstr "Số từ tối đa mỗi mô tả (0 = vừa với khoảng lặng):"
+
+#: audio_describer/ui/settings_dialog.py:161
+msgid "Thinking Level (Gemini 3 and later):"
+msgstr "Mức độ suy nghĩ (Gemini 3 trở lên):"
+
+#: audio_describer/ui/settings_dialog.py:224
+msgid ""
+"Original audio lowered during descriptions (-dB, player and export; 6 to 12 "
+"recommended):"
+msgstr ""
+"Giảm âm thanh gốc khi có mô tả (-dB, trình phát và tệp xuất; khuyến nghị 6 "
+"đến 12):"
+
+#: audio_describer/ui/settings_dialog.py:227
+msgid "Audio description voice level in exports (dB, 0 = unchanged):"
+msgstr "Mức giọng mô tả âm thanh trong tệp xuất (dB, 0 = không đổi):"
+
+#: audio_describer/ui/settings_dialog.py:343
+msgid "Windows OneCore Settings"
+msgstr "Cài đặt Windows OneCore"
+
+#: audio_describer/ui/settings_dialog.py:476
+msgid "%d models available."
+msgstr "Có %d mô hình khả dụng."
+
+#: audio_describer/ui/settings_dialog.py:153
+msgid "Gemini Model (empty = default %s):"
+msgstr "Mô hình Gemini (để trống = mặc định %s):"
+
+#: audio_describer/ui/settings_dialog.py:471
+msgid "Could not load the model list: %s"
+msgstr "Không thể tải danh sách mô hình: %s"
+
+#: audio_describer/ui/settings_dialog.py:471
+msgid "no models returned"
+msgstr "không có mô hình nào được trả về"
+
+#: audio_describer/utils/update_checker.py:101
+msgid ""
+"The downloaded update is damaged or was modified (checksum mismatch). It was"
+" deleted."
+msgstr ""
+"Bản cập nhật đã tải về bị hỏng hoặc đã bị sửa đổi (sai tổng kiểm tra). Bản "
+"cập nhật đã bị xóa."
+
+#: audio_describer/utils/update_checker.py:116
+msgid ""
+"The updater component seems to be missing. The application will now attempt "
+"to download the necessary updater to proceed."
+msgstr ""
+"Thành phần cập nhật dường như bị thiếu. Ứng dụng sẽ thử tải xuống trình cập "
+"nhật cần thiết để tiếp tục."
+
+#: audio_describer/utils/update_checker.py:117
+msgid "Updater Missing"
+msgstr "Thiếu trình cập nhật"
+
+#: audio_describer/utils/update_checker.py:138
+msgid ""
+"Could not download the required updater component. The update cannot proceed.\n"
+"\n"
+"Please try again later or contact support.\n"
+"\n"
+"Error: {}"
+msgstr ""
+"Không thể tải xuống thành phần cập nhật cần thiết. Không thể tiến hành cập nhật.\n"
+"\n"
+"Vui lòng thử lại sau hoặc liên hệ bộ phận hỗ trợ.\n"
+"\n"
+"Lỗi: {}"
+
+#: audio_describer/core/audio_describer.py:372
+msgid "Checking the descriptions for inconsistencies..."
+msgstr "Đang kiểm tra mô tả để tìm điểm không nhất quán..."
+
+#: audio_describer/core/audio_describer.py:393
+msgid "Quality check: %d descriptions marked uncertain."
+msgstr "Kiểm tra chất lượng: %d mô tả được đánh dấu là không chắc chắn."
+
+#: audio_describer/ui/edit_description_dialog.py:171
+msgid "Rename Character"
+msgstr "Đổi tên nhân vật"
+
+#: audio_describer/ui/edit_description_dialog.py:184
+msgid "uncertain, check with Ask More"
+msgstr "không chắc chắn, hãy kiểm tra bằng Hỏi thêm"
+
+#: audio_describer/ui/edit_description_dialog.py:155
+msgid "Select a character first."
+msgstr "Hãy chọn một nhân vật trước."
+
+#: audio_describer/ui/edit_description_dialog.py:159
+msgid "New name for this character:"
+msgstr "Tên mới cho nhân vật này:"
+
+#: audio_describer/ui/edit_description_dialog.py:171
+msgid "Character renamed. %d descriptions updated."
+msgstr "Đã đổi tên nhân vật. Đã cập nhật %d mô tả."
+
+#: audio_describer/ui/edit_description_dialog.py:81
+msgid "&Rename Character..."
+msgstr "Đổi &tên nhân vật..."
+
+#: audio_describer/ui/player_window.py:128
+msgid ""
+"Player shortcuts: Space, play or pause. Left and Right arrows, back or "
+"forward 5 seconds; with Control, 30 seconds. Alt plus Left or Right, "
+"previous or next description. Up and Down arrows, video volume. R, repeat "
+"the last description. T, announce the time. A, turn audio description on or "
+"off. D, change description density. M, change the audio description mode: in"
+" the pauses, pause the video when needed, or on demand. In on-demand mode, "
+"Enter describes the current moment and Shift+Enter gives more detail. I, "
+"audio introduction: the main characters and places, without spoilers. V, "
+"quality report. Q, ask more. S, explore scene. Control plus S, save project."
+" F1, this help."
+msgstr ""
+"Phím tắt trình phát: Phím cách, phát hoặc tạm dừng. Mũi tên Trái và Phải, "
+"lùi hoặc tiến 5 giây; kèm Control, 30 giây. Alt cộng Trái hoặc Phải, mô tả "
+"trước hoặc tiếp theo. Mũi tên Lên và Xuống, âm lượng video. R, lặp lại mô tả"
+" cuối cùng. T, đọc thời gian. A, bật hoặc tắt mô tả âm thanh. D, thay đổi "
+"mật độ mô tả. M, thay đổi chế độ mô tả âm thanh: trong các khoảng lặng, tạm "
+"dừng video khi cần, hoặc theo yêu cầu. Ở chế độ theo yêu cầu, Enter mô tả "
+"khoảnh khắc hiện tại và Shift+Enter cho thêm chi tiết. I, phần giới thiệu âm"
+" thanh: các nhân vật và địa điểm chính, không tiết lộ nội dung. V, báo cáo "
+"chất lượng. Q, hỏi thêm. S, khám phá cảnh. Control cộng S, lưu dự án. F1, "
+"trợ giúp này."
+
+#: audio_describer/ui/player_window.py:577
+msgid "Writing the audio introduction. It will be read when ready."
+msgstr ""
+"Đang viết phần giới thiệu âm thanh. Phần này sẽ được đọc khi sẵn sàng."
+
+#: audio_describer/ui/player_window.py:605
+msgid ""
+"%(count)d descriptions. %(within).0f%% within their word budget. %(overlap)d"
+" over sound or dialogue, %(uncertain)d uncertain. Average %(wps).1f words "
+"per second. Longest stretch without description: %(gap)s."
+msgstr ""
+"%(count)d mô tả. %(within).0f%% nằm trong giới hạn số từ. %(overlap)d mô tả "
+"đè lên âm thanh hoặc lời thoại, %(uncertain)d không chắc chắn. Trung bình "
+"%(wps).1f từ mỗi giây. Đoạn dài nhất không có mô tả: %(gap)s."
+
+#: audio_describer/ui/player_window.py:571
+msgid "The audio introduction is being written..."
+msgstr "Phần giới thiệu âm thanh đang được viết..."
+
+#: audio_describer/ui/player_window.py:593
+msgid "Could not write the audio introduction: %s"
+msgstr "Không thể viết phần giới thiệu âm thanh: %s"
+
+#: audio_describer/ui/player_window.py:593
+msgid "empty answer"
+msgstr "câu trả lời trống"
+
+#: audio_describer/ui/settings_dialog.py:63
+msgid "Describe only what is visible"
+msgstr "Chỉ mô tả những gì nhìn thấy"
+
+#: audio_describer/ui/settings_dialog.py:64
+msgid "Describe and name (Default)"
+msgstr "Mô tả và gọi tên (Mặc định)"
+
+#: audio_describer/ui/settings_dialog.py:65
+msgid "Describe, name and briefly explain"
+msgstr "Mô tả, gọi tên và giải thích ngắn gọn"
+
+#: audio_describer/ui/settings_dialog.py:157
+msgid "Check the descriptions with a second AI pass (marks uncertain ones)"
+msgstr ""
+"Kiểm tra mô tả bằng lượt AI thứ hai (đánh dấu các mô tả không chắc chắn)"
+
+#: audio_describer/ui/settings_dialog.py:154
+msgid "Explicitation:"
+msgstr "Mức độ giải thích:"
+
+#: audio_describer/ui/scene_explorer_dialog.py:33
+msgid "in the centre"
+msgstr "ở giữa"
+
+#: audio_describer/ui/scene_explorer_dialog.py:36
+msgid "at %d o'clock"
+msgstr "ở hướng %d giờ"
+
+#: audio_describer/ui/scene_explorer_dialog.py:35
+msgid "at %d o'clock, near the edge"
+msgstr "ở hướng %d giờ, gần mép"
+
+#: audio_describer/ui/scene_explorer_dialog.py:49
+msgid "&Scene:"
+msgstr "&Cảnh:"
+
+#: audio_describer/ui/scene_explorer_dialog.py:53
+msgid "&Objects (12 o'clock is the top of the picture):"
+msgstr "Đối &tượng (12 giờ là phía trên của hình):"
+
+#: audio_describer/ui/scene_explorer_dialog.py:57
+msgid "&Details:"
+msgstr "&Chi tiết:"
+
+#: audio_describer/ui/player_window.py:128
+msgid ""
+"Player shortcuts: Space, play or pause. Left and Right arrows, back or "
+"forward 5 seconds; with Control, 30 seconds. Alt plus Left or Right, "
+"previous or next description. Up and Down arrows, video volume. R, repeat "
+"the last description. T, announce the time. A, turn audio description on or "
+"off. D, change description density. M, change the audio description mode: in"
+" the pauses, pause the video when needed, or on demand. In on-demand mode, "
+"Enter describes the current moment and Shift+Enter gives more detail. I, "
+"audio introduction: the main characters and places, without spoilers. V, "
+"quality report. W, what is on screen now; ask follow-up questions in the "
+"window that opens. Q, ask more. S, explore scene. Control plus S, save "
+"project. F1, this help."
+msgstr ""
+"Phím tắt trình phát: Phím cách, phát hoặc tạm dừng. Mũi tên Trái và Phải, "
+"lùi hoặc tiến 5 giây; kèm Control, 30 giây. Alt cộng Trái hoặc Phải, mô tả "
+"trước hoặc tiếp theo. Mũi tên Lên và Xuống, âm lượng video. R, lặp lại mô tả"
+" cuối cùng. T, đọc thời gian. A, bật hoặc tắt mô tả âm thanh. D, thay đổi "
+"mật độ mô tả. M, thay đổi chế độ mô tả âm thanh: trong các khoảng lặng, tạm "
+"dừng video khi cần, hoặc theo yêu cầu. Ở chế độ theo yêu cầu, Enter mô tả "
+"khoảnh khắc hiện tại và Shift+Enter cho thêm chi tiết. I, phần giới thiệu âm"
+" thanh: các nhân vật và địa điểm chính, không tiết lộ nội dung. V, báo cáo "
+"chất lượng. W, trên màn hình đang có gì; đặt thêm câu hỏi trong cửa sổ vừa "
+"mở. Q, hỏi thêm. S, khám phá cảnh. Control cộng S, lưu dự án. F1, trợ giúp "
+"này."
+
+#: audio_describer/ui/player_window.py:611
+msgid ""
+"What is on screen right now? Describe it briefly, including any visible "
+"text."
+msgstr "Trên màn hình lúc này có gì? Hãy mô tả ngắn gọn, kể cả chữ hiển thị."
+
+#: audio_describer/ui/settings_dialog.py:240
+msgid "In exports, read on-screen text in a second, lower voice"
+msgstr "Khi xuất, đọc chữ trên màn hình bằng giọng thứ hai, trầm hơn"
+
+#: audio_describer/ui/main_window.py:64
+msgid "Describe an &Image or PDF...\tCtrl+I"
+msgstr "Mô tả &hình ảnh hoặc PDF...\tCtrl+I"
+
+#: audio_describer/ui/main_window.py:64
+msgid "Audio description of a picture, a screenshot or a PDF document"
+msgstr "Mô tả âm thanh cho ảnh, ảnh chụp màn hình hoặc tài liệu PDF"
+
+#: audio_describer/ui/main_window.py:65
+msgid "Describe My &Screen\tCtrl+Alt+Shift+D"
+msgstr "Mô tả &màn hình của tôi\tCtrl+Alt+Shift+D"
+
+#: audio_describer/ui/main_window.py:65
+msgid ""
+"Describe what is on the screen now; the shortcut also works from any other "
+"application"
+msgstr ""
+"Mô tả những gì đang có trên màn hình; phím tắt cũng hoạt động từ bất kỳ ứng "
+"dụng nào khác"
+
+#: audio_describer/ui/main_window.py:339
+msgid "Describing..."
+msgstr "Đang mô tả..."
+
+#: audio_describer/ui/main_window.py:312
+msgid "Images and PDF documents"
+msgstr "Hình ảnh và tài liệu PDF"
+
+#: audio_describer/ui/main_window.py:313
+msgid "Describe an Image or PDF"
+msgstr "Mô tả hình ảnh hoặc PDF"
+
+#: audio_describer/ui/main_window.py:322
+msgid "Still describing, please wait..."
+msgstr "Vẫn đang mô tả, vui lòng chờ..."
+
+#: audio_describer/ui/main_window.py:332
+msgid "Could not capture the screen."
+msgstr "Không thể chụp màn hình."
+
+#: audio_describer/ui/main_window.py:359
+msgid "Description failed: %s"
+msgstr "Mô tả thất bại: %s"
+
+#: audio_describer/ui/text_result_dialog.py:16
+msgid "&Copy"
+msgstr "&Sao chép"
+
+#: audio_describer/ui/text_result_dialog.py:9
+msgid "Description: %s"
+msgstr "Mô tả: %s"
+
+#: audio_describer/ui/text_result_dialog.py:12
+msgid "&Description:"
+msgstr "&Mô tả:"
+
+#: audio_describer/ui/edit_description_dialog.py:185
+msgid "translated dialogue"
+msgstr "lời thoại đã dịch"
+
+#: audio_describer/ui/main_window.py:66
+msgid "&Live Screen Description\tCtrl+Alt+Shift+L"
+msgstr "Mô tả màn hình &liên tục\tCtrl+Alt+Shift+L"
+
+#: audio_describer/ui/main_window.py:66
+msgid ""
+"Turn on or off: describe the screen each time it changes; the shortcut also "
+"works from any other application"
+msgstr ""
+"Bật hoặc tắt: mô tả màn hình mỗi khi nó thay đổi; phím tắt cũng hoạt động từ"
+" bất kỳ ứng dụng nào khác"
+
+#: audio_describer/ui/main_window.py:364
+msgid ""
+"Live screen description on. Each change of the screen is described; this "
+"uses your API quota."
+msgstr ""
+"Đã bật mô tả màn hình liên tục. Mỗi thay đổi trên màn hình đều được mô tả; "
+"việc này dùng hạn mức API của bạn."
+
+#: audio_describer/ui/main_window.py:360
+msgid "Live screen description off."
+msgstr "Đã tắt mô tả màn hình liên tục."
+
+#: audio_describer/ui/settings_dialog.py:157
+msgid "Translate dialogue spoken in another language (audio subtitles)"
+msgstr "Dịch lời thoại bằng ngôn ngữ khác (phụ đề âm thanh)"
+
+#: audio_describer/core/audio_describer.py:499
+msgid ""
+"The local model can only describe images; switch to Gemini in Settings for "
+"PDF documents."
+msgstr ""
+"Mô hình cục bộ chỉ mô tả được hình ảnh; hãy chuyển sang Gemini trong Cài đặt"
+" để xử lý tài liệu PDF."
+
+#: audio_describer/core/audio_describer.py:485
+msgid "Ollama refused the request (model '%(model)s'): %(detail)s"
+msgstr "Ollama đã từ chối yêu cầu (mô hình '%(model)s'): %(detail)s"
+
+#: audio_describer/core/audio_describer.py:487
+msgid ""
+"Ollama is not running on this computer. Install it from ollama.com, then "
+"run: ollama pull %s"
+msgstr ""
+"Ollama chưa chạy trên máy tính này. Hãy cài đặt từ ollama.com, rồi chạy: "
+"ollama pull %s"
+
+#: audio_describer/models/evaluation_model.py:45
+msgid "not rated"
+msgstr "chưa đánh giá"
+
+#: audio_describer/models/evaluation_model.py:45
+msgid "1, very poor"
+msgstr "1, rất kém"
+
+#: audio_describer/models/evaluation_model.py:45
+msgid "2, poor"
+msgstr "2, kém"
+
+#: audio_describer/models/evaluation_model.py:45
+msgid "3, fair"
+msgstr "3, trung bình"
+
+#: audio_describer/models/evaluation_model.py:45
+msgid "4, good"
+msgstr "4, tốt"
+
+#: audio_describer/models/evaluation_model.py:45
+msgid "5, very good"
+msgstr "5, rất tốt"
+
+#: audio_describer/models/evaluation_model.py:46
+msgid "Global listening, without the picture"
+msgstr "Nghe tổng thể, không có hình"
+
+#: audio_describer/models/evaluation_model.py:46
+msgid "Analysis, with the picture"
+msgstr "Phân tích, có hình"
+
+#: audio_describer/models/evaluation_model.py:13
+msgid ""
+"Without the picture, are the action, the characters, the place and the time "
+"understood?"
+msgstr ""
+"Không có hình, có hiểu được hành động, nhân vật, địa điểm và thời gian "
+"không?"
+
+#: audio_describer/models/evaluation_model.py:14
+msgid "Does the description avoid covering dialogue?"
+msgstr "Phần mô tả có tránh đè lên lời thoại không?"
+
+#: audio_describer/models/evaluation_model.py:15
+msgid "Does it describe the images rather than explain the plot?"
+msgstr "Có mô tả hình ảnh thay vì giải thích cốt truyện không?"
+
+#: audio_describer/models/evaluation_model.py:16
+msgid "Is it neither too sparse nor too present?"
+msgstr "Có vừa phải, không quá thưa cũng không quá dày không?"
+
+#: audio_describer/models/evaluation_model.py:17
+msgid "Does it stay inside the fiction (no actors, no filming jargon)?"
+msgstr ""
+"Có ở trong thế giới của phim không (không nhắc diễn viên, không dùng thuật "
+"ngữ quay phim)?"
+
+#: audio_describer/models/evaluation_model.py:18
+msgid "Is the language correct and clear?"
+msgstr "Ngôn ngữ có đúng và rõ ràng không?"
+
+#: audio_describer/models/evaluation_model.py:19
+msgid "Are the voice and the pace pleasant and suitable?"
+msgstr "Giọng đọc và nhịp độ có dễ nghe và phù hợp không?"
+
+#: audio_describer/models/evaluation_model.py:20
+msgid "With the picture: is it free of factual errors and omissions?"
+msgstr "Có hình: có tránh được lỗi sai sự thật và thiếu sót không?"
+
+#: audio_describer/models/evaluation_model.py:21
+msgid "Are looks, faces and gestures interpreted correctly?"
+msgstr "Ánh mắt, khuôn mặt và cử chỉ có được diễn giải đúng không?"
+
+#: audio_describer/models/evaluation_model.py:22
+msgid "Are the chronology and the rhythm of the film respected?"
+msgstr "Trình tự thời gian và nhịp điệu của phim có được tôn trọng không?"
+
+#: audio_describer/models/evaluation_model.py:23
+msgid "Is each description well placed relative to sound effects and music?"
+msgstr "Mỗi mô tả có được đặt hợp lý so với hiệu ứng âm thanh và nhạc không?"
+
+#: audio_describer/models/evaluation_model.py:24
+msgid "Is on-screen text read?"
+msgstr "Chữ trên màn hình có được đọc không?"
+
+#: audio_describer/models/evaluation_model.py:25
+msgid "Does the style match the film?"
+msgstr "Phong cách có phù hợp với phim không?"
+
+#: audio_describer/models/evaluation_model.py:35
+msgid "measured: %(n)d of %(total)d descriptions over sound or dialogue"
+msgstr "đo được: %(n)d trên %(total)d mô tả đè lên âm thanh hoặc lời thoại"
+
+#: audio_describer/models/evaluation_model.py:36
+msgid ""
+"measured: %(total)d descriptions, longest stretch without description "
+"%(gap)s"
+msgstr "đo được: %(total)d mô tả, khoảng dài nhất không có mô tả %(gap)s"
+
+#: audio_describer/models/evaluation_model.py:37
+msgid "measured: %(wps).1f words per second (target 2.7 or less)"
+msgstr "đo được: %(wps).1f từ mỗi giây (mục tiêu 2,7 trở xuống)"
+
+#: audio_describer/models/evaluation_model.py:38
+msgid "measured: %d descriptions marked uncertain by the AI check"
+msgstr "đo được: %d mô tả bị kiểm tra AI đánh dấu là không chắc chắn"
+
+#: audio_describer/models/evaluation_model.py:39
+msgid "measured: %d descriptions read on-screen text"
+msgstr "đo được: %d mô tả đọc chữ trên màn hình"
+
+#: audio_describer/models/evaluation_model.py:47
+msgid "Audio description evaluation (CSA 2020 grid): %s"
+msgstr "Đánh giá mô tả âm thanh (bảng tiêu chí CSA 2020): %s"
+
+#: audio_describer/models/evaluation_model.py:58
+msgid "Comments:"
+msgstr "Nhận xét:"
+
+#: audio_describer/ui/evaluation_dialog.py:12
+msgid "Evaluate this Audio Description"
+msgstr "Đánh giá mô tả âm thanh này"
+
+#: audio_describer/ui/evaluation_dialog.py:46
+msgid "Save &Report..."
+msgstr "Lưu &báo cáo..."
+
+#: audio_describer/ui/evaluation_dialog.py:65
+msgid "Save Evaluation Report"
+msgstr "Lưu báo cáo đánh giá"
+
+#: audio_describer/ui/evaluation_dialog.py:36
+msgid "&Comments:"
+msgstr "&Nhận xét:"
+
+#: audio_describer/ui/player_window.py:128
+msgid ""
+"Player shortcuts: Space, play or pause. Left and Right arrows, back or "
+"forward 5 seconds; with Control, 30 seconds. Alt plus Left or Right, "
+"previous or next description. Up and Down arrows, video volume. R, repeat "
+"the last description. T, announce the time. A, turn audio description on or "
+"off. D, change description density. M, change the audio description mode: in"
+" the pauses, pause the video when needed, or on demand. In on-demand mode, "
+"Enter describes the current moment and Shift+Enter gives more detail. I, "
+"audio introduction: the main characters and places, without spoilers. V, "
+"quality report. W, what is on screen now; ask follow-up questions in the "
+"window that opens. E, evaluate this audio description. Q, ask more. S, "
+"explore scene. Control plus S, save project. F1, this help."
+msgstr ""
+"Phím tắt trình phát: Phím cách, phát hoặc tạm dừng. Mũi tên Trái và Phải, "
+"lùi hoặc tiến 5 giây; kèm Control, 30 giây. Alt cộng Trái hoặc Phải, mô tả "
+"trước hoặc tiếp theo. Mũi tên Lên và Xuống, âm lượng video. R, lặp lại mô tả"
+" cuối cùng. T, đọc thời gian. A, bật hoặc tắt mô tả âm thanh. D, thay đổi "
+"mật độ mô tả. M, thay đổi chế độ mô tả âm thanh: trong các khoảng lặng, tạm "
+"dừng video khi cần, hoặc theo yêu cầu. Ở chế độ theo yêu cầu, Enter mô tả "
+"khoảnh khắc hiện tại và Shift+Enter cho thêm chi tiết. I, phần giới thiệu âm"
+" thanh: các nhân vật và địa điểm chính, không tiết lộ nội dung. V, báo cáo "
+"chất lượng. W, trên màn hình đang có gì; đặt thêm câu hỏi trong cửa sổ vừa "
+"mở. E, đánh giá phần mô tả âm thanh này. Q, hỏi thêm. S, khám phá cảnh. "
+"Control cộng S, lưu dự án. F1, trợ giúp này."
+
+#: audio_describer/ui/settings_dialog.py:157
+msgid "Gemini (online)"
+msgstr "Gemini (trực tuyến)"
+
+#: audio_describer/ui/settings_dialog.py:158
+msgid "Local model with Ollama (private, offline, lower quality)"
+msgstr ""
+"Mô hình cục bộ với Ollama (riêng tư, ngoại tuyến, chất lượng thấp hơn)"
+
+#: audio_describer/ui/settings_dialog.py:159
+msgid "Images and screen described by:"
+msgstr "Hình ảnh và màn hình được mô tả bởi:"
+
+#: audio_describer/ui/settings_dialog.py:162
+msgid "Ollama vision model:"
+msgstr "Mô hình thị giác Ollama:"
+
+#: audio_describer/core/audio_describer.py:427
+msgid ""
+"Quality check: %(uncertain)d descriptions uncertain, %(style)d with style "
+"issues."
+msgstr ""
+"Kiểm tra chất lượng: %(uncertain)d mô tả không chắc chắn, %(style)d mô tả có"
+" lỗi văn phong."
+
+#: audio_describer/core/audio_describer.py:245
+msgid "Detecting shot changes..."
+msgstr "Đang phát hiện các lần chuyển cảnh..."
+
+#: audio_describer/core/audio_describer.py:234
+msgid ""
+"About %(tokens)s tokens will be sent to %(model)s for %(duration)s of video."
+" Press Escape to cancel."
+msgstr ""
+"Khoảng %(tokens)s token sẽ được gửi tới %(model)s cho %(duration)s video. "
+"Nhấn Escape để hủy."
+
+#: audio_describer/core/audio_describer.py:542
+msgid "Still working, %s elapsed."
+msgstr "Vẫn đang xử lý, đã trôi qua %s."
+
+#: audio_describer/core/script_export.py:40
+msgid "validated"
+msgstr "đã duyệt"
+
+#: audio_describer/core/script_export.py:40
+msgid "to review"
+msgstr "cần xem lại"
+
+#: audio_describer/core/script_export.py:45
+msgid "In"
+msgstr "Điểm vào"
+
+#: audio_describer/core/script_export.py:45
+msgid "Out"
+msgstr "Điểm ra"
+
+#: audio_describer/core/script_export.py:45
+msgid "Level"
+msgstr "Mức"
+
+#: audio_describer/core/script_export.py:45
+msgid "Status"
+msgstr "Trạng thái"
+
+#: audio_describer/core/script_export.py:45
+msgid "Notes"
+msgstr "Ghi chú"
+
+#: audio_describer/core/script_export.py:92
+msgid "[Description]"
+msgstr "[Mô tả]"
+
+#: audio_describer/core/script_export.py:93
+msgid "Voice"
+msgstr "Giọng"
+
+#: audio_describer/models/evaluation_model.py:40
+msgid "measured: %d descriptions interpret instead of describing"
+msgstr "đo được: %d mô tả diễn giải thay vì mô tả"
+
+#: audio_describer/models/evaluation_model.py:41
+msgid "measured: %d descriptions leave the fiction"
+msgstr "đo được: %d mô tả thoát khỏi thế giới hư cấu"
+
+#: audio_describer/models/evaluation_model.py:42
+msgid "measured: %d descriptions not in the present tense"
+msgstr "đo được: %d mô tả không ở thì hiện tại"
+
+#: audio_describer/ui/edit_description_dialog.py:193
+msgid "style: not in the present tense"
+msgstr "văn phong: không ở thì hiện tại"
+
+#: audio_describer/ui/edit_description_dialog.py:194
+msgid "style: interprets instead of describing"
+msgstr "văn phong: diễn giải thay vì mô tả"
+
+#: audio_describer/ui/edit_description_dialog.py:195
+msgid "style: leaves the fiction (actors, camera)"
+msgstr "văn phong: thoát khỏi thế giới hư cấu (diễn viên, máy quay)"
+
+#: audio_describer/ui/edit_description_dialog.py:54
+msgid "Review status:"
+msgstr "Trạng thái duyệt:"
+
+#: audio_describer/ui/edit_description_dialog.py:55
+msgid "To review"
+msgstr "Cần xem lại"
+
+#: audio_describer/ui/edit_description_dialog.py:55
+msgid "Validated"
+msgstr "Đã duyệt"
+
+#: audio_describer/ui/edit_description_dialog.py:57
+msgid "Reviewer notes:"
+msgstr "Ghi chú của người duyệt:"
+
+#: audio_describer/ui/edit_description_dialog.py:201
+msgid "Validated. "
+msgstr "Đã duyệt. "
+
+#: audio_describer/ui/export_options_dialog.py:17
+msgid ""
+"Video with a separate audio description track (MP4, for most players and "
+"phones)"
+msgstr ""
+"Video có rãnh mô tả âm thanh riêng (MP4, cho hầu hết trình phát và điện "
+"thoại)"
+
+#: audio_describer/ui/export_options_dialog.py:23
+msgid ""
+"Audio description script, W3C TTML DAPT (.ttml, for professional tools)"
+msgstr ""
+"Kịch bản mô tả âm thanh, W3C TTML DAPT (.ttml, cho công cụ chuyên nghiệp)"
+
+#: audio_describer/ui/export_options_dialog.py:24
+msgid ""
+"Production script for review (Word .docx: timecodes, text, status, notes)"
+msgstr ""
+"Kịch bản sản xuất để duyệt (Word .docx: mã thời gian, văn bản, trạng thái, "
+"ghi chú)"
+
+#: audio_describer/ui/export_options_dialog.py:25
+msgid ""
+"Full script: transcribed dialogue and descriptions (.txt, for deafblind "
+"readers; uses the AI)"
+msgstr ""
+"Kịch bản đầy đủ: lời thoại đã phiên âm và mô tả (.txt, cho người đọc điếc "
+"mù; dùng AI)"
+
+#: audio_describer/ui/player_export.py:105
+msgid "Transcribing the dialogue, this can take a few minutes..."
+msgstr "Đang phiên âm lời thoại, việc này có thể mất vài phút..."
+
+#: audio_describer/ui/player_export.py:73
+msgid "TTML DAPT scripts (*.ttml)|*.ttml"
+msgstr "Kịch bản TTML DAPT (*.ttml)|*.ttml"
+
+#: audio_describer/ui/player_export.py:74
+msgid "Word documents (*.docx)|*.docx"
+msgstr "Tài liệu Word (*.docx)|*.docx"
+
+#: audio_describer/ui/player_export.py:129
+msgid "MP4 video (*.mp4)|*.mp4"
+msgstr "Video MP4 (*.mp4)|*.mp4"
+
+#: audio_describer/ui/player_export.py:120
+msgid "Export"
+msgstr "Xuất tệp"
+
+#: audio_describer/ui/player_window.py:131
+msgid ""
+"Player shortcuts: Space, play or pause. Left and Right arrows, back or "
+"forward 5 seconds; with Control, 30 seconds. Alt plus Left or Right, "
+"previous or next description. Up and Down arrows, video volume; with Shift, "
+"how much the video is lowered during descriptions. R, repeat the last "
+"description. T, announce the time. A, turn audio description on or off. D, "
+"change description density. M, change the audio description mode: in the "
+"pauses, pause the video when needed, or on demand. In on-demand mode, Enter "
+"describes the current moment and Shift+Enter gives more detail. I, audio "
+"introduction: the main characters and places, without spoilers. V, quality "
+"report. W, what is on screen now; ask follow-up questions in the window that"
+" opens. E, evaluate this audio description. Q, ask more. S, explore scene. "
+"In braille-only output, Enter resumes the video after each description. "
+"Control plus S, save project. F1 or question mark, this help."
+msgstr ""
+"Phím tắt trình phát: Phím cách, phát hoặc tạm dừng. Mũi tên Trái và Phải, "
+"lùi hoặc tiến 5 giây; kèm Control, 30 giây. Alt cộng Trái hoặc Phải, mô tả "
+"trước hoặc tiếp theo. Mũi tên Lên và Xuống, âm lượng video; kèm Shift, mức "
+"giảm âm lượng video khi đang đọc mô tả. R, lặp lại mô tả cuối cùng. T, đọc "
+"thời gian. A, bật hoặc tắt mô tả âm thanh. D, thay đổi mật độ mô tả. M, thay"
+" đổi chế độ mô tả âm thanh: trong các khoảng lặng, tạm dừng video khi cần, "
+"hoặc theo yêu cầu. Ở chế độ theo yêu cầu, Enter mô tả khoảnh khắc hiện tại "
+"và Shift+Enter cho thêm chi tiết. I, phần giới thiệu âm thanh: các nhân vật "
+"và địa điểm chính, không tiết lộ nội dung. V, báo cáo chất lượng. W, trên "
+"màn hình đang có gì; đặt thêm câu hỏi trong cửa sổ vừa mở. E, đánh giá phần "
+"mô tả âm thanh này. Q, hỏi thêm. S, khám phá cảnh. Ở chế độ chỉ chữ nổi, "
+"Enter tiếp tục phát video sau mỗi mô tả. Control cộng S, lưu dự án. F1 hoặc "
+"dấu chấm hỏi, trợ giúp này."
+
+#: audio_describer/ui/player_window.py:694
+msgid ""
+"%(count)d descriptions. %(within).0f%% within their word budget. %(overlap)d"
+" over sound or dialogue, %(uncertain)d uncertain, %(style)d with style "
+"issues. Average %(wps).1f words per second. Longest stretch without "
+"description: %(gap)s."
+msgstr ""
+"%(count)d mô tả. %(within).0f%% nằm trong giới hạn số từ. %(overlap)d mô tả "
+"đè lên âm thanh hoặc lời thoại, %(uncertain)d không chắc chắn, %(style)d có "
+"lỗi văn phong. Trung bình %(wps).1f từ mỗi giây. Đoạn dài nhất không có mô "
+"tả: %(gap)s."
+
+#: audio_describer/ui/player_window.py:503
+msgid "Video not lowered during descriptions."
+msgstr "Video không bị giảm âm lượng khi đọc mô tả."
+
+#: audio_describer/ui/player_window.py:502
+msgid "Video lowered by %d dB during descriptions."
+msgstr "Video được giảm %d dB khi đọc mô tả."
+
+#: audio_describer/ui/settings_dialog.py:253
+msgid "Screen reader (speech and braille)"
+msgstr "Trình đọc màn hình (giọng nói và chữ nổi)"
+
+#: audio_describer/ui/settings_dialog.py:254
+msgid "App voice above, prepared in advance (exact timing)"
+msgstr ""
+"Giọng của ứng dụng đã chọn ở trên, chuẩn bị trước (canh thời gian chính xác)"
+
+#: audio_describer/ui/settings_dialog.py:255
+msgid "Braille only, the video waits for Enter"
+msgstr "Chỉ chữ nổi, video chờ nhấn Enter"
+
+#: audio_describer/ui/settings_dialog.py:259
+msgid "Also show descriptions in large text on the video"
+msgstr "Đồng thời hiển thị mô tả bằng chữ lớn trên video"
+
+#: audio_describer/ui/settings_dialog.py:264
+msgid "Yellow"
+msgstr "Vàng"
+
+#: audio_describer/ui/settings_dialog.py:264
+msgid "White"
+msgstr "Trắng"
+
+#: audio_describer/ui/settings_dialog.py:264
+msgid "Cyan"
+msgstr "Lục lam"
+
+#: audio_describer/ui/settings_dialog.py:256
+msgid "Descriptions in the player:"
+msgstr "Mô tả trong trình phát:"
+
+#: audio_describer/ui/settings_dialog.py:261
+msgid "Text size on the video:"
+msgstr "Cỡ chữ trên video:"
+
+#: audio_describer/ui/settings_dialog.py:265
+msgid "Text colour on the video:"
+msgstr "Màu chữ trên video:"
+
+#: audio_describer/ui/edit_description_dialog.py:75
+msgid "C&haracters..."
+msgstr "&Nhân vật..."
+
+#: audio_describer/ui/glossary_dialog.py:19
+msgid "&Characters kept consistent across the video:"
+msgstr "&Nhân vật được giữ nhất quán trong toàn bộ video:"
+
+#: audio_describer/ui/glossary_dialog.py:66
+msgid "ID and description are required."
+msgstr "Mã và mô tả là bắt buộc."
+
+#: audio_describer/ui/glossary_dialog.py:68
+msgid "Another character already uses this ID."
+msgstr "Một nhân vật khác đã dùng mã này."
+
+#: audio_describer/ui/glossary_dialog.py:79
+msgid "Add Character"
+msgstr "Thêm nhân vật"
+
+#: audio_describer/ui/glossary_dialog.py:89
+#: audio_describer/ui/glossary_dialog.py:100
+msgid "Edit Character"
+msgstr "Sửa nhân vật"
+
+#: audio_describer/ui/glossary_dialog.py:107
+msgid "Delete this character from the glossary?"
+msgstr "Xóa nhân vật này khỏi bảng thuật ngữ?"
+
+#: audio_describer/ui/glossary_dialog.py:124
+msgid "&ID:"
+msgstr "&Mã:"
+
+#: audio_describer/ui/glossary_dialog.py:127
+msgid "&Name (leave empty if not revealed yet):"
+msgstr "&Tên (để trống nếu chưa được tiết lộ):"
+
+#: audio_describer/ui/glossary_dialog.py:130
+msgid "&Description (how to recognise them):"
+msgstr "Mô tả (&cách nhận biết):"
+
+#: audio_describer/ui/player_vqa.py:65
+msgid "AI processing could not be completed."
+msgstr "Không thể hoàn tất xử lý AI."
+
+#: audio_describer/ui/player_vqa.py:74
+msgid "No video context available."
+msgstr "Không có ngữ cảnh video."
+
+#: audio_describer/ui/player_vqa.py:86
+#, python-format
+msgid "FFmpeg failed to extract segment: %s"
+msgstr "FFmpeg không trích xuất được đoạn: %s"
+
+#: audio_describer/ui/player_vqa.py:138
+#, python-brace-format
+msgid "Extracting {duration}s clip..."
+msgstr "Đang trích xuất đoạn {duration} giây..."
+
+#: audio_describer/ui/player_vqa.py:145
+msgid "No time remaining in the video to analyze from the selected point."
+msgstr "Không còn video để phân tích từ điểm đã chọn."
+
+#: audio_describer/ui/player_vqa.py:147
+msgid "Asking AI to analyze the scene... This may take a moment."
+msgstr "AI đang phân tích cảnh... Việc này có thể mất một lúc."
+
+#: audio_describer/ui/player_vqa.py:179
+#, python-format
+msgid "FFmpeg failed to extract scene: %s"
+msgstr "FFmpeg không trích xuất được cảnh: %s"
+
+#: audio_describer/ui/player_vqa.py:194
+#, python-format
+msgid "Failed to analyze scene: %s"
+msgstr "Không phân tích được cảnh: %s"
+
+#: audio_describer/utils/update_checker.py:120
+msgid ""
+"The update is not signed by the Omni Describer team (missing or invalid "
+"signature). It was deleted. Download the new version from the official site "
+"instead."
+msgstr ""
+"Bản cập nhật không được nhóm Omni Describer ký (chữ ký bị thiếu hoặc không "
+"hợp lệ). Bản cập nhật đã bị xóa. Hãy tải phiên bản mới từ trang web chính "
+"thức."
+
+#: audio_describer/ui/edit_description_dialog.py:30
+#, python-format
+msgid "Invalid time \"%s\". Use HH:MM:SS.mmm, MM:SS or seconds."
+msgstr "Thời gian không hợp lệ \"%s\". Dùng HH:MM:SS.mmm, MM:SS hoặc số giây."
+
+#: audio_describer/ui/edit_description_dialog.py:32
+#, python-format
+msgid "Times must be within the video duration (0 to %s)."
+msgstr "Thời gian phải nằm trong độ dài video (0 đến %s)."
+
+#: audio_describer/ui/edit_description_dialog.py:53
+msgid "Descriptions &list:"
+msgstr "&Danh sách mô tả:"
+
+#: audio_describer/ui/edit_description_dialog.py:55
+msgid "Start"
+msgstr "Bắt đầu"
+
+#: audio_describer/ui/edit_description_dialog.py:55
+msgid "End"
+msgstr "Kết thúc"
+
+#: audio_describer/ui/edit_description_dialog.py:55
+msgid "Text"
+msgstr "Văn bản"
+
+#: audio_describer/ui/edit_description_dialog.py:56
+msgid "Words/s"
+msgstr "Từ/giây"
+
+#: audio_describer/ui/edit_description_dialog.py:76
+#: audio_describer/ui/edit_description_dialog.py:423
+msgid "Start (HH:MM:SS.mmm):"
+msgstr "Bắt đầu (HH:MM:SS.mmm):"
+
+#: audio_describer/ui/edit_description_dialog.py:76
+msgid "S&tart = player position (Ctrl+[)"
+msgstr "&Bắt đầu = vị trí trình phát (Ctrl+[)"
+
+#: audio_describer/ui/edit_description_dialog.py:77
+#: audio_describer/ui/edit_description_dialog.py:426
+msgid "End (HH:MM:SS.mmm):"
+msgstr "Kết thúc (HH:MM:SS.mmm):"
+
+#: audio_describer/ui/edit_description_dialog.py:77
+msgid "E&nd = player position (Ctrl+])"
+msgstr "&Kết thúc = vị trí trình phát (Ctrl+])"
+
+#: audio_describer/ui/edit_description_dialog.py:93
+msgid ""
+"F8 / Shift+F8: next / previous description to review. Ctrl+P: play or pause "
+"the video. Alt+Left / Alt+Right: move the video 1 second. Ctrl+Z / Ctrl+Y in"
+" the list: undo / redo."
+msgstr ""
+"F8 / Shift+F8: mô tả cần duyệt tiếp theo / trước đó. Ctrl+P: phát hoặc tạm "
+"dừng video. Alt+Trái / Alt+Phải: dịch video 1 giây. Ctrl+Z / Ctrl+Y trong "
+"danh sách: hoàn tác / làm lại."
+
+#: audio_describer/ui/edit_description_dialog.py:147
+#, python-format
+msgid "Review: %s"
+msgstr "Cần duyệt: %s"
+
+#: audio_describer/ui/edit_description_dialog.py:247
+#: audio_describer/ui/edit_description_dialog.py:452
+msgid "The end time must be after the start time."
+msgstr "Thời điểm kết thúc phải sau thời điểm bắt đầu."
+
+#: audio_describer/ui/edit_description_dialog.py:275
+msgid "No changes to save."
+msgstr "Không có thay đổi để lưu."
+
+#: audio_describer/ui/edit_description_dialog.py:346
+msgid "Nothing to undo."
+msgstr "Không có gì để hoàn tác."
+
+#: audio_describer/ui/edit_description_dialog.py:346
+msgid "Nothing to redo."
+msgstr "Không có gì để làm lại."
+
+#: audio_describer/ui/edit_description_dialog.py:360
+msgid "No description left to review."
+msgstr "Không còn mô tả nào cần duyệt."
+
+#: audio_describer/ui/edit_description_dialog.py:388
+msgid "Undone."
+msgstr "Đã hoàn tác."
+
+#: audio_describer/ui/edit_description_dialog.py:390
+msgid "Redone."
+msgstr "Đã làm lại."
+
+#: audio_describer/ui/edit_description_dialog.py:398
+msgid "The current description has unsaved changes. Save them before closing?"
+msgstr "Mô tả hiện tại có thay đổi chưa lưu. Lưu trước khi đóng?"
+
+#: audio_describer/ui/edit_description_dialog.py:399
+msgid "Unsaved Changes"
+msgstr "Thay đổi chưa lưu"
+
+#: audio_describer/__app__real.py:127
+msgid ""
+"Welcome to Omni Describer.\n"
+"\n"
+"To describe videos, the app needs a free Gemini API key from Google AI Studio (aistudio.google.com/apikey). Press Yes to open that page and the Settings, then paste the key in the Gemini API Key field and press Test key."
+msgstr ""
+"Chào mừng bạn đến với Omni Describer.\n"
+"\n"
+"Để mô tả video, ứng dụng cần một khóa API Gemini miễn phí từ Google AI Studio (aistudio.google.com/apikey). Nhấn Có để mở trang đó và phần Cài đặt, sau đó dán khóa vào trường Khóa API Gemini và nhấn Kiểm tra khóa."
+
+#: audio_describer/__app__real.py:130
+msgid "First Start"
+msgstr "Khởi động lần đầu"
+
+#: audio_describer/ui/edit_description_dialog.py:107
+msgid "Hea&r with the export voice (Ctrl+R)"
+msgstr "Ng&he bằng giọng xuất tệp (Ctrl+R)"
+
+#: audio_describer/ui/edit_description_dialog.py:425
+msgid "The export voice could not be played. Check the voice in Settings."
+msgstr "Không thể phát giọng xuất tệp. Hãy kiểm tra giọng nói trong Cài đặt."
+
+#: audio_describer/ui/export_options_dialog.py:38
+msgid "Only the descriptions of the current &density, as heard in the player"
+msgstr "Chỉ các mô tả ở &mật độ hiện tại, như khi nghe trong trình phát"
+
+#: audio_describer/ui/export_options_dialog.py:41
+msgid ""
+"E&xtended description: pause the picture when a description is longer than "
+"its pause (the video is re-encoded)"
+msgstr ""
+"Mô tả &mở rộng: dừng hình khi một mô tả dài hơn khoảng lặng của nó (video "
+"được mã hóa lại)"
+
+#: audio_describer/ui/export_options_dialog.py:43
+msgid "Add a spoken c&redit at the end: audio description generated by AI"
+msgstr "Thêm lời &ghi nhận ở cuối: mô tả âm thanh do AI tạo"
+
+#: audio_describer/ui/main_window.py:65
+msgid "&Recent Projects"
+msgstr "Dự án &gần đây"
+
+#: audio_describer/ui/main_window.py:66
+msgid "Import &Descriptions from SRT or WebVTT..."
+msgstr "Nhập mô tả từ &SRT hoặc WebVTT..."
+
+#: audio_describer/ui/main_window.py:66
+msgid ""
+"Open a video with an existing description script to listen to, edit or "
+"export it"
+msgstr "Mở video đã có kịch bản mô tả để nghe, chỉnh sửa hoặc xuất tệp"
+
+#: audio_describer/ui/main_window.py:305
+msgid "(No recent projects)"
+msgstr "(Không có dự án gần đây)"
+
+#: audio_describer/ui/main_window.py:311
+msgid "Import Descriptions from SRT or WebVTT"
+msgstr "Nhập mô tả từ SRT hoặc WebVTT"
+
+#: audio_describer/ui/main_window.py:311
+msgid "SRT and WebVTT files"
+msgstr "Tệp SRT và WebVTT"
+
+#: audio_describer/ui/main_window.py:320
+#, python-format
+msgid ""
+"Could not open the file:\n"
+"%s"
+msgstr ""
+"Không thể mở tệp:\n"
+"%s"
+
+#: audio_describer/ui/main_window.py:323
+msgid "No timed descriptions were found in this file."
+msgstr "Không tìm thấy mô tả có mốc thời gian trong tệp này."
+
+#: audio_describer/ui/main_window.py:325
+#, python-format
+msgid "%d descriptions found. Now choose the video they belong to."
+msgstr "Đã tìm thấy %d mô tả. Bây giờ hãy chọn video tương ứng."
+
+#: audio_describer/ui/main_window.py:326
+msgid "Import"
+msgstr "Nhập"
+
+#: audio_describer/ui/main_window.py:330
+#, python-format
+msgid "Imported %d descriptions."
+msgstr "Đã nhập %d mô tả."
+
+#: audio_describer/ui/manage_prompts_dialog.py:53
+msgid "E&xport..."
+msgstr "X&uất tệp..."
+
+#: audio_describer/ui/manage_prompts_dialog.py:54
+msgid "&Import..."
+msgstr "&Nhập..."
+
+#: audio_describer/ui/manage_prompts_dialog.py:137
+msgid "Export Presets"
+msgstr "Xuất thiết lập sẵn"
+
+#: audio_describer/ui/manage_prompts_dialog.py:146
+#, python-format
+msgid ""
+"Could not save the file:\n"
+"%s"
+msgstr ""
+"Không thể lưu tệp:\n"
+"%s"
+
+#: audio_describer/ui/manage_prompts_dialog.py:149
+#: audio_describer/ui/manage_prompts_dialog.py:169
+msgid "Import Presets"
+msgstr "Nhập thiết lập sẵn"
+
+#: audio_describer/ui/manage_prompts_dialog.py:159
+#, python-format
+msgid ""
+"This file does not contain valid presets:\n"
+"%s"
+msgstr ""
+"Tệp này không chứa thiết lập sẵn hợp lệ:\n"
+"%s"
+
+#: audio_describer/ui/manage_prompts_dialog.py:169
+#, python-format
+msgid "%d presets imported."
+msgstr "Đã nhập %d thiết lập sẵn."
+
+#: audio_describer/ui/player_export.py:373
+#, python-format
+msgid ""
+"%(n)d descriptions were too long for their pause and were cut (numbers: "
+"%(list)s). Shorten them, or export again with the extended description "
+"option."
+msgstr ""
+"%(n)d mô tả quá dài so với khoảng lặng của chúng và đã bị cắt (số: "
+"%(list)s). Hãy rút ngắn chúng, hoặc xuất lại với tùy chọn mô tả mở rộng."
+
+#: audio_describer/ui/player_export.py:377
+#, python-format
+msgid ""
+"The picture is paused %(n)d times (%(sec).1f seconds in total) so that long "
+"descriptions are read in full."
+msgstr ""
+"Hình ảnh được dừng %(n)d lần (tổng cộng %(sec).1f giây) để các mô tả dài "
+"được đọc trọn vẹn."
+
+#: audio_describer/ui/player_export.py:412
+msgid ""
+"The original subtitles were not kept: with the picture paused they would be "
+"out of sync."
+msgstr ""
+"Phụ đề gốc không được giữ lại: khi dừng hình, chúng sẽ bị lệch thời gian."
+
+#: audio_describer/ui/player_export.py:435
+msgid ""
+"The original subtitles could not be copied into this format and were not "
+"kept."
+msgstr ""
+"Không thể sao chép phụ đề gốc sang định dạng này nên chúng không được giữ "
+"lại."
+
+#: audio_describer/ui/player_export.py:461
+msgid "Failed to synthesize the audio introduction."
+msgstr "Không thể tổng hợp phần giới thiệu âm thanh."
+
+#: audio_describer/ui/player_window.py:132
+msgid ""
+"Player shortcuts: Space, play or pause. Left and Right arrows, back or "
+"forward 5 seconds; with Control, 30 seconds. Alt plus Left or Right, "
+"previous or next description. Up and Down arrows, video volume; with Shift, "
+"how much the video is lowered during descriptions. R, repeat the last "
+"description. T, announce the time. A, turn audio description on or off. D, "
+"change description density. M, change the audio description mode: in the "
+"pauses, pause the video when needed, or on demand. In on-demand mode, Enter "
+"describes the current moment and Shift+Enter gives more detail. I, audio "
+"introduction: the main characters and places, without spoilers; Shift+I "
+"saves it as an MP3. V, quality report. W, what is on screen now; ask follow-"
+"up questions in the window that opens. E, evaluate this audio description. "
+"Q, ask more. S, explore scene. L, next audio track of the video; C, next "
+"subtitle track or none. In on-demand mode, a soft sound tells you an "
+"essential description is available. In braille-only output, Enter resumes "
+"the video after each description. Control plus S, save project. F1 or "
+"question mark, this help."
+msgstr ""
+"Phím tắt trình phát: Phím cách, phát hoặc tạm dừng. Mũi tên Trái và Phải, "
+"lùi hoặc tiến 5 giây; kèm Control, 30 giây. Alt cộng Trái hoặc Phải, mô tả "
+"trước hoặc tiếp theo. Mũi tên Lên và Xuống, âm lượng video; kèm Shift, mức "
+"giảm âm lượng video khi đang đọc mô tả. R, lặp lại mô tả cuối cùng. T, đọc "
+"thời gian. A, bật hoặc tắt mô tả âm thanh. D, thay đổi mật độ mô tả. M, thay"
+" đổi chế độ mô tả âm thanh: trong các khoảng lặng, tạm dừng video khi cần, "
+"hoặc theo yêu cầu. Ở chế độ theo yêu cầu, Enter mô tả khoảnh khắc hiện tại "
+"và Shift+Enter cho thêm chi tiết. I, phần giới thiệu âm thanh: các nhân vật "
+"và địa điểm chính, không tiết lộ nội dung; Shift+I lưu phần này thành tệp "
+"MP3. V, báo cáo chất lượng. W, trên màn hình đang có gì; đặt thêm câu hỏi "
+"trong cửa sổ vừa mở. E, đánh giá phần mô tả âm thanh này. Q, hỏi thêm. S, "
+"khám phá cảnh. L, rãnh âm thanh tiếp theo của video; C, rãnh phụ đề tiếp "
+"theo hoặc tắt phụ đề. Ở chế độ theo yêu cầu, một âm thanh nhẹ báo cho bạn "
+"biết đang có mô tả thiết yếu. Ở chế độ chỉ chữ nổi, Enter tiếp tục phát "
+"video sau mỗi mô tả. Control cộng S, lưu dự án. F1 hoặc dấu chấm hỏi, trợ "
+"giúp này."
+
+#: audio_describer/ui/player_window.py:632
+msgid "This video has only one audio track."
+msgstr "Video này chỉ có một rãnh âm thanh."
+
+#: audio_describer/ui/player_window.py:632
+msgid "This video has no subtitles."
+msgstr "Video này không có phụ đề."
+
+#: audio_describer/ui/player_window.py:641
+#, python-format
+msgid "Audio track: %s"
+msgstr "Rãnh âm thanh: %s"
+
+#: audio_describer/ui/player_window.py:641
+#, python-format
+msgid "Subtitles: %s"
+msgstr "Phụ đề: %s"
+
+#: audio_describer/ui/player_window.py:664
+msgid "No audio introduction yet. Press I to write it first."
+msgstr "Chưa có phần giới thiệu âm thanh. Nhấn I để viết trước."
+
+#: audio_describer/ui/player_window.py:667
+msgid "Save the Audio Introduction"
+msgstr "Lưu phần giới thiệu âm thanh"
+
+#: audio_describer/ui/player_window.py:673
+msgid "Saving the audio introduction..."
+msgstr "Đang lưu phần giới thiệu âm thanh..."
+
+#: audio_describer/ui/player_window.py:690
+msgid "Audio introduction saved."
+msgstr "Đã lưu phần giới thiệu âm thanh."
+
+#: audio_describer/ui/settings_dialog.py:37
+msgid "Essential descriptions only"
+msgstr "Chỉ các mô tả thiết yếu"
+
+#: audio_describer/ui/settings_dialog.py:37
+msgid "Standard (Default)"
+msgstr "Tiêu chuẩn (Mặc định)"
+
+#: audio_describer/ui/settings_dialog.py:37
+msgid "All descriptions, with details"
+msgstr "Tất cả mô tả, kèm chi tiết"
+
+#: audio_describer/ui/settings_dialog.py:129
+msgid "Gemini API Key"
+msgstr "Khóa API Gemini"
+
+#: audio_describer/ui/settings_dialog.py:132
+msgid "&Test key"
+msgstr "&Kiểm tra khóa"
+
+#: audio_describer/ui/settings_dialog.py:143
+msgid "Description density when the player opens (D changes it):"
+msgstr "Mật độ mô tả khi mở trình phát (D để thay đổi):"
+
+#: audio_describer/ui/settings_dialog.py:247
+msgid ""
+"Pronunciation dictionary, one rule per line: word = how to say it (app voice"
+" and exports):"
+msgstr ""
+"Từ điển phát âm, mỗi dòng một quy tắc: từ = cách đọc (giọng của ứng dụng và "
+"tệp xuất):"
+
+#: audio_describer/ui/settings_dialog.py:249
+msgid "Pronunciation dictionary"
+msgstr "Từ điển phát âm"
+
+#: audio_describer/ui/settings_dialog.py:251
+msgid "In the pauses, the video keeps playing"
+msgstr "Trong các khoảng lặng, video vẫn tiếp tục phát"
+
+#: audio_describer/ui/settings_dialog.py:252
+msgid "Extended: pause the video when a description does not fit"
+msgstr "Mở rộng: tạm dừng video khi một mô tả không vừa"
+
+#: audio_describer/ui/settings_dialog.py:253
+msgid "On demand: Enter describes the current moment"
+msgstr "Theo yêu cầu: Enter mô tả khoảnh khắc hiện tại"
+
+#: audio_describer/ui/settings_dialog.py:254
+msgid "Audio description mode in the player (M changes it):"
+msgstr "Chế độ mô tả âm thanh trong trình phát (M để thay đổi):"
+
+#: audio_describer/ui/settings_dialog.py:256
+msgid "Audio description mode in the player"
+msgstr "Chế độ mô tả âm thanh trong trình phát"
+
+#: audio_describer/ui/settings_dialog.py:542
+msgid "Type or paste your Gemini API key first."
+msgstr "Hãy nhập hoặc dán khóa API Gemini của bạn trước."
+
+#: audio_describer/ui/settings_dialog.py:545
+msgid "Testing the key..."
+msgstr "Đang kiểm tra khóa..."
+
+#: audio_describer/ui/settings_dialog.py:559
+#, python-format
+msgid "The key does not work: %s"
+msgstr "Khóa không hoạt động: %s"
+
+#: audio_describer/ui/settings_dialog.py:560
+msgid "Test key"
+msgstr "Kiểm tra khóa"
+
+#: audio_describer/ui/settings_dialog.py:562
+#, python-format
+msgid "The key works. %d models available."
+msgstr "Khóa hoạt động. Có %d mô hình khả dụng."
+
+#: audio_describer/core/ollama_video.py:107
+#, python-format
+msgid ""
+"The model '%(model)s' is not installed in Ollama. Run: ollama pull %(model)s"
+msgstr ""
+"Mô hình '%(model)s' chưa được cài trong Ollama. Hãy chạy: ollama pull "
+"%(model)s"
+
+#: audio_describer/core/ollama_video.py:111
+msgid ""
+"Ollama took too long to answer. Try a smaller model or a shorter video."
+msgstr "Ollama phản hồi quá lâu. Hãy thử mô hình nhỏ hơn hoặc video ngắn hơn."
+
+#: audio_describer/core/ollama_video.py:154
+msgid "FFmpeg is required to describe a video with the local model."
+msgstr "Cần FFmpeg để mô tả video bằng mô hình cục bộ."
+
+#: audio_describer/core/ollama_video.py:157
+msgid "Could not read the length of the video."
+msgstr "Không đọc được độ dài của video."
+
+#: audio_describer/core/ollama_video.py:159
+#, python-format
+msgid "Describing locally with Ollama (%s). Nothing leaves this computer."
+msgstr ""
+"Đang mô tả cục bộ bằng Ollama (%s). Không có gì rời khỏi máy tính này."
+
+#: audio_describer/core/ollama_video.py:177
+#, python-format
+msgid "Segment %(n)d of %(total)d..."
+msgstr "Đoạn %(n)d trên %(total)d..."
+
+#: audio_describer/ui/edit_description_dialog.py:24
+msgid "female voice"
+msgstr "giọng nữ"
+
+#: audio_describer/ui/edit_description_dialog.py:24
+msgid "male voice"
+msgstr "giọng nam"
+
+#: audio_describer/ui/edit_description_dialog.py:414
+msgid "Only translated dialogue has a speaker's voice."
+msgstr "Chỉ lời thoại được dịch mới có giọng của người nói."
+
+#: audio_describer/ui/edit_description_dialog.py:426
+msgid "Speaker's voice: unknown"
+msgstr "Giọng người nói: không rõ"
+
+#: audio_describer/ui/edit_description_dialog.py:426
+msgid "Speaker's voice: female"
+msgstr "Giọng người nói: nữ"
+
+#: audio_describer/ui/edit_description_dialog.py:427
+msgid "Speaker's voice: male"
+msgstr "Giọng người nói: nam"
+
+#: audio_describer/ui/settings_dialog.py:171
+msgid "Ollama (local, free, private)"
+msgstr "Ollama (cục bộ, miễn phí, riêng tư)"
+
+#: audio_describer/ui/settings_dialog.py:172
+msgid "Video descriptions:"
+msgstr "Mô tả video:"
+
+#: audio_describer/ui/settings_dialog.py:275
+msgid ""
+"Read translated dialogue with a voice matching the speaker (woman or man)"
+msgstr ""
+"Đọc lời thoại được dịch bằng giọng phù hợp với người nói (nữ hoặc nam)"
+
+#: audio_describer/ui/settings_dialog.py:279
+msgid "Woman's voice:"
+msgstr "Giọng nữ:"
+
+#: audio_describer/ui/settings_dialog.py:279
+msgid "Man's voice:"
+msgstr "Giọng nam:"
+
+#: audio_describer/ui/settings_dialog.py:285
+msgid "Installed Windows voice (automatic)"
+msgstr "Giọng đã cài trong Windows (tự động)"
+
+#: audio_describer/ui/settings_dialog.py:286
+#, python-format
+msgid "%(voice)s (local Piper voice, %(size)d MB)"
+msgstr "%(voice)s (giọng Piper cục bộ, %(size)d MB)"
+
+#: audio_describer/ui/settings_dialog.py:291
+msgid "Download and listen"
+msgstr "Tải xuống và nghe thử"
+
+#: audio_describer/ui/settings_dialog.py:639
+msgid ""
+"Choose a Piper voice first; the automatic choice uses the voices installed "
+"in Windows."
+msgstr ""
+"Hãy chọn một giọng Piper trước; lựa chọn tự động dùng các giọng đã cài trong"
+" Windows."
+
+#: audio_describer/ui/settings_dialog.py:642
+msgid "Local Piper voices are not available in this version."
+msgstr "Giọng Piper cục bộ không có trong phiên bản này."
+
+#: audio_describer/ui/settings_dialog.py:646
+#, python-format
+msgid "Preparing the voice %s..."
+msgstr "Đang chuẩn bị giọng %s..."
+
+#: audio_describer/ui/settings_dialog.py:652
+msgid "This is how this voice sounds."
+msgstr "Đây là giọng này khi đọc."
+
+#: audio_describer/ui/settings_dialog.py:662
+#, python-format
+msgid "The voice could not be prepared: %s"
+msgstr "Không thể chuẩn bị giọng: %s"
+
+#: audio_describer/ui/settings_dialog.py:662
+msgid "no sound produced"
+msgstr "không tạo ra âm thanh"
+
+#: audio_describer/core/gemini_helpers.py:266
+#, python-format
+msgid ""
+"Gemini is overloaded right now (model %s). Nothing is wrong with your video "
+"or your key: try again in a few minutes, or choose another model in Settings."
+msgstr ""
+"Gemini đang quá tải (mô hình %s). Video và khóa của bạn không có vấn đề gì: "
+"hãy thử lại sau vài phút hoặc chọn mô hình khác trong Cài đặt."
+
+#: audio_describer/core/gemini_helpers.py:274
+#, python-format
+msgid ""
+"Gemini is overloaded right now (attempt %(attempt)d of %(max)d). Retrying in "
+"%(delay)d seconds..."
+msgstr ""
+"Gemini đang quá tải (lần thử %(attempt)d trên %(max)d). Thử lại sau %(delay)d"
+" giây..."
+
+#: audio_describer/core/gemini_helpers.py:259
+#, python-format
+msgid "%(old)s is still overloaded: switching to %(new)s."
+msgstr "%(old)s vẫn quá tải: chuyển sang %(new)s."
+
+msgid ""
+"This feature uses Gemini, but video descriptions are set to another AI in "
+"Settings, so nothing was sent to Google. Switch to Gemini in Settings to use"
+" it."
+msgstr ""
+"Tính năng này dùng Gemini, nhưng mô tả video đang được đặt cho một AI khác "
+"trong Cài đặt, nên không có gì được gửi đến Google. Hãy chuyển sang Gemini "
+"trong Cài đặt để sử dụng."
+
+msgid ""
+"Could not read this image. FFmpeg is required to send it to the vision "
+"service."
+msgstr ""
+"Không thể đọc hình ảnh này. Cần có FFmpeg để gửi hình ảnh đến dịch vụ phân "
+"tích hình ảnh."
+
+msgid ""
+"This vision model can only describe images; switch to Gemini in Settings for"
+" PDF documents."
+msgstr ""
+"Mô hình phân tích hình ảnh này chỉ mô tả được hình ảnh; hãy chuyển sang "
+"Gemini trong Cài đặt để xử lý tài liệu PDF."
+
+#, python-format
+msgid "Describing with %s (frames sent to the vision service)."
+msgstr ""
+"Đang mô tả bằng %s (các khung hình được gửi đến dịch vụ phân tích hình ảnh)."
+
+msgid ""
+"Set the server address and the model of the OpenAI-compatible vision service"
+" in Settings."
+msgstr ""
+"Hãy đặt địa chỉ máy chủ và mô hình của dịch vụ phân tích hình ảnh tương "
+"thích OpenAI trong Cài đặt."
+
+msgid ""
+"Use an https:// address for an online vision service; http:// is only for "
+"this computer."
+msgstr ""
+"Hãy dùng địa chỉ https:// cho dịch vụ phân tích hình ảnh trực tuyến; http://"
+" chỉ dành cho máy tính này."
+
+#, python-format
+msgid "The vision service refused the API key (%(code)d)."
+msgstr "Dịch vụ phân tích hình ảnh đã từ chối khóa API (%(code)d)."
+
+#, python-format
+msgid "The vision service refused the request (model '%(model)s'): %(detail)s"
+msgstr ""
+"Dịch vụ phân tích hình ảnh đã từ chối yêu cầu (mô hình '%(model)s'): "
+"%(detail)s"
+
+msgid ""
+"The vision service took too long to answer. Try a smaller model or a shorter"
+" video."
+msgstr ""
+"Dịch vụ phân tích hình ảnh phản hồi quá lâu. Hãy thử một mô hình nhỏ hơn "
+"hoặc một video ngắn hơn."
+
+#, python-format
+msgid "Could not reach the vision service at %s."
+msgstr "Không thể kết nối đến dịch vụ phân tích hình ảnh tại %s."
+
+#, python-format
+msgid "Unknown voice engine in Settings: %s"
+msgstr "Cơ chế giọng nói không xác định trong Cài đặt: %s"
+
+#, python-format
+msgid ""
+"Settings file was corrupted and has been reset. Your previous settings could"
+" not be recovered. (Error: %s)"
+msgstr ""
+"Tệp cài đặt bị hỏng và đã được đặt lại. Không thể khôi phục cài đặt trước "
+"đây của bạn. (Lỗi: %s)"
+
+msgid ""
+"Your previous settings could not be migrated from the old encrypted format. "
+"This typically happens after a Windows update or hardware change. Settings "
+"have been reset to defaults. You will need to re-enter your API keys."
+msgstr ""
+"Không thể chuyển cài đặt trước đây của bạn từ định dạng mã hóa cũ. Điều này "
+"thường xảy ra sau khi cập nhật Windows hoặc thay đổi phần cứng. Cài đặt đã "
+"được đặt lại về mặc định. Bạn sẽ cần nhập lại các khóa API."
+
+msgid "Automatic (speaker's apparent gender on each line)"
+msgstr "Tự động (giới tính biểu hiện của người nói ở mỗi câu)"
+
+msgid "Woman's voice"
+msgstr "Giọng nữ"
+
+msgid "Man's voice"
+msgstr "Giọng nam"
+
+msgid "Description voice"
+msgstr "Giọng mô tả"
+
+msgid "woman"
+msgstr "nữ"
+
+msgid "man"
+msgstr "nam"
+
+msgid "unknown"
+msgstr "không rõ"
+
+#, python-format
+msgid "&Voice for this character's translated lines (AI saw: %s):"
+msgstr "&Giọng cho các câu thoại đã dịch của nhân vật này (AI nhận thấy: %s):"
+
+msgid "&Reset Settings and Data..."
+msgstr "&Đặt lại Cài đặt và Dữ liệu..."
+
+msgid "Restore default settings or presets, or clear downloaded data"
+msgstr ""
+"Khôi phục cài đặt hoặc thiết lập sẵn mặc định, hoặc xóa dữ liệu đã tải xuống"
+
+msgid "Reset done. Some settings apply after restarting the app."
+msgstr ""
+"Đã đặt lại. Một số cài đặt sẽ có hiệu lực sau khi khởi động lại ứng dụng."
+
+#, python-format
+msgid "%(title)s (Reason: %(reason)s)"
+msgstr "%(title)s (Lý do: %(reason)s)"
+
+#, python-format
+msgid "Opening %s"
+msgstr "Đang mở %s"
+
+#, python-format
+msgid "Help file not found: %s"
+msgstr "Không tìm thấy tệp trợ giúp: %s"
+
+#, python-format
+msgid "Could not open %(file)s: %(error)s"
+msgstr "Không thể mở %(file)s: %(error)s"
+
+msgid "Reset Settings and Data"
+msgstr "Đặt lại Cài đặt và Dữ liệu"
+
+msgid ""
+"Choose what to reset. A backup copy of your settings and presets is saved "
+"first. Projects and exported files are never touched."
+msgstr ""
+"Chọn nội dung cần đặt lại. Một bản sao lưu cài đặt và thiết lập sẵn của bạn "
+"sẽ được lưu trước. Dự án và các tệp đã xuất không bao giờ bị động đến."
+
+msgid "&Settings (back to defaults)"
+msgstr "&Cài đặt (trở về mặc định)"
+
+msgid "Also forget my &API keys"
+msgstr "Quên luôn các khóa &API của tôi"
+
+msgid "&Prompt presets (custom presets are removed)"
+msgstr "Thiết lập sẵn &lời nhắc (các thiết lập sẵn tùy chỉnh sẽ bị xóa)"
+
+msgid "OpenAI &voice presets"
+msgstr "Thiết lập sẵn &giọng nói OpenAI"
+
+msgid "&Downloaded voices and models (downloaded again when needed)"
+msgstr "Giọng nói và mô hình đã &tải xuống (sẽ tải lại khi cần)"
+
+msgid "&Temporary files"
+msgstr "Tệp tạ&m thời"
+
+msgid "&Reset"
+msgstr "Đặt &lại"
+
+msgid "Nothing is selected."
+msgstr "Chưa chọn mục nào."
+
+msgid "Reset"
+msgstr "Đặt lại"
+
+msgid "Reset the selected items now? This cannot be undone from the app."
+msgstr ""
+"Đặt lại các mục đã chọn ngay bây giờ? Không thể hoàn tác thao tác này từ ứng"
+" dụng."
+
+msgid "Confirm Reset"
+msgstr "Xác nhận Đặt lại"
+
+#, python-format
+msgid "The reset did not complete: %s"
+msgstr "Việc đặt lại chưa hoàn tất: %s"
+
+msgid "Microsoft Azure Neural Voices (online, key required)"
+msgstr "Giọng nói Neural Microsoft Azure (trực tuyến, cần khóa)"
+
+msgid "Google Cloud Text-to-Speech (online, key required)"
+msgstr "Google Cloud Chuyển văn bản thành giọng nói (trực tuyến, cần khóa)"
+
+msgid ""
+"OpenAI-compatible vision service (OpenRouter, OpenAI, Claude, Mistral, LM "
+"Studio...)"
+msgstr ""
+"Dịch vụ phân tích hình ảnh tương thích OpenAI (OpenRouter, OpenAI, Claude, "
+"Mistral, LM Studio...)"
+
+msgid "OpenAI-compatible vision service (frames)"
+msgstr "Dịch vụ phân tích hình ảnh tương thích OpenAI (khung hình)"
+
+msgid "Vision service address (OpenAI-compatible):"
+msgstr "Địa chỉ dịch vụ phân tích hình ảnh (tương thích OpenAI):"
+
+msgid "Vision service model:"
+msgstr "Mô hình dịch vụ phân tích hình ảnh:"
+
+msgid "Vision service API key (empty for a local server):"
+msgstr ""
+"Khóa API dịch vụ phân tích hình ảnh (để trống nếu dùng máy chủ cục bộ):"
+
+msgid "Microsoft Azure Neural Voices"
+msgstr "Giọng nói Neural Microsoft Azure"
+
+msgid "Speech resource key:"
+msgstr "Khóa tài nguyên Speech:"
+
+msgid "Region (for example westeurope):"
+msgstr "Khu vực (ví dụ westeurope):"
+
+msgid "Voice (for example fr-FR-DeniseNeural):"
+msgstr "Giọng nói (ví dụ fr-FR-DeniseNeural):"
+
+msgid "Woman's voice for translated dialogue (optional):"
+msgstr "Giọng nữ cho lời thoại đã dịch (tùy chọn):"
+
+msgid "Man's voice for translated dialogue (optional):"
+msgstr "Giọng nam cho lời thoại đã dịch (tùy chọn):"
+
+msgid "Google Cloud Text-to-Speech"
+msgstr "Google Cloud Chuyển văn bản thành giọng nói"
+
+msgid "API key:"
+msgstr "Khóa API:"
+
+msgid "Voice (for example fr-FR-Chirp3-HD-Aoede):"
+msgstr "Giọng nói (ví dụ fr-FR-Chirp3-HD-Aoede):"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Picture detail sent to the AI:"
+msgstr "Độ chi tiết hình ảnh gửi cho AI:"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Automatic (Default)"
+msgstr "Tự động (Mặc định)"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Low (cheaper, for long videos)"
+msgstr "Thấp (rẻ hơn, cho video dài)"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Medium"
+msgstr "Trung bình"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "High (reads small on-screen text, costs more)"
+msgstr "Cao (đọc được chữ nhỏ trên màn hình, tốn hơn)"

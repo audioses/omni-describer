@@ -1,0 +1,94 @@
+[
+    {
+        "name": "Trailer cinematografico",
+        "prompt": "Questo è il trailer di un film. Concentrati sulle inquadrature incalzanti, d'impatto e iconiche. Dai priorità ai momenti d'azione chiave, alle presentazioni drammatiche dei personaggi e a qualsiasi testo in sovrimpressione, come date di uscita o loghi delle case di produzione. Crea un senso di attesa ed entusiasmo e lascia intuire la trama senza rivelare spoiler. Le descrizioni devono essere brevissime, per stare tra un taglio rapido e l'altro."
+    },
+    {
+        "name": "Film d'azione",
+        "prompt": "Questo è un film d'azione. Concentrati sulla coreografia essenziale dell'azione: pugni, calci, schivate significative e uso delle armi. Descrivi gli eventi su larga scala, come esplosioni o inseguimenti in auto. Mantieni l'audiodescrizione concisa e incisiva, al ritmo serrato del film."
+    },
+    {
+        "name": "Film romantico",
+        "prompt": "Questo è un film romantico. Dai priorità alla vicinanza fisica tra i personaggi, ai contatti significativi (come tenersi per mano) e alle espressioni del viso rilevanti che mostrano affetto, desiderio o conflitto. Descrivi l'atmosfera romantica dell'ambientazione (ad esempio: 'cena a lume di candela', 'passeggiata su una spiaggia al chiaro di luna')."
+    },
+    {
+        "name": "Commedia / Sitcom",
+        "prompt": "Questo è un contenuto comico. Concentrati sulle gag visive, sulla comicità fisica e sulle situazioni assurde. Descrivi le reazioni esagerate e le espressioni buffe che sono essenziali per la battuta. Descrivi la gag mentre accade, così chi ascolta ride insieme a tutti gli altri, e sii breve; se devi anticiparla, non svelare mai la battuta finale."
+    },
+    {
+        "name": "Fantascienza / Fantasy",
+        "prompt": "Questo è un contenuto di fantascienza o fantasy. Concentrati sugli elementi caratteristici del mondo rappresentato. Descrivi tecnologie futuristiche, creature fantastiche, effetti magici e paesaggi ultraterreni. Spiega in che cosa gli elementi visivi differiscono dal mondo reale (ad esempio: 'Una nave dalle vele luminose attraversa una nebulosa viola.')."
+    },
+    {
+        "name": "Meme / Video virale",
+        "prompt": "Questo è un breve meme o video virale. L'obiettivo è descrivere la gag visiva centrale o l'evento inaspettato nel modo più conciso possibile. Individua il soggetto principale e l'unica azione che rende il video divertente o interessante. Le didascalie in sovrimpressione sono molto importanti (ad esempio: 'Un gatto con gli occhiali da sole muove la testa a ritmo. Didascalia: Vibing.')."
+    },
+    {
+        "name": "Documentario / Educativo",
+        "prompt": "Questo è un documentario o un video educativo. Dai priorità al testo in sovrimpressione, alle etichette, ai grafici, alle mappe e ai filmati d'archivio. Per le persone, concentrati sulle azioni legate all'argomento trattato (ad esempio: 'La biologa indica una pianta specifica.'). Mantieni un tono neutro e informativo."
+    },
+    {
+        "name": "Cucina / Ricetta",
+        "prompt": "Questo è un video di cucina. Descrivi i singoli ingredienti man mano che vengono aggiunti e le tecniche di cottura mostrate (ad esempio: 'taglia la cipolla a dadini', 'scotta la bistecca'). Descrivi l'aspetto e la consistenza del cibo nelle fasi principali (ad esempio: 'La salsa si addensa fino a diventare lucida.')."
+    },
+    {
+        "name": "Fai da te / Tutorial",
+        "prompt": "Questo è un tutorial o un video di fai da te. Concentrati sul procedimento passo dopo passo. Descrivi con chiarezza gli attrezzi e i materiali utilizzati. Specifica l'azione eseguita sull'oggetto e descrivi lo stato dell'oggetto prima e dopo l'azione (ad esempio: 'Il falegname pratica un foro nel punto segnato sull'asse.')."
+    },
+    {
+        "name": "Videogiochi / Let's Play",
+        "prompt": "Questa è la registrazione di un videogioco. Dai priorità agli elementi essenziali dell'interfaccia a schermo (l'HUD), come barre della salute, munizioni o minimappe, quando cambiano. Descrivi le azioni del personaggio principale o dell'avatar nel mondo di gioco (ad esempio: 'Il personaggio lancia un incantesimo di fuoco', 'L'avatar salta sulla piattaforma successiva.')."
+    },
+    {
+        "name": "Lezione / Slide",
+        "prompt": "Questa è una lezione, un corso o una presentazione. Leggi alla lettera, come testo in sovrimpressione, ogni titolo di slide, punto elenco, formula ed etichetta di grafico quando compare o cambia. Descrivi i diagrammi in base alla loro struttura (assi, andamento, riquadri e frecce). Non descrivere il relatore, se non per i gesti con cui indica i contenuti."
+    },
+    {
+        "name": "Anime / Animazione",
+        "prompt": "Questa è un'opera d'animazione. Descrivi i personaggi in base al loro design visivo stabile (colore e taglio dei capelli, abbigliamento) e usa ogni volta lo stesso descrittore. Leggi cartelli e didascalie in sovrimpressione. Descrivi brevemente gli effetti stilizzati (linee di velocità, gocce di sudore, trasformazioni chibi) in base a ciò che comunicano visivamente."
+    },
+    {
+        "name": "Bambini",
+        "prompt": "Questo è un contenuto per bambini piccoli. Usa parole semplici e concrete e frasi brevi. Nomina colori e forme. Descrivi con chiarezza le azioni buffe. Evita parole che possano spaventare."
+    },
+    {
+        "name": "Horror / Thriller",
+        "prompt": "Questo è un film horror o thriller. Non riempire mai i silenzi che creano tensione; descrivi solo l'essenziale, brevemente, se possibile appena prima di uno spavento. Descrivi ombre, movimenti ai margini dell'inquadratura e ciò che vedono i personaggi, senza rivelare ciò che il film ancora nasconde."
+    },
+    {
+        "name": "Videoclip / Concerto",
+        "prompt": "Questo è un videoclip o un concerto. Il testo della canzone viene cantato per gran parte del tempo: inserisci l'audiodescrizione solo nei passaggi strumentali e tra una strofa e l'altra, e solo per gli elementi visivi più importanti (artisti, cambi di ambientazione, coreografie). Lascia respirare la musica."
+    },
+    {
+        "name": "Sport",
+        "prompt": "Questa è una trasmissione sportiva. Di solito la telecronaca copre l'azione: descrivi solo ciò che la telecronaca non dice, come la grafica del punteggio, i replay, le esultanze dei giocatori e il pubblico. Leggi il punteggio e il cronometro in sovrimpressione."
+    },
+    {
+        "name": "Notiziario / Intervista",
+        "prompt": "Questo è un servizio giornalistico o un'intervista. Leggi alla lettera i nomi e i ruoli nei sottopancia, le didascalie e le grafiche. Descrivi brevemente i luoghi e i filmati d'archivio. Non sovrapporti mai a chi parla."
+    },
+    {
+        "name": "Senza dialoghi / Muto",
+        "prompt": "Questo video ha pochi dialoghi o nessuno. Descrivi in modo continuo, ma lascia spazio alla musica e ai silenzi voluti. Segui la storia azione per azione, dal generale al particolare."
+    },
+    {
+        "name": "Danza / Coreografia",
+        "prompt": "Questa è un'esibizione di danza o una coreografia. Descrivi ogni movimento indicando la parte del corpo e la direzione (le braccia passano sopra la testa, una piroetta verso sinistra), le formazioni, le prese, le entrate e i costumi alla loro prima apparizione. Colloca le descrizioni sulle frasi strumentali; non coprire mai il testo cantato."
+    },
+    {
+        "name": "Fitness / Yoga",
+        "prompt": "Questo è un video di allenamento o yoga che lo spettatore segue in contemporanea. Per ogni nuovo movimento indica la posizione di partenza, poi la parte del corpo, il lato (sinistra o destra dell'istruttore), la direzione e il numero di ripetizioni mostrato. Leggi i nomi degli esercizi e i timer sullo schermo. Descrivi l'aspetto e il luogo una sola volta, all'inizio."
+    },
+    {
+        "name": "Natura / Animali",
+        "prompt": "Questo è un documentario naturalistico. Nomina una specie solo se la narrazione o un testo sullo schermo la identifica o se è inconfondibile; altrimenti indica dimensioni, forma, colore e movimento. Descrivi i comportamenti (caccia, alimentazione, corteggiamento) e i cambiamenti di paesaggio e di tempo. La narrazione spesso spiega l'azione: aggiungi solo ciò che non dice."
+    },
+    {
+        "name": "Vlog / In camera",
+        "prompt": "Questo è un vlog o una persona che parla in camera per la maggior parte del tempo. Descrivi la persona e il luogo una sola volta, all'inizio, poi solo i cambiamenti: inserti, oggetti mostrati alla camera, testi sullo schermo, emoji e sticker in sovrimpressione, e reazioni visibili che cambiano il senso di ciò che viene detto."
+    },
+    {
+        "name": "Recensione prodotto / Unboxing",
+        "prompt": "Questa è una recensione di un prodotto o un unboxing. Leggi marca, modello, prezzo e specifiche mostrati sullo schermo o sulla confezione. Descrivi la forma del prodotto, le dimensioni rispetto a oggetti familiari, i materiali, i pulsanti e le porte, e ogni elemento che esce dalla scatola. Descrivi le dimostrazioni attraverso il loro risultato visibile."
+    }
+]

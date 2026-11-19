@@ -1,6 +1,7 @@
 # audio_describer/core/youtube_downloader.py
 from audio_describer.i18n_setup import _ # Assuming this is correctly imported elsewhere or handled
 import os
+import tempfile
 import subprocess
 import json
 import sys # <-- Import sys to check for frozen state
@@ -19,7 +20,7 @@ except ImportError:
 
 # Define a directory for temporary downloads
 # Using a subfolder within the main application's temporary directory
-TEMP_DOWNLOAD_DIR = os.path.join(os.getcwd(), config.TEMP_DIR_NAME, "downloads")
+TEMP_DOWNLOAD_DIR = os.path.join(tempfile.gettempdir(), "OmniDescriber", config.TEMP_DIR_NAME, "downloads")
 if not os.path.exists(TEMP_DOWNLOAD_DIR):
     try:
         os.makedirs(TEMP_DOWNLOAD_DIR, exist_ok=True)
@@ -27,7 +28,7 @@ if not os.path.exists(TEMP_DOWNLOAD_DIR):
         # Keep this error unwrapped
         app_logger.error("Could not create temp download directory %s: %s" % (TEMP_DOWNLOAD_DIR, e))
         # Fallback if creation fails, though this is not ideal
-        TEMP_DOWNLOAD_DIR = os.path.join(os.getcwd(), "temp_downloads")
+        TEMP_DOWNLOAD_DIR = tempfile.mkdtemp(prefix="omni_downloads_")
         if not os.path.exists(TEMP_DOWNLOAD_DIR):
              # Added a try/except around the fallback creation too
              try:

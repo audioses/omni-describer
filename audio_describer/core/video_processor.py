@@ -9,17 +9,21 @@ import math
 
 from audio_describer import config
 from audio_describer.utils.logger import app_logger
-from audio_describer.core import youtube_downloader
+from audio_describer.core import youtube_downloader, timing
 from audio_describer.models import config_model
 from audio_describer.utils.system_utils import run_command, get_ffmpeg_path
 
 FFMPEG_COMMAND = get_ffmpeg_path('ffmpeg')
 FFPROBE_COMMAND = get_ffmpeg_path('ffprobe')
 
-TEMP_PROCESSING_BASE_DIR = os.path.join(os.getcwd(), config.TEMP_DIR_NAME)
+# Under %TEMP%, not the working folder: launched from Program Files or System32 the old
+# os.getcwd() location raised PermissionError at import and the app failed to start.
+TEMP_PROCESSING_BASE_DIR = os.path.join(tempfile.gettempdir(), "OmniDescriber", config.TEMP_DIR_NAME)
 TEMP_VIDEO_DIR = os.path.join(TEMP_PROCESSING_BASE_DIR, "processed_videos")
-if not os.path.exists(TEMP_VIDEO_DIR):
+try:
     os.makedirs(TEMP_VIDEO_DIR, exist_ok=True)
+except OSError as e:
+    app_logger.warning(f"Could not create {TEMP_VIDEO_DIR}: {e}")
 
 try:
     ffmpeg_process = run_command([FFMPEG_COMMAND, "-version"])
@@ -54,36 +58,58 @@ def get_video_duration(video_path):
             return 0.0
     return 0.0
 
-def get_video_properties(video_path):
+
+def has_audio_stream(video_path):
     if not FFPROBE_IS_AVAILABLE:
-        app_logger.warning("ffprobe not available, cannot get video properties.")
+        return True
+    process = run_command([FFPROBE_COMMAND, "-v", "error", "-select_streams", "a",
+                           "-show_entries", "stream=index", "-of", "csv=p=0", video_path])
+    return process.returncode != 0 or bool(process.stdout.strip())
+
+
+def detect_quiet_windows(video_path, duration=None):
+    """Windows [(start, end), ...] where a description can go, found locally (no tokens).
+
+    Silero VAD when available: windows without speech, music included (audit §10.2).
+    Otherwise ffmpeg silencedetect: true silences only. Returns None when it cannot be
+    determined (no ffmpeg, no audio track, error) so the model judges pauses itself.
+    """
+    if not FFMPEG_IS_AVAILABLE or not has_audio_stream(video_path):
         return None
-    command = [
-        FFPROBE_COMMAND, "-v", "error", "-select_streams", "v:0",
-        "-show_entries", "stream=width,height,avg_frame_rate,bit_rate",
-        "-of", "json", video_path
-    ]
-    process = run_command(command)
-    if process.returncode == 0 and process.stdout.strip():
-        try:
-            props = json.loads(process.stdout)['streams'][0]
-            if 'avg_frame_rate' in props and '/' in props['avg_frame_rate']:
-                num, den = props['avg_frame_rate'].split('/')
-                if int(den) != 0:
-                    props['avg_frame_rate'] = float(num) / float(den)
-                else:
-                    props['avg_frame_rate'] = 30 
-            else:
-                 props['avg_frame_rate'] = 30
-            if 'bit_rate' in props and props['bit_rate'] is not None:
-                props['bit_rate'] = int(props['bit_rate'])
-            else:
-                props['bit_rate'] = None
-            return props
-        except (json.JSONDecodeError, IndexError, KeyError) as e:
-            app_logger.error(f"Failed to parse ffprobe output: {e}")
-            return None
-    return None
+    threshold_db = config_model.get_setting("silence_threshold_db") or -35
+    min_duration = config_model.get_setting("silence_min_duration_sec") or 0.8
+    from . import vad
+    windows = vad.detect_speech_free_windows(video_path, duration, min_duration)
+    if windows is not None:
+        return windows
+    cmd = [FFMPEG_COMMAND, "-hide_banner", "-nostats", "-i", video_path, "-vn", "-sn", "-dn",
+           "-af", f"silencedetect=n={threshold_db}dB:d={min_duration}", "-f", "null", "-"]
+    process = run_command(cmd)
+    if process.returncode != 0:
+        app_logger.warning(f"silencedetect failed: {process.stderr[-500:]}")
+        return None
+    windows = timing.parse_silencedetect(process.stderr, duration)
+    app_logger.info(f"silencedetect: {len(windows)} quiet windows (n={threshold_db}dB, d={min_duration}s)")
+    return windows
+
+SCENE_THRESHOLD = 0.3  # ffmpeg scene score; 0.3 is the usual cut threshold
+
+
+def detect_shot_changes(video_path):
+    """Shot changes in seconds (audit §10.2): natural anchors for a description. None on failure.
+    Decodes the whole video at a small size: about a minute per hour of film."""
+    if not FFMPEG_IS_AVAILABLE:
+        return None
+    cmd = [FFMPEG_COMMAND, "-hide_banner", "-nostats", "-i", video_path, "-an", "-sn", "-dn",
+           "-vf", f"scale=160:-2,select='gt(scene,{SCENE_THRESHOLD})',showinfo", "-f", "null", "-"]
+    process = run_command(cmd)
+    if process.returncode != 0:
+        app_logger.warning(f"Shot detection failed: {process.stderr[-500:]}")
+        return None
+    cuts = timing.parse_scene_changes(process.stderr)
+    app_logger.info(f"Shot detection: {len(cuts)} changes")
+    return cuts
+
 
 def _standardize_video_format(input_path, is_local_file=False):
     if not FFMPEG_IS_AVAILABLE:
@@ -118,45 +144,6 @@ def _standardize_video_format(input_path, is_local_file=False):
         cleanup_temp_file(input_path)
         
     return output_path, True
-
-def split_video_into_chunks(video_path, chunk_duration_sec, status_callback=None):
-    if not FFMPEG_IS_AVAILABLE:
-        raise RuntimeError("FFmpeg is required for video chunking but was not found.")
-        
-    total_duration = get_video_duration(video_path)
-    if total_duration == 0:
-        raise ValueError("Could not determine video duration or video is empty.")
-
-    num_chunks = math.ceil(total_duration / chunk_duration_sec)
-    if num_chunks <= 1:
-        app_logger.info("Video is shorter than chunk size, no splitting needed.")
-        return [video_path]
-
-    if status_callback:
-        status_callback(_("Splitting video into %d chunks...") % num_chunks)
-
-    chunk_paths = []
-    temp_dir = tempfile.gettempdir()
-    base_name = os.path.splitext(os.path.basename(video_path))[0]
-
-    for i in range(num_chunks):
-        start_time = i * chunk_duration_sec
-        chunk_path = os.path.join(temp_dir, f"{base_name}_chunk_{i+1:03d}.mp4")
-        
-        command = [
-            FFMPEG_COMMAND, "-y", "-ss", str(start_time), "-i", video_path,
-            "-t", str(chunk_duration_sec), "-c", "copy", chunk_path
-        ]
-        
-        process = run_command(command)
-        if process.returncode != 0:
-            raise RuntimeError(f"FFmpeg failed to create chunk {i+1}: {process.stderr}")
-        
-        chunk_paths.append(chunk_path)
-        if status_callback:
-            status_callback(_("Created chunk %d of %d...") % (i + 1, num_chunks))
-
-    return chunk_paths
 
 def preprocess_video_for_ai(original_video_path, status_update_callback=None):
     """Pre-processes video for AI analysis.
@@ -253,15 +240,23 @@ def process_youtube_url(youtube_url, desired_resolution=None):
                                     }
             raise youtube_downloader.DownloaderError(final_error_message)
 
+def is_inside(path, folder):
+    """True when path is inside folder (real path containment, case-insensitive on Windows),
+    not merely a string containing the folder name."""
+    try:
+        path, folder = os.path.normcase(os.path.abspath(path)), os.path.normcase(os.path.abspath(folder))
+        return path != folder and os.path.commonpath([path, folder]) == folder
+    except ValueError:  # different drives
+        return False
+
+
 def cleanup_temp_file(file_path):
+    """Delete a file this app created in one of its temporary folders; anything else is left alone."""
     if not isinstance(file_path, str): return
     abs_file_path = os.path.abspath(file_path)
-    is_in_downloader_temp = youtube_downloader.TEMP_DOWNLOAD_DIR in abs_file_path
-    is_in_processor_temp = TEMP_VIDEO_DIR in abs_file_path
-    is_in_generic_temp_name = config.TEMP_DIR_NAME in abs_file_path
-    is_in_system_temp = tempfile.gettempdir() in abs_file_path
+    temp_dirs = (youtube_downloader.TEMP_DOWNLOAD_DIR, TEMP_VIDEO_DIR, tempfile.gettempdir())
 
-    if os.path.exists(abs_file_path) and (is_in_downloader_temp or is_in_processor_temp or is_in_generic_temp_name or is_in_system_temp):
+    if os.path.isfile(abs_file_path) and any(is_inside(abs_file_path, d) for d in temp_dirs if d):
         try:
             os.remove(abs_file_path)
             app_logger.info(f"Cleaned up temporary file: {abs_file_path}")
