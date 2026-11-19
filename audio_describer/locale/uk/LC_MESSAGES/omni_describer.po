@@ -1280,7 +1280,7 @@ msgstr "&Перемотати назад на %s с"
 #: audio_describer/ui/player_window.py:87
 #, python-format
 msgid "&Forward %ss"
-msgstr "&Перемотати вперед на %s с"
+msgstr "Перемотати &вперед на %s с"
 
 #: audio_describer/ui/player_window.py:90
 msgid "Vol:"
