@@ -39,7 +39,8 @@ DEFAULT_SETTINGS = {
     "gemini_description_verbosity": config.DEFAULT_VERBOSITY,
     "gemini_model_override": "",
     "gemini_disable_safety_block_none": True,
-    "gemini_temperature": 0.3,
+    "gemini_temperature": 0.3,              # only sent to Gemini 2.x; ignored by Gemini 3.6+ (no longer in Settings)
+    "gemini_media_resolution": "",          # "" (model default) | low | medium | high: detail per video frame
     "user_openai_api_key": "",
     "openai_tts_model": "gpt-4o-mini-tts",
     "openai_tts_voice": "alloy",

@@ -4270,3 +4270,23 @@ msgstr "Голос (наприклад, fr-FR-Chirp3-HD-Aoede):"
 
 #~ msgid "English (Default)"
 #~ msgstr "Англійська (за замовчуванням)"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Picture detail sent to the AI:"
+msgstr "Деталізація зображень для ШІ:"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Automatic (Default)"
+msgstr "Автоматично (за замовчуванням)"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Low (cheaper, for long videos)"
+msgstr "Низька (дешевше, для довгих відео)"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Medium"
+msgstr "Середня"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "High (reads small on-screen text, costs more)"
+msgstr "Висока (читає дрібний текст на екрані, дорожче)"

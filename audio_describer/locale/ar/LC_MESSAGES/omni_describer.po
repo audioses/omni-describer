@@ -4106,3 +4106,23 @@ msgstr "مفتاح API:"
 
 msgid "Voice (for example fr-FR-Chirp3-HD-Aoede):"
 msgstr "الصوت (مثلًا fr-FR-Chirp3-HD-Aoede):"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Picture detail sent to the AI:"
+msgstr "تفاصيل الصور المرسلة إلى الذكاء الاصطناعي:"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Automatic (Default)"
+msgstr "تلقائي (افتراضي)"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Low (cheaper, for long videos)"
+msgstr "منخفض (أرخص، للفيديوهات الطويلة)"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Medium"
+msgstr "متوسط"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "High (reads small on-screen text, costs more)"
+msgstr "عالٍ (يقرأ النصوص الصغيرة على الشاشة، أعلى تكلفة)"

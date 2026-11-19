@@ -198,6 +198,10 @@ def build_generation_config(system_instruction_text=None, is_json_response=False
     if thinking_config is not None:
         config_params["thinking_config"] = thinking_config
 
+    level = config_model.get_setting("gemini_media_resolution")
+    if level in ("low", "medium", "high"):
+        config_params["media_resolution"] = f"MEDIA_RESOLUTION_{level.upper()}"
+
     if is_json_response:
         config_params["response_mime_type"] = "application/json"
         if response_schema:

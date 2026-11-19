@@ -81,11 +81,14 @@ CONTACT_EMAIL = "info@audioses.com"
 # API Settings (Placeholder - Store securely, not directly in code for production)
 GEMINI_API_KEY = None
 # Default Gemini model. gemini-3.8-flash: stable, free tier, video input,
-# structured output, thinking_level. gemini-2.5-* were deprecated on
-# 2026-11-02 (rerouted from 2026-12-01). Users can pick another model in Settings.
+# structured output, thinking_level, cheapest of the strong models. gemini-2.5-* are
+# deprecated (rerouted from 2026-12-01). Users can pick another model in Settings.
+# Checked 2026-11-19 against aistudio.google.com/docs/models.md.
 GEMINI_MODEL_NAME = "gemini-3.8-flash"
 # Shown in Settings before the live list from the API is loaded.
-KNOWN_GEMINI_MODELS = ["gemini-3.8-flash", "gemini-4-argon", "gemini-4-carbon", "gemini-3.5-flash-lite"]
+# Free tier: 4-hydrogen, 3.8/3.6 Flash, 3.5/3.1 Flash-Lite. Paid only: 4-neon, 4-carbon, 4-argon.
+KNOWN_GEMINI_MODELS = ["gemini-3.8-flash", "gemini-4-hydrogen", "gemini-3.6-flash", "gemini-3.5-flash-lite",
+                       "gemini-3.1-flash-lite", "gemini-4-neon", "gemini-4-carbon", "gemini-4-argon"]
 # Tried in order when the chosen model stays overloaded (503 "high demand").
 FALLBACK_GEMINI_MODELS = ["gemini-3.8-flash", "gemini-3.5-flash-lite"]
 

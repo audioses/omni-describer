@@ -4354,3 +4354,23 @@ msgstr "Chave API:"
 
 msgid "Voice (for example fr-FR-Chirp3-HD-Aoede):"
 msgstr "Voz (por exemplo fr-FR-Chirp3-HD-Aoede):"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Picture detail sent to the AI:"
+msgstr "Detalhe das imagens enviadas à IA:"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Automatic (Default)"
+msgstr "Automático (predefinido)"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Low (cheaper, for long videos)"
+msgstr "Baixo (mais barato, para vídeos longos)"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Medium"
+msgstr "Médio"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "High (reads small on-screen text, costs more)"
+msgstr "Alto (lê textos pequenos no ecrã, custa mais)"

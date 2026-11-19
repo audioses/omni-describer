@@ -4671,3 +4671,23 @@ msgstr "API anahtarı:"
 
 msgid "Voice (for example fr-FR-Chirp3-HD-Aoede):"
 msgstr "Ses (örneğin fr-FR-Chirp3-HD-Aoede):"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Picture detail sent to the AI:"
+msgstr "Yapay zekâya gönderilen görüntü ayrıntısı:"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Automatic (Default)"
+msgstr "Otomatik (Varsayılan)"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Low (cheaper, for long videos)"
+msgstr "Düşük (daha ucuz, uzun videolar için)"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Medium"
+msgstr "Orta"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "High (reads small on-screen text, costs more)"
+msgstr "Yüksek (ekrandaki küçük yazıları okur, daha pahalı)"

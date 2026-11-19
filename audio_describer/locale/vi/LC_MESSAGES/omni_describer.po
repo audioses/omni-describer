@@ -4067,3 +4067,23 @@ msgstr "Khóa API:"
 
 msgid "Voice (for example fr-FR-Chirp3-HD-Aoede):"
 msgstr "Giọng nói (ví dụ fr-FR-Chirp3-HD-Aoede):"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Picture detail sent to the AI:"
+msgstr "Độ chi tiết hình ảnh gửi cho AI:"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Automatic (Default)"
+msgstr "Tự động (Mặc định)"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Low (cheaper, for long videos)"
+msgstr "Thấp (rẻ hơn, cho video dài)"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Medium"
+msgstr "Trung bình"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "High (reads small on-screen text, costs more)"
+msgstr "Cao (đọc được chữ nhỏ trên màn hình, tốn hơn)"

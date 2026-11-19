@@ -63,6 +63,9 @@ class SettingsDialog(wx.Dialog):
             (code, _(name)) for code, name in sorted(timing.LANGUAGE_NAMES.items(), key=lambda kv: kv[1])]
         self.THINKING_LEVEL_CHOICES = [("low", _("Low (faster, cheaper)")), ("medium", _("Medium (Default)")),
                                        ("high", _("High (slower, for complex films)"))]
+        # Gemini mediaResolution: tokens per video frame (Google advises low/medium for video, high to read small text).
+        self.MEDIA_RESOLUTION_CHOICES = [("", _("Automatic (Default)")), ("low", _("Low (cheaper, for long videos)")),
+                                         ("medium", _("Medium")), ("high", _("High (reads small on-screen text, costs more)"))]
 
         self.STYLE_CHOICES = [("objective", _("Objective (Default)")), ("subjective", _("Subjective, evocative"))]
         self.EMPHASIS_CHOICES = [("general", _("General (Default)")), ("characters", _("Characters")),
@@ -191,9 +194,9 @@ class SettingsDialog(wx.Dialog):
         ai_grid_sizer.Add(wx.StaticText(self.ai_panel, label=_("Thinking Level (Gemini 3 and later):")), 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
         self.thinking_choice = wx.Choice(self.ai_panel, choices=[c[1] for c in self.THINKING_LEVEL_CHOICES])
         ai_grid_sizer.Add(self.thinking_choice, 1, wx.EXPAND|wx.ALL, 5)
-        ai_grid_sizer.Add(wx.StaticText(self.ai_panel, label=_("Temperature:")), 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
-        self.temp_text_ctrl = wx.TextCtrl(self.ai_panel, value=str(config_model.DEFAULT_SETTINGS["gemini_temperature"]))
-        ai_grid_sizer.Add(self.temp_text_ctrl, 1, wx.EXPAND|wx.ALL, 5)
+        ai_grid_sizer.Add(wx.StaticText(self.ai_panel, label=_("Picture detail sent to the AI:")), 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
+        self.media_resolution_choice = wx.Choice(self.ai_panel, choices=[c[1] for c in self.MEDIA_RESOLUTION_CHOICES])
+        ai_grid_sizer.Add(self.media_resolution_choice, 1, wx.EXPAND|wx.ALL, 5)
         self.send_silenced_video_checkbox = wx.CheckBox(self.ai_panel, label=_("Send Video Only (No Audio) to AI - not recommended: the AI can no longer avoid dialogue"))
         ai_grid_sizer.Add(self.send_silenced_video_checkbox, 0, wx.EXPAND|wx.ALL, 5)
         self.disable_safety_checkbox = wx.CheckBox(self.ai_panel, label=_("Disable Safety Filters (Use with caution)"))
@@ -386,8 +389,7 @@ class SettingsDialog(wx.Dialog):
         self.explicitation_choice.Bind(wx.EVT_CHOICE, self.OnSettingChanged)
         self.quality_check_checkbox.Bind(wx.EVT_CHECKBOX, self.OnSettingChanged)
         self.translate_dialogue_checkbox.Bind(wx.EVT_CHECKBOX, self.OnSettingChanged)
-        self.temp_text_ctrl.Bind(wx.EVT_TEXT, self.OnSettingChanged)
-        self.temp_text_ctrl.Bind(wx.EVT_KILL_FOCUS, self.OnTemperatureKillFocus)
+        self.media_resolution_choice.Bind(wx.EVT_CHOICE, self.OnSettingChanged)
         self.send_silenced_video_checkbox.Bind(wx.EVT_CHECKBOX, self.OnSettingChanged)
         self.disable_safety_checkbox.Bind(wx.EVT_CHECKBOX, self.OnSettingChanged)
         self.enable_chunking_checkbox.Bind(wx.EVT_CHECKBOX, self.OnSettingChanged)
@@ -557,7 +559,9 @@ class SettingsDialog(wx.Dialog):
         self.explicitation_choice.SetSelection(values.index(value) if value in values else 1)
         self.quality_check_checkbox.SetValue(self.current_settings.get("enable_quality_check", True))
         self.translate_dialogue_checkbox.SetValue(self.current_settings.get("translate_foreign_dialogue", False))
-        self.temp_text_ctrl.SetValue(str(self.current_settings.get("gemini_temperature", config_model.DEFAULT_SETTINGS["gemini_temperature"])))
+        values = [c[0] for c in self.MEDIA_RESOLUTION_CHOICES]
+        value = self.current_settings.get("gemini_media_resolution", "")
+        self.media_resolution_choice.SetSelection(values.index(value) if value in values else 0)
         self.send_silenced_video_checkbox.SetValue(self.current_settings.get("send_silenced_video_to_ai", config_model.DEFAULT_SETTINGS["send_silenced_video_to_ai"]))
         self.disable_safety_checkbox.SetValue(self.current_settings.get("gemini_disable_safety_block_none", False))
         
@@ -725,8 +729,7 @@ class SettingsDialog(wx.Dialog):
         self.current_settings["description_explicitation"] = self.EXPLICITATION_CHOICES[self.explicitation_choice.GetSelection()][0]
         self.current_settings["enable_quality_check"] = self.quality_check_checkbox.IsChecked()
         self.current_settings["translate_foreign_dialogue"] = self.translate_dialogue_checkbox.IsChecked()
-        try: self.current_settings["gemini_temperature"] = float(self.temp_text_ctrl.GetValue().strip())
-        except ValueError: self.current_settings["gemini_temperature"] = config_model.DEFAULT_SETTINGS["gemini_temperature"]
+        self.current_settings["gemini_media_resolution"] = self.MEDIA_RESOLUTION_CHOICES[self.media_resolution_choice.GetSelection()][0]
         self.current_settings["send_silenced_video_to_ai"] = self.send_silenced_video_checkbox.IsChecked()
         self.current_settings["gemini_disable_safety_block_none"] = self.disable_safety_checkbox.IsChecked()
         self.current_settings["enable_video_chunking"] = self.enable_chunking_checkbox.IsChecked()
@@ -793,6 +796,3 @@ class SettingsDialog(wx.Dialog):
 
     def OnCancel(self, event):
         self.EndModal(wx.ID_CANCEL)
-        
-    def OnTemperatureKillFocus(self, event):
-        pass

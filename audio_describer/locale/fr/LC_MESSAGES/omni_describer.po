@@ -4385,3 +4385,23 @@ msgstr "Voix (par exemple fr-FR-Chirp3-HD-Aoede) :"
 
 #~ msgid "something whent wrong while updating."
 #~ msgstr "un problème est survenu lors de la mise à jour."
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Picture detail sent to the AI:"
+msgstr "Détail des images envoyées à l'IA :"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Automatic (Default)"
+msgstr "Automatique (par défaut)"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Low (cheaper, for long videos)"
+msgstr "Faible (moins cher, pour les longues vidéos)"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Medium"
+msgstr "Moyen"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "High (reads small on-screen text, costs more)"
+msgstr "Élevé (lit les petits textes à l'écran, plus coûteux)"

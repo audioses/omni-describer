@@ -4389,3 +4389,23 @@ msgstr "Voz (por ejemplo fr-FR-Chirp3-HD-Aoede):"
 
 #~ msgid "English (Default)"
 #~ msgstr "Inglés (predeterminado)"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Picture detail sent to the AI:"
+msgstr "Detalle de las imágenes enviadas a la IA:"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Automatic (Default)"
+msgstr "Automático (predeterminado)"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Low (cheaper, for long videos)"
+msgstr "Bajo (más barato, para vídeos largos)"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Medium"
+msgstr "Medio"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "High (reads small on-screen text, costs more)"
+msgstr "Alto (lee textos pequeños en pantalla, cuesta más)"

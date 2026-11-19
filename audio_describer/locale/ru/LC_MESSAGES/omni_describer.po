@@ -4433,3 +4433,23 @@ msgstr "Голос (например, fr-FR-Chirp3-HD-Aoede):"
 
 #~ msgid "Temperature must be a valid number."
 #~ msgstr "Температура должна быть допустимым числом."
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Picture detail sent to the AI:"
+msgstr "Детализация изображений для ИИ:"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Automatic (Default)"
+msgstr "Автоматически (по умолчанию)"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Low (cheaper, for long videos)"
+msgstr "Низкая (дешевле, для длинных видео)"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "Medium"
+msgstr "Средняя"
+
+#: audio_describer/ui/settings_dialog.py
+msgid "High (reads small on-screen text, costs more)"
+msgstr "Высокая (читает мелкий текст на экране, дороже)"
