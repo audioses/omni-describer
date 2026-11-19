@@ -4204,7 +4204,7 @@ msgid "OpenAI &voice presets"
 msgstr "Шаблоны &голосов OpenAI"
 
 msgid "&Downloaded voices and models (downloaded again when needed)"
-msgstr "&Загруженные голоса и модели (при необходимости загружаются снова)"
+msgstr "Загруженные голоса и &модели (при необходимости загружаются снова)"
 
 msgid "&Temporary files"
 msgstr "&Временные файлы"

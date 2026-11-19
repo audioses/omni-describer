@@ -1269,7 +1269,7 @@ msgstr "&Añadir..."
 #: audio_describer/ui/manage_prompts_dialog.py:50
 #: audio_describer/ui/manage_voices_dialog.py:37
 msgid "&Edit..."
-msgstr "&Editar..."
+msgstr "E&ditar..."
 
 #: audio_describer/ui/manage_prompts_dialog.py:95
 msgid "Add New Prompt"

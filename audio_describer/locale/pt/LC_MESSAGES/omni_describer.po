@@ -4266,7 +4266,7 @@ msgid "&Settings (back to defaults)"
 msgstr "&Configurações (voltar aos valores predefinidos)"
 
 msgid "Also forget my &API keys"
-msgstr "Esquecer também as minhas &chaves API"
+msgstr "&Esquecer também as minhas chaves API"
 
 msgid "&Prompt presets (custom presets are removed)"
 msgstr ""
