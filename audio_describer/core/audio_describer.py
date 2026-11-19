@@ -179,13 +179,6 @@ def release_kept_upload():
 atexit.register(release_kept_upload)
 
 
-def _require_gemini_backend():
-    """Gemini-only features (questions, scene explorer, transcript, audio introduction) refuse to run
-    when the user picked another vision backend, so nothing is sent to Google behind their back."""
-    if (config_model.get_setting("video_backend") or "gemini") != "gemini":
-        raise GeminiAPIError(_("This feature uses Gemini, but video descriptions are set to another AI in "
-                               "Settings, so nothing was sent to Google. Switch to Gemini in Settings to use it."))
-
 
 def ask_about_kept_upload(video_path, start_sec, end_sec, prompt_text, json_response=False):
     """Ask about [start_sec, end_sec] of the video generation already uploaded.
@@ -194,7 +187,6 @@ def ask_about_kept_upload(video_path, start_sec, end_sec, prompt_text, json_resp
     (another video, expired, API key changed); the caller then sends a clip.
     """
     global _kept_upload
-    _require_gemini_backend()
     kept = _kept_upload
     if kept is None or kept[0] != _upload_key(video_path):
         return None
@@ -532,7 +524,6 @@ DIALOGUE_SCHEMA = {
 def transcribe_dialogue(video_path):
     """Dialogue transcript for the full script (WCAG 1.2.8): [(start_seconds, speaker, text), ...].
     Speakers use the names or descriptors heard or seen; songs and important sounds in brackets."""
-    _require_gemini_backend()
     client = gemini.get_gemini_client()
     model_name = _get_model_name()
     uploaded = None
@@ -568,7 +559,6 @@ INTRO_SCHEMA = {"type": "object", "properties": {"introduction": {"type": "strin
 def generate_audio_introduction(descriptions, glossary, title="", duration_sec=0):
     """Audio introduction (Ofcom §4.14, ADLAB §3.2): main characters, look and places, heard before the
     programme. Text-only request built from the existing script, so no new video upload."""
-    _require_gemini_backend()
     client = gemini.get_gemini_client()
     model_name = _get_model_name()
     system = ("You write audio introductions for blind and partially sighted audiences, heard before a film or "
@@ -653,9 +643,6 @@ def describe_video(video_path, user_prompt="", status_update_callback=None, canc
     app_state.set_cancel_event(cancel_event)  # lets ffmpeg, retries and HTTP calls below stop on Escape
     try:
         processed, was_preprocessed = None, False
-        if config_model.get_setting("video_backend") in ("ollama", "openai"):  # local frames: no upload, no preprocessing
-            from . import ollama_video
-            return ollama_video.describe_video_locally(video_path, user_prompt, status, cancel_event, initial_glossary)
         processed, was_preprocessed = video_processor.preprocess_video_for_ai(video_path, status)
         video_for_ai = processed if was_preprocessed else video_path
         _check_cancel(cancel_event)
@@ -677,54 +664,10 @@ IMAGE_EXTENSIONS = (".png", ".jpg", ".jpeg", ".webp", ".gif", ".bmp", ".heic")
 DOCUMENT_EXTENSIONS = (".pdf",)
 
 
-OLLAMA_URL = "http://127.0.0.1:11434/api/generate"  # local only: nothing leaves the computer
-
-
-def _describe_with_ollama(path, prompt):
-    """Privacy / offline mode (audit P3): a local vision model through Ollama. Images only."""
-    import base64
-    import urllib.request
-    import urllib.error
-    with open(path, "rb") as f:
-        image_b64 = base64.b64encode(f.read()).decode("ascii")
-    model = config_model.get_setting("ollama_model") or "gemma3"
-    body = json.dumps({"model": model, "prompt": prompt, "images": [image_b64], "stream": False}).encode("utf-8")
-    request = urllib.request.Request(OLLAMA_URL, data=body, headers={"Content-Type": "application/json"})
-    try:
-        with urllib.request.urlopen(request, timeout=300) as response:
-            answer = json.loads(response.read().decode("utf-8"))
-    except urllib.error.HTTPError as e:
-        detail = e.read().decode("utf-8", "replace")[:300]
-        raise GeminiAPIError(_("Ollama refused the request (model '%(model)s'): %(detail)s") % {"model": model, "detail": detail})
-    except (urllib.error.URLError, OSError) as e:
-        raise GeminiAPIError(_("Ollama is not running on this computer. Install it from ollama.com, then run: ollama pull %s") % model) from e
-    text = (answer.get("response") or "").strip()
-    if not text:
-        raise GeminiAPIError(_("AI could not provide an answer."))
-    return text
-
-
-def _describe_with_openai_compatible(path, prompt):
-    """An image through the OpenAI-compatible vision service, re-encoded as JPEG (the one format all accept)."""
-    import base64
-    from . import openai_vision
-    jpeg = video_processor.image_as_jpeg_bytes(path)
-    if jpeg is None:
-        raise GeminiAPIError(_("Could not read this image. FFmpeg is required to send it to the vision service."))
-    text = openai_vision.chat(None, prompt, [base64.b64encode(jpeg).decode("ascii")]).strip()
-    if not text:
-        raise GeminiAPIError(_("AI could not provide an answer."))
-    return text
-
-
 def describe_file(path, question=""):
     """Audio-description style text for a picture, a screenshot or a PDF (audit P3)."""
     is_document = path.lower().endswith(DOCUMENT_EXTENSIONS)
-    backend = config_model.get_setting("image_backend")
-    local = backend in ("ollama", "openai")
-    if local and is_document:
-        raise GeminiAPIError(_("This vision model can only describe images; switch to Gemini in Settings for PDF documents."))
-    client = None if local else gemini.get_gemini_client()
+    client = gemini.get_gemini_client()
     uploaded = None
     try:
         if is_document:
@@ -741,10 +684,6 @@ def describe_file(path, question=""):
         if question:
             prompt += f"\nAnswer this question first: \"{question}\""
         prompt += f"\nWrite in {description_language_name()}, plain text without Markdown."
-        if backend == "openai":
-            return _describe_with_openai_compatible(path, prompt)
-        if local:
-            return _describe_with_ollama(path, prompt)
         uploaded = _upload_and_wait_for_active(client, path)
         config = gemini.build_generation_config(is_json_response=False, enable_thinking=False)
         response = gemini.generate_content_with_retry(client, model=_get_model_name(), contents=[prompt, uploaded], config=config)
@@ -785,7 +724,6 @@ def build_vqa_prompt(question, language_name, history=(), context=""):
 
 
 def ask_gemini_about_video_segment(video_segment_path, vqa_prompt_text, system_instruction_text_vqa=None):
-    _require_gemini_backend()
     if not os.path.exists(video_segment_path):
         raise FileNotFoundError(f"Video segment file not found: {video_segment_path}")
 
@@ -817,7 +755,6 @@ def ask_gemini_about_video_segment(video_segment_path, vqa_prompt_text, system_i
 
 
 def get_json_response_from_gemini(video_path, prompt_text, status_update_callback=None, suffix=""):
-    _require_gemini_backend()
     if not os.path.exists(video_path):
         raise FileNotFoundError(f"Video file not found: {video_path}")
     video_file_obj = None
@@ -985,7 +922,7 @@ def _parse_unified_response(json_string, status_update_callback):
     return [], []
 
 
-# Prompt building lives in prompts.py; re-exported for existing callers (ollama_video, UI).
+# Prompt building lives in prompts.py; re-exported for existing callers (UI, tests).
 from .prompts import (  # noqa: E402,F401
     MAX_CUTS_IN_PROMPT, MAX_WINDOWS_IN_PROMPT, MIN_WINDOW_SEC, core_directives, load_rules, system_prompt,
     _build_unified_prompts, _format_cuts, _format_windows, _personalisation_lines, description_language_name,

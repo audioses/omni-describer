@@ -120,7 +120,7 @@ class AudioDescriberApp(wx.App):
         _ = audio_describer.i18n_setup._
         from audio_describer.models import config_model
         try:
-            if gemini_helpers.api_key_configured() or config_model.get_setting("video_backend") in ("ollama", "openai"):
+            if gemini_helpers.api_key_configured():
                 return
         except Exception:
             return

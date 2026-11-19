@@ -16,7 +16,7 @@ class DataResetTest(unittest.TestCase):
             mock.patch.object(config_model, "APP_DATA_DIR", d),
             mock.patch.object(config_model, "CONFIG_FILE_PATH", os.path.join(d, "settings.dat2")),
             mock.patch.object(config_model, "_obfuscate", lambda s: s.encode("utf-8")),  # no DPAPI in tests
-            mock.patch.object(config_model, "app_settings", {"user_gemini_api_key": "k1", "ollama_model": "llava"}),
+            mock.patch.object(config_model, "app_settings", {"user_gemini_api_key": "k1", "description_style": "subjective"}),
             mock.patch.object(prompt_model, "PROMPTS_FILE_PATH", os.path.join(d, "prompts.json")),
         ]
         for p in self.patches:
@@ -36,7 +36,7 @@ class DataResetTest(unittest.TestCase):
     def test_settings_reset_keeps_keys_and_backs_up(self):
         data_reset.reset_settings(keep_api_keys=True)
         self.assertEqual(config_model.app_settings["user_gemini_api_key"], "k1")
-        self.assertEqual(config_model.app_settings["ollama_model"], config_model.DEFAULT_SETTINGS["ollama_model"])
+        self.assertEqual(config_model.app_settings["description_style"], config_model.DEFAULT_SETTINGS["description_style"])
         self.assertTrue(any(p.endswith("settings.dat2") for p in self._backups()))
 
     def test_settings_reset_can_forget_keys(self):

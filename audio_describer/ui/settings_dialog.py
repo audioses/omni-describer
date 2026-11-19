@@ -171,30 +171,6 @@ class SettingsDialog(wx.Dialog):
         ai_grid_sizer.Add(wx.StaticText(self.ai_panel, label=_("Explicitation:")), 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
         self.explicitation_choice = wx.Choice(self.ai_panel, choices=[c[1] for c in self.EXPLICITATION_CHOICES])
         ai_grid_sizer.Add(self.explicitation_choice, 1, wx.EXPAND|wx.ALL, 5)
-        self.IMAGE_BACKEND_CHOICES = [("gemini", _("Gemini (online)")),
-                                      ("ollama", _("Local model with Ollama (private, offline, lower quality)")),
-                                      ("openai", _("OpenAI-compatible vision service (OpenRouter, OpenAI, Claude, Mistral, LM Studio...)"))]
-        ai_grid_sizer.Add(wx.StaticText(self.ai_panel, label=_("Images and screen described by:")), 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
-        self.image_backend_choice = wx.Choice(self.ai_panel, choices=[c[1] for c in self.IMAGE_BACKEND_CHOICES])
-        ai_grid_sizer.Add(self.image_backend_choice, 1, wx.EXPAND|wx.ALL, 5)
-        self.VIDEO_BACKEND_CHOICES = [("gemini", _("Gemini (online)")),
-                                      ("ollama", _("Ollama (local, free, private)")),
-                                      ("openai", _("OpenAI-compatible vision service (frames)"))]
-        ai_grid_sizer.Add(wx.StaticText(self.ai_panel, label=_("Video descriptions:")), 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
-        self.video_backend_choice = wx.Choice(self.ai_panel, choices=[c[1] for c in self.VIDEO_BACKEND_CHOICES])
-        ai_grid_sizer.Add(self.video_backend_choice, 1, wx.EXPAND|wx.ALL, 5)
-        ai_grid_sizer.Add(wx.StaticText(self.ai_panel, label=_("Ollama vision model:")), 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
-        self.ollama_model_text = wx.TextCtrl(self.ai_panel)
-        ai_grid_sizer.Add(self.ollama_model_text, 1, wx.EXPAND|wx.ALL, 5)
-        ai_grid_sizer.Add(wx.StaticText(self.ai_panel, label=_("Vision service address (OpenAI-compatible):")), 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
-        self.vision_base_url_text = wx.TextCtrl(self.ai_panel)
-        ai_grid_sizer.Add(self.vision_base_url_text, 1, wx.EXPAND|wx.ALL, 5)
-        ai_grid_sizer.Add(wx.StaticText(self.ai_panel, label=_("Vision service model:")), 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
-        self.vision_model_text = wx.TextCtrl(self.ai_panel)
-        ai_grid_sizer.Add(self.vision_model_text, 1, wx.EXPAND|wx.ALL, 5)
-        ai_grid_sizer.Add(wx.StaticText(self.ai_panel, label=_("Vision service API key (empty for a local server):")), 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
-        self.vision_api_key_text = wx.TextCtrl(self.ai_panel, style=wx.TE_PASSWORD)
-        ai_grid_sizer.Add(self.vision_api_key_text, 1, wx.EXPAND|wx.ALL, 5)
         self.translate_dialogue_checkbox = wx.CheckBox(self.ai_panel, label=_("Translate dialogue spoken in another language (audio subtitles)"))
         ai_grid_sizer.Add(self.translate_dialogue_checkbox, 0, wx.EXPAND|wx.ALL, 5)
         ai_grid_sizer.AddSpacer(0)
@@ -410,11 +386,6 @@ class SettingsDialog(wx.Dialog):
         self.explicitation_choice.Bind(wx.EVT_CHOICE, self.OnSettingChanged)
         self.quality_check_checkbox.Bind(wx.EVT_CHECKBOX, self.OnSettingChanged)
         self.translate_dialogue_checkbox.Bind(wx.EVT_CHECKBOX, self.OnSettingChanged)
-        self.image_backend_choice.Bind(wx.EVT_CHOICE, self.OnSettingChanged)
-        self.video_backend_choice.Bind(wx.EVT_CHOICE, self.OnSettingChanged)
-        self.ollama_model_text.Bind(wx.EVT_TEXT, self.OnSettingChanged)
-        for ctrl in (self.vision_base_url_text, self.vision_model_text, self.vision_api_key_text):
-            ctrl.Bind(wx.EVT_TEXT, self.OnSettingChanged)
         self.temp_text_ctrl.Bind(wx.EVT_TEXT, self.OnSettingChanged)
         self.temp_text_ctrl.Bind(wx.EVT_KILL_FOCUS, self.OnTemperatureKillFocus)
         self.send_silenced_video_checkbox.Bind(wx.EVT_CHECKBOX, self.OnSettingChanged)
@@ -586,16 +557,6 @@ class SettingsDialog(wx.Dialog):
         self.explicitation_choice.SetSelection(values.index(value) if value in values else 1)
         self.quality_check_checkbox.SetValue(self.current_settings.get("enable_quality_check", True))
         self.translate_dialogue_checkbox.SetValue(self.current_settings.get("translate_foreign_dialogue", False))
-        backends = [c[0] for c in self.IMAGE_BACKEND_CHOICES]
-        backend = self.current_settings.get("image_backend", "gemini")
-        self.image_backend_choice.SetSelection(backends.index(backend) if backend in backends else 0)
-        backends = [c[0] for c in self.VIDEO_BACKEND_CHOICES]
-        backend = self.current_settings.get("video_backend", "gemini")
-        self.video_backend_choice.SetSelection(backends.index(backend) if backend in backends else 0)
-        self.ollama_model_text.ChangeValue(self.current_settings.get("ollama_model", "gemma3") or "gemma3")
-        self.vision_base_url_text.ChangeValue(self.current_settings.get("vision_base_url") or config_model.DEFAULT_SETTINGS["vision_base_url"])
-        self.vision_model_text.ChangeValue(self.current_settings.get("vision_model") or "")
-        self.vision_api_key_text.ChangeValue(self.current_settings.get("user_vision_api_key") or "")
         self.temp_text_ctrl.SetValue(str(self.current_settings.get("gemini_temperature", config_model.DEFAULT_SETTINGS["gemini_temperature"])))
         self.send_silenced_video_checkbox.SetValue(self.current_settings.get("send_silenced_video_to_ai", config_model.DEFAULT_SETTINGS["send_silenced_video_to_ai"]))
         self.disable_safety_checkbox.SetValue(self.current_settings.get("gemini_disable_safety_block_none", False))
@@ -764,12 +725,6 @@ class SettingsDialog(wx.Dialog):
         self.current_settings["description_explicitation"] = self.EXPLICITATION_CHOICES[self.explicitation_choice.GetSelection()][0]
         self.current_settings["enable_quality_check"] = self.quality_check_checkbox.IsChecked()
         self.current_settings["translate_foreign_dialogue"] = self.translate_dialogue_checkbox.IsChecked()
-        self.current_settings["image_backend"] = self.IMAGE_BACKEND_CHOICES[self.image_backend_choice.GetSelection()][0]
-        self.current_settings["video_backend"] = self.VIDEO_BACKEND_CHOICES[self.video_backend_choice.GetSelection()][0]
-        self.current_settings["ollama_model"] = self.ollama_model_text.GetValue().strip() or "gemma3"
-        self.current_settings["vision_base_url"] = self.vision_base_url_text.GetValue().strip()
-        self.current_settings["vision_model"] = self.vision_model_text.GetValue().strip()
-        self.current_settings["user_vision_api_key"] = self.vision_api_key_text.GetValue().strip()
         try: self.current_settings["gemini_temperature"] = float(self.temp_text_ctrl.GetValue().strip())
         except ValueError: self.current_settings["gemini_temperature"] = config_model.DEFAULT_SETTINGS["gemini_temperature"]
         self.current_settings["send_silenced_video_to_ai"] = self.send_silenced_video_checkbox.IsChecked()

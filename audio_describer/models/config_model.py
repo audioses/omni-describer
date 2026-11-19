@@ -82,12 +82,6 @@ DEFAULT_SETTINGS = {
     "max_words_per_description": 40,        # about 15 s at 160 wpm (ACB); 0 = only the pause budget
     "ad_voice_gain_db": 0,                  # AD voice level in exports (Ofcom 4.17: separate from programme)
     "translate_foreign_dialogue": False,
-    "image_backend": "gemini",              # gemini | ollama (local, private) | openai (any OpenAI-compatible vision API)
-    "video_backend": "gemini",              # gemini | ollama | openai: the last two get frames sampled per segment
-    "ollama_model": "gemma3",               # any Ollama vision model: gemma3, llava, qwen2.5vl...
-    "vision_base_url": "https://openrouter.ai/api/v1",  # OpenAI-compatible server (cloud or http://localhost)
-    "vision_model": "",                     # model id on that server, e.g. openai/gpt-5-mini, qwen/qwen3-vl...
-    "user_vision_api_key": "",              # empty for local servers
     "dialogue_voice_by_gender": True,       # translated dialogue: voice matching the speaker's gender
     "piper_voice_female": "",               # local Piper voice id, "" = an installed Windows voice
     "piper_voice_male": "",
@@ -338,7 +332,9 @@ def _apply_defaults_and_cleanup(settings):
             updated = True
     obsolete_keys = [
         "sapi5_voice_rate", "gemini_top_p", "gemini_top_k",
-        "gemini_max_output_tokens"
+        "gemini_max_output_tokens",
+        # vision backends other than Gemini were removed; drop their settings and the stored API key
+        "image_backend", "video_backend", "ollama_model", "vision_base_url", "vision_model", "user_vision_api_key",
     ]
     for key in obsolete_keys:
         if key in settings:

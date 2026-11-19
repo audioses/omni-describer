@@ -16,7 +16,6 @@ New exports: MP4 with a separate audio description track, W3C TTML DAPT script, 
 Command line: --density, --watch (watched folders), exports dapt, docx, mkv, mp4, mp3, m4a; available in the installed app as OmniDescriber.exe --cli.
 Describe my screen: the screen showing the active window is used; live mode waits for a pause in the computer's sound before speaking.
 Evaluate this audio description (E in the player): the CSA 2020 questionnaire in two phases (listening without the picture, then checking with it), each question rated 1 to 5 with comments, measured values shown next to the questions they inform, no overall score. Saved with the project; Save Report writes a text file.
-Private mode for images and the screen (Settings > AI): a local vision model through Ollama instead of Gemini; nothing leaves the computer and no quota is used, with lower accuracy. PDF documents still need Gemini.
 Command line and batch mode: python -m audio_describer.cli <videos, images, PDFs or folders> --lang fr --export vtt,srt,txt,project --out <folder>. Uses the app's settings and API key; a failed file does not stop the batch.
 
 Unreleased - Sprint P2 (part 1): quality and introduction

@@ -1,5 +1,5 @@
 # audio_describer/core/prompts.py
-"""Prompts shared by every vision backend (Gemini, Ollama, OpenAI-compatible).
+"""Prompts sent to Gemini for audio description.
 
 The text itself lives in prompts/rules/en.json (professional AD rules, output fields, personalisation
 lines). A translation rules/<description language>.json and the user's own <data folder>/ad_rules.json
@@ -78,7 +78,7 @@ def core_directives(rules=None):
 
 
 def system_prompt(kind, rules=None):
-    """System prompt for 'video' (whole clip) or 'frames' (sampled stills, Ollama / OpenAI-compatible)."""
+    """System prompt for the whole video ('video')."""
     rules = rules or load_rules()
     return _fill(rules.get(f"system_{kind}", "{core_directives}"), core_directives=core_directives(rules))
 

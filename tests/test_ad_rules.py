@@ -36,7 +36,7 @@ class AdRulesTest(unittest.TestCase):
         with open(os.path.join(os.path.dirname(prompts.__file__), "..", "prompts", "rules", "en.json"), encoding="utf-8") as f:
             rules = json.load(f)
         self.assertEqual(len(rules["core_directives"]), 12)
-        for key in ("system_video", "system_frames", "task", "language_line", "pauses", "audio_subtitles", "length"):
+        for key in ("system_video", "task", "language_line", "pauses", "audio_subtitles", "length"):
             self.assertIn(key, rules)
 
     def test_translation_then_user_file_override_key_by_key(self):

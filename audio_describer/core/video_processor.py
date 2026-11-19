@@ -41,22 +41,6 @@ except Exception as e:
     FFPROBE_IS_AVAILABLE = False
 
 
-def image_as_jpeg_bytes(path, max_side=1568):
-    """Any picture ffmpeg reads, as JPEG bytes with its longest side at most max_side px
-    (vision APIs accept JPEG everywhere and bill by pixels). None when ffmpeg cannot convert it."""
-    if FFMPEG_IS_AVAILABLE:
-        with tempfile.TemporaryDirectory(prefix="omni_img_") as tmp:
-            out = os.path.join(tmp, "image.jpg")
-            scale = f"scale='if(gt(iw,ih),min({max_side},iw),-2)':'if(gt(iw,ih),-2,min({max_side},ih))'"
-            result = run_command([FFMPEG_COMMAND, "-hide_banner", "-loglevel", "error", "-i", path,
-                                  "-frames:v", "1", "-vf", scale, "-q:v", "4", out])
-            if result.returncode == 0 and os.path.exists(out):
-                with open(out, "rb") as f:
-                    return f.read()
-            app_logger.warning(f"Image conversion failed: {result.stderr[-300:]}")
-    return None
-
-
 def get_video_duration(video_path):
     if not FFPROBE_IS_AVAILABLE:
         app_logger.warning("ffprobe not available, cannot get video duration for chunking.")

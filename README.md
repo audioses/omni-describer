@@ -65,9 +65,7 @@ to everyone who tested, translated, and used it along the way — see
 - **Voice control** — pronunciation dictionary, listen to a line with the
   export voice from the editor, audio introduction saved as MP3 (Shift+I).
 - **Images, PDFs and your screen** — describe a picture or document (Ctrl+I),
-  or the screen with a global hotkey; optional local model through Ollama.
-- **Fully local option** — video descriptions can also come from a local Ollama
-  vision model (free, private, slower than Gemini).
+  or the screen with a global hotkey.
 - **Voices matching the speaker** — translated dialogue is read with a woman's
   or a man's voice: an installed Windows voice, or a free local Piper voice
   (downloaded once, ~20 MB, checksum verified). Ctrl+G in the editor fixes it.
