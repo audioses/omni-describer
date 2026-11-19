@@ -132,7 +132,7 @@ class MainWindow(wx.Frame):
         # --- Status Log ---
         status_box = wx.StaticBox(self.panel, label=_("Status Log"))
         status_box_sizer = wx.StaticBoxSizer(status_box, wx.VERTICAL)
-        self.log_text_ctrl = wx.TextCtrl(self.panel, style=wx.TE_MULTILINE | wx.TE_READONLY | wx.TE_RICH2 | wx.VSCROLL, size=(-1, 150))
+        self.log_text_ctrl = wx.TextCtrl(status_box, style=wx.TE_MULTILINE | wx.TE_READONLY | wx.TE_RICH2 | wx.VSCROLL, size=(-1, 150))
         set_control_accessible_name(self.log_text_ctrl, _("Application status and processing messages."))
         status_box_sizer.Add(self.log_text_ctrl, 1, wx.EXPAND | wx.ALL, 5)
         self.sizer.Add(status_box_sizer, 1, wx.EXPAND | wx.ALL, 5)
@@ -216,7 +216,7 @@ class MainWindow(wx.Frame):
         app_logger.info(f"UI_LOG: {message}")
 
     def update_prompt_presets(self):
-        current_lang = config_model.get_setting("application_language")
+        current_lang = config_model.ui_language()
         prompts = prompt_model.get_prompts_for_language(current_lang)
         self.prompt_choice.Clear()
         self.prompt_data.clear()
@@ -684,7 +684,7 @@ class MainWindow(wx.Frame):
         try:
             doc_dir = config.get_doc_dir()
             doc_dir = os.path.normpath(doc_dir)
-            lang_code = config_model.get_setting('application_language') or 'en'
+            lang_code = config_model.ui_language() or 'en'
 
             lang_specific_file = os.path.join(doc_dir, lang_code, filename)
             default_file = os.path.join(doc_dir, 'en', filename)

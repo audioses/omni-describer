@@ -241,11 +241,11 @@ class SettingsDialog(wx.Dialog):
         self.openai_settings_panel = wx.Panel(self.audio_output_panel)
         openai_sizer = wx.StaticBoxSizer(wx.StaticBox(self.openai_settings_panel, label=_("OpenAI TTS Settings")), wx.VERTICAL)
         openai_grid = wx.FlexGridSizer(cols=2, gap=(5,5)); openai_grid.AddGrowableCol(1,1)
-        openai_grid.Add(wx.StaticText(self.openai_settings_panel, label=_("Voice Preset:")), 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
-        self.openai_voice_choice = wx.Choice(self.openai_settings_panel)
+        openai_grid.Add(wx.StaticText(openai_sizer.GetStaticBox(), label=_("Voice Preset:")), 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
+        self.openai_voice_choice = wx.Choice(openai_sizer.GetStaticBox())
         openai_grid.Add(self.openai_voice_choice, 1, wx.EXPAND|wx.ALL, 5)
         openai_sizer.Add(openai_grid, 0, wx.EXPAND|wx.ALL, 5)
-        self.manage_voices_button = wx.Button(self.openai_settings_panel, label=_("Manage Voice Presets..."))
+        self.manage_voices_button = wx.Button(openai_sizer.GetStaticBox(), label=_("Manage Voice Presets..."))
         openai_sizer.Add(self.manage_voices_button, 0, wx.ALIGN_CENTER|wx.ALL, 5)
         self.openai_settings_panel.SetSizer(openai_sizer)
         audio_sizer.Add(self.openai_settings_panel, 0, wx.EXPAND|wx.ALL, 5)
@@ -254,11 +254,11 @@ class SettingsDialog(wx.Dialog):
         # MODIFICATION: Keep a reference to the sizer, not just the panel
         self.sapi_sizer = wx.StaticBoxSizer(wx.StaticBox(self.sapi5_settings_panel, label=_("SAPI5 Settings")), wx.VERTICAL)
         sapi_grid = wx.FlexGridSizer(cols=2, gap=(5,5)); sapi_grid.AddGrowableCol(1,1)
-        sapi_grid.Add(wx.StaticText(self.sapi5_settings_panel, label=_("Voice:")), 0, wx.ALIGN_CENTER_VERTICAL | wx.ALL, 5)
-        self.sapi_voice_choice = wx.Choice(self.sapi5_settings_panel) # Choices populated dynamically
+        sapi_grid.Add(wx.StaticText(self.sapi_sizer.GetStaticBox(), label=_("Voice:")), 0, wx.ALIGN_CENTER_VERTICAL | wx.ALL, 5)
+        self.sapi_voice_choice = wx.Choice(self.sapi_sizer.GetStaticBox()) # Choices populated dynamically
         sapi_grid.Add(self.sapi_voice_choice, 1, wx.EXPAND|wx.ALL, 5)
-        sapi_grid.Add(wx.StaticText(self.sapi5_settings_panel, label=_("Speed:")), 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
-        self.sapi_rate_slider = wx.Slider(self.sapi5_settings_panel, value=100, minValue=50, maxValue=200)
+        sapi_grid.Add(wx.StaticText(self.sapi_sizer.GetStaticBox(), label=_("Speed:")), 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
+        self.sapi_rate_slider = wx.Slider(self.sapi_sizer.GetStaticBox(), value=100, minValue=50, maxValue=200)
         sapi_grid.Add(self.sapi_rate_slider, 1, wx.EXPAND|wx.ALL, 5)
         self.sapi_sizer.Add(sapi_grid, 1, wx.EXPAND | wx.ALL, 5)
         self.sapi5_settings_panel.SetSizer(self.sapi_sizer)
@@ -285,8 +285,8 @@ class SettingsDialog(wx.Dialog):
             box = wx.StaticBoxSizer(wx.StaticBox(panel, label=title), wx.VERTICAL)
             grid = wx.FlexGridSizer(cols=2, gap=(5, 5)); grid.AddGrowableCol(1, 1)
             for key, label, secret in fields:
-                grid.Add(wx.StaticText(panel, label=label), 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
-                ctrl = wx.TextCtrl(panel, style=wx.TE_PASSWORD if secret else 0)
+                grid.Add(wx.StaticText(box.GetStaticBox(), label=label), 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
+                ctrl = wx.TextCtrl(box.GetStaticBox(), style=wx.TE_PASSWORD if secret else 0)
                 set_control_accessible_name(ctrl, label.rstrip(":"))
                 ctrl.Bind(wx.EVT_TEXT, self.OnSettingChanged)
                 grid.Add(ctrl, 1, wx.EXPAND|wx.ALL, 5)
@@ -298,9 +298,9 @@ class SettingsDialog(wx.Dialog):
         
         test_box = wx.StaticBox(self.audio_output_panel, label=_("Test Voice"))
         test_sizer = wx.StaticBoxSizer(test_box, wx.VERTICAL)
-        self.test_text_ctrl = wx.TextCtrl(self.audio_output_panel, value=_("This is a test of the selected voice."))
+        self.test_text_ctrl = wx.TextCtrl(test_box, value=_("This is a test of the selected voice."))
         test_sizer.Add(self.test_text_ctrl, 0, wx.EXPAND|wx.ALL, 5)
-        self.test_voice_button = wx.Button(self.audio_output_panel, label=_("Test"))
+        self.test_voice_button = wx.Button(test_box, label=_("Test"))
         test_sizer.Add(self.test_voice_button, 0, wx.ALIGN_CENTER|wx.ALL, 5)
         audio_sizer.Add(test_sizer, 0, wx.EXPAND|wx.ALL, 5)
         audio_sizer.Add(wx.StaticText(self.audio_output_panel, label=_("Pronunciation dictionary, one rule per line: word = how to say it (app voice and exports):")), 0, wx.ALL, 5)
@@ -325,7 +325,7 @@ class SettingsDialog(wx.Dialog):
         audio_sizer.Add(self.second_voice_checkbox, 0, wx.EXPAND|wx.ALL, 5)
         self.gender_voice_checkbox = wx.CheckBox(self.audio_output_panel, label=_("Read translated dialogue with a voice matching the speaker (woman or man)"))
         audio_sizer.Add(self.gender_voice_checkbox, 0, wx.EXPAND|wx.ALL, 5)
-        lang = (config_model.get_setting("description_language") or config_model.get_setting("application_language") or "en")
+        lang = (config_model.get_setting("description_language") or config_model.ui_language() or "en")
         self.piper_choices, self.piper_buttons = {}, {}
         for gender, label in (("female", _("Woman's voice:")), ("male", _("Man's voice:"))):
             row = wx.BoxSizer(wx.HORIZONTAL)
