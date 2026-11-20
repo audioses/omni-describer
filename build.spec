@@ -60,9 +60,6 @@ a = Analysis(
         'IPython', 'Cython', 'astroid', 'pylint',
         'av', 'matplotlib', 'jupyter',
     ],
-    win_no_prefer_redirects=False,
-    win_private_assemblies=False,
-    cipher=None,  # Remove encryption here; handled by CLI
     noarchive=False,
 )
 
@@ -79,7 +76,7 @@ for name in VC_RUNTIME:
     if os.path.exists(path):
         a.binaries.append((name, path, 'BINARY'))
 
-pyz = PYZ(a.pure, a.zipped_data, cipher=None)
+pyz = PYZ(a.pure)
 
 # Part 4: Configure the final executable.
 exe = EXE(
@@ -104,10 +101,9 @@ exe = EXE(
 coll = COLLECT(
     exe,
     a.binaries,
-    a.zipfiles,
     a.datas,
     strip=False,
     upx=True,
     upx_exclude=[],
-    name='omni_describer_dist',
+    name='omni_describer_dist',  # PyInstaller 6: libraries and data go to _internal/
 )

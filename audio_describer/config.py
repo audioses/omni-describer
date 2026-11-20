@@ -9,9 +9,9 @@ def get_app_root():
     Gets the application's root directory, handling both source and frozen modes.
     """
     if getattr(sys, 'frozen', False):
-        # In a frozen app, the data folders (notifs, locale, etc.) are
-        # placed next to the main executable. This is the most reliable way.
-        return os.path.dirname(sys.executable)
+        # PyInstaller 6 puts the data folders (notifs, locale, doc, bin) in _internal/,
+        # which is sys._MEIPASS; older flat builds had them next to the executable.
+        return getattr(sys, '_MEIPASS', os.path.dirname(sys.executable))
     else:
         # In source mode, data files are in the 'audio_describer' directory,
         # same as this config.py file.
