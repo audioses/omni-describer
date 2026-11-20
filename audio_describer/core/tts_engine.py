@@ -308,9 +308,9 @@ async def _synthesize_with_onecore_inner(text, voice_id, rate):
     else:
         app_logger.info("OneCore: No voice ID specified, using default voice")
     
-    # Rate is a multiplier from 0.5 to 6.0. We'll map our 50-200% to this range.
-    # Let's map 50% -> 0.5, 100% -> 1.0, 200% -> 2.0 for a reasonable range.
-    actual_rate = max(0.5, min(rate * 2.0, 6.0)) # Example mapping
+    # Rate is a multiplier from 0.5 to 6.0 and rate is already percent / 100, so 100% -> 1.0.
+    # It used to be doubled; config_model._migrate_onecore_rate converts saved values once.
+    actual_rate = max(0.5, min(rate, 6.0))
     synth.options.speaking_rate = actual_rate
     app_logger.info(f"OneCore: Setting speaking rate to {actual_rate}")
 

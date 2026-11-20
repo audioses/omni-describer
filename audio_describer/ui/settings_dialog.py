@@ -278,6 +278,8 @@ class SettingsDialog(wx.Dialog):
         
         self.openai_settings_panel.Show(is_openai)
         self.sapi5_settings_panel.Show(is_sapi)
+        # OneCore goes up to 6x; existing OneCore speeds above 200% were kept by the rate migration.
+        self.sapi_rate_slider.SetMax(config_model.ONECORE_RATE_MAX_PERCENT if selected_engine == "onecore" else 200)
 
         if is_sapi:
             # MODIFICATION: Use the sizer reference to get the static box
