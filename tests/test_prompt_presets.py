@@ -8,6 +8,7 @@ from unittest import mock
 from audio_describer.models import config_model, data_reset, prompt_model
 
 EN = [{"id": "a", "name": "A", "prompt": "a text"}, {"id": "b", "name": "B", "prompt": "b text"}]
+real_defaults, real_legacy = prompt_model.DEFAULT_PROMPTS, prompt_model.LEGACY_DEFAULT_IDS
 
 
 class ShippedDefaultsTest(unittest.TestCase):
@@ -77,6 +78,20 @@ class MergeTest(unittest.TestCase):
         prompt_model.set_prompts_for_language("en", [{"name": "Mine", "prompt": "x"}])
         data_reset.reset_prompts()
         self.assertEqual(self._names(), ["A", "B"])
+
+    def test_turkish_new_install_and_existing_list(self):
+        with mock.patch.object(prompt_model, "DEFAULT_PROMPTS", real_defaults), \
+                mock.patch.object(prompt_model, "LEGACY_DEFAULT_IDS", real_legacy):
+            prompt_model.load_prompts()  # new install
+            tr = prompt_model.get_prompts_for_language("tr")
+            self.assertEqual(tr, real_defaults["tr"])
+            self.assertEqual([p["name"] for p in tr][:2], ["Fragman", "Aksiyon Film"])
+            # Existing tr user from a version without ids, one default deleted: nothing added back.
+            mine = [{"name": "Fragman", "prompt": "x"}, {"name": "Benim", "prompt": "y"}]
+            with open(self.path, "w", encoding="utf-8") as f:
+                json.dump({"en": [], "tr": mine}, f)
+            prompt_model.load_prompts()
+            self.assertEqual(prompt_model.get_prompts_for_language("tr"), mine)
 
     def test_broken_file_falls_back_to_defaults(self):
         with open(self.path, "w", encoding="utf-8") as f:
