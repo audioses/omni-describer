@@ -66,6 +66,15 @@ DEFAULT_SETTINGS = {
     "azure_voice": "",                      # e.g. fr-FR-DeniseNeural
     "user_google_tts_api_key": "",
     "google_voice": "",                     # e.g. fr-FR-Chirp3-HD-Aoede
+    # Translated dialogue (audio subtitles), read with a voice matching the speaker's gender.
+    "translate_foreign_dialogue": False,
+    "dialogue_voice_by_gender": True,
+    "piper_voice_female": "",               # local Piper voice id, "" = an installed Windows voice
+    "piper_voice_male": "",
+    "azure_voice_female": "",
+    "azure_voice_male": "",
+    "google_voice_female": "",
+    "google_voice_male": "",
     "mp3_audio_ducking_level_db": -15,
     "player_volume_percent": 50,
     "webapp_banner_shown": False,

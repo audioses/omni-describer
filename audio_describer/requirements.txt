@@ -14,3 +14,7 @@ winsdk
 simpleaudio
 pygame
 cryptography==49.0.0
+# Optional at run time: local Piper voices for translated dialogue (the app works without it).
+# 1.13.x: 2.0 dropped the built-in espeak-ng front end. numpy converts its audio.
+sherpa-onnx==1.13.8
+numpy

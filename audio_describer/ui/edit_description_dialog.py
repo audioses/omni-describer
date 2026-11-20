@@ -4,6 +4,7 @@ import wx
 import sys
 import copy
 from audio_describer.utils.logger import app_logger
+from audio_describer.core import timing
 
 class EditDescriptionDialog(wx.Dialog):
     def __init__(self, parent, descriptions_list, video_duration, character_glossary=None, selected_original_index=0, title=_("Edit Audio Descriptions"), seek_callback=None):
@@ -232,7 +233,8 @@ class EditDescriptionDialog(wx.Dialog):
                 raise ValueError(_("Description text cannot be empty."))
 
             # --- FIX: Update the local list directly ---
-            self.all_descriptions[self.current_edit_original_index] = (new_start, new_end, new_text)
+            old = self.all_descriptions[self.current_edit_original_index]  # keep its speaker and voice flags
+            self.all_descriptions[self.current_edit_original_index] = timing.Description(new_start, new_end, new_text, timing.flags_of(old))
             self.all_descriptions.sort(key=lambda x: x[0])
             
             # Repopulate to reflect changes and sorting
