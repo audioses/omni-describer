@@ -28,6 +28,9 @@ def get_notifs_dir():
 def get_doc_dir():
     return os.path.join(get_app_root(), 'doc')
 
+def get_prompts_dir():
+    return os.path.join(get_app_root(), 'prompts')
+
 def get_app_data_dir():
     """
     Gets the directory where user-modifiable data files (settings, prompts) are stored.

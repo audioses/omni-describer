@@ -63,6 +63,7 @@ class MainWindow(wx.Frame):
         self.menu_webapp = file_menu.Append(wx.ID_ANY, _("Open &Web Platform...\tCtrl+W"), _("Open the Omni Describer web platform in your browser"))
         file_menu.AppendSeparator()
         self.menu_settings = file_menu.Append(wx.ID_PREFERENCES, _("&Settings...\tCtrl+,"), _("Configure application settings"))
+        self.menu_reset = file_menu.Append(wx.ID_ANY, _("&Reset Settings and Data..."), _("Restore default settings or presets"))
         file_menu.AppendSeparator()
         self.menu_exit = file_menu.Append(wx.ID_EXIT, _("E&xit\tAlt+F4"), _("Exit the application"))
         menu_bar.Append(file_menu, _("&File"))
@@ -146,6 +147,7 @@ class MainWindow(wx.Frame):
         self.Bind(wx.EVT_MENU, self.on_manage_prompts, self.menu_manage_prompts)
         self.Bind(wx.EVT_MENU, self.on_open_webapp, self.menu_webapp)
         self.Bind(wx.EVT_MENU, self.on_settings, self.menu_settings)
+        self.Bind(wx.EVT_MENU, self.on_reset_data, self.menu_reset)
         self.Bind(wx.EVT_MENU, self.on_exit, self.menu_exit)
         self.Bind(wx.EVT_MENU, self.on_help, self.menu_help)
         self.Bind(wx.EVT_MENU, self.on_open_changelog, self.menu_changelog)
@@ -206,6 +208,15 @@ class MainWindow(wx.Frame):
         with ManagePromptsDialog(self) as dlg:
             dlg.ShowModal()
         self.update_prompt_presets()
+
+    def on_reset_data(self, event):
+        from audio_describer.ui.reset_dialog import ResetDialog
+        with ResetDialog(self) as dlg:
+            if dlg.ShowModal() != wx.ID_OK:
+                return
+        audio_describer.reset_gemini_client()  # keys may have changed
+        self.update_prompt_presets()
+        self.set_processing_status(_("Reset done. Some settings apply after restarting the app."))
 
     def update_status_bar(self, message, speak=True, field=0):
         self.statusBar.SetStatusText(message, field)
