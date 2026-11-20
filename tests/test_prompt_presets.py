@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from unittest import mock
 
-from audio_describer.models import config_model, prompt_model
+from audio_describer.models import config_model, data_reset, prompt_model
 
 EN = [{"id": "a", "name": "A", "prompt": "a text"}, {"id": "b", "name": "B", "prompt": "b text"}]
 
@@ -65,6 +65,18 @@ class MergeTest(unittest.TestCase):
         self.assertEqual(self._names(), ["C"])
         prompt_model.set_prompts_for_language("en", [])
         self.assertEqual(self._names(), [])
+
+    def test_settings_reset_does_not_rerun_the_merge(self):
+        self._names()
+        prompt_model.set_prompts_for_language("en", [{"name": "Mine", "prompt": "x"}])
+        data_reset.reset_settings(keep_api_keys=True)
+        self.assertEqual(self._names(), ["Mine"])
+
+    def test_reset_presets_restores_every_default(self):
+        self._names()
+        prompt_model.set_prompts_for_language("en", [{"name": "Mine", "prompt": "x"}])
+        data_reset.reset_prompts()
+        self.assertEqual(self._names(), ["A", "B"])
 
     def test_broken_file_falls_back_to_defaults(self):
         with open(self.path, "w", encoding="utf-8") as f:
