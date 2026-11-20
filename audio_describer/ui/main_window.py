@@ -308,11 +308,14 @@ class MainWindow(wx.Frame):
                 chunk_duration = config_model.get_setting("video_chunk_duration_seconds")
                 wx.CallAfter(self.set_processing_status, _("Processing video..."), sound_file="going.mp3")
                 all_descriptions, character_glossary, all_descriptions_token_usage = audio_describer.generate_descriptions_chunked(
-                    video_for_ai, chunk_duration, user_prompt, ui_status_updater, initial_glossary=initial_glossary
+                    video_for_ai, chunk_duration, user_prompt, ui_status_updater, initial_glossary=initial_glossary,
+                    audio_source_path=original_video_path  # the AI copy may have no sound
                 )
             else:
                 wx.CallAfter(self.set_processing_status, status_message, sound_file="going.mp3")
-                all_descriptions, character_glossary, main_usage = audio_describer.generate_descriptions_and_glossary(video_for_ai, user_prompt, ui_status_updater, initial_glossary=initial_glossary)
+                all_descriptions, character_glossary, main_usage = audio_describer.generate_descriptions_and_glossary(
+                    video_for_ai, user_prompt, ui_status_updater, initial_glossary=initial_glossary,
+                    audio_source_path=original_video_path)  # the AI copy may have no sound
                 if main_usage:
                     all_descriptions_token_usage.append(main_usage)
 

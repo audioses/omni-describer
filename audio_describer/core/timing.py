@@ -101,3 +101,28 @@ def merge_glossary(glossary, new_entries):
         elif existing.get("apparent_gender") in (None, "unknown") and entry.get("apparent_gender") in ("female", "male"):
             existing["apparent_gender"] = entry["apparent_gender"]
     return glossary
+
+
+def speech_free_windows(probs, frame_sec, duration=None, threshold=0.5, min_gap=0.8, pad=0.1):
+    """Silero frame probabilities -> [(start, end), ...] without speech, at least min_gap long.
+    Speech is padded by `pad` seconds so a description never clips the first or last syllable."""
+    windows, gap_start = [], 0.0
+    for i, p in enumerate(probs):
+        if p >= threshold:
+            if gap_start is not None:
+                end = i * frame_sec - pad
+                if end - gap_start >= min_gap:
+                    windows.append((round(gap_start, 3), round(end, 3)))
+                gap_start = None
+        elif gap_start is None:
+            gap_start = i * frame_sec + pad
+    total = duration or len(probs) * frame_sec
+    if gap_start is not None and total - gap_start >= min_gap:
+        windows.append((round(gap_start, 3), round(total, 3)))
+    return windows
+
+
+def format_mmss(seconds):
+    """Seconds -> "MM:SS.s", the timestamp format the description prompt uses."""
+    minutes, sec = divmod(max(0.0, float(seconds)), 60)
+    return f"{int(minutes):02d}:{sec:04.1f}"

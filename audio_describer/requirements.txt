@@ -18,3 +18,5 @@ cryptography==49.0.0
 # 1.13.x: 2.0 dropped the built-in espeak-ng front end. numpy converts its audio.
 sherpa-onnx==1.13.8
 numpy
+# Optional at run time: Silero speech detection (pauses in the dialogue, even under music).
+onnxruntime

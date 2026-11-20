@@ -142,6 +142,8 @@ class SettingsDialog(wx.Dialog):
         ai_grid_sizer.Add(self.enable_character_glossary_checkbox, 0, wx.EXPAND|wx.ALL, 5)
         self.translate_dialogue_checkbox = wx.CheckBox(self.ai_panel, label=_("Translate dialogue spoken in another language (audio subtitles)"))
         ai_grid_sizer.Add(self.translate_dialogue_checkbox, 0, wx.EXPAND|wx.ALL, 5)
+        self.speech_pauses_checkbox = wx.CheckBox(self.ai_panel, label=_("Find pauses in the dialogue before describing (local speech detection, recommended)"))
+        ai_grid_sizer.Add(self.speech_pauses_checkbox, 0, wx.EXPAND|wx.ALL, 5)
         self.chunk_duration_label = wx.StaticText(self.ai_panel, label=_("Chunk Duration (seconds):"))
         ai_grid_sizer.Add(self.chunk_duration_label, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
         self.chunk_duration_spin = wx.SpinCtrl(self.ai_panel, value="120", min=30, max=2400)
@@ -281,6 +283,7 @@ class SettingsDialog(wx.Dialog):
         self.chunk_duration_spin.Bind(wx.EVT_SPINCTRL, self.OnSettingChanged)
         self.enable_character_glossary_checkbox.Bind(wx.EVT_CHECKBOX, self.OnSettingChanged)
         self.translate_dialogue_checkbox.Bind(wx.EVT_CHECKBOX, self.OnSettingChanged)
+        self.speech_pauses_checkbox.Bind(wx.EVT_CHECKBOX, self.OnSettingChanged)
         self.gender_voice_checkbox.Bind(wx.EVT_CHECKBOX, self.OnSettingChanged)
         self.tts_engine_choice.Bind(wx.EVT_RADIOBOX, self.OnTtsEngineChanged)
         self.openai_voice_choice.Bind(wx.EVT_CHOICE, self.OnSettingChanged)
@@ -419,6 +422,7 @@ class SettingsDialog(wx.Dialog):
         self.chunk_duration_spin.Enable(is_chunking)
         self.enable_character_glossary_checkbox.SetValue(self.current_settings.get("enable_character_glossary", False))
         self.translate_dialogue_checkbox.SetValue(bool(self.current_settings.get("translate_foreign_dialogue", False)))
+        self.speech_pauses_checkbox.SetValue(bool(self.current_settings.get("detect_speech_pauses", False)))
         
         tts_engine_val = self.current_settings.get("tts_engine", "sapi5")
         try:
@@ -479,6 +483,7 @@ class SettingsDialog(wx.Dialog):
         self.current_settings["video_chunk_duration_seconds"] = self.chunk_duration_spin.GetValue()
         self.current_settings["enable_character_glossary"] = self.enable_character_glossary_checkbox.IsChecked()
         self.current_settings["translate_foreign_dialogue"] = self.translate_dialogue_checkbox.IsChecked()
+        self.current_settings["detect_speech_pauses"] = self.speech_pauses_checkbox.IsChecked()
         
         self.current_settings["tts_engine"] = self.TTS_ENGINE_CHOICES[self.tts_engine_choice.GetSelection()][0]
         self.current_settings["openai_tts_voice"] = self.openai_voice_choice.GetStringSelection()

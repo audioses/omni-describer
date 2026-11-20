@@ -75,6 +75,8 @@ DEFAULT_SETTINGS = {
     "azure_voice_male": "",
     "google_voice_female": "",
     "google_voice_male": "",
+    # Silero VAD (optional onnxruntime): pauses without speech, listed in the prompt.
+    "detect_speech_pauses": False,
     "mp3_audio_ducking_level_db": -15,
     "player_volume_percent": 50,
     "webapp_banner_shown": False,

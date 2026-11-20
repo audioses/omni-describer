@@ -126,7 +126,7 @@ def _cleanup_uploaded_file(client, video_file_obj, status_callback=None):
             app_logger.error(f"Failed to delete file {video_file_obj.name}: {del_e}")
 
 
-def generate_descriptions_and_glossary(video_path, user_prompt="", status_update_callback=None, initial_glossary=None):
+def generate_descriptions_and_glossary(video_path, user_prompt="", status_update_callback=None, initial_glossary=None, audio_source_path=None):
     """
     Generates both audio descriptions and a character glossary in a single AI call.
     Uses Gemini's native videoMetadata for FPS control instead of local re-encoding.
@@ -151,6 +151,7 @@ def generate_descriptions_and_glossary(video_path, user_prompt="", status_update
         _update_status(_("Video ready. Preparing unified AI request..."))
 
         system_instruction, user_prompt_text = _build_unified_prompts(user_prompt, model_name_to_use, initial_glossary)
+        user_prompt_text += _speech_pause_hint(audio_source_path or video_path, _update_status)
 
         gen_config = gemini.build_generation_config(system_instruction_text=system_instruction, is_json_response=True, enable_thinking=True)
         video_part = _build_video_part(video_file_obj)
@@ -195,7 +196,7 @@ def generate_descriptions_and_glossary(video_path, user_prompt="", status_update
     finally:
         _cleanup_uploaded_file(client, video_file_obj, _update_status)
 
-def generate_descriptions_chunked(video_path, chunk_duration_sec, user_prompt="", status_update_callback=None, initial_glossary=None):
+def generate_descriptions_chunked(video_path, chunk_duration_sec, user_prompt="", status_update_callback=None, initial_glossary=None, audio_source_path=None):
     """Generates descriptions for a long video by uploading once and using time offsets.
 
     Instead of splitting the video into separate files and uploading each one,
@@ -241,6 +242,7 @@ def generate_descriptions_chunked(video_path, chunk_duration_sec, user_prompt=""
 
         enable_glossary = config_model.get_setting("enable_character_glossary")
         system_instruction, user_prompt_text = _build_unified_prompts(user_prompt, model_name_to_use, initial_glossary)
+        user_prompt_text += _speech_pause_hint(audio_source_path or video_path, _update_status)
         gen_config = gemini.build_generation_config(
             system_instruction_text=system_instruction, is_json_response=True, enable_thinking=True
         )
@@ -398,6 +400,24 @@ def get_json_response_from_gemini(video_path, prompt_text, status_update_callbac
         _cleanup_uploaded_file(client, video_file_obj)
 
 # --- INTERNAL HELPERS ---
+
+def _speech_pause_hint(media_path, update_status):
+    """Prompt line listing the stretches without speech found locally by Silero VAD (free, no tokens),
+    so descriptions land in real pauses, music included. "" when disabled or unavailable."""
+    if not config_model.get_setting("detect_speech_pauses"):
+        return ""
+    from . import vad
+    if not vad.available():
+        return ""
+    update_status(_("Detecting pauses in the dialogue..."))
+    windows = vad.detect_speech_free_windows(media_path, video_processor.get_video_duration(media_path), min_gap=0.8)
+    if not windows:
+        return ""
+    # ponytail: every window goes in the prompt; split per chunk if very long videos crowd it.
+    spans = ", ".join(f"{timing.format_mmss(a)}-{timing.format_mmss(b)}" for a, b in windows)
+    return ("\n*   **Pauses Without Speech (detected locally, MM:SS):** " + spans
+            + ". Place descriptions inside these pauses whenever possible.")
+
 
 def _get_model_name():
     model_override = config_model.get_setting("gemini_model_override")
