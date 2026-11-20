@@ -50,7 +50,7 @@ def wait_for_process_to_exit(pid, logger):
         if not handle:
             logger.warning(f"Could not get handle for PID {pid}. Assuming it has exited.")
             return
-        ret = WaitForSingleObject(handle, 15000)
+        ret = WaitForSingleObject(handle, 120000)  # a long video export can take a while to close
         if ret == 0:
             logger.info(f"Main application process (PID: {pid}) has exited.")
         else:
@@ -131,9 +131,14 @@ def main():
             logger.warning(f"Permission error on attempt {attempt + 1}. Another process may be interfering. Waiting...")
             time.sleep(2) # A longer sleep between retries now
         except Exception as e:
-            logger.error(f"Fatal error during extraction: {e}", exc_info=True); sys.exit(1)
+            logger.error(f"Fatal error during extraction: {e}", exc_info=True)
+            break
 
-    logger.error("Update failed after multiple attempts. A file in the application directory remains locked.")
+    logger.error("Update failed. A file in the application directory remains locked or the archive is unusable.")
+    try:  # never leave the user without their app
+        subprocess.Popen([app_to_relaunch])
+    except OSError as e:
+        logger.error(f"Could not relaunch the application: {e}")
     sys.exit(1)
 
 if __name__ == "__main__":
