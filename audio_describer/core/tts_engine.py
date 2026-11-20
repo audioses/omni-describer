@@ -6,6 +6,7 @@ import subprocess
 import sys
 import json
 from ..models import config_model, voice_model
+from . import cloud_tts
 from ..utils.logger import app_logger
 from ..i18n_setup import _
 from ..utils import sound_player
@@ -98,6 +99,16 @@ def test_voice(engine_choice, text, settings):
                 except Exception as e: app_logger.error(f"Could not clean up temp 32-bit test file: {e}")
     elif engine_choice == "onecore":
         _test_voice_onecore(text, settings)
+    elif engine_choice in CLOUD_ENGINES:
+        temp_wav_path = os.path.join(tempfile.gettempdir(), f"test_voice_cloud_{os.urandom(4).hex()}.wav")
+        try:
+            if _synthesize_with_cloud(engine_choice, text, temp_wav_path, settings=settings):
+                sound_player.play(temp_wav_path, is_full_path=True)
+        finally:
+            if os.path.exists(temp_wav_path):
+                time.sleep(1)
+                try: os.remove(temp_wav_path)
+                except Exception as e: app_logger.error(f"Could not clean up temp cloud test file: {e}")
     else:
         raise TTSError(f"Unknown TTS engine for testing: '{engine_choice}'")
 
@@ -181,10 +192,30 @@ def synthesize_description_to_wav(text, output_wav_path):
         return _synthesize_with_sapi5_32bit(text, output_wav_path)
     elif engine_choice == "onecore":
         return asyncio.run(_synthesize_with_onecore(text, output_wav_path))
+    elif engine_choice in CLOUD_ENGINES:
+        return _synthesize_with_cloud(engine_choice, text, output_wav_path)
     else:
         err_msg = f"Unknown TTS engine selected: '{engine_choice}'"
         app_logger.error(err_msg)
         raise TTSError(err_msg)
+
+
+CLOUD_ENGINES = ("azure", "google")
+
+
+def _synthesize_with_cloud(engine_choice, text, output_wav_path, voice_key=None, settings=None):
+    """Azure / Google neural voice. settings: the Settings dialog's unsaved values (voice test)."""
+    get = settings.get if settings else config_model.get_setting
+    voice = (get(voice_key or f"{engine_choice}_voice") or "").strip()
+    app_logger.info(f"Cloud TTS synthesis: engine={engine_choice}, voice={voice}")  # never the key
+    try:
+        if engine_choice == "azure":
+            return cloud_tts.synthesize_azure(text, output_wav_path, (get("user_azure_api_key") or "").strip(),
+                                              get("azure_region"), voice)
+        return cloud_tts.synthesize_google(text, output_wav_path, (get("user_google_tts_api_key") or "").strip(), voice)
+    except cloud_tts.CloudTTSError as e:
+        app_logger.error(f"Cloud TTS error ({engine_choice}): {e}")
+        raise TTSError(f"{engine_choice.capitalize()} speech synthesis failed: {e}")
 
 def _synthesize_with_openai(text, output_wav_path, override_settings=None):
     if not OPENAI_AVAILABLE:

@@ -60,6 +60,12 @@ DEFAULT_SETTINGS = {
     "onecore_voice_id": None,
     "onecore_voice_rate_percent": 100,
     "onecore_rate_migrated": True,  # new installs already use the 100% = 1.0x scale
+    # Cloud neural voices (tts_engine azure | google), plain REST; keys stored like the Gemini key.
+    "user_azure_api_key": "",
+    "azure_region": "",                     # e.g. westeurope
+    "azure_voice": "",                      # e.g. fr-FR-DeniseNeural
+    "user_google_tts_api_key": "",
+    "google_voice": "",                     # e.g. fr-FR-Chirp3-HD-Aoede
     "mp3_audio_ducking_level_db": -15,
     "player_volume_percent": 50,
     "webapp_banner_shown": False,

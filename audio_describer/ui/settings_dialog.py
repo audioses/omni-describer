@@ -64,6 +64,9 @@ class SettingsDialog(wx.Dialog):
             self.TTS_ENGINE_CHOICES.append(("sapi5_32bit", _("SAPI5 (32-bit Voices)")))
         if ONECORE_AVAILABLE:
             self.TTS_ENGINE_CHOICES.append(("onecore", _("Windows OneCore (Modern Voices)")))
+        # Cloud neural voices: plain HTTPS, always available once a key is entered below.
+        self.TTS_ENGINE_CHOICES.append(("azure", _("Microsoft Azure Neural Voices (online, key required)")))
+        self.TTS_ENGINE_CHOICES.append(("google", _("Google Cloud Text-to-Speech (online, key required)")))
 
         self.OPENAI_VOICE_CHOICES = ["alloy", "echo", "fable", "onyx", "nova", "shimmer", "coral", "ash", "ballad", "sage"]
 
@@ -172,7 +175,33 @@ class SettingsDialog(wx.Dialog):
         self.sapi5_settings_panel.SetSizer(self.sapi_sizer)
         
         audio_sizer.Add(self.sapi5_settings_panel, 0, wx.EXPAND|wx.ALL, 5)
-        
+
+        # (setting key, label, secret) per cloud engine
+        cloud_fields = {
+            "azure": (_("Microsoft Azure Neural Voices"), [
+                ("user_azure_api_key", _("Speech resource key:"), True),
+                ("azure_region", _("Region (for example westeurope):"), False),
+                ("azure_voice", _("Voice (for example fr-FR-DeniseNeural):"), False)]),
+            "google": (_("Google Cloud Text-to-Speech"), [
+                ("user_google_tts_api_key", _("API key:"), True),
+                ("google_voice", _("Voice (for example fr-FR-Chirp3-HD-Aoede):"), False)]),
+        }
+        self.cloud_panels, self.cloud_ctrls = {}, {}
+        for engine, (box_title, fields) in cloud_fields.items():
+            panel = wx.Panel(self.audio_output_panel)
+            box = wx.StaticBoxSizer(wx.StaticBox(panel, label=box_title), wx.VERTICAL)
+            grid = wx.FlexGridSizer(cols=2, gap=(5, 5)); grid.AddGrowableCol(1, 1)
+            for key, label, secret in fields:
+                grid.Add(wx.StaticText(box.GetStaticBox(), label=label), 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
+                ctrl = wx.TextCtrl(box.GetStaticBox(), style=wx.TE_PASSWORD if secret else 0)  # named by the label before it
+                ctrl.Bind(wx.EVT_TEXT, self.OnSettingChanged)
+                grid.Add(ctrl, 1, wx.EXPAND|wx.ALL, 5)
+                self.cloud_ctrls[key] = ctrl
+            box.Add(grid, 0, wx.EXPAND|wx.ALL, 5)
+            panel.SetSizer(box)
+            audio_sizer.Add(panel, 0, wx.EXPAND|wx.ALL, 5)
+            self.cloud_panels[engine] = panel
+
         test_box = wx.StaticBox(self.audio_output_panel, label=_("Test Voice"))
         test_sizer = wx.StaticBoxSizer(test_box, wx.VERTICAL)
         self.test_text_ctrl = wx.TextCtrl(self.audio_output_panel, value=_("This is a test of the selected voice."))
@@ -243,6 +272,7 @@ class SettingsDialog(wx.Dialog):
             "sapi5_rate_percent": self.sapi_rate_slider.GetValue(),
             "onecore_voice_id": self.sapi_voices[self.sapi_voice_choice.GetSelection()]['id'] if self.sapi_voices and self.sapi_voice_choice.GetSelection() != wx.NOT_FOUND else None,
             "onecore_rate_percent": self.sapi_rate_slider.GetValue(),
+            **{key: ctrl.GetValue().strip() for key, ctrl in self.cloud_ctrls.items()},
         }
         
         self.test_voice_button.Disable()
@@ -278,6 +308,8 @@ class SettingsDialog(wx.Dialog):
         
         self.openai_settings_panel.Show(is_openai)
         self.sapi5_settings_panel.Show(is_sapi)
+        for engine, panel in self.cloud_panels.items():
+            panel.Show(selected_engine == engine)
         # OneCore goes up to 6x; existing OneCore speeds above 200% were kept by the rate migration.
         self.sapi_rate_slider.SetMax(config_model.ONECORE_RATE_MAX_PERCENT if selected_engine == "onecore" else 200)
 
@@ -381,7 +413,9 @@ class SettingsDialog(wx.Dialog):
         else:
             self.sapi_rate_slider.SetValue(self.current_settings.get("sapi5_voice_rate_percent", 100))
         self.ducking_spin.SetValue(self.current_settings.get("mp3_audio_ducking_level_db", -15))
-        
+        for key, ctrl in self.cloud_ctrls.items():
+            ctrl.ChangeValue(str(self.current_settings.get(key) or ""))
+
         self.settings_changed = False
         self.apply_button.Disable()
 
@@ -429,6 +463,8 @@ class SettingsDialog(wx.Dialog):
             self.current_settings["onecore_voice_rate_percent"] = 100
 
         self.current_settings["mp3_audio_ducking_level_db"] = self.ducking_spin.GetValue()
+        for key, ctrl in self.cloud_ctrls.items():
+            self.current_settings[key] = ctrl.GetValue().strip()
         
         config_model.app_settings.update(self.current_settings)
         if config_model.save_settings(config_model.app_settings):
