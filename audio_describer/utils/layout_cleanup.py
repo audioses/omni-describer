@@ -16,6 +16,8 @@ KEEP = {
     "temp_processing", "debug_ai_outputs", "settings.dat2", "settings.dat",
     "settings.dat.json", "key.salt", "prompts.json", "voices.json",
 }
+# Old-layout folders that PyInstaller 6 ships under another name (_tcl_data, _tk_data).
+RENAMED_IN_V6 = {"tcl", "tk"}
 
 
 def stale_flat_layout_entries(top_level, internal):
@@ -31,7 +33,8 @@ def stale_flat_layout_entries(top_level, internal):
     internal = {n.lower() for n in internal}
     return sorted(n for n in top_level
                   if n.lower() not in KEEP
-                  and (n.lower() in internal or n.lower().endswith((".dll", ".pyd"))))
+                  and (n.lower() in internal or n.lower() in RENAMED_IN_V6
+                       or n.lower().endswith((".dll", ".pyd", ".dist-info"))))
 
 
 def remove_stale_flat_layout(app_dir, log):

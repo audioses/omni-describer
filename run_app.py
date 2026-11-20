@@ -1,6 +1,31 @@
 # run_app.py
 import sys
 import os
+
+
+class _EarlyLog:
+    """Collects the cleanup's messages until the app logger exists."""
+    def __init__(self):
+        self.lines = []
+
+    def info(self, msg):
+        self.lines.append(("info", msg))
+
+    def warning(self, msg):
+        self.lines.append(("warning", msg))
+
+
+# After an update from a flat (PyInstaller 5) release, the old DLLs and .pyd are still
+# next to the exe, and Windows loads DLLs from there first. Remove them before anything
+# (tkinter, wx, asyncio...) loads one and locks it.
+_early_log = _EarlyLog()
+if getattr(sys, "frozen", False) and os.path.basename(getattr(sys, "_MEIPASS", "")) == "_internal":
+    try:
+        from audio_describer.utils.layout_cleanup import remove_stale_flat_layout
+        remove_stale_flat_layout(os.path.dirname(sys.executable), _early_log)
+    except Exception as e:  # never block startup over cleanup
+        _early_log.warning(f"Old layout cleanup failed: {e}")
+
 import traceback
 import time
 import tkinter as tk
@@ -20,7 +45,9 @@ def main():
     try:
         # --- Stage 1: Initial Setup (before logger is fully configured) ---
         if getattr(sys, 'frozen', False):
-            base_path = os.path.dirname(sys.executable)
+            # _internal/ on PyInstaller 6 (the exe folder on 5). Never the exe folder on 6:
+            # old-layout modules left there would shadow the bundled ones.
+            base_path = getattr(sys, '_MEIPASS', os.path.dirname(sys.executable))
             sys.path.insert(0, base_path)
         else:
             base_path = os.path.dirname(os.path.abspath(__file__))
@@ -31,6 +58,8 @@ def main():
         
         # We pre-import the logger here to make it available in the final catch block.
         from audio_describer.utils.logger import app_logger, get_log_file_path
+        for level, msg in _early_log.lines:
+            getattr(app_logger, level)(msg)
 
         try:
             # --- Pre-warm Critical Imports ---

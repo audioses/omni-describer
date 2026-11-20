@@ -160,11 +160,7 @@ class AudioDescriberApp(wx.App):
         _ = audio_describer.i18n_setup._
         if getattr(sys, "frozen", False):
             update_checker.install_pending_updater()
-            # An updater from a flat (PyInstaller 5) release has no cleanup step, so the
-            # first PyInstaller 6 run removes the old layout's leftovers itself.
-            if os.path.basename(getattr(sys, "_MEIPASS", "")) == "_internal":
-                from audio_describer.utils.layout_cleanup import remove_stale_flat_layout
-                remove_stale_flat_layout(os.path.dirname(sys.executable), app_logger)
+            # Old flat-layout leftovers are removed at the very start of run_app.py.
 
         thread = threading.Thread(
             target=update_checker.check_for_updates,

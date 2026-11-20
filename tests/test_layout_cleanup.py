@@ -31,6 +31,11 @@ class StaleEntriesTest(unittest.TestCase):
     def test_no_internal_dir_is_noop(self):
         self.assertEqual(stale_flat_layout_entries(OLD_FLAT + USER_DATA, []), [])
 
+    def test_renamed_tcl_tk_and_old_dist_info_are_stale(self):
+        # Seen in a real update from the flat release: v6 ships _tcl_data/_tk_data and newer dist-info.
+        top = ["_internal", "tcl", "tk", "tqdm-4.69.0.dist-info", "Notes.txt", "my.dist-info.srt"]
+        self.assertEqual(stale_flat_layout_entries(top, NEW_INTERNAL), ["tcl", "tk", "tqdm-4.69.0.dist-info"])
+
     def test_keep_list_wins_over_internal_names(self):
         kept = ["app_log.txt", "temp_processing", "settings.dat2", "prompts.json", "updater.exe.new"]
         self.assertEqual(stale_flat_layout_entries(kept, kept), [])
