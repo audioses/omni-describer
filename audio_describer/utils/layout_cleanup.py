@@ -18,6 +18,10 @@ KEEP = {
 }
 # Old-layout folders that PyInstaller 6 ships under another name (_tcl_data, _tk_data).
 RENAMED_IN_V6 = {"tcl", "tk"}
+# Package folders the flat v2.1.2 release shipped and later builds no longer bundle
+# (googleapiclient/grpc came with the removed google-generativeai SDK): ~110 MB that
+# the "shipped in _internal" rule cannot see. Seen in a real update from v2.1.2.
+DROPPED_PACKAGES = {"googleapiclient", "grpc", "httplib2", "win32com"}
 
 
 def stale_flat_layout_entries(top_level, internal):
@@ -33,7 +37,7 @@ def stale_flat_layout_entries(top_level, internal):
     internal = {n.lower() for n in internal}
     return sorted(n for n in top_level
                   if n.lower() not in KEEP
-                  and (n.lower() in internal or n.lower() in RENAMED_IN_V6
+                  and (n.lower() in internal or n.lower() in RENAMED_IN_V6 or n.lower() in DROPPED_PACKAGES
                        or n.lower().endswith((".dll", ".pyd", ".dist-info"))))
 
 

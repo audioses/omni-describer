@@ -36,6 +36,12 @@ class StaleEntriesTest(unittest.TestCase):
         top = ["_internal", "tcl", "tk", "tqdm-4.69.0.dist-info", "Notes.txt", "my.dist-info.srt"]
         self.assertEqual(stale_flat_layout_entries(top, NEW_INTERNAL), ["tcl", "tk", "tqdm-4.69.0.dist-info"])
 
+    def test_packages_dropped_since_the_flat_release_are_stale(self):
+        # Left by v2.1.2 and absent from the new build, so not in _internal/ either.
+        top = ["_internal", "googleapiclient", "grpc", "httplib2", "win32com", "grpc_notes"]
+        self.assertEqual(stale_flat_layout_entries(top, NEW_INTERNAL),
+                         ["googleapiclient", "grpc", "httplib2", "win32com"])
+
     def test_keep_list_wins_over_internal_names(self):
         kept = ["app_log.txt", "temp_processing", "settings.dat2", "prompts.json", "updater.exe.new"]
         self.assertEqual(stale_flat_layout_entries(kept, kept), [])
