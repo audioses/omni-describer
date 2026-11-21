@@ -348,6 +348,9 @@ class SettingsDialog(wx.Dialog):
             panel.Show(selected_engine == engine)
         # OneCore goes up to 6x; existing OneCore speeds above 200% were kept by the rate migration.
         self.sapi_rate_slider.SetMax(config_model.ONECORE_RATE_MAX_PERCENT if selected_engine == "onecore" else 200)
+        # SetMax clamps the value: show this engine's saved rate, or a OneCore 300% would be saved as 200%.
+        rate_key = "onecore_voice_rate_percent" if selected_engine == "onecore" else "sapi5_voice_rate_percent"
+        self.sapi_rate_slider.SetValue(self.current_settings.get(rate_key) or 100)
 
         if is_sapi:
             # MODIFICATION: Use the sizer reference to get the static box
