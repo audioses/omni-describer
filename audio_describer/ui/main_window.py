@@ -7,9 +7,9 @@ import time # For timestamping log messages
 import webbrowser # For opening help file
 import sys # For getting base path for help file
 
-from audio_describer import config
+from audio_describer import app_state, config
 from audio_describer.ui.accessibility_utils import speak_message, set_control_accessible_name
-from audio_describer.ui import file_dialogs
+from audio_describer.ui import file_dialogs, call_if_open
 from audio_describer.core import video_processor, audio_describer
 from audio_describer.utils.logger import app_logger
 from audio_describer.ui.player_window import PlayerWindow 
@@ -39,6 +39,7 @@ class MainWindow(wx.Frame):
         self.current_video_path = None
         self.is_temp_video = False
         self.prompt_data = {}
+        self.cancel_event = None
 
         self.create_widgets()
         self.bind_events()
@@ -130,6 +131,10 @@ class MainWindow(wx.Frame):
         self.settings_button = wx.Button(self.panel, label=_("&Settings..."))
         set_control_accessible_name(self.settings_button, _("Open application settings"))
         bottom_button_sizer.Add(self.settings_button, 0, wx.ALL, 5)
+        self.cancel_button = wx.Button(self.panel, label=_("&Cancel Generation"))
+        set_control_accessible_name(self.cancel_button, _("Cancel the running generation (Escape)"))
+        self.cancel_button.Disable()
+        bottom_button_sizer.Add(self.cancel_button, 0, wx.ALL, 5)
         bottom_button_sizer.AddStretchSpacer(1) # Pushes the exit button to the right
         self.exit_button = wx.Button(self.panel, id=wx.ID_EXIT, label=_("E&xit"))
         bottom_button_sizer.Add(self.exit_button, 0, wx.ALL, 5)
@@ -160,6 +165,8 @@ class MainWindow(wx.Frame):
         self.btn_webapp.Bind(wx.EVT_BUTTON, self.on_open_webapp)
         self.prompt_choice.Bind(wx.EVT_CHOICE, self.on_prompt_selected)
         self.settings_button.Bind(wx.EVT_BUTTON, self.on_settings)
+        self.cancel_button.Bind(wx.EVT_BUTTON, self.on_cancel_generation)
+        self.Bind(wx.EVT_CHAR_HOOK, self.on_char_hook)
         self.exit_button.Bind(wx.EVT_BUTTON, self.on_exit)
         self.Bind(wx.EVT_CLOSE, self.on_close_window)
         self.Bind(EVT_PROCESSING_DONE, self.on_processing_complete)
@@ -253,17 +260,33 @@ class MainWindow(wx.Frame):
             desired_resolution = config_model.get_setting("youtube_download_quality")
             self.start_processing_thread(video_processor.process_youtube_url, (youtube_url, desired_resolution), self.prompt_display_text.GetValue(), _("Downloading from YouTube..."))
 
+    def on_char_hook(self, event):
+        if event.GetKeyCode() == wx.WXK_ESCAPE and self.cancel_button.IsEnabled():
+            self.on_cancel_generation(None)
+            return
+        event.Skip()
+
+    def on_cancel_generation(self, event):
+        if self.cancel_event is not None and not self.cancel_event.is_set():
+            self.cancel_event.set()
+            self.log_text_ctrl.SetFocus()  # a disabled button drops focus, leaving the screen reader nowhere
+            self.cancel_button.Disable()
+            self.set_processing_status(_("Cancelling..."))
+
     def start_processing_thread(self, target_function, target_args, user_prompt, initial_status_msg):
+        self.cancel_event = threading.Event()
         self.log_text_ctrl.Clear()
         self.set_processing_status(initial_status_msg, sound_file="aistart.mp3")
         self.update_progress_bar(0)
         self.toggle_ui_elements(enable=False)
-        
-        thread = threading.Thread(target=self._processing_task_runner, args=(target_function, target_args, user_prompt))
+
+        thread = threading.Thread(target=self._processing_task_runner, args=(target_function, target_args, user_prompt, self.cancel_event))
         thread.daemon = True
         thread.start()
 
-    def _processing_task_runner(self, video_handler_func, video_handler_args, user_prompt):
+    def _processing_task_runner(self, video_handler_func, video_handler_args, user_prompt, cancel_event):
+        # Escape on this run: ffmpeg, Gemini requests, retry waits and the upload below stop early.
+        app_state.set_cancel_event(cancel_event)
         def ui_status_updater(message):
             if "Video processing" in message and "state:" in message:
                 sound_player.play("progress.mp3")
@@ -286,10 +309,11 @@ class MainWindow(wx.Frame):
         try:
             original_video_path, is_temp = video_handler_func(*video_handler_args)
             self.is_temp_video = is_temp
+            self.current_video_path = original_video_path  # so a cancelled download is cleaned up too
+            app_state.raise_if_cancelled()
 
             if not original_video_path or not os.path.exists(original_video_path):
                 raise Exception(_("Video processing or downloading failed."))
-            self.current_video_path = original_video_path
 
             # --- START: SECURITY FIX ---
             # Generate the pre-processed video for AI analysis first.
@@ -301,7 +325,8 @@ class MainWindow(wx.Frame):
             # If pre-processing was successful, use the smaller file. Otherwise, use the original.
             video_for_ai = processed_for_ai_path if was_preprocessed else original_video_path
             # --- END: SECURITY FIX ---
-            
+            app_state.raise_if_cancelled()
+
             enable_chunking = config_model.get_setting("enable_video_chunking")
             enable_glossary = config_model.get_setting("enable_character_glossary")
 
@@ -332,11 +357,17 @@ class MainWindow(wx.Frame):
             # We can add a type if we want to distinguish it in the future.
             # For now, we just pass the list of usage dicts.
             
-            wx.PostEvent(self, ProcessingDoneEvent(data=(original_video_path, final_descriptions, all_descriptions_token_usage, character_glossary)))
+            call_if_open(self, wx.PostEvent, self, ProcessingDoneEvent(data=(original_video_path, final_descriptions, all_descriptions_token_usage, character_glossary)))
 
         except Exception as e:
-            wx.PostEvent(self, ProcessingDoneEvent(data=None, error=e))
+            error = e
+            if app_state.cancel_requested() and not isinstance(e, audio_describer.GenerationCancelled):
+                # A step stopped by Escape (e.g. a killed ffmpeg) may fail with its own error: report the cancel.
+                app_logger.info(f"Error after cancellation, reported as cancelled: {e}")
+                error = audio_describer.GenerationCancelled("Generation cancelled by user.")
+            call_if_open(self, wx.PostEvent, self, ProcessingDoneEvent(data=None, error=error))
         finally:
+            app_state.set_cancel_event(None)
             if was_preprocessed and processed_for_ai_path and os.path.exists(processed_for_ai_path):
                 video_processor.cleanup_temp_file(processed_for_ai_path)
 
@@ -345,10 +376,12 @@ class MainWindow(wx.Frame):
         self.toggle_ui_elements(enable=True)
 
         if event.error:
-            sound_player.play("error.mp3")
-            
-            from audio_describer.core.audio_describer import ContentBlockedError, TokenLimitError
-            if isinstance(event.error, ContentBlockedError):
+            from audio_describer.core.audio_describer import ContentBlockedError, TokenLimitError, GenerationCancelled
+            cancelled = isinstance(event.error, GenerationCancelled)
+            sound_player.play("aistop.mp3" if cancelled else "error.mp3")
+            if cancelled:  # the user asked for it: no error dialog
+                self.set_processing_status(_("Generation cancelled."))
+            elif isinstance(event.error, ContentBlockedError):
                 reason = event.error.reason or _("Unknown")
                 title = _("Content Generation Blocked")
                 message = _(
@@ -418,6 +451,11 @@ class MainWindow(wx.Frame):
         self.btn_youtube_url.Enable(enable)
         self.prompt_choice.Enable(enable)
         self.settings_button.Enable(enable)
+        if enable and self.FindFocus() in (None, self.cancel_button):
+            self.btn_local_file.SetFocus()  # don't leave the screen reader on a disabled button
+        self.cancel_button.Enable(not enable)
+        if not enable:
+            self.cancel_button.SetFocus()
         if self.GetMenuBar():
             self.GetMenuBar().EnableTop(0, enable)
 
@@ -472,6 +510,9 @@ class MainWindow(wx.Frame):
         self.Close(True)
 
     def on_close_window(self, event):
+        self._is_closing = True  # late worker callbacks (call_if_open) are dropped from now on
+        if self.cancel_event:  # stop a running generation (ffmpeg, HTTP, retries) before tearing down
+            self.cancel_event.set()
         if self.is_temp_video and self.current_video_path and os.path.exists(self.current_video_path):
             video_processor.cleanup_temp_file(self.current_video_path)
         self.Destroy()

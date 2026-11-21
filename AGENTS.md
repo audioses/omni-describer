@@ -47,7 +47,9 @@ generate audio descriptions for video, for blind/low-vision users. See
   `sapi32.py`), and `os.name == 'nt'` branches assume Windows. Don't add
   cross-platform abstractions unless you're actually implementing
   cross-platform support end to end.
-- **No test suite exists yet.** Manually run the app (`python run_app.py`)
+- **Minimal tests only.** `tests/` holds a few stdlib `unittest` checks of
+  pure helpers (no wx, run in CI): `python -m unittest discover -s tests`.
+  Still manually run the app (`python run_app.py`)
   and exercise the path you changed before calling something done. If you add
   non-trivial logic, a small `test_*.py` or an `assert`-based self-check is
   welcome, not required.

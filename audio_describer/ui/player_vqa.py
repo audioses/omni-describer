@@ -17,6 +17,7 @@ from ..utils.system_utils import run_command
 from .ask_more_dialog import AskMoreDialog
 from .scene_explorer_dialog import SceneExplorer
 from .explore_scene_options_dialog import ExploreSceneOptionsDialog
+from . import call_if_open
 
 lang_map = {"en": "English", "es": "Spanish", "fr": "French", "ar": "Arabic", "pt": "Portuguese", "it": "Italian", "ru": "Russian", "uk": "Ukrainian", "vi": "vietnamese", "tr": "Turkish"}
 
@@ -104,7 +105,7 @@ def _handle_ask_more_thread(player_instance, user_question, segment_start_ms, co
             player_instance.AppendVQAUsage(usage) 
             if hasattr(player_instance, '_original_state_before_ask_more') and player_instance._original_state_before_ask_more:
                 player_instance.vlc_player.play()
-        wx.CallAfter(update_ui_after_vqa, ai_answer, vqa_usage_data, is_error_response)
+        call_if_open(player_instance, update_ui_after_vqa, ai_answer, vqa_usage_data, is_error_response)
 
 def handle_explore_scene(player_instance):
     if not player_instance.vlc_player: return
@@ -134,7 +135,7 @@ def _handle_explore_scene_thread(player_instance, segment_start_ms, media_total_
         duration_req = options["duration"]
         user_prompt = options["prompt"]
 
-        wx.CallAfter(progress_dialog.Pulse, trans_func("Extracting {duration}s clip...").format(duration=duration_req))
+        call_if_open(player_instance, progress_dialog.Pulse, trans_func("Extracting {duration}s clip...").format(duration=duration_req))
         start_time_ffmpeg = max(0, (segment_start_ms / 1000.0) - (duration_req / 2.0))
         
         remaining_duration_sec = (media_total_duration_ms / 1000.0) - start_time_ffmpeg
@@ -149,7 +150,7 @@ def _handle_explore_scene_thread(player_instance, segment_start_ms, media_total_
         process = run_command(ffmpeg_extract_cmd)
         if process.returncode != 0: raise Exception(trans_func("FFmpeg failed to extract scene: %s") % (process.stderr or process.stdout))
         
-        wx.CallAfter(progress_dialog.Pulse, trans_func("Asking AI to analyze the scene... This may take a moment."))
+        call_if_open(player_instance, progress_dialog.Pulse, trans_func("Asking AI to analyze the scene... This may take a moment."))
         
         target_language_code = config_model.get_setting("application_language") or "en"
         target_language_name = lang_map.get(target_language_code.lower(), "English")
@@ -180,14 +181,14 @@ def _handle_explore_scene_thread(player_instance, segment_start_ms, media_total_
         
         scene_data = json.loads(json_response_text)
 
-        wx.CallAfter(progress_dialog.Destroy)
+        call_if_open(player_instance, progress_dialog.Destroy)
         sound_player.play("aistop.mp3")
-        wx.CallAfter(launch_explorer_in_thread, player_instance, scene_data, trans_func)
+        call_if_open(player_instance, launch_explorer_in_thread, player_instance, scene_data, trans_func)
     except Exception as e:
         app_logger.error(f"Explore Scene Thread Error: {e}", exc_info=True)
         sound_player.play("error.mp3")
-        wx.CallAfter(progress_dialog.Destroy)
-        wx.CallAfter(wx.MessageBox, trans_func("Failed to analyze scene: %s") % e, trans_func("Error"), wx.OK | wx.ICON_ERROR, player_instance)
+        call_if_open(player_instance, progress_dialog.Destroy)
+        call_if_open(player_instance, wx.MessageBox, trans_func("Failed to analyze scene: %s") % e, trans_func("Error"), wx.OK | wx.ICON_ERROR, player_instance)
     finally:
         if temp_segment_path and os.path.exists(temp_segment_path):
             try: os.remove(temp_segment_path)

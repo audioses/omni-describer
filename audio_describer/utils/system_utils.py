@@ -90,8 +90,8 @@ def run_command(command):
         stderr_thread.start()
 
         while process.poll() is None:
-            if app_state.shutdown_event.is_set():
-                app_logger.warning(f"Shutdown signaled. Terminating process: {' '.join(command)}")
+            if app_state.cancel_requested():  # app closing, or Escape on the generation running on this thread
+                app_logger.warning(f"Stop requested. Terminating process: {' '.join(command)}")
                 process.terminate()
                 try:
                     process.wait(timeout=2)
