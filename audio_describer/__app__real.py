@@ -158,7 +158,9 @@ class AudioDescriberApp(wx.App):
         from audio_describer.utils import update_checker
         import audio_describer.config as app_config
         _ = audio_describer.i18n_setup._
-        
+        if getattr(sys, "frozen", False):
+            update_checker.install_pending_updater()
+
         thread = threading.Thread(
             target=update_checker.check_for_updates,
             args=(

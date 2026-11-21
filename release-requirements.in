@@ -1,0 +1,6 @@
+-r audio_describer/requirements.txt
+# PyInstaller 5.x: v6 nests bundled data in _internal/, but the app resolves
+# doc/notifs/locale/bin next to the exe (flat onedir layout).
+pyinstaller<6
+# PyInstaller 5 imports pkg_resources, which setuptools removed; keep it below that.
+setuptools<81

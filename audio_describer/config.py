@@ -67,6 +67,10 @@ GITHUB_REPO = "audioses/omni-describer"
 VERSION_URL = f"https://api.github.com/repos/{GITHUB_REPO}/releases/latest"
 DOWNLOAD_URL = f"https://github.com/{GITHUB_REPO}/releases/latest/download/omni_describer.zip"
 UPDATER_URL = f"https://github.com/{GITHUB_REPO}/releases/latest/download/updater.exe"
+# Ed25519 public key (base64) that signs every update asset (<asset>.sig). Empty =
+# only GitHub's SHA-256 digest is checked. Set it only together with the release
+# secret UPDATE_SIGNING_KEY: see audio_describer/utils/update_signature.py.
+UPDATE_SIGNING_PUBLIC_KEY = ""
 WEBSITE_URL = "https://audioses.com/"
 WEBAPP_URL = "https://studio.binclusive.io"
 CONTACT_EMAIL = "info@audioses.com"
