@@ -24,6 +24,19 @@ _UPLOAD_POLL_INTERVAL_SEC = 5
 GenerationCancelled = app_state.GenerationCancelled  # one class, raised from any layer
 
 
+def _uses_other_vision_model():
+    """True when Settings send video descriptions to an OpenAI-compatible vision model instead of Gemini."""
+    return config_model.get_setting("video_backend") == "openai"
+
+
+def _require_gemini_backend():
+    """Gemini-only features (questions about a scene...) refuse to run when another vision model is
+    chosen, so nothing is sent to Google behind the user's back."""
+    if _uses_other_vision_model():
+        raise GeminiAPIError(_("This feature uses Gemini, but video descriptions are set to another AI in "
+                               "Settings, so nothing was sent to Google. Switch to Gemini in Settings to use it."))
+
+
 def reset_gemini_client():
     """Proxy function to reset the Gemini client in the helper module."""
     gemini.reset_gemini_client()
@@ -160,6 +173,12 @@ def generate_descriptions_and_glossary(video_path, user_prompt="", status_update
             status_update_callback(msg)
         app_logger.info(f"Describer: {msg}")
 
+    if _uses_other_vision_model():
+        from . import frames_video
+        descriptions, glossary = frames_video.describe_video(video_path, user_prompt, _update_status,
+                                                             initial_glossary, audio_source_path)
+        return descriptions, glossary, {}
+
     if not os.path.exists(video_path):
         _update_status(_("Error: Video file not found: %s") % video_path)
         raise FileNotFoundError(f"Video file not found: {video_path}")
@@ -235,6 +254,12 @@ def generate_descriptions_chunked(video_path, chunk_duration_sec, user_prompt=""
         if status_update_callback:
             status_update_callback(msg)
         app_logger.info(f"ChunkedDescriber: {msg}")
+
+    if _uses_other_vision_model():  # always walks the video in short segments of its own
+        from . import frames_video
+        descriptions, glossary = frames_video.describe_video(video_path, user_prompt, _update_status,
+                                                             initial_glossary, audio_source_path)
+        return descriptions, glossary, []
 
     if not os.path.exists(video_path):
         _update_status(_("Error: Video file not found: %s") % video_path)
@@ -366,6 +391,7 @@ def generate_descriptions_chunked(video_path, chunk_duration_sec, user_prompt=""
 
 
 def ask_gemini_about_video_segment(video_segment_path, vqa_prompt_text, system_instruction_text_vqa=None):
+    _require_gemini_backend()
     if not os.path.exists(video_segment_path):
         raise FileNotFoundError(f"Video segment file not found: {video_segment_path}")
 
@@ -397,6 +423,7 @@ def ask_gemini_about_video_segment(video_segment_path, vqa_prompt_text, system_i
 
 
 def get_json_response_from_gemini(video_path, prompt_text, status_update_callback=None, suffix=""):
+    _require_gemini_backend()
     if not os.path.exists(video_path):
         raise FileNotFoundError(f"Video file not found: {video_path}")
     video_file_obj = None
