@@ -54,14 +54,10 @@ class TTSError(Exception):
 SAPI5_32BIT_HELPER_NAME = "sapi32.exe"
 
 def _get_helper_path():
-    """Finds the path to the 32-bit helper executable inside the 'bin' folder."""
+    """Finds the path to the 32-bit helper executable."""
     if getattr(sys, 'frozen', False):
-        # In a frozen app, it's in the 'bin' folder next to the main executable's directory
-        if hasattr(sys, '_MEIPASS'):
-            base_dir = sys._MEIPASS
-        else:
-            base_dir = os.path.dirname(sys.executable)
-        return os.path.join(base_dir, 'bin', SAPI5_32BIT_HELPER_NAME)
+        # The release workflow copies sapi32.exe next to omni_describer.exe, not into bin/.
+        return os.path.join(os.path.dirname(sys.executable), SAPI5_32BIT_HELPER_NAME)
     else:
         # In development, assume it's been built into the main dist folder for testing
         base_dir = os.getcwd()
