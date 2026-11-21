@@ -6,11 +6,12 @@ import json
 import sys
 import math
 
-from .. import config
+from .. import app_state, config
 from ..utils.logger import app_logger
 from ..models import config_model
 from . import video_processor, timing
 from . import gemini_helpers as gemini
+from . import prompts
 from .gemini_helpers import GeminiAPIError, ContentBlockedError, TokenLimitError
 
 # --- CONSTANTS ---
@@ -19,6 +20,9 @@ _UPLOAD_POLL_MAX_ATTEMPTS = 100
 _UPLOAD_POLL_INTERVAL_SEC = 5
 
 # --- PUBLIC API ---
+
+GenerationCancelled = app_state.GenerationCancelled  # one class, raised from any layer
+
 
 def reset_gemini_client():
     """Proxy function to reset the Gemini client in the helper module."""
@@ -53,29 +57,49 @@ def _upload_and_wait_for_active(client, video_path, status_callback=None):
         shutil.copy2(video_path, temp_copy.name)
         upload_path = temp_copy.name
         app_logger.info(f"Upload: copied to ASCII-safe temp path for upload")
-    try:
-        video_file_obj = client.files.upload(file=upload_path)
-    finally:
+    def _remove_temp_copy():
         if temp_copy is not None:
             try:
                 os.unlink(temp_copy.name)
             except OSError:
                 pass
+
+    def _discard_late_upload(late_file_obj):
+        # Escape during the upload: runs on the upload thread once it finishes. Only now is the
+        # temp copy released, and nobody else knows about the uploaded file.
+        _cleanup_uploaded_file(client, late_file_obj)
+        _remove_temp_copy()
+
+    abandoned = False
+    try:
+        video_file_obj = app_state.run_cancellable(client.files.upload, file=upload_path,
+                                                   on_abandoned=_discard_late_upload)
+    except GenerationCancelled:
+        abandoned = True
+        raise
+    finally:
+        if not abandoned:
+            _remove_temp_copy()
     _status(_("Video upload initiated: %s. Waiting for processing...") % video_file_obj.name)
 
-    for attempt in range(1, _UPLOAD_POLL_MAX_ATTEMPTS + 1):
-        if video_file_obj.state.name == "ACTIVE":
-            _status(_("Video is ACTIVE."))
-            return video_file_obj
-        _status(_("Video processing (attempt %d)... state: %s") % (attempt, video_file_obj.state.name))
-        time.sleep(_UPLOAD_POLL_INTERVAL_SEC)
-        video_file_obj = client.files.get(name=video_file_obj.name)
+    try:
+        for attempt in range(1, _UPLOAD_POLL_MAX_ATTEMPTS + 1):
+            if video_file_obj.state.name == "ACTIVE":
+                _status(_("Video is ACTIVE."))
+                return video_file_obj
+            _status(_("Video processing (attempt %d)... state: %s") % (attempt, video_file_obj.state.name))
+            app_state.sleep_or_cancel(_UPLOAD_POLL_INTERVAL_SEC)
+            video_file_obj = app_state.run_cancellable(client.files.get, name=video_file_obj.name)
 
-    err_msg = _("Video processing timed out or failed. Final state: %s") % video_file_obj.state.name
-    if getattr(video_file_obj, "error", None) and video_file_obj.error:
-        err_msg += f" Server error: Code={getattr(video_file_obj.error, 'code', 'N/A')}, Message='{getattr(video_file_obj.error, 'message', 'N/A')}'"
-    _status(err_msg)
-    raise GeminiAPIError(err_msg)
+        err_msg = _("Video processing timed out or failed. Final state: %s") % video_file_obj.state.name
+        if getattr(video_file_obj, "error", None) and video_file_obj.error:
+            err_msg += f" Server error: Code={getattr(video_file_obj.error, 'code', 'N/A')}, Message='{getattr(video_file_obj.error, 'message', 'N/A')}'"
+        _status(err_msg)
+        raise GeminiAPIError(err_msg)
+    except Exception:
+        # Cancelled or failed while waiting: callers only clean up a file they received.
+        _cleanup_uploaded_file(client, video_file_obj)
+        raise
 
 
 def _build_video_part(video_file_obj, start_offset_sec=None, end_offset_sec=None):
@@ -189,6 +213,8 @@ def generate_descriptions_and_glossary(video_path, user_prompt="", status_update
 
         app_logger.info(f"Unified generation complete. Descriptions: {len(final_descriptions)}, Glossary: {len(glossary)}")
         return final_descriptions, glossary, token_usage
+    except GenerationCancelled:
+        raise
     except Exception as e:
         _update_status(_("Unified generation failed: %s") % str(e))
         app_logger.error("Unified generation failed critically: %s", e, exc_info=True)
@@ -329,6 +355,8 @@ def generate_descriptions_chunked(video_path, chunk_duration_sec, user_prompt=""
         app_logger.info(f"Chunked generation complete. Descriptions: {len(final_descriptions)}, Glossary: {len(character_glossary)}")
         return final_descriptions, character_glossary, all_token_usage
 
+    except GenerationCancelled:
+        raise
     except Exception as e:
         _update_status(_("Chunked generation failed: %s") % str(e))
         app_logger.error("Chunked generation failed critically: %s", e, exc_info=True)
@@ -557,86 +585,5 @@ def parse_gemini_json_response_mmss(json_string):
 
 
 def _build_unified_prompts(user_prompt, model_name_to_use, initial_glossary=None):
-    """Builds the system and user prompts for the unified generation API call."""
-    target_language_code = config_model.get_setting("application_language") or "en"
-    lang_map = {"en": "English", "es": "Spanish", "fr": "French", "ar": "Arabic", "pt": "Portuguese", "it": "Italian", "ru": "Russian", "uk": "Ukrainian", "vi": "vietnamese", "tr": "Turkish"}
-    target_language_name = lang_map.get(target_language_code.lower(), "English")
-    
-    enable_glossary = config_model.get_setting("enable_character_glossary")
-    
-    # Get verbosity setting and convert to meaningful instruction
-    verbosity_setting = config_model.get_setting('gemini_description_verbosity')
-    verbosity_instructions = {
-        config.VERBOSITY_SHORT: "Keep descriptions extremely brief (1-3 words maximum). Only describe the most critical visual elements that are essential for understanding the scene.",
-        config.VERBOSITY_STANDARD: "Provide balanced descriptions (3-6 words). Focus on important visual information without overwhelming detail. This is the recommended setting.",
-        config.VERBOSITY_DETAILED: "Provide rich, detailed descriptions (6-12 words). Include important visual context, emotions, scene details, and atmospheric elements that enhance understanding."
-    }
-    verbosity_instruction = verbosity_instructions.get(verbosity_setting, verbosity_instructions[config.VERBOSITY_STANDARD])
-    app_logger.info(f"Using verbosity setting: {verbosity_setting} -> {verbosity_instruction[:50]}...")
-    
-    # Core directives remain largely the same, but the output format instruction is new.
-    core_directives = """
-**CORE DIRECTIVES (Apply to `audio_descriptions`):**
-1.  **DO NOT OVERLAP DIALOGUE:** The most critical rule. Omit descriptions during dialogue unless it's a 1-3 word, critical, silent visual.
-2.  **BE SELECTIVE AND CONCISE (2 WORDS/SECOND RULE):** Describe only NEW and PLOT-CRITICAL visual information. A 3-second description can have a maximum of 6 words.
-3.  **USE NAMES ACCURATELY:** Use character names only after they are clearly revealed in the dialogue. Do not invent names.
-4.  **Do not describe audible actions:** e.g., "a man talks". Describe new visual information.
-"""
-
-    # The main system instruction, now asking for a unified JSON object.
-    system_instruction = f"""
-You are an expert Audio Describer. Your mission is to analyze the provided video and generate two distinct sets of data in a single JSON object: a character glossary and a series of timed audio descriptions.
-
-**OUTPUT FORMAT (Strict JSON):**
-Your entire output MUST be a single JSON object with two top-level keys: "character_glossary" and "audio_descriptions".
-
-1.  **"character_glossary":** An array of objects, where each object represents a distinct character. Each character object must contain:
-    *   `"id"`: A unique, descriptive identifier (e.g., "man_in_red_shirt").
-    *   `"description"`: A definitive physical description.
-    *   `"name"`: The character's name, if and only if it is spoken clearly in the video. Otherwise, this must be null.
-
-2.  **"audio_descriptions":** An array of objects, where each object represents a timed description. Each description object must contain:
-    *   `"start_time_mmss"`: The start time of the description in "MM:SS" or "MM:SS.ms" format.
-    *   `"end_time_mmss"`: The end time of the description in "MM:SS" or "MM:SS.ms" format.
-    *   `"description_text"`: The concise description text, following all core directives.
-
-{core_directives}
-
-**EXAMPLE OUTPUT:**
-{{
-  "character_glossary": [
-    {{"id": "man_in_suit", "description": "A tall man in a dark suit.", "name": "David"}}
-  ],
-  "audio_descriptions": [
-    {{"start_time_mmss": "00:10.500", "end_time_mmss": "00:12.000", "description_text": "A car speeds down the street."}},
-    {{"start_time_mmss": "00:15.250", "end_time_mmss": "00:17.000", "description_text": "David enters the room."}}
-  ]
-}}
-"""
-
-    user_prompt_parts = [
-        f"Analyze the provided video and generate a unified JSON object containing {'the character glossary and ' if enable_glossary else ''}the timed audio descriptions. Follow all instructions.",
-        "\n**Current Task Specifications:**",
-        f"*   **Target Language for `description_text`:** {target_language_name}",
-        f"*   **Verbosity Level:** {verbosity_instruction}",
-    ]
-    if config_model.get_setting("translate_foreign_dialogue"):
-        user_prompt_parts.append(
-            f"*   **Dialogue Translation (audio subtitles):** When someone speaks a language other than {target_language_name}, "
-            f"add an `audio_descriptions` object for each line of that dialogue, timed with it, whose `description_text` is the "
-            f"line translated into {target_language_name}, without a speaker name. These objects may overlap the dialogue they "
-            "translate (an exception to directive 1) and also contain `\"dialogue_translation\": true`, "
-            "`\"speaker_gender\"` (\"female\", \"male\" or \"unknown\", from the voice and appearance) and `\"speaker_id\"` "
-            "(the speaker's `id` in `character_glossary`, or null). Give each glossary character an `\"apparent_gender\"` "
-            "(\"female\", \"male\" or \"unknown\").")
-    if initial_glossary:
-        user_prompt_parts.append("*   **Known Characters:** reuse these exact ids, names and descriptions in "
-                                 "`character_glossary` when these characters appear: "
-                                 + json.dumps(initial_glossary, ensure_ascii=False))
-    if user_prompt and user_prompt.strip():
-        user_prompt_parts.append(f"*   **User's Specific Focus:** {user_prompt.strip()}")
-        app_logger.info(f"Custom prompt applied: {user_prompt.strip()[:100]}...")
-    else:
-        app_logger.info("No custom prompt provided by user.")
-        
-    return system_instruction, "\n".join(user_prompt_parts)
+    """Builds the system and user prompts; the text lives in prompts/rules/*.json."""
+    return prompts.build_unified_prompts(user_prompt, initial_glossary)

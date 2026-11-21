@@ -39,8 +39,10 @@ def set_control_accessible_name(control, name):
     :param control: The wxPython control.
     :param name: The accessible name string.
     """
-    if hasattr(control, 'SetLabel') and not control.GetLabel(): # Only if no visible label
-         control.SetLabel(name) # This might make it visible, be careful
+    import wx
+    # TextCtrl.SetLabel asserts on recent wxPython ("Use SetValue()"): its label is its content.
+    if hasattr(control, 'SetLabel') and not isinstance(control, wx.TextCtrl) and not control.GetLabel():
+        control.SetLabel(name)
     
     # For many wxPython controls, GetAccessible().SetName(name) is the way
     # However, direct access to SetName on the accessible object might vary

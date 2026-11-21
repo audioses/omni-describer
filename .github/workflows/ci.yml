@@ -1,7 +1,7 @@
 name: CI
 
 # Lightweight smoke check: byte-compile everything and import core modules.
-# No test suite exists yet (see AGENTS.md); this catches syntax and import breaks.
+# Plus the small stdlib unit tests in tests/; this catches syntax and import breaks.
 on:
   push:
     branches: [main]
@@ -23,3 +23,8 @@ jobs:
 
       - name: Import config (no heavy deps)
         run: python -c "import audio_describer.config; print(audio_describer.config.APP_VERSION)"
+
+      - name: Unit tests (pure functions, no wx needed)
+        run: |
+          pip install cryptography==49.0.0
+          python -m unittest discover -s tests -v

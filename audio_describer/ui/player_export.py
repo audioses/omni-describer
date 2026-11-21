@@ -14,6 +14,7 @@ from ..core.tts_engine import TTSError
 from ..models import config_model
 from ..utils.system_utils import run_command
 from .export_options_dialog import ExportOptionsDialog
+from . import call_if_open
 
 try:
     from pydub import AudioSegment
@@ -126,14 +127,14 @@ def _handle_av_export(player_instance, options):
     thread.daemon = True
     thread.start()
 
-def _synthesize_all_descriptions(descriptions, progress_dialog):
+def _synthesize_all_descriptions(player_instance, descriptions, progress_dialog):
     temp_wav_files = []
     description_segments = []
     
     for i, desc in enumerate(descriptions):
         start, end, text = desc
         if progress_dialog.WasCancelled(): raise InterruptedError("User cancelled.")
-        wx.CallAfter(progress_dialog.Update, i + 1, gettext_("Synthesizing description %d of %d...") % (i + 1, len(descriptions)))
+        call_if_open(player_instance, progress_dialog.Update, i + 1, gettext_("Synthesizing description %d of %d...") % (i + 1, len(descriptions)))
         
         temp_wav = os.path.join(tempfile.gettempdir(), f"desc_{i}_{os.urandom(4).hex()}.wav")
         temp_wav_files.append(temp_wav)
@@ -233,7 +234,7 @@ def _perform_mp3_export_thread(player_instance, output_path, descriptions, optio
         if not PYDUB_AVAILABLE:
             raise TTSError(gettext_("pydub library not available. Audio export functionality is disabled."))
 
-        wx.CallAfter(progress_dialog.Update, 0, gettext_("Extracting original audio..."))
+        call_if_open(player_instance, progress_dialog.Update, 0, gettext_("Extracting original audio..."))
         original_audio_path = os.path.join(tempfile.gettempdir(), f"original_audio_{os.urandom(4).hex()}.wav")
         temp_files.append(original_audio_path)
         cmd = [FFMPEG_COMMAND, "-y", "-i", player_instance.video_path, "-vn", "-c:a", "pcm_s16le", original_audio_path]
@@ -242,24 +243,24 @@ def _perform_mp3_export_thread(player_instance, output_path, descriptions, optio
             app_logger.error(f"FFmpeg failed to extract audio: {process_result.stderr}")
             raise TTSError(gettext_("FFmpeg failed to extract audio. Check FFmpeg availability and video file."))
         
-        description_details, synth_files = _synthesize_all_descriptions(descriptions, progress_dialog)
+        description_details, synth_files = _synthesize_all_descriptions(player_instance, descriptions, progress_dialog)
         temp_files.extend(synth_files)
 
-        wx.CallAfter(progress_dialog.Update, len(descriptions) + 2, gettext_("Mixing audio tracks..."))
+        call_if_open(player_instance, progress_dialog.Update, len(descriptions) + 2, gettext_("Mixing audio tracks..."))
         original_audio = AudioSegment.from_file(original_audio_path)
         ducking_db = float(config_model.get_setting("mp3_audio_ducking_level_db"))
         
         mixed_audio, _ = _apply_ducking_with_fades(original_audio, description_details, ducking_db)
         
-        wx.CallAfter(progress_dialog.Update, len(descriptions) + 3, gettext_("Saving to MP3..."))
+        call_if_open(player_instance, progress_dialog.Update, len(descriptions) + 3, gettext_("Saving to MP3..."))
         mixed_audio.export(output_path, format="mp3", bitrate="192k")
         
-        wx.CallAfter(progress_dialog.Update, len(descriptions) * 3 + 5, gettext_("Export Complete."))
+        call_if_open(player_instance, progress_dialog.Update, len(descriptions) * 3 + 5, gettext_("Export Complete."))
 
-        wx.PostEvent(player_instance, ExportDoneEvent(output_path=output_path))
+        call_if_open(player_instance, wx.PostEvent, player_instance, ExportDoneEvent(output_path=output_path))
     except Exception as e:
         app_logger.error(f"Error during MP3 export thread: {e}", exc_info=True)
-        wx.PostEvent(player_instance, ExportDoneEvent(error=e))
+        call_if_open(player_instance, wx.PostEvent, player_instance, ExportDoneEvent(error=e))
     finally:
         for path in temp_files:
             if os.path.exists(path):

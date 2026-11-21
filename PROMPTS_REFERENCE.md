@@ -15,7 +15,7 @@ This document extracts and documents all system prompts and mode-specific prompt
 
 ### Main System Instruction (Unified Generation)
 
-**Location:** `audio_describer/core/audio_describer.py` - `_build_unified_prompts()` function
+**Location:** `audio_describer/prompts/rules/en.json` (text), assembled by `audio_describer/core/prompts.py` - `build_unified_prompts()`
 
 This system instruction is used for generating both audio descriptions and character glossaries in a single AI call.
 
@@ -55,7 +55,7 @@ Your entire output MUST be a single JSON object with two top-level keys: "charac
 
 ### User Prompt Template
 
-**Location:** `audio_describer/core/audio_describer.py` - `_build_unified_prompts()` function
+**Location:** `audio_describer/prompts/rules/en.json` (text), assembled by `audio_describer/core/prompts.py` - `build_unified_prompts()`
 
 The user prompt is dynamically constructed and includes:
 
@@ -72,7 +72,7 @@ Analyze the provided video and generate a unified JSON object containing [charac
 
 ## Mode-Specific Prompts (Content Types)
 
-**Location:** `audio_describer/models/prompt_model.py` - `DEFAULT_PROMPTS` constant
+**Location:** `audio_describer/prompts/en.json` (one file per language), loaded into `DEFAULT_PROMPTS` by `audio_describer/models/prompt_model.py`
 
 Mode-specific prompts guide the AI to focus on content-relevant visual elements. Users can select these modes when processing videos. Each mode has both English and Turkish versions.
 
@@ -204,7 +204,7 @@ Bu bir video oyunu kaydıdır. Sağlık çubukları, mermi sayısı veya mini ha
 
 ## Verbosity Settings
 
-**Location:** `audio_describer/core/audio_describer.py` - `_build_unified_prompts()` function
+**Location:** `audio_describer/prompts/rules/en.json` (text), assembled by `audio_describer/core/prompts.py` - `build_unified_prompts()`
 
 The application supports three verbosity levels that dynamically adjust description length and detail:
 
@@ -236,7 +236,7 @@ Provide rich, detailed descriptions (6-12 words). Include important visual conte
 
 ## Language Support
 
-**Location:** `audio_describer/core/audio_describer.py` - `_build_unified_prompts()` function
+**Location:** `audio_describer/prompts/rules/en.json` (text), assembled by `audio_describer/core/prompts.py` - `build_unified_prompts()`
 
 The application supports the following target languages for descriptions:
 
@@ -328,8 +328,8 @@ The target language is determined by the `application_language` setting in the c
 
 ## File References
 
-- **System Prompts:** `audio_describer/core/audio_describer.py` (lines 540-610)
-- **Mode Prompts:** `audio_describer/models/prompt_model.py` (lines 10-91)
+- **System Prompts:** `audio_describer/prompts/rules/en.json`, assembled by `audio_describer/core/prompts.py`
+- **Mode Prompts:** `audio_describer/prompts/en.json`
 - **Gemini Configuration:** `audio_describer/core/gemini_helpers.py` (lines 133-187)
 - **Language Map:** `audio_describer/core/audio_describer.py` (line 543)
 

@@ -41,7 +41,8 @@ added_files = [
     ('audio_describer/bin', 'bin'),
     ('audio_describer/notifs', 'notifs'),
     ('audio_describer/doc', 'doc'),
-    ('audio_describer/locale', 'locale')
+    ('audio_describer/locale', 'locale'),
+    ('audio_describer/prompts', 'prompts')
 ]
 
 # Part 3: Define the main analysis.
