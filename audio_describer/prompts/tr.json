@@ -1,0 +1,52 @@
+[
+    {
+        "id": "movie_trailer",
+        "name": "Fragman",
+        "prompt": "Bu bir film fragmanıdır. Hızlı tempolu, etkili ve ikonik çekimlere odaklan. Kilit aksiyon anlarını, dramatik karakter girişlerini ve vizyon tarihleri veya stüdyo logoları gibi ekrandaki metinleri betimlemeye öncelik ver. Spoiler  vermeden bir heyecan hissi yarat ve konuya dair ipuçları ver. Betimlemeler, hızlı kesitler arasına sığabilmesi için son derece kısa olmalıdır."
+    },
+    {
+        "id": "action_movie",
+        "name": "Aksiyon Film",
+        "prompt": "Bu bir aksiyon videosudur. Aksiyonun temel koreografisine odaklan: önemli yumruklar, tekmeler, kaçışlar ve silah kullanımı. Patlamalar veya araba kovalamacaları gibi büyük ölçekli olayları betimle. Yüksek enerjili tempoya uymak için betimlemeleri kısa ve etkili tut."
+    },
+    {
+        "id": "romantic_movie",
+        "name": "Romantik Film",
+        "prompt": "Bu bir romantik videodur. Karakterlerin birbirine olan yakınlığını, (el ele tutuşmak gibi) anlamlı dokunuşlarını ve sevgi, özlem veya çatışma gösteren önemli yüz ifadelerini betimlemeye öncelik ver. Mekanın romantik atmosferini betimle (örneğin, 'mum ışığında bir akşam yemeği,' 'ay ışığında bir kumsalda yürüyüş')."
+    },
+    {
+        "id": "comedy_sitcom",
+        "name": "Komedi / Sitcom",
+        "prompt": "Bu bir komedi videosudur. Görsel şakalara, fiziksel komediye ve absürt durumlara odaklan. Şakanın anahtarı olan abartılı tepkileri ve komik ifadeleri betimle. Betimlemenin zamanlaması, esprinin etkili olması için kritiktir, bu yüzden kısa ol ve görsel şaka gerçekleştikten hemen sonra yerleştir."
+    },
+    {
+        "id": "sci_fi_fantasy",
+        "name": "Bilim Kurgu / Fantastik",
+        "prompt": "Bu bir bilim kurgu/fantastik videosudur. Benzersiz dünya unsurlarını betimlemeye odaklan. Fütüristik teknolojiyi, fantastik yaratıkları, sihirli efektleri ve dünya dışı manzaraları betimle. Görsel unsurları gerçek dünyadan farklı kılan şeyleri açıkla (örneğin, 'Parlayan yelkenleri olan bir gemi, mor bir bulutsunun içinde uçuyor.')."
+    },
+    {
+        "id": "meme_viral_video",
+        "name": "Meme / Viral Video",
+        "prompt": "Bu kısa bir meme veya viral videodur. Amaç, temel görsel şakayı veya beklenmedik olayı mümkün olan en kısa şekilde betimlemektir. Videoyu komik veya ilginç kılan ana özneyi ve tek eylemi belirle. Ekran üzerindeki yazılar son derece önemlidir (örneğin, 'Güneş gözlüğü takan bir kedi, bir ritme başını sallıyor. Altyazı: Modunda.')."
+    },
+    {
+        "id": "documentary_educational",
+        "name": "Belgesel / Bilgilendirici",
+        "prompt": "Bu bir belgesel/eğitici videodur. Ekrandaki metinleri, etiketleri, grafikleri, haritaları ve arşiv görüntülerini betimlemeye öncelik ver. İnsanlar için, konuyla ilgili eylemlerine odaklan (örneğin, \"Biyolog belirli bir bitkiyi işaret ediyor\"). Sade ve bilgilendirici bir ton kullan."
+    },
+    {
+        "id": "cooking_recipe",
+        "name": "Yemek / Tarif",
+        "prompt": "Bu bir yemek pişirme videosudur. Eklenen belirli malzemeleri ve gösterilen pişirme tekniklerini (örneğin, 'soğanı küp küp doğruyor,' 'bifteği mühürlüyor') betimle. Yemeğin kilit aşamalardaki görsel durumunu ve dokusunu betimle (örneğin, 'Sos, parlak bir kıvama gelene kadar koyulaşır.')."
+    },
+    {
+        "id": "diy_tutorial",
+        "name": "Kendin Yap / Eğitici Video",
+        "prompt": "Bu bir eğitici veya kendin yap videosudur. Adım adım ilerleyen sürece odaklan. Kullanılan belirli araçları ve malzemeleri net bir şekilde betimle. Nesne üzerinde gerçekleştirilen eylemi ve eylemden önceki ve sonraki durumunu detaylandır (örneğin, 'Tahtanın üzerindeki işaretli noktaya bir delik açıyor.')."
+    },
+    {
+        "id": "gaming_lets_play",
+        "name": "Oyun / Oynanış Videosu Odağı",
+        "prompt": "Bu bir video oyunu kaydıdır. Sağlık çubukları, mermi sayısı veya mini haritalar gibi kritik ekran arayüzü (HUD) ögelerini, değiştiklerinde betimlemeye öncelik ver. Ana karakterin/avatarın oyun dünyasındaki eylemlerini betimle (örneğin, 'Karakter bir ateş büyüsü yapıyor,' 'Bir sonraki platforma zıyplıyor)."
+    }
+]

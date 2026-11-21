@@ -11,6 +11,7 @@ from ..utils.logger import app_logger
 from ..models import config_model
 from . import video_processor
 from . import gemini_helpers as gemini
+from . import prompts
 from .gemini_helpers import GeminiAPIError, ContentBlockedError, TokenLimitError
 
 # --- CONSTANTS ---
@@ -559,73 +560,5 @@ def parse_gemini_json_response_mmss(json_string):
 
 
 def _build_unified_prompts(user_prompt, model_name_to_use):
-    """Builds the system and user prompts for the unified generation API call."""
-    target_language_code = config_model.get_setting("application_language") or "en"
-    lang_map = {"en": "English", "es": "Spanish", "fr": "French", "ar": "Arabic", "pt": "Portuguese", "it": "Italian", "ru": "Russian", "uk": "Ukrainian", "vi": "vietnamese", "tr": "Turkish"}
-    target_language_name = lang_map.get(target_language_code.lower(), "English")
-    
-    enable_glossary = config_model.get_setting("enable_character_glossary")
-    
-    # Get verbosity setting and convert to meaningful instruction
-    verbosity_setting = config_model.get_setting('gemini_description_verbosity')
-    verbosity_instructions = {
-        config.VERBOSITY_SHORT: "Keep descriptions extremely brief (1-3 words maximum). Only describe the most critical visual elements that are essential for understanding the scene.",
-        config.VERBOSITY_STANDARD: "Provide balanced descriptions (3-6 words). Focus on important visual information without overwhelming detail. This is the recommended setting.",
-        config.VERBOSITY_DETAILED: "Provide rich, detailed descriptions (6-12 words). Include important visual context, emotions, scene details, and atmospheric elements that enhance understanding."
-    }
-    verbosity_instruction = verbosity_instructions.get(verbosity_setting, verbosity_instructions[config.VERBOSITY_STANDARD])
-    app_logger.info(f"Using verbosity setting: {verbosity_setting} -> {verbosity_instruction[:50]}...")
-    
-    # Core directives remain largely the same, but the output format instruction is new.
-    core_directives = """
-**CORE DIRECTIVES (Apply to `audio_descriptions`):**
-1.  **DO NOT OVERLAP DIALOGUE:** The most critical rule. Omit descriptions during dialogue unless it's a 1-3 word, critical, silent visual.
-2.  **BE SELECTIVE AND CONCISE (2 WORDS/SECOND RULE):** Describe only NEW and PLOT-CRITICAL visual information. A 3-second description can have a maximum of 6 words.
-3.  **USE NAMES ACCURATELY:** Use character names only after they are clearly revealed in the dialogue. Do not invent names.
-4.  **Do not describe audible actions:** e.g., "a man talks". Describe new visual information.
-"""
-
-    # The main system instruction, now asking for a unified JSON object.
-    system_instruction = f"""
-You are an expert Audio Describer. Your mission is to analyze the provided video and generate two distinct sets of data in a single JSON object: a character glossary and a series of timed audio descriptions.
-
-**OUTPUT FORMAT (Strict JSON):**
-Your entire output MUST be a single JSON object with two top-level keys: "character_glossary" and "audio_descriptions".
-
-1.  **"character_glossary":** An array of objects, where each object represents a distinct character. Each character object must contain:
-    *   `"id"`: A unique, descriptive identifier (e.g., "man_in_red_shirt").
-    *   `"description"`: A definitive physical description.
-    *   `"name"`: The character's name, if and only if it is spoken clearly in the video. Otherwise, this must be null.
-
-2.  **"audio_descriptions":** An array of objects, where each object represents a timed description. Each description object must contain:
-    *   `"start_time_mmss"`: The start time of the description in "MM:SS" or "MM:SS.ms" format.
-    *   `"end_time_mmss"`: The end time of the description in "MM:SS" or "MM:SS.ms" format.
-    *   `"description_text"`: The concise description text, following all core directives.
-
-{core_directives}
-
-**EXAMPLE OUTPUT:**
-{{
-  "character_glossary": [
-    {{"id": "man_in_suit", "description": "A tall man in a dark suit.", "name": "David"}}
-  ],
-  "audio_descriptions": [
-    {{"start_time_mmss": "00:10.500", "end_time_mmss": "00:12.000", "description_text": "A car speeds down the street."}},
-    {{"start_time_mmss": "00:15.250", "end_time_mmss": "00:17.000", "description_text": "David enters the room."}}
-  ]
-}}
-"""
-
-    user_prompt_parts = [
-        f"Analyze the provided video and generate a unified JSON object containing {'the character glossary and ' if enable_glossary else ''}the timed audio descriptions. Follow all instructions.",
-        "\n**Current Task Specifications:**",
-        f"*   **Target Language for `description_text`:** {target_language_name}",
-        f"*   **Verbosity Level:** {verbosity_instruction}",
-    ]
-    if user_prompt and user_prompt.strip():
-        user_prompt_parts.append(f"*   **User's Specific Focus:** {user_prompt.strip()}")
-        app_logger.info(f"Custom prompt applied: {user_prompt.strip()[:100]}...")
-    else:
-        app_logger.info("No custom prompt provided by user.")
-        
-    return system_instruction, "\n".join(user_prompt_parts)
+    """Builds the system and user prompts; the text lives in prompts/rules/*.json."""
+    return prompts.build_unified_prompts(user_prompt)
