@@ -9,7 +9,7 @@ import math
 from .. import app_state, config
 from ..utils.logger import app_logger
 from ..models import config_model
-from . import video_processor
+from . import video_processor, timing
 from . import gemini_helpers as gemini
 from . import prompts
 from .gemini_helpers import GeminiAPIError, ContentBlockedError, TokenLimitError
@@ -150,7 +150,7 @@ def _cleanup_uploaded_file(client, video_file_obj, status_callback=None):
             app_logger.error(f"Failed to delete file {video_file_obj.name}: {del_e}")
 
 
-def generate_descriptions_and_glossary(video_path, user_prompt="", status_update_callback=None):
+def generate_descriptions_and_glossary(video_path, user_prompt="", status_update_callback=None, initial_glossary=None, audio_source_path=None):
     """
     Generates both audio descriptions and a character glossary in a single AI call.
     Uses Gemini's native videoMetadata for FPS control instead of local re-encoding.
@@ -174,7 +174,8 @@ def generate_descriptions_and_glossary(video_path, user_prompt="", status_update
 
         _update_status(_("Video ready. Preparing unified AI request..."))
 
-        system_instruction, user_prompt_text = _build_unified_prompts(user_prompt, model_name_to_use)
+        system_instruction, user_prompt_text = _build_unified_prompts(user_prompt, model_name_to_use, initial_glossary)
+        user_prompt_text += _speech_pause_hint(audio_source_path or video_path, _update_status)
 
         gen_config = gemini.build_generation_config(system_instruction_text=system_instruction, is_json_response=True, enable_thinking=True)
         video_part = _build_video_part(video_file_obj)
@@ -194,6 +195,8 @@ def generate_descriptions_and_glossary(video_path, user_prompt="", status_update
             return [], [], token_usage
 
         descriptions, glossary = _parse_unified_response(raw_json_text, _update_status)
+        if initial_glossary:  # characters reused from the previous video keep their ids and voices
+            glossary = timing.merge_glossary([dict(g) for g in initial_glossary], glossary)
 
         if not descriptions:
             _update_status(_("Failed to parse timed descriptions from AI's JSON response."))
@@ -219,7 +222,7 @@ def generate_descriptions_and_glossary(video_path, user_prompt="", status_update
     finally:
         _cleanup_uploaded_file(client, video_file_obj, _update_status)
 
-def generate_descriptions_chunked(video_path, chunk_duration_sec, user_prompt="", status_update_callback=None):
+def generate_descriptions_chunked(video_path, chunk_duration_sec, user_prompt="", status_update_callback=None, initial_glossary=None, audio_source_path=None):
     """Generates descriptions for a long video by uploading once and using time offsets.
 
     Instead of splitting the video into separate files and uploading each one,
@@ -240,7 +243,7 @@ def generate_descriptions_chunked(video_path, chunk_duration_sec, user_prompt=""
     video_file_obj = None
     client = None
     all_descriptions = []
-    character_glossary = []
+    character_glossary = [dict(g) for g in (initial_glossary or [])]  # reused from the previous video
     all_token_usage = []
 
     try:
@@ -264,7 +267,8 @@ def generate_descriptions_chunked(video_path, chunk_duration_sec, user_prompt=""
         _update_status(_("Processing video..."))
 
         enable_glossary = config_model.get_setting("enable_character_glossary")
-        system_instruction, user_prompt_text = _build_unified_prompts(user_prompt, model_name_to_use)
+        system_instruction, user_prompt_text = _build_unified_prompts(user_prompt, model_name_to_use, initial_glossary)
+        user_prompt_text += _speech_pause_hint(audio_source_path or video_path, _update_status)
         gen_config = gemini.build_generation_config(
             system_instruction_text=system_instruction, is_json_response=True, enable_thinking=True
         )
@@ -303,7 +307,7 @@ def generate_descriptions_chunked(video_path, chunk_duration_sec, user_prompt=""
             chunk_descriptions, chunk_glossary = _parse_unified_response(raw_json_text, _update_status)
 
             if enable_glossary and chunk_glossary:
-                character_glossary.extend(chunk_glossary)
+                timing.merge_glossary(character_glossary, chunk_glossary)
 
             if not chunk_descriptions:
                 app_logger.warning(f"Chunk {i+1} returned no descriptions.")
@@ -330,16 +334,15 @@ def generate_descriptions_chunked(video_path, chunk_duration_sec, user_prompt=""
                         f"(first={first_start:.1f}s, chunk_start={chunk_start:.1f}s). "
                         f"Using as-is."
                     )
-                    for start_sec, end_sec, text in corrected_chunk:
-                        all_descriptions.append((start_sec, end_sec, text))
+                    all_descriptions.extend(corrected_chunk)
                 else:
                     app_logger.info(
                         f"Chunk {i+1}: timestamps appear chunk-relative "
                         f"(first={first_start:.1f}s, chunk_start={chunk_start:.1f}s). "
                         f"Adding offset {chunk_start:.1f}s."
                     )
-                    for start_sec, end_sec, text in corrected_chunk:
-                        all_descriptions.append((start_sec + chunk_start, end_sec + chunk_start, text))
+                    for d in corrected_chunk:
+                        all_descriptions.append(timing.Description(d[0] + chunk_start, d[1] + chunk_start, d[2], timing.flags_of(d)))
 
             _update_status(_("Chunk %d: parsed %d descriptions.") % (i + 1, len(corrected_chunk)))
 
@@ -426,6 +429,24 @@ def get_json_response_from_gemini(video_path, prompt_text, status_update_callbac
 
 # --- INTERNAL HELPERS ---
 
+def _speech_pause_hint(media_path, update_status):
+    """Prompt line listing the stretches without speech found locally by Silero VAD (free, no tokens),
+    so descriptions land in real pauses, music included. "" when disabled or unavailable."""
+    if not config_model.get_setting("detect_speech_pauses"):
+        return ""
+    from . import vad
+    if not vad.available():
+        return ""
+    update_status(_("Detecting pauses in the dialogue..."))
+    windows = vad.detect_speech_free_windows(media_path, video_processor.get_video_duration(media_path), min_gap=0.8)
+    if not windows:
+        return ""
+    # ponytail: every window goes in the prompt; split per chunk if very long videos crowd it.
+    spans = ", ".join(f"{timing.format_mmss(a)}-{timing.format_mmss(b)}" for a, b in windows)
+    return ("\n*   **Pauses Without Speech (detected locally, MM:SS):** " + spans
+            + ". Place descriptions inside these pauses whenever possible.")
+
+
 def _get_model_name():
     model_override = config_model.get_setting("gemini_model_override")
     return model_override if model_override and model_override.strip() else config.GEMINI_MODEL_NAME
@@ -454,7 +475,9 @@ def _post_process_mmss_timestamps(descriptions_list_raw_times, status_update_cal
     def _log_status_local(message):
         if status_update_callback: status_update_callback(message)
     corrected_descriptions = []; last_corrected_end_time_sec = 0.0; num_adjustments_made = 0
-    for i, (start_mmss_str, end_mmss_str, text) in enumerate(descriptions_list_raw_times):
+    for i, item in enumerate(descriptions_list_raw_times):
+        start_mmss_str, end_mmss_str, text = item[:3]
+        flags = item[3] if len(item) > 3 else ()  # translated dialogue: speaker gender and id
         made_adjustment_this_iteration = False
         try: current_start_sec = _mmss_to_total_seconds(start_mmss_str); current_end_sec = _mmss_to_total_seconds(end_mmss_str)
         except ValueError as e: _log_status_local(_("Skipping description due to invalid MM:SS format.")); continue
@@ -466,7 +489,7 @@ def _post_process_mmss_timestamps(descriptions_list_raw_times, status_update_cal
             duration_to_add = max(0.1, original_duration_from_ai if original_duration_from_ai > 0 else 0.1)
             adjusted_end_sec = adjusted_start_sec + duration_to_add; _log_status_local(_("Ensuring minimum description duration...")); made_adjustment_this_iteration = True
         if made_adjustment_this_iteration: num_adjustments_made += 1
-        corrected_descriptions.append((adjusted_start_sec, adjusted_end_sec, text)); last_corrected_end_time_sec = adjusted_end_sec
+        corrected_descriptions.append(timing.Description(adjusted_start_sec, adjusted_end_sec, text, flags)); last_corrected_end_time_sec = adjusted_end_sec
     if status_update_callback: _log_status_local(_("Timestamp correction complete. %(count)d descriptions processed, %(adjusted_count)d had timestamps adjusted.") % {'count': len(corrected_descriptions), 'adjusted_count': num_adjustments_made})
     return corrected_descriptions
 
@@ -490,7 +513,9 @@ def _extract_descriptions_and_glossary_from_dict(data, status_update_callback):
                 end = item.get("end_time_mmss")
                 text = item.get("description_text")
                 if start is not None and end is not None and text is not None:
-                    descriptions.append((str(start), str(end), str(text).strip()))
+                    flags = timing.dialogue_flags(item.get("dialogue_translation") is True,
+                                                  item.get("speaker_gender"), item.get("speaker_id"))
+                    descriptions.append((str(start), str(end), str(text).strip(), flags))
     else:
         if status_update_callback:
             status_update_callback(_("Warning: 'audio_descriptions' key was not a list."))
@@ -559,6 +584,6 @@ def parse_gemini_json_response_mmss(json_string):
     return descriptions_raw_times
 
 
-def _build_unified_prompts(user_prompt, model_name_to_use):
+def _build_unified_prompts(user_prompt, model_name_to_use, initial_glossary=None):
     """Builds the system and user prompts; the text lives in prompts/rules/*.json."""
-    return prompts.build_unified_prompts(user_prompt)
+    return prompts.build_unified_prompts(user_prompt, initial_glossary)

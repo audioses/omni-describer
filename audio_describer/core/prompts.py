@@ -67,8 +67,8 @@ def core_directives(rules):
     return "\n" + "\n".join([rules.get("core_directives_title", "")] + lines) + "\n"
 
 
-def build_unified_prompts(user_prompt):
-    """System + user prompts for one generation request."""
+def build_unified_prompts(user_prompt, initial_glossary=None):
+    """System + user prompts for one generation request; initial_glossary = characters reused from the previous video."""
     rules = load_rules()
     system_instruction = _fill(rules.get("system_video", "{core_directives}"), core_directives=core_directives(rules))
 
@@ -77,13 +77,19 @@ def build_unified_prompts(user_prompt):
     verbosity_instruction = verbosity.get(verbosity_setting) or verbosity.get(config.VERBOSITY_STANDARD, "")
     app_logger.info(f"Using verbosity setting: {verbosity_setting} -> {verbosity_instruction[:50]}...")
 
+    language = LANGUAGE_NAMES.get(_language_code(), "English")
     task_key = "task_with_glossary" if config_model.get_setting("enable_character_glossary") else "task"
     parts = [
         rules.get(task_key, ""),
         rules.get("task_header", ""),
-        _fill(rules.get("language_line", ""), language=LANGUAGE_NAMES.get(_language_code(), "English")),
+        _fill(rules.get("language_line", ""), language=language),
         _fill(rules.get("verbosity_line", ""), text=verbosity_instruction),
     ]
+    if config_model.get_setting("translate_foreign_dialogue"):
+        parts.append(_fill(rules.get("dialogue_translation_line", ""), language=language))
+    if initial_glossary:
+        parts.append(_fill(rules.get("known_characters_line", ""),
+                           characters=json.dumps(initial_glossary, ensure_ascii=False)))
     if user_prompt and user_prompt.strip():
         parts.append(_fill(rules.get("user_focus", ""), focus=user_prompt.strip()))
         app_logger.info(f"Custom prompt applied: {user_prompt.strip()[:100]}...")

@@ -10,7 +10,7 @@ import sys # For getting base path for help file
 from audio_describer import app_state, config
 from audio_describer.ui.accessibility_utils import speak_message, set_control_accessible_name
 from audio_describer.ui import file_dialogs, call_if_open
-from audio_describer.core import video_processor, audio_describer
+from audio_describer.core import video_processor, audio_describer, timing
 from audio_describer.utils.logger import app_logger
 from audio_describer.ui.player_window import PlayerWindow 
 from audio_describer.ui.settings_dialog import SettingsDialog
@@ -39,6 +39,7 @@ class MainWindow(wx.Frame):
         self.current_video_path = None
         self.is_temp_video = False
         self.prompt_data = {}
+        self.last_glossary = []  # characters of the previous video, reused when the File menu toggle is on
         self.cancel_event = None
 
         self.create_widgets()
@@ -60,6 +61,9 @@ class MainWindow(wx.Frame):
         self.menu_open_youtube = file_menu.Append(wx.ID_ANY, _("Open from &YouTube...\tCtrl+Y"), _("Open a video from YouTube"))
         file_menu.AppendSeparator()
         self.menu_manage_prompts = file_menu.Append(wx.ID_ANY, _("Manage &Prompt Presets..."), _("Add, edit, or delete custom prompt presets"))
+        # A toggle, so it stays visibly on (screen readers say "checked") until the user turns it off.
+        self.menu_reuse_characters = file_menu.AppendCheckItem(wx.ID_ANY, _("Reuse &Characters from the Previous Video"), _("Keep the same characters, names and voices for the next video, for example the next episode"))
+        self.menu_reuse_characters.Enable(False)
         file_menu.AppendSeparator()
         self.menu_webapp = file_menu.Append(wx.ID_ANY, _("Open &Web Platform...\tCtrl+W"), _("Open the Omni Describer web platform in your browser"))
         file_menu.AppendSeparator()
@@ -280,11 +284,13 @@ class MainWindow(wx.Frame):
         self.update_progress_bar(0)
         self.toggle_ui_elements(enable=False)
 
-        thread = threading.Thread(target=self._processing_task_runner, args=(target_function, target_args, user_prompt, self.cancel_event))
+        reuse = self.last_glossary if self.menu_reuse_characters.IsChecked() else None
+        thread = threading.Thread(target=self._processing_task_runner,
+                                  args=(target_function, target_args, user_prompt, self.cancel_event, reuse))
         thread.daemon = True
         thread.start()
 
-    def _processing_task_runner(self, video_handler_func, video_handler_args, user_prompt, cancel_event):
+    def _processing_task_runner(self, video_handler_func, video_handler_args, user_prompt, cancel_event, initial_glossary=None):
         # Escape on this run: ffmpeg, Gemini requests, retry waits and the upload below stop early.
         app_state.set_cancel_event(cancel_event)
         def ui_status_updater(message):
@@ -339,11 +345,14 @@ class MainWindow(wx.Frame):
                 chunk_duration = config_model.get_setting("video_chunk_duration_seconds")
                 wx.CallAfter(self.set_processing_status, _("Processing video..."), sound_file="going.mp3")
                 all_descriptions, character_glossary, all_descriptions_token_usage = audio_describer.generate_descriptions_chunked(
-                    video_for_ai, chunk_duration, user_prompt, ui_status_updater
+                    video_for_ai, chunk_duration, user_prompt, ui_status_updater, initial_glossary=initial_glossary,
+                    audio_source_path=original_video_path  # the AI copy may have no sound
                 )
             else:
                 wx.CallAfter(self.set_processing_status, status_message, sound_file="going.mp3")
-                all_descriptions, character_glossary, main_usage = audio_describer.generate_descriptions_and_glossary(video_for_ai, user_prompt, ui_status_updater)
+                all_descriptions, character_glossary, main_usage = audio_describer.generate_descriptions_and_glossary(
+                    video_for_ai, user_prompt, ui_status_updater, initial_glossary=initial_glossary,
+                    audio_source_path=original_video_path)  # the AI copy may have no sound
                 if main_usage:
                     all_descriptions_token_usage.append(main_usage)
 
@@ -352,6 +361,7 @@ class MainWindow(wx.Frame):
 
             wx.CallAfter(self.set_processing_status, _("Finalizing descriptions..."))
             final_descriptions = audio_describer._remove_consecutive_duplicates(all_descriptions, ui_status_updater)
+            final_descriptions, _cast = timing.apply_voice_casting(final_descriptions, character_glossary)
             
             # The token usage is now unified, so we just pass it along.
             # We can add a type if we want to distinguish it in the future.
@@ -418,6 +428,9 @@ class MainWindow(wx.Frame):
             return
 
         video_path, descriptions, token_usage, character_glossary = event.data
+        if character_glossary:  # the same list the player edits, so voices chosen there are reused too
+            self.last_glossary = character_glossary
+            self.menu_reuse_characters.Enable(True)
         if descriptions:
             sound_player.play("finish.mp3")
             success_msg = _("Success! Generated %d audio descriptions.") % len(descriptions)

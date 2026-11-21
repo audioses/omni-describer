@@ -1,0 +1,15 @@
+Local voices (Settings > Audio Output > Woman's voice / Man's voice)
+
+Engine: sherpa-onnx 1.13.8 (https://github.com/k2-fsa/sherpa-onnx), Apache License 2.0.
+It bundles onnxruntime (MIT) and the espeak-ng phonemizer.
+
+Voices are NOT shipped with Omni Describer. When the user chooses one and presses
+"Download and listen", the archive is downloaded from
+https://github.com/k2-fsa/sherpa-onnx/releases/tag/tts-models, checked against the
+SHA-256 pinned in audio_describer/core/piper_catalog.py and unpacked into
+%LOCALAPPDATA%\OmniDescriber\piper.
+
+Each archive contains a Piper model (https://github.com/rhasspy/piper, MIT engine) and
+espeak-ng-data (GPL-3.0 data files). Every voice keeps the licence of the recordings it
+was trained on, stated in the MODEL_CARD file inside its folder; some voices are for
+non-commercial use only. Check it before using a voice in a commercial production.

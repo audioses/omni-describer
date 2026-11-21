@@ -93,6 +93,7 @@ from ..utils.logger import app_logger
 from ..core import video_processor
 from .accessibility_utils import speak_message, set_control_accessible_name
 from .edit_description_dialog import EditDescriptionDialog
+from .glossary_dialog import GlossaryDialog
 from .ask_more_dialog import AskMoreSubmitEvent, EVT_ASK_MORE_SUBMIT, AskMoreAddToMainEvent, EVT_ASK_MORE_ADD_TO_MAIN
 from . import player_export
 from . import player_vqa
@@ -200,7 +201,12 @@ class PlayerWindow(wx.Dialog):
         action_buttons_sizer.Add(self.ask_more_button, 0, wx.ALL, 5)
         self.edit_descriptions_button = wx.Button(self.panel, ID_EDIT_DESCRIPTIONS, _("Edit Descriptions..."))
         action_buttons_sizer.Add(self.edit_descriptions_button, 0, wx.ALL, 5)
-        
+        # Voice casting: which voice reads each character's translated dialogue (works without VLC).
+        self.character_voices_button = wx.Button(self.panel, label=_("Character &Voices..."))
+        self.character_voices_button.Bind(wx.EVT_BUTTON, self.OnCharacterVoices)
+        self.character_voices_button.Enable(bool(self.character_glossary))
+        action_buttons_sizer.Add(self.character_voices_button, 0, wx.ALL, 5)
+
         self.settings_button = wx.Button(self.panel, ID_SETTINGS, _("Settings..."))
         action_buttons_sizer.Add(self.settings_button, 0, wx.ALL, 5)
 
@@ -453,6 +459,14 @@ class PlayerWindow(wx.Dialog):
         if not VLC_AVAILABLE: return
         player_vqa.handle_ask_more_submission(self, event)
         
+    def OnCharacterVoices(self, event):
+        with GlossaryDialog(self, self.character_glossary, self.descriptions) as dlg:
+            if dlg.ShowModal() == wx.ID_OK:
+                # In place: the main window reuses this glossary (and its voices) for the next video.
+                self.character_glossary[:] = dlg.glossary
+                self.descriptions = dlg.descriptions
+                speak_message(_("Character voices updated."))
+
     def disable_media_dependent_controls(self):
         self.play_pause_button.Disable()
         self.seek_slider.Disable()

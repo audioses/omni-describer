@@ -9,7 +9,7 @@ import threading
 import subprocess
 
 from ..utils.logger import app_logger
-from ..core import tts_engine, video_processor
+from ..core import tts_engine, video_processor, timing
 from ..core.tts_engine import TTSError
 from ..models import config_model
 from ..utils.system_utils import run_command
@@ -131,14 +131,15 @@ def _synthesize_all_descriptions(player_instance, descriptions, progress_dialog)
     temp_wav_files = []
     description_segments = []
     
-    for i, (start, end, text) in enumerate(descriptions):
+    for i, desc in enumerate(descriptions):
+        start, end, text = desc
         if progress_dialog.WasCancelled(): raise InterruptedError("User cancelled.")
         call_if_open(player_instance, progress_dialog.Update, i + 1, gettext_("Synthesizing description %d of %d...") % (i + 1, len(descriptions)))
         
         temp_wav = os.path.join(tempfile.gettempdir(), f"desc_{i}_{os.urandom(4).hex()}.wav")
         temp_wav_files.append(temp_wav)
         
-        if not tts_engine.synthesize_description_to_wav(text, temp_wav):
+        if not tts_engine.synthesize_description_to_wav(text, temp_wav, gender=timing.voice_gender(desc)):
             raise TTSError(gettext_("Failed to synthesize description #%d.") % (i + 1))
             
         desc_segment = AudioSegment.from_file(temp_wav)

@@ -6,6 +6,7 @@ import subprocess
 import sys
 import json
 from ..models import config_model, voice_model
+from . import cloud_tts
 from ..utils.logger import app_logger
 from ..i18n_setup import _
 from ..utils import sound_player
@@ -98,6 +99,16 @@ def test_voice(engine_choice, text, settings):
                 except Exception as e: app_logger.error(f"Could not clean up temp 32-bit test file: {e}")
     elif engine_choice == "onecore":
         _test_voice_onecore(text, settings)
+    elif engine_choice in CLOUD_ENGINES:
+        temp_wav_path = os.path.join(tempfile.gettempdir(), f"test_voice_cloud_{os.urandom(4).hex()}.wav")
+        try:
+            if _synthesize_with_cloud(engine_choice, text, temp_wav_path, settings=settings):
+                sound_player.play(temp_wav_path, is_full_path=True)
+        finally:
+            if os.path.exists(temp_wav_path):
+                time.sleep(1)
+                try: os.remove(temp_wav_path)
+                except Exception as e: app_logger.error(f"Could not clean up temp cloud test file: {e}")
     else:
         raise TTSError(f"Unknown TTS engine for testing: '{engine_choice}'")
 
@@ -169,7 +180,59 @@ def _test_voice_openai(text, settings):
             except Exception as e:
                 app_logger.error(f"Could not clean up temp test file {temp_wav_path}: {e}")
 
-def synthesize_description_to_wav(text, output_wav_path):
+def _description_language():
+    return (config_model.get_setting("application_language") or "en").split("_")[0].lower()
+
+
+def _engine_rate_percent():
+    key = "onecore_voice_rate_percent" if config_model.get_setting("tts_engine") == "onecore" else "sapi5_voice_rate_percent"
+    try:
+        return int(config_model.get_setting(key) or 100)
+    except (TypeError, ValueError):
+        return 100
+
+
+def _onecore_voice_for(gender, lang):
+    """An installed Windows voice of that gender and language, other than the description voice."""
+    if not WIN_ONECORE_AVAILABLE:
+        return None
+    wanted = speechsynthesis.VoiceGender.FEMALE if gender == "female" else speechsynthesis.VoiceGender.MALE
+    main = config_model.get_setting("onecore_voice_id") if config_model.get_setting("tts_engine") == "onecore" else None
+    try:
+        voices = list(speechsynthesis.SpeechSynthesizer.all_voices)
+    except Exception as e:
+        app_logger.warning(f"OneCore voices unavailable: {e}")
+        return None
+    return next((v.id for v in voices if v.gender == wanted and v.id != main
+                 and v.language.lower().startswith(lang)), None)
+
+
+def synthesize_with_gender(text, output_wav_path, gender):
+    """Translated dialogue read with a voice matching the speaker ('female' / 'male'): the cloud
+    engine's gendered voice, else the chosen Piper voice, else an installed Windows voice.
+    True if such a voice spoke; False when none is available (the caller uses the usual voice)."""
+    if gender not in ("female", "male") or not config_model.get_setting("dialogue_voice_by_gender"):
+        return False
+    try:
+        engine_choice = config_model.get_setting("tts_engine")
+        if engine_choice in CLOUD_ENGINES and config_model.get_setting(f"{engine_choice}_voice_{gender}"):
+            return _synthesize_with_cloud(engine_choice, text, output_wav_path, voice_key=f"{engine_choice}_voice_{gender}")
+        from . import piper_voices
+        voice_id = config_model.get_setting(f"piper_voice_{gender}")
+        if voice_id and piper_voices.synthesize(voice_id, text, output_wav_path, _engine_rate_percent() / 100.0):
+            return True
+        voice_id = _onecore_voice_for(gender, _description_language())
+        if voice_id:
+            return bool(asyncio.run(_synthesize_with_onecore(text, output_wav_path, override_settings={
+                "onecore_voice_id": voice_id, "onecore_rate_percent": _engine_rate_percent()})))
+    except Exception as e:  # never block an export: the usual voice reads the line instead
+        app_logger.warning(f"Gendered voice failed, using the usual voice: {e}")
+    return False
+
+
+def synthesize_description_to_wav(text, output_wav_path, gender=None):
+    if gender and synthesize_with_gender(text, output_wav_path, gender):
+        return True
     engine_choice = config_model.get_setting("tts_engine")
     app_logger.info(f"TTS synthesis requested with engine: '{engine_choice}'")
 
@@ -181,10 +244,30 @@ def synthesize_description_to_wav(text, output_wav_path):
         return _synthesize_with_sapi5_32bit(text, output_wav_path)
     elif engine_choice == "onecore":
         return asyncio.run(_synthesize_with_onecore(text, output_wav_path))
+    elif engine_choice in CLOUD_ENGINES:
+        return _synthesize_with_cloud(engine_choice, text, output_wav_path)
     else:
         err_msg = f"Unknown TTS engine selected: '{engine_choice}'"
         app_logger.error(err_msg)
         raise TTSError(err_msg)
+
+
+CLOUD_ENGINES = ("azure", "google")
+
+
+def _synthesize_with_cloud(engine_choice, text, output_wav_path, voice_key=None, settings=None):
+    """Azure / Google neural voice. settings: the Settings dialog's unsaved values (voice test)."""
+    get = settings.get if settings else config_model.get_setting
+    voice = (get(voice_key or f"{engine_choice}_voice") or "").strip()
+    app_logger.info(f"Cloud TTS synthesis: engine={engine_choice}, voice={voice}")  # never the key
+    try:
+        if engine_choice == "azure":
+            return cloud_tts.synthesize_azure(text, output_wav_path, (get("user_azure_api_key") or "").strip(),
+                                              get("azure_region"), voice)
+        return cloud_tts.synthesize_google(text, output_wav_path, (get("user_google_tts_api_key") or "").strip(), voice)
+    except cloud_tts.CloudTTSError as e:
+        app_logger.error(f"Cloud TTS error ({engine_choice}): {e}")
+        raise TTSError(f"{engine_choice.capitalize()} speech synthesis failed: {e}")
 
 def _synthesize_with_openai(text, output_wav_path, override_settings=None):
     if not OPENAI_AVAILABLE:
@@ -308,9 +391,9 @@ async def _synthesize_with_onecore_inner(text, voice_id, rate):
     else:
         app_logger.info("OneCore: No voice ID specified, using default voice")
     
-    # Rate is a multiplier from 0.5 to 6.0. We'll map our 50-200% to this range.
-    # Let's map 50% -> 0.5, 100% -> 1.0, 200% -> 2.0 for a reasonable range.
-    actual_rate = max(0.5, min(rate * 2.0, 6.0)) # Example mapping
+    # Rate is a multiplier from 0.5 to 6.0 and rate is already percent / 100, so 100% -> 1.0.
+    # It used to be doubled; config_model._migrate_onecore_rate converts saved values once.
+    actual_rate = max(0.5, min(rate, 6.0))
     synth.options.speaking_rate = actual_rate
     app_logger.info(f"OneCore: Setting speaking rate to {actual_rate}")
 
