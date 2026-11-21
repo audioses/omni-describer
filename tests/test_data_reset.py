@@ -33,6 +33,10 @@ class DataResetTest(unittest.TestCase):
     def test_settings_reset_can_forget_keys(self):
         data_reset.reset_settings(keep_api_keys=False)
         self.assertEqual(config_model.app_settings["user_gemini_api_key"], "")
+        root = os.path.join(self.tmp.name, "backups")
+        backup = [os.path.join(d, f) for d, _, files in os.walk(root) for f in files][0]
+        with open(backup, "rb") as f:
+            self.assertNotIn("k1", config_model._deobfuscate(f.read()))
 
 
 if __name__ == "__main__":

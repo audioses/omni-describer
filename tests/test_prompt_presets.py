@@ -67,6 +67,12 @@ class MergeTest(unittest.TestCase):
         prompt_model.set_prompts_for_language("en", [])
         self.assertEqual(self._names(), [])
 
+    def test_new_default_with_a_custom_presets_name_is_skipped(self):
+        with open(self.path, "w", encoding="utf-8") as f:
+            json.dump({"en": [{"name": "B", "prompt": "my own"}]}, f)
+        self.assertEqual(self._names(), ["B"])
+        self.assertEqual(prompt_model.get_prompts_for_language("en")[0]["prompt"], "my own")
+
     def test_settings_reset_does_not_rerun_the_merge(self):
         self._names()
         prompt_model.set_prompts_for_language("en", [{"name": "Mine", "prompt": "x"}])

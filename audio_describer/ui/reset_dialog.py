@@ -16,7 +16,7 @@ class ResetDialog(wx.Dialog):
                   0, wx.ALL, 10)
         self.settings_cb = wx.CheckBox(self, label=_("&Settings (back to defaults)"))
         self.keys_cb = wx.CheckBox(self, label=_("Also forget my &API keys"))
-        self.prompts_cb = wx.CheckBox(self, label=_("&Prompt presets (custom presets are removed)"))
+        self.prompts_cb = wx.CheckBox(self, label=_("&Prompt presets and AD rules (custom presets are removed)"))
         self.voices_cb = wx.CheckBox(self, label=_("OpenAI &voice presets"))
         self.keys_cb.Disable()
         for cb in (self.settings_cb, self.keys_cb, self.prompts_cb, self.voices_cb):

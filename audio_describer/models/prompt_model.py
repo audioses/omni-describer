@@ -102,7 +102,9 @@ def _merge_new_defaults():
             _prompts_cache[lang_code] = copy.deepcopy(default_list)
             changed = True
             continue
-        new = [copy.deepcopy(p) for p in default_list if p["id"] not in seen]
+        # A user's own preset with the same name wins: two entries with one name can't both be picked.
+        names = {p.get("name") for p in user_list if isinstance(p, dict)}
+        new = [copy.deepcopy(p) for p in default_list if p["id"] not in seen and p.get("name") not in names]
         if new:
             user_list.extend(new)
             changed = True

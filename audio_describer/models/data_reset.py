@@ -5,6 +5,7 @@ Every reset first copies what it replaces or deletes into APP_DATA_DIR/backups/<
 so a mistaken reset can be undone by hand. Exported files are never touched."""
 import copy
 import datetime
+import json
 import os
 import shutil
 
@@ -38,7 +39,11 @@ def reset_settings(keep_api_keys=True):
         for key in API_KEY_SETTINGS:
             if current.get(key):
                 fresh[key] = current[key]
-    _backup([config_model.CONFIG_FILE_PATH])
+    folder = _backup([config_model.CONFIG_FILE_PATH])
+    if folder and not keep_api_keys:  # the backup must not keep the keys the user asked to forget
+        scrubbed = {k: ("" if k in API_KEY_SETTINGS else v) for k, v in current.items()}
+        with open(os.path.join(folder, os.path.basename(config_model.CONFIG_FILE_PATH)), "wb") as f:
+            f.write(config_model._obfuscate(json.dumps(scrubbed, indent=4)))
     if not config_model.save_settings(fresh):
         raise OSError("Could not save the reset settings.")
     if config_model.app_settings is not None:
