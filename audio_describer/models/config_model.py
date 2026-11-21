@@ -77,6 +77,12 @@ DEFAULT_SETTINGS = {
     "google_voice_male": "",
     # Silero VAD (optional onnxruntime): pauses without speech, listed in the prompt.
     "detect_speech_pauses": False,
+    # Video descriptions by another vision model: frames sampled per segment, sent to any
+    # OpenAI-compatible server (OpenRouter, OpenAI, LM Studio, Ollama's http://localhost:11434/v1...).
+    "video_backend": "gemini",              # gemini | openai
+    "vision_base_url": "https://openrouter.ai/api/v1",
+    "vision_model": "",                     # model id on that server, e.g. qwen/qwen2.5-vl-72b-instruct, gemma3
+    "user_vision_api_key": "",              # empty for a local server
     "mp3_audio_ducking_level_db": -15,
     "player_volume_percent": 50,
     "webapp_banner_shown": False,

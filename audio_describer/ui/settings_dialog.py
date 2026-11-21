@@ -132,6 +132,20 @@ class SettingsDialog(wx.Dialog):
         ai_grid_sizer.Add(wx.StaticText(self.ai_panel, label=_("Temperature:")), 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
         self.temp_text_ctrl = wx.TextCtrl(self.ai_panel, value="0.7")
         ai_grid_sizer.Add(self.temp_text_ctrl, 1, wx.EXPAND|wx.ALL, 5)
+        self.VIDEO_BACKEND_CHOICES = [("gemini", _("Gemini (whole video with its sound)")),
+                                      ("openai", _("Other vision model, OpenAI-compatible (still frames, no sound)"))]
+        ai_grid_sizer.Add(wx.StaticText(self.ai_panel, label=_("Video descriptions made by:")), 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
+        self.video_backend_choice = wx.Choice(self.ai_panel, choices=[c[1] for c in self.VIDEO_BACKEND_CHOICES])
+        ai_grid_sizer.Add(self.video_backend_choice, 1, wx.EXPAND|wx.ALL, 5)
+        ai_grid_sizer.Add(wx.StaticText(self.ai_panel, label=_("Vision service address (OpenRouter, LM Studio, Ollama http://localhost:11434/v1...):")), 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
+        self.vision_base_url_text = wx.TextCtrl(self.ai_panel)
+        ai_grid_sizer.Add(self.vision_base_url_text, 1, wx.EXPAND|wx.ALL, 5)
+        ai_grid_sizer.Add(wx.StaticText(self.ai_panel, label=_("Vision model:")), 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
+        self.vision_model_text = wx.TextCtrl(self.ai_panel)
+        ai_grid_sizer.Add(self.vision_model_text, 1, wx.EXPAND|wx.ALL, 5)
+        ai_grid_sizer.Add(wx.StaticText(self.ai_panel, label=_("Vision service API key (empty for a local server):")), 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
+        self.vision_api_key_text = wx.TextCtrl(self.ai_panel, style=wx.TE_PASSWORD)
+        ai_grid_sizer.Add(self.vision_api_key_text, 1, wx.EXPAND|wx.ALL, 5)
         self.send_silenced_video_checkbox = wx.CheckBox(self.ai_panel, label=_("Send Video Only (No Audio) to AI"))
         ai_grid_sizer.Add(self.send_silenced_video_checkbox, 0, wx.EXPAND|wx.ALL, 5)
         self.disable_safety_checkbox = wx.CheckBox(self.ai_panel, label=_("Disable Safety Filters (Use with caution)"))
@@ -276,6 +290,9 @@ class SettingsDialog(wx.Dialog):
         self.verbosity_choice.Bind(wx.EVT_CHOICE, self.OnSettingChanged)
         self.model_override_text.Bind(wx.EVT_TEXT, self.OnSettingChanged)
         self.temp_text_ctrl.Bind(wx.EVT_TEXT, self.OnSettingChanged)
+        self.video_backend_choice.Bind(wx.EVT_CHOICE, self.OnSettingChanged)
+        for ctrl in (self.vision_base_url_text, self.vision_model_text, self.vision_api_key_text):
+            ctrl.Bind(wx.EVT_TEXT, self.OnSettingChanged)
         self.temp_text_ctrl.Bind(wx.EVT_KILL_FOCUS, self.OnTemperatureKillFocus)
         self.send_silenced_video_checkbox.Bind(wx.EVT_CHECKBOX, self.OnSettingChanged)
         self.disable_safety_checkbox.Bind(wx.EVT_CHECKBOX, self.OnSettingChanged)
@@ -415,6 +432,12 @@ class SettingsDialog(wx.Dialog):
         self.verbosity_choice.SetSelection(self.verbosity_internal_values.index(self.current_settings.get("gemini_description_verbosity", config.DEFAULT_VERBOSITY)))
         self.model_override_text.SetValue(self.current_settings.get("gemini_model_override", ""))
         self.temp_text_ctrl.SetValue(str(self.current_settings.get("gemini_temperature", 0.7)))
+        backends = [c[0] for c in self.VIDEO_BACKEND_CHOICES]
+        backend = self.current_settings.get("video_backend", "gemini")
+        self.video_backend_choice.SetSelection(backends.index(backend) if backend in backends else 0)
+        self.vision_base_url_text.ChangeValue(self.current_settings.get("vision_base_url") or config_model.DEFAULT_SETTINGS["vision_base_url"])
+        self.vision_model_text.ChangeValue(self.current_settings.get("vision_model") or "")
+        self.vision_api_key_text.ChangeValue(self.current_settings.get("user_vision_api_key") or "")
         self.send_silenced_video_checkbox.SetValue(self.current_settings.get("send_silenced_video_to_ai", True))
         self.disable_safety_checkbox.SetValue(self.current_settings.get("gemini_disable_safety_block_none", False))
         
@@ -478,6 +501,10 @@ class SettingsDialog(wx.Dialog):
         self.current_settings["frame_rate_for_ai"] = self.frame_rate_internal_values[self.frame_rate_choice.GetSelection()]
         self.current_settings["gemini_description_verbosity"] = self.verbosity_internal_values[self.verbosity_choice.GetSelection()]
         self.current_settings["gemini_model_override"] = self.model_override_text.GetValue().strip()
+        self.current_settings["video_backend"] = self.VIDEO_BACKEND_CHOICES[self.video_backend_choice.GetSelection()][0]
+        self.current_settings["vision_base_url"] = self.vision_base_url_text.GetValue().strip()
+        self.current_settings["vision_model"] = self.vision_model_text.GetValue().strip()
+        self.current_settings["user_vision_api_key"] = self.vision_api_key_text.GetValue().strip()
         try: self.current_settings["gemini_temperature"] = float(self.temp_text_ctrl.GetValue().strip())
         except ValueError: self.current_settings["gemini_temperature"] = config_model.DEFAULT_SETTINGS["gemini_temperature"]
         self.current_settings["send_silenced_video_to_ai"] = self.send_silenced_video_checkbox.IsChecked()
