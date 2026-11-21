@@ -27,7 +27,10 @@ if google_spec:
 else:
     app_logger.warning("Could not find spec for the 'google' namespace package.")
 
-genai_spec = importlib.util.find_spec("google.generativeai")
+try:
+    genai_spec = importlib.util.find_spec("google.generativeai")
+except ModuleNotFoundError:  # no 'google' package at all (e.g. CI, which skips the SDK)
+    genai_spec = None
 if genai_spec:
     app_logger.debug(f"Found 'google.generativeai' spec before import attempt. Origin: {genai_spec.origin}")
 else:
