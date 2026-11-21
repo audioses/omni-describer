@@ -6,7 +6,7 @@ import json
 import sys
 import math
 
-from .. import config
+from .. import app_state, config
 from ..utils.logger import app_logger
 from ..models import config_model
 from . import video_processor
@@ -19,6 +19,9 @@ _UPLOAD_POLL_MAX_ATTEMPTS = 100
 _UPLOAD_POLL_INTERVAL_SEC = 5
 
 # --- PUBLIC API ---
+
+GenerationCancelled = app_state.GenerationCancelled  # one class, raised from any layer
+
 
 def reset_gemini_client():
     """Proxy function to reset the Gemini client in the helper module."""
@@ -53,29 +56,49 @@ def _upload_and_wait_for_active(client, video_path, status_callback=None):
         shutil.copy2(video_path, temp_copy.name)
         upload_path = temp_copy.name
         app_logger.info(f"Upload: copied to ASCII-safe temp path for upload")
-    try:
-        video_file_obj = client.files.upload(file=upload_path)
-    finally:
+    def _remove_temp_copy():
         if temp_copy is not None:
             try:
                 os.unlink(temp_copy.name)
             except OSError:
                 pass
+
+    def _discard_late_upload(late_file_obj):
+        # Escape during the upload: runs on the upload thread once it finishes. Only now is the
+        # temp copy released, and nobody else knows about the uploaded file.
+        _cleanup_uploaded_file(client, late_file_obj)
+        _remove_temp_copy()
+
+    abandoned = False
+    try:
+        video_file_obj = app_state.run_cancellable(client.files.upload, file=upload_path,
+                                                   on_abandoned=_discard_late_upload)
+    except GenerationCancelled:
+        abandoned = True
+        raise
+    finally:
+        if not abandoned:
+            _remove_temp_copy()
     _status(_("Video upload initiated: %s. Waiting for processing...") % video_file_obj.name)
 
-    for attempt in range(1, _UPLOAD_POLL_MAX_ATTEMPTS + 1):
-        if video_file_obj.state.name == "ACTIVE":
-            _status(_("Video is ACTIVE."))
-            return video_file_obj
-        _status(_("Video processing (attempt %d)... state: %s") % (attempt, video_file_obj.state.name))
-        time.sleep(_UPLOAD_POLL_INTERVAL_SEC)
-        video_file_obj = client.files.get(name=video_file_obj.name)
+    try:
+        for attempt in range(1, _UPLOAD_POLL_MAX_ATTEMPTS + 1):
+            if video_file_obj.state.name == "ACTIVE":
+                _status(_("Video is ACTIVE."))
+                return video_file_obj
+            _status(_("Video processing (attempt %d)... state: %s") % (attempt, video_file_obj.state.name))
+            app_state.sleep_or_cancel(_UPLOAD_POLL_INTERVAL_SEC)
+            video_file_obj = app_state.run_cancellable(client.files.get, name=video_file_obj.name)
 
-    err_msg = _("Video processing timed out or failed. Final state: %s") % video_file_obj.state.name
-    if getattr(video_file_obj, "error", None) and video_file_obj.error:
-        err_msg += f" Server error: Code={getattr(video_file_obj.error, 'code', 'N/A')}, Message='{getattr(video_file_obj.error, 'message', 'N/A')}'"
-    _status(err_msg)
-    raise GeminiAPIError(err_msg)
+        err_msg = _("Video processing timed out or failed. Final state: %s") % video_file_obj.state.name
+        if getattr(video_file_obj, "error", None) and video_file_obj.error:
+            err_msg += f" Server error: Code={getattr(video_file_obj.error, 'code', 'N/A')}, Message='{getattr(video_file_obj.error, 'message', 'N/A')}'"
+        _status(err_msg)
+        raise GeminiAPIError(err_msg)
+    except Exception:
+        # Cancelled or failed while waiting: callers only clean up a file they received.
+        _cleanup_uploaded_file(client, video_file_obj)
+        raise
 
 
 def _build_video_part(video_file_obj, start_offset_sec=None, end_offset_sec=None):
@@ -186,6 +209,8 @@ def generate_descriptions_and_glossary(video_path, user_prompt="", status_update
 
         app_logger.info(f"Unified generation complete. Descriptions: {len(final_descriptions)}, Glossary: {len(glossary)}")
         return final_descriptions, glossary, token_usage
+    except GenerationCancelled:
+        raise
     except Exception as e:
         _update_status(_("Unified generation failed: %s") % str(e))
         app_logger.error("Unified generation failed critically: %s", e, exc_info=True)
@@ -326,6 +351,8 @@ def generate_descriptions_chunked(video_path, chunk_duration_sec, user_prompt=""
         app_logger.info(f"Chunked generation complete. Descriptions: {len(final_descriptions)}, Glossary: {len(character_glossary)}")
         return final_descriptions, character_glossary, all_token_usage
 
+    except GenerationCancelled:
+        raise
     except Exception as e:
         _update_status(_("Chunked generation failed: %s") % str(e))
         app_logger.error("Chunked generation failed critically: %s", e, exc_info=True)
