@@ -258,6 +258,7 @@ class MainWindow(wx.Frame):
     def on_cancel_generation(self, event):
         if self.cancel_event is not None and not self.cancel_event.is_set():
             self.cancel_event.set()
+            self.log_text_ctrl.SetFocus()  # a disabled button drops focus, leaving the screen reader nowhere
             self.cancel_button.Disable()
             self.set_processing_status(_("Cancelling..."))
 
@@ -439,7 +440,7 @@ class MainWindow(wx.Frame):
         self.btn_youtube_url.Enable(enable)
         self.prompt_choice.Enable(enable)
         self.settings_button.Enable(enable)
-        if enable and self.FindFocus() == self.cancel_button:
+        if enable and self.FindFocus() in (None, self.cancel_button):
             self.btn_local_file.SetFocus()  # don't leave the screen reader on a disabled button
         self.cancel_button.Enable(not enable)
         if not enable:
