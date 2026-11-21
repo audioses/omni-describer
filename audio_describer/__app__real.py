@@ -160,6 +160,7 @@ class AudioDescriberApp(wx.App):
         _ = audio_describer.i18n_setup._
         if getattr(sys, "frozen", False):
             update_checker.install_pending_updater()
+            # Old flat-layout leftovers are removed at the very start of run_app.py.
 
         thread = threading.Thread(
             target=update_checker.check_for_updates,

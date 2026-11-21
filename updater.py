@@ -10,6 +10,7 @@ import logging
 import shutil
 import ctypes
 from ctypes import wintypes
+from audio_describer.utils.layout_cleanup import remove_stale_flat_layout
 
 # --- WIN32 API DEFINITIONS ---
 SYNCHRONIZE = 0x00100000
@@ -118,7 +119,11 @@ def main():
                         zip_ref.extract(member, extract_dir)
                 # --- END OF THE FIX ---
 
+                new_layout = any(n.replace("\\", "/").startswith("_internal/") for n in zip_ref.namelist())
+
             logger.info("Extraction successful.")
+            if new_layout:  # PyInstaller 6 build: drop what the old flat layout left at the top
+                remove_stale_flat_layout(extract_dir, logger)
             os.remove(zip_path)
             
             logger.info(f"Relaunching application: {app_to_relaunch}")
