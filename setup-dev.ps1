@@ -6,8 +6,9 @@
 # What it does, in order:
 #   1. Finds Python 3.11+ (installs Python 3.11 via winget if none is found).
 #   2. Creates the .venv virtual environment if missing, reuses it if present.
-#   3. Installs requirements.txt with pip (pip itself is verify/update: an
-#      already-satisfied requirement is left alone, a missing one is added).
+#   3. Installs audio_describer\requirements.txt with pip (pip itself is
+#      verify/update: an already-satisfied requirement is left alone, a
+#      missing one is added).
 #   4. Fetches the runtime binaries the app expects in audio_describer\bin,
 #      each pinned to an exact version and verified by SHA-256 before use:
 #        - yt-dlp.exe            -> audio_describer\bin\yt-dlp.exe
@@ -107,9 +108,9 @@ if (Test-Path $VenvPy) {
 }
 
 # --- 3. Python packages ---------------------------------------------------------
-Step 'Python packages (requirements.txt)'
+Step 'Python packages (audio_describer\requirements.txt)'
 & $VenvPy -m pip install --upgrade pip
-$reqFile = Join-Path $RepoRoot 'requirements.txt'
+$reqFile = Join-Path $RepoRoot 'audio_describer\requirements.txt'
 & $VenvPy -m pip install -r $reqFile
 if ($LASTEXITCODE -ne 0) {
     # Known upstream snag: requirements.txt lists simpleaudio, which ships no
