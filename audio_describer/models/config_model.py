@@ -60,6 +60,24 @@ DEFAULT_SETTINGS = {
     "sapi5_voice_volume": 1.0,
     "onecore_voice_id": None,
     "onecore_voice_rate_percent": 100,
+    "onecore_rate_migrated": True,  # new installs already use the 100% = 1.0x scale
+    # Cloud neural voices (tts_engine azure | google), plain REST; keys stored like the Gemini key.
+    "user_azure_api_key": "",
+    "azure_region": "",                     # e.g. westeurope
+    "azure_voice": "",                      # e.g. fr-FR-DeniseNeural
+    "user_google_tts_api_key": "",
+    "google_voice": "",                     # e.g. fr-FR-Chirp3-HD-Aoede
+    # Translated dialogue (audio subtitles), read with a voice matching the speaker's gender.
+    "translate_foreign_dialogue": False,
+    "dialogue_voice_by_gender": True,
+    "piper_voice_female": "",               # local Piper voice id, "" = an installed Windows voice
+    "piper_voice_male": "",
+    "azure_voice_female": "",
+    "azure_voice_male": "",
+    "google_voice_female": "",
+    "google_voice_male": "",
+    # Silero VAD (optional onnxruntime): pauses without speech, listed in the prompt.
+    "detect_speech_pauses": False,
     "mp3_audio_ducking_level_db": -15,
     "player_volume_percent": 50,
     "webapp_banner_shown": False,
@@ -245,9 +263,27 @@ def load_settings():
     return DEFAULT_SETTINGS.copy()
 
 
+ONECORE_RATE_MAX_PERCENT = 600  # OneCore's fastest speaking rate is 6.0x
+
+
+def _migrate_onecore_rate(settings):
+    """One time: OneCore used to speak at 2 x the saved percent; it now speaks at the percent
+    itself. Double the saved value so existing users keep their speed. Returns True if changed."""
+    if settings.get("onecore_rate_migrated"):
+        return False
+    if settings.get("tts_engine") == "onecore":
+        try:
+            old = int(settings.get("onecore_voice_rate_percent") or 100)
+        except (TypeError, ValueError):
+            old = 100
+        settings["onecore_voice_rate_percent"] = max(50, min(old * 2, ONECORE_RATE_MAX_PERCENT))
+    settings["onecore_rate_migrated"] = True
+    return True
+
+
 def _apply_defaults_and_cleanup(settings):
     """Ensure all default keys exist and remove obsolete keys."""
-    updated = False
+    updated = _migrate_onecore_rate(settings)  # before the defaults: a missing marker means an older settings file
     for key, default_value in DEFAULT_SETTINGS.items():
         if key not in settings:
             settings[key] = default_value
