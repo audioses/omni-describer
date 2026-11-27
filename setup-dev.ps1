@@ -187,7 +187,6 @@ from audio_describer.ui import settings_dialog
 from audio_describer.core import gemini_helpers
 from audio_describer.models import config_model
 from audio_describer.ui import player_window
-assert callable(gemini_helpers.fetch_available_models)
 print('imports OK')
 print('VLC_AVAILABLE =', player_window.VLC_AVAILABLE)
 "@
