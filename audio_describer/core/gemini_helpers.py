@@ -10,7 +10,7 @@ import time
 from typing import Any, Union
 
 from ..i18n_setup import _
-from .. import app_state, config
+from .. import config
 from ..utils.logger import app_logger
 from ..models import config_model
 
@@ -27,10 +27,7 @@ if google_spec:
 else:
     app_logger.warning("Could not find spec for the 'google' namespace package.")
 
-try:
-    genai_spec = importlib.util.find_spec("google.generativeai")
-except ModuleNotFoundError:  # no 'google' package at all (e.g. CI, which skips the SDK)
-    genai_spec = None
+genai_spec = importlib.util.find_spec("google.generativeai")
 if genai_spec:
     app_logger.debug(f"Found 'google.generativeai' spec before import attempt. Origin: {genai_spec.origin}")
 else:
@@ -133,6 +130,56 @@ def get_gemini_client():
         app_logger.error("Failed to initialize Gemini Client: %s", e, exc_info=True)
         raise GeminiAPIError(_("Failed to initialize Gemini Client: %s") % e)
 
+# Model id fragments that can never describe a video, even when they accept generateContent.
+_MODEL_ID_EXCLUDE_PARTS = ("embedding", "aqa", "imagen", "veo", "tts", "image")
+
+def _filter_describer_models(models):
+    """Reduces a Gemini models.list() result to the models Omni can describe with.
+
+    Takes raw model objects (anything with name/display_name/supported_actions
+    attributes) and returns (model_id, display_name) tuples, newest first.
+    Pure function with no SDK calls, so it can be checked on its own.
+    """
+    pairs = []
+    for model in models or []:
+        raw_name = getattr(model, "name", "") or ""
+        model_id = raw_name[len("models/"):] if raw_name.startswith("models/") else raw_name
+        if not model_id.startswith("gemini-"):
+            continue
+        actions = getattr(model, "supported_actions", None) or []
+        if actions and "generateContent" not in actions:
+            continue
+        lowered = model_id.lower()
+        if any(part in lowered for part in _MODEL_ID_EXCLUDE_PARTS):
+            continue
+        display_name = getattr(model, "display_name", "") or model_id
+        pairs.append((model_id, display_name))
+    pairs.sort(key=lambda pair: pair[0], reverse=True)
+    return pairs
+
+def fetch_available_models(api_key=None):
+    """Lists the Gemini models the given (or saved) API key can describe with.
+
+    Returns a list of (model_id, display_name) tuples. Raises GeminiAPIError
+    when the SDK is unavailable or the API call fails.
+    """
+    _lazy_import_gemini_sdk()
+    if api_key:
+        try:
+            client_kwargs = {"api_key": api_key}
+            client = genai.Client(**client_kwargs)
+        except Exception as e:
+            raise GeminiAPIError(_("Failed to initialize Gemini Client: %s") % e) from e
+    else:
+        client = get_gemini_client()
+    try:
+        return _filter_describer_models(client.models.list())
+    except GeminiAPIError:
+        raise
+    except Exception as e:
+        app_logger.error("Failed to list Gemini models: %s", e, exc_info=True)
+        raise GeminiAPIError(_("Failed to fetch the model list from Google: %s") % e) from e
+
 def build_safety_settings():
     """Constructs the safety_settings list for the Gemini API call."""
     _lazy_import_gemini_sdk()
@@ -220,14 +267,11 @@ def generate_content_with_retry(client, model, contents, config, status_callback
 
     last_exception = None
     for attempt in range(1, MAX_RETRIES + 1):
-        app_state.raise_if_cancelled()  # never start another paid request after Escape
         try:
-            response = app_state.run_cancellable(
-                client.models.generate_content, model=model, contents=contents, config=config
+            response = client.models.generate_content(
+                model=model, contents=contents, config=config
             )
             return response
-        except app_state.GenerationCancelled:
-            raise
         except Exception as e:
             error_str = str(e).lower()
             is_retryable = False
@@ -258,7 +302,7 @@ def generate_content_with_retry(client, model, contents, config, status_callback
             app_logger.warning(f"Rate limit / transient error on attempt {attempt}: {e}. Retrying in {delay}s...")
             if status_callback:
                 status_callback(retry_msg)
-            app_state.sleep_or_cancel(delay)
+            time.sleep(delay)
 
     # Should not reach here, but just in case
     raise last_exception or GeminiAPIError(_("Failed after %d retries.") % MAX_RETRIES)

@@ -1,17 +1,14 @@
 # audio_describer/ui/settings_dialog.py
 import wx
 import sys
-import os
-import tempfile
 import threading
 from audio_describer import config
 from audio_describer.models import config_model, voice_model
 from audio_describer.utils.logger import app_logger
-from audio_describer.ui.accessibility_utils import set_control_accessible_name, speak_message
-from audio_describer.utils import sound_player
+from audio_describer.ui.accessibility_utils import set_control_accessible_name
 from .manage_voices_dialog import ManageVoicesDialog
 from ..i18n_setup import _
-from ..core import tts_engine, piper_voices
+from ..core import tts_engine, gemini_helpers
 
 # --- MODIFICATION: Check for all available TTS engines ---
 PYTTSX3_AVAILABLE = tts_engine.PYTTSX3_AVAILABLE
@@ -26,6 +23,16 @@ EVT_TEST_VOICE_DONE = wx.PyEventBinder(EVT_TEST_VOICE_DONE_ID, 0)
 class TestVoiceDoneEvent(wx.PyCommandEvent):
     def __init__(self, error=None):
         super().__init__(EVT_TEST_VOICE_DONE_ID, 0)
+        self.error = error
+
+# Custom event for when the model-list fetch thread is done
+EVT_MODEL_FETCH_DONE_ID = wx.NewIdRef()
+EVT_MODEL_FETCH_DONE = wx.PyEventBinder(EVT_MODEL_FETCH_DONE_ID, 0)
+
+class ModelFetchDoneEvent(wx.PyCommandEvent):
+    def __init__(self, models=None, error=None):
+        super().__init__(EVT_MODEL_FETCH_DONE_ID, 0)
+        self.models = models
         self.error = error
 
 class SettingsDialog(wx.Dialog):
@@ -58,6 +65,14 @@ class SettingsDialog(wx.Dialog):
             (2, _("2 FPS (Extreme low cost, for static scenes)")),
             (1, _("1 FPS (Minimal cost, for static content)")),
         ]
+
+        self.GEMINI_MODEL_CHOICES = [
+            ("", _("Default (gemini-flash-latest, always the newest Flash)")),
+            ("gemini-4-hydrogen", _("Gemini 4 Hydrogen (fast, current Flash tier)")),
+            ("gemini-4-neon", _("Gemini 4 Neon (deepest reasoning, slower and pricier)")),
+            ("gemini-3.8-flash", _("Gemini 3.8 Flash")),
+            ("gemini-3.5-flash-lite", _("Gemini 3.5 Flash Lite (cheapest)")),
+        ]
         
         # --- MODIFICATION: Dynamically build TTS choices based on availability ---
         self.TTS_ENGINE_CHOICES = [("openai", _("OpenAI TTS (High Quality)"))]
@@ -67,9 +82,6 @@ class SettingsDialog(wx.Dialog):
             self.TTS_ENGINE_CHOICES.append(("sapi5_32bit", _("SAPI5 (32-bit Voices)")))
         if ONECORE_AVAILABLE:
             self.TTS_ENGINE_CHOICES.append(("onecore", _("Windows OneCore (Modern Voices)")))
-        # Cloud neural voices: plain HTTPS, always available once a key is entered below.
-        self.TTS_ENGINE_CHOICES.append(("azure", _("Microsoft Azure Neural Voices (online, key required)")))
-        self.TTS_ENGINE_CHOICES.append(("google", _("Google Cloud Text-to-Speech (online, key required)")))
 
         self.OPENAI_VOICE_CHOICES = ["alloy", "echo", "fable", "onyx", "nova", "shimmer", "coral", "ash", "ballad", "sage"]
 
@@ -126,9 +138,15 @@ class SettingsDialog(wx.Dialog):
         self.verbosity_display_choices = [vc[1] for vc in self.VERBOSITY_CHOICES]; self.verbosity_internal_values = [vc[0] for vc in self.VERBOSITY_CHOICES]
         self.verbosity_choice = wx.Choice(self.ai_panel, choices=self.verbosity_display_choices)
         ai_grid_sizer.Add(self.verbosity_choice, 1, wx.EXPAND|wx.ALL, 5)
-        ai_grid_sizer.Add(wx.StaticText(self.ai_panel, label=_("Gemini Model Override:")), 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
-        self.model_override_text = wx.TextCtrl(self.ai_panel)
-        ai_grid_sizer.Add(self.model_override_text, 1, wx.EXPAND|wx.ALL, 5)
+        ai_grid_sizer.Add(wx.StaticText(self.ai_panel, label=_("Gemini Model:")), 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
+        self._models_from_api = False
+        self._model_fetch_silent = False
+        model_sizer = wx.BoxSizer(wx.HORIZONTAL)
+        self.model_choice = wx.Choice(self.ai_panel, choices=[])
+        model_sizer.Add(self.model_choice, 1, wx.EXPAND|wx.RIGHT, 5)
+        self.fetch_models_button = wx.Button(self.ai_panel, label=_("Fetch from API key"))
+        model_sizer.Add(self.fetch_models_button, 0, wx.ALIGN_CENTER_VERTICAL)
+        ai_grid_sizer.Add(model_sizer, 1, wx.EXPAND|wx.ALL, 5)
         ai_grid_sizer.Add(wx.StaticText(self.ai_panel, label=_("Temperature:")), 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
         self.temp_text_ctrl = wx.TextCtrl(self.ai_panel, value="0.7")
         ai_grid_sizer.Add(self.temp_text_ctrl, 1, wx.EXPAND|wx.ALL, 5)
@@ -140,10 +158,6 @@ class SettingsDialog(wx.Dialog):
         ai_grid_sizer.Add(self.enable_chunking_checkbox, 0, wx.EXPAND|wx.ALL, 5)
         self.enable_character_glossary_checkbox = wx.CheckBox(self.ai_panel, label=_("Enable Character Glossary Pre-Analysis"))
         ai_grid_sizer.Add(self.enable_character_glossary_checkbox, 0, wx.EXPAND|wx.ALL, 5)
-        self.translate_dialogue_checkbox = wx.CheckBox(self.ai_panel, label=_("Translate dialogue spoken in another language (audio subtitles)"))
-        ai_grid_sizer.Add(self.translate_dialogue_checkbox, 0, wx.EXPAND|wx.ALL, 5)
-        self.speech_pauses_checkbox = wx.CheckBox(self.ai_panel, label=_("Find pauses in the dialogue before describing (local speech detection, recommended)"))
-        ai_grid_sizer.Add(self.speech_pauses_checkbox, 0, wx.EXPAND|wx.ALL, 5)
         self.chunk_duration_label = wx.StaticText(self.ai_panel, label=_("Chunk Duration (seconds):"))
         ai_grid_sizer.Add(self.chunk_duration_label, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
         self.chunk_duration_spin = wx.SpinCtrl(self.ai_panel, value="120", min=30, max=2400)
@@ -182,59 +196,7 @@ class SettingsDialog(wx.Dialog):
         self.sapi5_settings_panel.SetSizer(self.sapi_sizer)
         
         audio_sizer.Add(self.sapi5_settings_panel, 0, wx.EXPAND|wx.ALL, 5)
-
-        # (setting key, label, secret) per cloud engine
-        cloud_fields = {
-            "azure": (_("Microsoft Azure Neural Voices"), [
-                ("user_azure_api_key", _("Speech resource key:"), True),
-                ("azure_region", _("Region (for example westeurope):"), False),
-                ("azure_voice", _("Voice (for example fr-FR-DeniseNeural):"), False),
-                ("azure_voice_female", _("Woman's voice for translated dialogue (optional):"), False),
-                ("azure_voice_male", _("Man's voice for translated dialogue (optional):"), False)]),
-            "google": (_("Google Cloud Text-to-Speech"), [
-                ("user_google_tts_api_key", _("API key:"), True),
-                ("google_voice", _("Voice (for example fr-FR-Chirp3-HD-Aoede):"), False),
-                ("google_voice_female", _("Woman's voice for translated dialogue (optional):"), False),
-                ("google_voice_male", _("Man's voice for translated dialogue (optional):"), False)]),
-        }
-        self.cloud_panels, self.cloud_ctrls = {}, {}
-        for engine, (box_title, fields) in cloud_fields.items():
-            panel = wx.Panel(self.audio_output_panel)
-            box = wx.StaticBoxSizer(wx.StaticBox(panel, label=box_title), wx.VERTICAL)
-            grid = wx.FlexGridSizer(cols=2, gap=(5, 5)); grid.AddGrowableCol(1, 1)
-            for key, label, secret in fields:
-                grid.Add(wx.StaticText(box.GetStaticBox(), label=label), 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
-                ctrl = wx.TextCtrl(box.GetStaticBox(), style=wx.TE_PASSWORD if secret else 0)  # named by the label before it
-                ctrl.Bind(wx.EVT_TEXT, self.OnSettingChanged)
-                grid.Add(ctrl, 1, wx.EXPAND|wx.ALL, 5)
-                self.cloud_ctrls[key] = ctrl
-            box.Add(grid, 0, wx.EXPAND|wx.ALL, 5)
-            panel.SetSizer(box)
-            audio_sizer.Add(panel, 0, wx.EXPAND|wx.ALL, 5)
-            self.cloud_panels[engine] = panel
-
-        self.gender_voice_checkbox = wx.CheckBox(self.audio_output_panel, label=_("Read translated dialogue with a voice matching the speaker (woman or man)"))
-        audio_sizer.Add(self.gender_voice_checkbox, 0, wx.EXPAND|wx.ALL, 5)
-        lang = config_model.get_setting("application_language") or "en"
-        self.piper_choices, self.piper_buttons = {}, {}
-        for gender, label in (("female", _("Woman's voice:")), ("male", _("Man's voice:"))):
-            row = wx.BoxSizer(wx.HORIZONTAL)
-            row.Add(wx.StaticText(self.audio_output_panel, label=label), 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
-            # The voice known to be a woman's / a man's comes first (Piper model cards do not say).
-            voices = sorted(piper_voices.voices_for(lang), key=lambda v, g=gender: v[0] != piper_voices.default_voice(lang, g))
-            ids = [""] + [v[0] for v in voices]
-            names = [_("Installed Windows voice (automatic)")] + [
-                _("%(voice)s (local Piper voice, %(size)d MB)") % {"voice": v[0], "size": v[1]} for v in voices]
-            choice = wx.Choice(self.audio_output_panel, choices=names)
-            choice.voice_ids = ids
-            choice.Bind(wx.EVT_CHOICE, self.OnSettingChanged)
-            row.Add(choice, 1, wx.EXPAND|wx.ALL, 5)
-            button = wx.Button(self.audio_output_panel, label=_("Download and listen"))
-            button.Bind(wx.EVT_BUTTON, lambda e, g=gender: self.OnPiperListen(g))
-            row.Add(button, 0, wx.ALL, 5)
-            audio_sizer.Add(row, 0, wx.EXPAND)
-            self.piper_choices[gender], self.piper_buttons[gender] = choice, button
-
+        
         test_box = wx.StaticBox(self.audio_output_panel, label=_("Test Voice"))
         test_sizer = wx.StaticBoxSizer(test_box, wx.VERTICAL)
         self.test_text_ctrl = wx.TextCtrl(self.audio_output_panel, value=_("This is a test of the selected voice."))
@@ -274,7 +236,9 @@ class SettingsDialog(wx.Dialog):
         self.openai_api_key_text.Bind(wx.EVT_TEXT, self.OnSettingChanged)
         self.frame_rate_choice.Bind(wx.EVT_CHOICE, self.OnSettingChanged)
         self.verbosity_choice.Bind(wx.EVT_CHOICE, self.OnSettingChanged)
-        self.model_override_text.Bind(wx.EVT_TEXT, self.OnSettingChanged)
+        self.model_choice.Bind(wx.EVT_CHOICE, self.OnSettingChanged)
+        self.Bind(EVT_MODEL_FETCH_DONE, self._OnModelFetchFinished)
+        self.Bind(wx.EVT_BUTTON, self.OnFetchModels, self.fetch_models_button)
         self.temp_text_ctrl.Bind(wx.EVT_TEXT, self.OnSettingChanged)
         self.temp_text_ctrl.Bind(wx.EVT_KILL_FOCUS, self.OnTemperatureKillFocus)
         self.send_silenced_video_checkbox.Bind(wx.EVT_CHECKBOX, self.OnSettingChanged)
@@ -282,9 +246,6 @@ class SettingsDialog(wx.Dialog):
         self.enable_chunking_checkbox.Bind(wx.EVT_CHECKBOX, self.OnSettingChanged)
         self.chunk_duration_spin.Bind(wx.EVT_SPINCTRL, self.OnSettingChanged)
         self.enable_character_glossary_checkbox.Bind(wx.EVT_CHECKBOX, self.OnSettingChanged)
-        self.translate_dialogue_checkbox.Bind(wx.EVT_CHECKBOX, self.OnSettingChanged)
-        self.speech_pauses_checkbox.Bind(wx.EVT_CHECKBOX, self.OnSettingChanged)
-        self.gender_voice_checkbox.Bind(wx.EVT_CHECKBOX, self.OnSettingChanged)
         self.tts_engine_choice.Bind(wx.EVT_RADIOBOX, self.OnTtsEngineChanged)
         self.openai_voice_choice.Bind(wx.EVT_CHOICE, self.OnSettingChanged)
         self.manage_voices_button.Bind(wx.EVT_BUTTON, self.OnManageVoices)
@@ -308,7 +269,6 @@ class SettingsDialog(wx.Dialog):
             "sapi5_rate_percent": self.sapi_rate_slider.GetValue(),
             "onecore_voice_id": self.sapi_voices[self.sapi_voice_choice.GetSelection()]['id'] if self.sapi_voices and self.sapi_voice_choice.GetSelection() != wx.NOT_FOUND else None,
             "onecore_rate_percent": self.sapi_rate_slider.GetValue(),
-            **{key: ctrl.GetValue().strip() for key, ctrl in self.cloud_ctrls.items()},
         }
         
         self.test_voice_button.Disable()
@@ -331,6 +291,52 @@ class SettingsDialog(wx.Dialog):
         self.test_voice_button.Enable()
         if event.error:
             wx.MessageBox(_("Error testing voice: %s") % event.error, _("Test Failed"), wx.OK | wx.ICON_ERROR, self)
+
+    def _RebuildModelChoices(self, model_pairs):
+        pairs = list(model_pairs) if model_pairs else list(self.GEMINI_MODEL_CHOICES[1:])
+        self.model_internal_values = [""] + [pair[0] for pair in pairs]
+        self.model_display_choices = [self.GEMINI_MODEL_CHOICES[0][1]] + [pair[1] for pair in pairs]
+        self.model_choice.SetItems(self.model_display_choices)
+
+    def _ApplyModelSelection(self, model_id):
+        if model_id in self.model_internal_values:
+            self.model_choice.SetSelection(self.model_internal_values.index(model_id))
+        else:
+            self.model_choice.SetSelection(0)
+
+    def OnFetchModels(self, event, silent=False):
+        entered_key = self.api_key_text.GetValue().strip()
+        self._model_fetch_silent = silent
+        self.fetch_models_button.Disable()
+        thread = threading.Thread(target=self._ModelFetchThread, args=(entered_key,))
+        thread.daemon = True
+        thread.start()
+
+    def _ModelFetchThread(self, api_key):
+        models = None
+        error = None
+        try:
+            models = gemini_helpers.fetch_available_models(api_key or None)
+        except Exception as e:
+            error = e
+        finally:
+            wx.PostEvent(self, ModelFetchDoneEvent(models=models, error=error))
+
+    def _OnModelFetchFinished(self, event):
+        self.fetch_models_button.Enable()
+        if event.error:
+            app_logger.error("Model list fetch failed: %s", event.error)
+            if not self._model_fetch_silent:
+                wx.MessageBox(_("Error fetching models: %s") % event.error, _("Fetch Failed"), wx.OK | wx.ICON_ERROR, self)
+            return
+        if event.models:
+            selection = self.model_choice.GetSelection()
+            current_value = self.model_internal_values[selection] if selection != wx.NOT_FOUND else ""
+            self._models_from_api = True
+            self._RebuildModelChoices(event.models)
+            self._ApplyModelSelection(current_value)
+            self.settings_changed = True
+            self.apply_button.Enable()
             
     def OnTtsEngineChanged(self, event):
         self.UpdateTtsEnginePanels()
@@ -344,13 +350,6 @@ class SettingsDialog(wx.Dialog):
         
         self.openai_settings_panel.Show(is_openai)
         self.sapi5_settings_panel.Show(is_sapi)
-        for engine, panel in self.cloud_panels.items():
-            panel.Show(selected_engine == engine)
-        # OneCore goes up to 6x; existing OneCore speeds above 200% were kept by the rate migration.
-        self.sapi_rate_slider.SetMax(config_model.ONECORE_RATE_MAX_PERCENT if selected_engine == "onecore" else 200)
-        # SetMax clamps the value: show this engine's saved rate, or a OneCore 300% would be saved as 200%.
-        rate_key = "onecore_voice_rate_percent" if selected_engine == "onecore" else "sapi5_voice_rate_percent"
-        self.sapi_rate_slider.SetValue(self.current_settings.get(rate_key) or 100)
 
         if is_sapi:
             # MODIFICATION: Use the sizer reference to get the static box
@@ -413,7 +412,12 @@ class SettingsDialog(wx.Dialog):
         self.openai_api_key_text.SetValue(self.current_settings.get("user_openai_api_key", ""))
         self.frame_rate_choice.SetSelection(self.frame_rate_internal_values.index(self.current_settings.get("frame_rate_for_ai", 0)))
         self.verbosity_choice.SetSelection(self.verbosity_internal_values.index(self.current_settings.get("gemini_description_verbosity", config.DEFAULT_VERBOSITY)))
-        self.model_override_text.SetValue(self.current_settings.get("gemini_model_override", ""))
+        cached_models = self.current_settings.get("gemini_available_models") or []
+        self._models_from_api = bool(cached_models)
+        self._RebuildModelChoices([tuple(pair) for pair in cached_models])
+        self._ApplyModelSelection(self.current_settings.get("gemini_model_override", ""))
+        if self.current_settings.get("user_gemini_api_key", "").strip():
+            self.OnFetchModels(None, silent=True)
         self.temp_text_ctrl.SetValue(str(self.current_settings.get("gemini_temperature", 0.7)))
         self.send_silenced_video_checkbox.SetValue(self.current_settings.get("send_silenced_video_to_ai", True))
         self.disable_safety_checkbox.SetValue(self.current_settings.get("gemini_disable_safety_block_none", False))
@@ -424,8 +428,6 @@ class SettingsDialog(wx.Dialog):
         self.chunk_duration_label.Enable(is_chunking)
         self.chunk_duration_spin.Enable(is_chunking)
         self.enable_character_glossary_checkbox.SetValue(self.current_settings.get("enable_character_glossary", False))
-        self.translate_dialogue_checkbox.SetValue(bool(self.current_settings.get("translate_foreign_dialogue", False)))
-        self.speech_pauses_checkbox.SetValue(bool(self.current_settings.get("detect_speech_pauses", False)))
         
         tts_engine_val = self.current_settings.get("tts_engine", "sapi5")
         try:
@@ -454,16 +456,7 @@ class SettingsDialog(wx.Dialog):
         else:
             self.sapi_rate_slider.SetValue(self.current_settings.get("sapi5_voice_rate_percent", 100))
         self.ducking_spin.SetValue(self.current_settings.get("mp3_audio_ducking_level_db", -15))
-        for key, ctrl in self.cloud_ctrls.items():
-            ctrl.ChangeValue(str(self.current_settings.get(key) or ""))
-        self.gender_voice_checkbox.SetValue(bool(self.current_settings.get("dialogue_voice_by_gender", True)))
-        for gender, choice in self.piper_choices.items():
-            voice_id = self.current_settings.get(f"piper_voice_{gender}") or ""
-            if voice_id not in choice.voice_ids:  # chosen for another language
-                choice.Append(voice_id)
-                choice.voice_ids.append(voice_id)
-            choice.SetSelection(choice.voice_ids.index(voice_id))
-
+        
         self.settings_changed = False
         self.apply_button.Disable()
 
@@ -477,7 +470,10 @@ class SettingsDialog(wx.Dialog):
         self.current_settings["user_openai_api_key"] = self.openai_api_key_text.GetValue().strip()
         self.current_settings["frame_rate_for_ai"] = self.frame_rate_internal_values[self.frame_rate_choice.GetSelection()]
         self.current_settings["gemini_description_verbosity"] = self.verbosity_internal_values[self.verbosity_choice.GetSelection()]
-        self.current_settings["gemini_model_override"] = self.model_override_text.GetValue().strip()
+        model_selection = self.model_choice.GetSelection()
+        self.current_settings["gemini_model_override"] = self.model_internal_values[model_selection] if model_selection != wx.NOT_FOUND else ""
+        if self._models_from_api:
+            self.current_settings["gemini_available_models"] = [[pair_id, pair_label] for pair_id, pair_label in zip(self.model_internal_values[1:], self.model_display_choices[1:])]
         try: self.current_settings["gemini_temperature"] = float(self.temp_text_ctrl.GetValue().strip())
         except ValueError: self.current_settings["gemini_temperature"] = config_model.DEFAULT_SETTINGS["gemini_temperature"]
         self.current_settings["send_silenced_video_to_ai"] = self.send_silenced_video_checkbox.IsChecked()
@@ -485,8 +481,6 @@ class SettingsDialog(wx.Dialog):
         self.current_settings["enable_video_chunking"] = self.enable_chunking_checkbox.IsChecked()
         self.current_settings["video_chunk_duration_seconds"] = self.chunk_duration_spin.GetValue()
         self.current_settings["enable_character_glossary"] = self.enable_character_glossary_checkbox.IsChecked()
-        self.current_settings["translate_foreign_dialogue"] = self.translate_dialogue_checkbox.IsChecked()
-        self.current_settings["detect_speech_pauses"] = self.speech_pauses_checkbox.IsChecked()
         
         self.current_settings["tts_engine"] = self.TTS_ENGINE_CHOICES[self.tts_engine_choice.GetSelection()][0]
         self.current_settings["openai_tts_voice"] = self.openai_voice_choice.GetStringSelection()
@@ -513,11 +507,6 @@ class SettingsDialog(wx.Dialog):
             self.current_settings["onecore_voice_rate_percent"] = 100
 
         self.current_settings["mp3_audio_ducking_level_db"] = self.ducking_spin.GetValue()
-        for key, ctrl in self.cloud_ctrls.items():
-            self.current_settings[key] = ctrl.GetValue().strip()
-        self.current_settings["dialogue_voice_by_gender"] = self.gender_voice_checkbox.IsChecked()
-        for gender, choice in self.piper_choices.items():
-            self.current_settings[f"piper_voice_{gender}"] = choice.voice_ids[max(0, choice.GetSelection())]
         
         config_model.app_settings.update(self.current_settings)
         if config_model.save_settings(config_model.app_settings):
@@ -552,39 +541,5 @@ class SettingsDialog(wx.Dialog):
     def OnCancel(self, event):
         self.EndModal(wx.ID_CANCEL)
         
-    def OnPiperListen(self, gender):
-        """Download the chosen Piper voice once (about 20 MB, checksum verified), then play a sample."""
-        choice = self.piper_choices[gender]
-        voice_id = choice.voice_ids[choice.GetSelection()] if choice.GetSelection() >= 0 else ""
-        if not voice_id:
-            speak_message(_("Choose a Piper voice first; the automatic choice uses the voices installed in Windows."), interrupt=True)
-            return
-        if not piper_voices.available():
-            speak_message(_("Local Piper voices are not available in this version."), interrupt=True)
-            return
-        button = self.piper_buttons[gender]
-        button.Disable()
-        speak_message(_("Preparing the voice %s...") % voice_id, interrupt=True)
-        path = os.path.join(tempfile.gettempdir(), "omni_describer_piper_test.wav")
-
-        def work():
-            try:
-                piper_voices.download(voice_id)
-                ok, error = piper_voices.synthesize(voice_id, _("This is how this voice sounds."), path), None
-            except Exception as e:
-                ok, error = False, e
-            wx.CallAfter(done, ok, error)
-
-        def done(ok, error):
-            if not self:
-                return
-            button.Enable()
-            if ok:
-                sound_player.play(path, is_full_path=True)
-            else:
-                speak_message(_("The voice could not be prepared: %s") % (error or _("no sound produced")), interrupt=True)
-
-        threading.Thread(target=work, daemon=True).start()
-
     def OnTemperatureKillFocus(self, event):
         pass
