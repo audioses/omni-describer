@@ -122,7 +122,7 @@ if ($LASTEXITCODE -ne 0) {
     Write-Host 'and no module in this app imports it, so the environment is'
     Write-Host 'complete without it.'
     $filtered = Join-Path $env:TEMP 'omni-requirements-nosimpleaudio.txt'
-    Get-Content $reqFile | Where-Object { $_ -notmatch '^\s*simpleaudio(\s|=|<|>|~|!|\[|;)' } | Set-Content $filtered -Encoding Ascii
+    Get-Content $reqFile | Where-Object { $_ -notmatch '^\s*simpleaudio($|[\s=<>~!\[;])' } | Set-Content $filtered -Encoding Ascii
     & $VenvPy -m pip install -r $filtered
     if ($LASTEXITCODE -ne 0) { throw 'pip install failed even without simpleaudio. See the pip output above.' }
 }
