@@ -74,12 +74,12 @@ Step 'Python'
 $PythonCmd = $null
 foreach ($candidate in @(@('py', '-3.11'), @('py', '-3.12'), @('py', '-3'), @('python'))) {
     try {
-        $v = & $candidate[0] $candidate[1..($candidate.Length - 1)] -c "import sys; print(sys.version_info[:2])" 2>$null
+        $v = & $candidate[0] $candidate[1..($candidate.Length - 1)] -c "import sys; print(sys.version); sys.exit(0 if sys.version_info >= (3, 11) else 1)" 2>$null
         if ($LASTEXITCODE -eq 0 -and $v) { $PythonCmd = $candidate; break }
     } catch { }
 }
 if (-not $PythonCmd) {
-    Write-Host 'No Python 3 found. Installing Python 3.11 via winget...'
+    Write-Host 'No Python 3.11+ found. Installing Python 3.11 via winget...'
     if (-not (Get-Command winget -ErrorAction SilentlyContinue)) {
         throw 'Python is not installed and winget is unavailable. Install Python 3.11+ from https://www.python.org/downloads/ and run this script again.'
     }
@@ -88,7 +88,7 @@ if (-not $PythonCmd) {
     $env:Path = [Environment]::GetEnvironmentVariable('Path', 'Machine') + ';' + [Environment]::GetEnvironmentVariable('Path', 'User')
     foreach ($candidate in @(@('py', '-3.11'), @('python'))) {
         try {
-            $v = & $candidate[0] $candidate[1..($candidate.Length - 1)] -c "import sys; print(sys.version_info[:2])" 2>$null
+            $v = & $candidate[0] $candidate[1..($candidate.Length - 1)] -c "import sys; print(sys.version); sys.exit(0 if sys.version_info >= (3, 11) else 1)" 2>$null
             if ($LASTEXITCODE -eq 0 -and $v) { $PythonCmd = $candidate; break }
         } catch { }
     }
