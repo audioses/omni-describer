@@ -365,10 +365,13 @@ class SettingsDialog(wx.Dialog):
         self.model_choice.SetItems(self.model_display_choices)
 
     def _ApplyModelSelection(self, model_id):
-        if model_id in self.model_internal_values:
-            self.model_choice.SetSelection(self.model_internal_values.index(model_id))
-        else:
-            self.model_choice.SetSelection(0)
+        model_id = (model_id or "").strip()
+        if model_id and model_id not in self.model_internal_values:
+            # A model typed in the old free-text field, or one the list doesn't show: keep it, or Apply would reset it.
+            self.model_internal_values.append(model_id)
+            self.model_display_choices.append(model_id)
+            self.model_choice.Append(model_id)
+        self.model_choice.SetSelection(self.model_internal_values.index(model_id))
 
     def OnFetchModels(self, event, silent=False):
         entered_key = self.api_key_text.GetValue().strip()
