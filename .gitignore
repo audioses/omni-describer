@@ -40,3 +40,6 @@ combined_output.py
 *.swp
 .DS_Store
 Thumbs.db
+
+# Local virtual environment (setup-dev.ps1)
+.venv/
