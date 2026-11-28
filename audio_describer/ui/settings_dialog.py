@@ -11,7 +11,7 @@ from audio_describer.ui.accessibility_utils import set_control_accessible_name, 
 from audio_describer.utils import sound_player
 from .manage_voices_dialog import ManageVoicesDialog
 from ..i18n_setup import _
-from ..core import tts_engine, piper_voices
+from ..core import tts_engine, piper_voices, gemini_helpers
 
 # --- MODIFICATION: Check for all available TTS engines ---
 PYTTSX3_AVAILABLE = tts_engine.PYTTSX3_AVAILABLE
@@ -26,6 +26,16 @@ EVT_TEST_VOICE_DONE = wx.PyEventBinder(EVT_TEST_VOICE_DONE_ID, 0)
 class TestVoiceDoneEvent(wx.PyCommandEvent):
     def __init__(self, error=None):
         super().__init__(EVT_TEST_VOICE_DONE_ID, 0)
+        self.error = error
+
+# Custom event for when the model-list fetch thread is done
+EVT_MODEL_FETCH_DONE_ID = wx.NewIdRef()
+EVT_MODEL_FETCH_DONE = wx.PyEventBinder(EVT_MODEL_FETCH_DONE_ID, 0)
+
+class ModelFetchDoneEvent(wx.PyCommandEvent):
+    def __init__(self, models=None, error=None):
+        super().__init__(EVT_MODEL_FETCH_DONE_ID, 0)
+        self.models = models
         self.error = error
 
 class SettingsDialog(wx.Dialog):
@@ -57,6 +67,14 @@ class SettingsDialog(wx.Dialog):
             (5, _("5 FPS (Very low cost, may miss fast action)")),
             (2, _("2 FPS (Extreme low cost, for static scenes)")),
             (1, _("1 FPS (Minimal cost, for static content)")),
+        ]
+
+        self.GEMINI_MODEL_CHOICES = [
+            ("", _("Default (gemini-flash-latest, always the newest Flash)")),
+            ("gemini-4-hydrogen", _("Gemini 4 Hydrogen (fast, current Flash tier)")),
+            ("gemini-4-neon", _("Gemini 4 Neon (deepest reasoning, slower and pricier)")),
+            ("gemini-3.8-flash", _("Gemini 3.8 Flash")),
+            ("gemini-3.5-flash-lite", _("Gemini 3.5 Flash Lite (cheapest)")),
         ]
         
         # --- MODIFICATION: Dynamically build TTS choices based on availability ---
@@ -126,9 +144,15 @@ class SettingsDialog(wx.Dialog):
         self.verbosity_display_choices = [vc[1] for vc in self.VERBOSITY_CHOICES]; self.verbosity_internal_values = [vc[0] for vc in self.VERBOSITY_CHOICES]
         self.verbosity_choice = wx.Choice(self.ai_panel, choices=self.verbosity_display_choices)
         ai_grid_sizer.Add(self.verbosity_choice, 1, wx.EXPAND|wx.ALL, 5)
-        ai_grid_sizer.Add(wx.StaticText(self.ai_panel, label=_("Gemini Model Override:")), 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
-        self.model_override_text = wx.TextCtrl(self.ai_panel)
-        ai_grid_sizer.Add(self.model_override_text, 1, wx.EXPAND|wx.ALL, 5)
+        ai_grid_sizer.Add(wx.StaticText(self.ai_panel, label=_("Gemini Model:")), 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
+        self._models_from_api = False
+        self._model_fetch_silent = False
+        model_sizer = wx.BoxSizer(wx.HORIZONTAL)
+        self.model_choice = wx.Choice(self.ai_panel, choices=[])
+        model_sizer.Add(self.model_choice, 1, wx.EXPAND|wx.RIGHT, 5)
+        self.fetch_models_button = wx.Button(self.ai_panel, label=_("Fetch from API key"))
+        model_sizer.Add(self.fetch_models_button, 0, wx.ALIGN_CENTER_VERTICAL)
+        ai_grid_sizer.Add(model_sizer, 1, wx.EXPAND|wx.ALL, 5)
         ai_grid_sizer.Add(wx.StaticText(self.ai_panel, label=_("Temperature:")), 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
         self.temp_text_ctrl = wx.TextCtrl(self.ai_panel, value="0.7")
         ai_grid_sizer.Add(self.temp_text_ctrl, 1, wx.EXPAND|wx.ALL, 5)
@@ -274,7 +298,9 @@ class SettingsDialog(wx.Dialog):
         self.openai_api_key_text.Bind(wx.EVT_TEXT, self.OnSettingChanged)
         self.frame_rate_choice.Bind(wx.EVT_CHOICE, self.OnSettingChanged)
         self.verbosity_choice.Bind(wx.EVT_CHOICE, self.OnSettingChanged)
-        self.model_override_text.Bind(wx.EVT_TEXT, self.OnSettingChanged)
+        self.model_choice.Bind(wx.EVT_CHOICE, self.OnSettingChanged)
+        self.Bind(EVT_MODEL_FETCH_DONE, self._OnModelFetchFinished)
+        self.Bind(wx.EVT_BUTTON, self.OnFetchModels, self.fetch_models_button)
         self.temp_text_ctrl.Bind(wx.EVT_TEXT, self.OnSettingChanged)
         self.temp_text_ctrl.Bind(wx.EVT_KILL_FOCUS, self.OnTemperatureKillFocus)
         self.send_silenced_video_checkbox.Bind(wx.EVT_CHECKBOX, self.OnSettingChanged)
@@ -332,6 +358,55 @@ class SettingsDialog(wx.Dialog):
         if event.error:
             wx.MessageBox(_("Error testing voice: %s") % event.error, _("Test Failed"), wx.OK | wx.ICON_ERROR, self)
             
+    def _RebuildModelChoices(self, model_pairs):
+        pairs = list(model_pairs) if model_pairs else list(self.GEMINI_MODEL_CHOICES[1:])
+        self.model_internal_values = [""] + [pair[0] for pair in pairs]
+        self.model_display_choices = [self.GEMINI_MODEL_CHOICES[0][1]] + [pair[1] for pair in pairs]
+        self.model_choice.SetItems(self.model_display_choices)
+
+    def _ApplyModelSelection(self, model_id):
+        model_id = (model_id or "").strip()
+        if model_id and model_id not in self.model_internal_values:
+            # A model typed in the old free-text field, or one the list doesn't show: keep it, or Apply would reset it.
+            self.model_internal_values.append(model_id)
+            self.model_display_choices.append(model_id)
+            self.model_choice.Append(model_id)
+        self.model_choice.SetSelection(self.model_internal_values.index(model_id))
+
+    def OnFetchModels(self, event, silent=False):
+        entered_key = self.api_key_text.GetValue().strip()
+        self._model_fetch_silent = silent
+        self.fetch_models_button.Disable()
+        thread = threading.Thread(target=self._ModelFetchThread, args=(entered_key,))
+        thread.daemon = True
+        thread.start()
+
+    def _ModelFetchThread(self, api_key):
+        models = None
+        error = None
+        try:
+            models = gemini_helpers.fetch_available_models(api_key or None)
+        except Exception as e:
+            error = e
+        finally:
+            wx.PostEvent(self, ModelFetchDoneEvent(models=models, error=error))
+
+    def _OnModelFetchFinished(self, event):
+        self.fetch_models_button.Enable()
+        if event.error:
+            app_logger.error("Model list fetch failed: %s", event.error)
+            if not self._model_fetch_silent:
+                wx.MessageBox(_("Error fetching models: %s") % event.error, _("Fetch Failed"), wx.OK | wx.ICON_ERROR, self)
+            return
+        if event.models:
+            selection = self.model_choice.GetSelection()
+            current_value = self.model_internal_values[selection] if selection != wx.NOT_FOUND else ""
+            self._models_from_api = True
+            self._RebuildModelChoices(event.models)
+            self._ApplyModelSelection(current_value)
+            self.settings_changed = True
+            self.apply_button.Enable()
+
     def OnTtsEngineChanged(self, event):
         self.UpdateTtsEnginePanels()
         self.OnSettingChanged(event)
@@ -413,7 +488,12 @@ class SettingsDialog(wx.Dialog):
         self.openai_api_key_text.SetValue(self.current_settings.get("user_openai_api_key", ""))
         self.frame_rate_choice.SetSelection(self.frame_rate_internal_values.index(self.current_settings.get("frame_rate_for_ai", 0)))
         self.verbosity_choice.SetSelection(self.verbosity_internal_values.index(self.current_settings.get("gemini_description_verbosity", config.DEFAULT_VERBOSITY)))
-        self.model_override_text.SetValue(self.current_settings.get("gemini_model_override", ""))
+        cached_models = self.current_settings.get("gemini_available_models") or []
+        self._models_from_api = bool(cached_models)
+        self._RebuildModelChoices([tuple(pair) for pair in cached_models])
+        self._ApplyModelSelection(self.current_settings.get("gemini_model_override", ""))
+        if self.current_settings.get("user_gemini_api_key", "").strip():
+            self.OnFetchModels(None, silent=True)
         self.temp_text_ctrl.SetValue(str(self.current_settings.get("gemini_temperature", 0.7)))
         self.send_silenced_video_checkbox.SetValue(self.current_settings.get("send_silenced_video_to_ai", True))
         self.disable_safety_checkbox.SetValue(self.current_settings.get("gemini_disable_safety_block_none", False))
@@ -477,7 +557,10 @@ class SettingsDialog(wx.Dialog):
         self.current_settings["user_openai_api_key"] = self.openai_api_key_text.GetValue().strip()
         self.current_settings["frame_rate_for_ai"] = self.frame_rate_internal_values[self.frame_rate_choice.GetSelection()]
         self.current_settings["gemini_description_verbosity"] = self.verbosity_internal_values[self.verbosity_choice.GetSelection()]
-        self.current_settings["gemini_model_override"] = self.model_override_text.GetValue().strip()
+        model_selection = self.model_choice.GetSelection()
+        self.current_settings["gemini_model_override"] = self.model_internal_values[model_selection] if model_selection != wx.NOT_FOUND else ""
+        if self._models_from_api:
+            self.current_settings["gemini_available_models"] = [[pair_id, pair_label] for pair_id, pair_label in zip(self.model_internal_values[1:], self.model_display_choices[1:])]
         try: self.current_settings["gemini_temperature"] = float(self.temp_text_ctrl.GetValue().strip())
         except ValueError: self.current_settings["gemini_temperature"] = config_model.DEFAULT_SETTINGS["gemini_temperature"]
         self.current_settings["send_silenced_video_to_ai"] = self.send_silenced_video_checkbox.IsChecked()

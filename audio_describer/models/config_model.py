@@ -38,6 +38,7 @@ DEFAULT_SETTINGS = {
     "user_gemini_api_key": "",
     "gemini_description_verbosity": config.DEFAULT_VERBOSITY,
     "gemini_model_override": "",
+    "gemini_available_models": [],
     "gemini_disable_safety_block_none": True,
     "gemini_temperature": 0.3,
     "user_openai_api_key": "",
